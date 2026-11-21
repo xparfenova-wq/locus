@@ -1515,3 +1515,23 @@ CREATE TABLE IF NOT EXISTS zaprosy_insajtov (
   sozdano                TEXT NOT NULL,
   PRIMARY KEY (avtor, kljuch_hesh)
 );
+
+CREATE TABLE IF NOT EXISTS versija_nastroek_sistemy (
+  id                     INTEGER NOT NULL,
+  versija                INTEGER NOT NULL,
+  PRIMARY KEY (id),
+  CHECK (id=1),
+  CHECK (typeof(versija)='integer' AND versija>0)
+);
+
+CREATE TABLE IF NOT EXISTS zaprosy_nastroek_sistemy (
+  avtor                  INTEGER NOT NULL REFERENCES ljudi(id) ON DELETE CASCADE,
+  kljuch_hesh            TEXT NOT NULL,
+  zapros_hesh            TEXT,
+  sohraneno              INTEGER NOT NULL DEFAULT 0,
+  versija_posle          INTEGER,
+  kontekst_posle         TEXT,
+  polja_json             TEXT,
+  sozdano                TEXT NOT NULL,
+  PRIMARY KEY (avtor, kljuch_hesh)
+);

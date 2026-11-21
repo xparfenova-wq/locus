@@ -861,7 +861,8 @@ function planerka({ zapros, avtor, metod, polnyj_snimok = false }) {
   const napr = db.prepare('SELECT * FROM napravlenija WHERE kod = ?').get(napravlenie);
   if (!napr) throw new NeNajdeno(`направления ${napravlenie} нет`);
 
-  const den = zapros.den || segodnja();
+  const analyticToday=require('./parametry-analitiki.js').today(db);
+  const den = zapros.den || analyticToday;
   require('./kalendar.js').data(den,'den');
   const { god, nedelja } = razobrat_nedelju(zapros, den);
   const week={god,nomer:nedelja};
@@ -870,9 +871,9 @@ function planerka({ zapros, avtor, metod, polnyj_snimok = false }) {
                                                                             
                                                                            
   const weeklySnapshot=require('./snimok-planerki.js');
-  if(!polnyj_snimok&&!Object.hasOwn(zapros,'den')&&okno.konec<segodnja()){
+  if(!polnyj_snimok&&!Object.hasOwn(zapros,'den')&&okno.konec<analyticToday){
     const saved=weeklySnapshot.read(db,{napravlenie,god,nomer:nedelja});
-    if(saved)return {telo:weeklySnapshot.report(saved,week,segodnja(),weeklySnapshot.permissions(db,{napravlenie,...okno},avtor))};
+    if(saved)return {telo:weeklySnapshot.report(saved,week,analyticToday,weeklySnapshot.permissions(db,{napravlenie,...okno},avtor))};
   }
 
   const NE_UD = NE_UDALENA.replace(/udaleno/g, 'z.udaleno');
@@ -1151,9 +1152,8 @@ function planerka({ zapros, avtor, metod, polnyj_snimok = false }) {
                                                                    
                                                                         
                                                              
-  const nastrojki = db.prepare(
-    'SELECT dnej_bez_obschenija_porog p, chasovoj_pojas FROM nastrojki_sistemy LIMIT 1').get();
-  const porog_sistemy = (nastrojki && nastrojki.p) || 14;
+  const nastrojki = require('./parametry-analitiki.js').values(db);
+  const porog_sistemy = nastrojki.dnej_bez_obschenija_porog;
   const porog = napr.norma_dnej || porog_sistemy;
 
   const dnej_ot = (data) => {
@@ -1262,8 +1262,8 @@ function planerka({ zapros, avtor, metod, polnyj_snimok = false }) {
       nachalo: okno.nachalo,
       konec: okno.konec,
       porog_dnej_bez_obschenija: porog,
-      istochnik_otcheta:{...weeklySnapshot.metadata(week,segodnja(),null,Object.hasOwn(zapros,'den')),...weeklySnapshot.permissions(db,{napravlenie,...okno},avtor)},
-      dopolnenija:weeklySnapshot.extras(db,{napravlenie,week:{...week,...okno},day:[den,segodnja()].sort()[0],actor:avtor,uchityvat_otlozhennye:!polnyj_snimok&&weeklySnapshot.metadata(week,segodnja(),null,Object.hasOwn(zapros,'den')).vid==='tekuschaja'}),
+      istochnik_otcheta:{...weeklySnapshot.metadata(week,analyticToday,null,Object.hasOwn(zapros,'den')),...weeklySnapshot.permissions(db,{napravlenie,...okno},avtor)},
+      dopolnenija:weeklySnapshot.extras(db,{napravlenie,week:{...week,...okno},day:[den,segodnja()].sort()[0],actor:avtor,uchityvat_otlozhennye:!polnyj_snimok&&weeklySnapshot.metadata(week,analyticToday,null,Object.hasOwn(zapros,'den')).vid==='tekuschaja'}),
       chasovoj_pojas: (nastrojki && nastrojki.chasovoj_pojas) || 'Europe/Moscow',
                                                                        
                                                                    
@@ -1875,31 +1875,7 @@ function nastrojki(ctx) {
 }
 
                                                       
-function nastrojki_sistemy({ telo, metod }) {
-  const db = baza();
-  const PO_UMOLCHANIJU = {
-    dnej_bez_obschenija_porog: 14,
-    chasovoj_pojas: 'Europe/Moscow',
-    nachalo_nedeli: 'ponedelnik',
-    valjuta: 'RUB',
-                                                                       
-                                                                        
-                                                                       
-                                                    
-    stavka_naloga: 6,
-  };
-  if (metod === 'GET') {
-    const est = db.prepare('SELECT * FROM nastrojki_sistemy LIMIT 1').get();
-    if (!est) return { telo: PO_UMOLCHANIJU };
-                                                                    
-                                                                  
-                                                                         
-    const zadannye = Object.fromEntries(
-      Object.entries(v_api(est)).filter(([, z]) => z !== null && z !== undefined));
-    return { telo: { ...PO_UMOLCHANIJU, ...zadannye } };
-  }
-  throw Object.assign(new Error('сюда только GET'), { kod: 405 });
-}
+function nastrojki_sistemy(ctx) { return require('./parametry-analitiki.js').handle(ctx); }
 
                                                                     
                                        

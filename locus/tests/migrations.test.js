@@ -51,10 +51,11 @@ test('новая база получает ограничения статусо
     assert.equal(db.prepare('SELECT sozdano FROM zadachi WHERE nomer=1428').get().sozdano, '2026-10-23 12:34:56');
     const plan = db.prepare('EXPLAIN QUERY PLAN SELECT id FROM zadachi WHERE otvetstvennyj=1').all();
     assert.ok(plan.some(row => /USING.*INDEX/.test(row.detail)), 'отбор по человеку использует индекс');
-    assert.equal(db.prepare("SELECT count(*) n FROM sqlite_master WHERE type='trigger'").get().n, 86);
+    assert.equal(db.prepare("SELECT count(*) n FROM sqlite_master WHERE type='trigger'").get().n, 90);
     assert.equal(db.prepare("SELECT count(*) n FROM sqlite_master WHERE type='trigger' AND name='zaprosy_planov_kampanij_delete'").get().n,1);
     assert.equal(db.prepare("SELECT count(*) n FROM sqlite_master WHERE type='trigger' AND name='zaprosy_istochnikov_publikacij_udalenie'").get().n,1);
     for(const name of ['versii_tezisy_insert','versii_tezisy_update','versii_tezisy_delete'])assert.equal(db.prepare("SELECT count(*) n FROM sqlite_master WHERE type='trigger' AND name=?").get(name).n,1);
+    for(const name of ['nastrojki_sistemy_singleton','versija_nastroek_sistemy_insert','versija_nastroek_sistemy_update','versija_nastroek_sistemy_delete'])assert.equal(db.prepare("SELECT count(*) n FROM sqlite_master WHERE type='trigger' AND name=?").get(name).n,1);
     for(const name of ['versii_nastroek_insert','versii_nastroek_update','versii_nastroek_delete'])assert.equal(db.prepare("SELECT count(*) n FROM sqlite_master WHERE type='trigger' AND name=?").get(name).n,1);
     assert.equal(['rassylka_ljudi', 'zadachi', 'sostojanija', 'zamery']
       .reduce((n, table) => n + db.prepare(`PRAGMA foreign_key_list(${table})`).all().length, 0), 5);

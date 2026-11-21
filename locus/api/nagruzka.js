@@ -19,7 +19,7 @@ function mediana(chisla){
 }
 function nagruzka(db,{den,week=calendar.iso_nedelja(den),chelovek_id}={}){
   calendar.data(den);
-  const settings=db.prepare('SELECT chasovoj_pojas,nedel_v_okne FROM nastrojki_sistemy LIMIT 1').get()||{};
+  const settings=require('./parametry-analitiki.js').values(db);
   const zone=settings.chasovoj_pojas||'Europe/Moscow';
                                                                            
   new Intl.DateTimeFormat('en-CA',{timeZone:zone});
@@ -57,10 +57,22 @@ function nagruzka(db,{den,week=calendar.iso_nedelja(den),chelovek_id}={}){
     GROUP BY z.otvetstvennyj`).all(week.nomer,week.god,borders.konec,...(chelovek_id!=null?[Number(chelovek_id)]:[]));
   for(const row of open)if(byPerson.has(row.otvetstvennyj))byPerson.get(row.otvetstvennyj).otkryto=row.n;
   return [...byPerson.values()].map(p=>{
-    const norma=mediana(p.po_nedeljam.map(w=>w.zakryto)),porog=norma==null?null:norma*1.5;
+    const norma=mediana(p.po_nedeljam.map(w=>w.zakryto)),porog=norma==null?null:norma*settings.porog_peregruza;
     return {...p,chelovek_id:p.id,mediana:norma,mediana_zakrytyh:norma,porog,
       nepustyh_nedel:p.po_nedeljam.filter(w=>w.zakryto>0).length,
-      peregruz:porog!=null&&p.otkryto>porog,nedel_v_okne:window,chasovoj_pojas:zone};
+      peregruz:porog!=null&&p.otkryto>porog,nedel_v_okne:window,porog_peregruza:settings.porog_peregruza,chasovoj_pojas:zone};
   });
 }
-module.exports={nagruzka,mediana,den_v_zone};
+                                                                              
+function zakryto_po_napravlenijam(db,{den}={}){
+  calendar.data(den);const settings=require('./parametry-analitiki.js').values(db),week=calendar.iso_nedelja(den),start=calendar.sdvinut_nedelju(week.god,week.nomer,-settings.nedel_v_okne),borders=calendar.granicy_nedeli(week.god,week.nomer),groups=new Map();
+  const keys=Array.from({length:settings.nedel_v_okne},(_,i)=>{const w=calendar.sdvinut_nedelju(start.god,start.nomer,i);return calendar.kljuch_nedeli(w.god,w.nomer);});
+  const formatter=new Intl.DateTimeFormat('en-CA',{timeZone:settings.chasovoj_pojas,year:'numeric',month:'2-digit',day:'2-digit'});
+  for(const event of db.prepare("SELECT z.napravlenie,MAX(datetime(j.kogda)) kogda FROM zadachi z JOIN zhurnal j ON j.obekt='zadacha' AND j.obekt_id=z.id AND j.pole='status' AND j.stalo='sdelano' WHERE z.status='sdelano' AND COALESCE(z.udaleno,0)=0 GROUP BY z.id").all()){
+    const day=event.kogda?den_v_zone(event.kogda,settings.chasovoj_pojas,formatter):null;if(!day||day<start.nachalo||day>den)continue;
+    if(!groups.has(event.napravlenie))groups.set(event.napravlenie,{napravlenie:event.napravlenie,seichas:0,counts:keys.map(()=>0)});const group=groups.get(event.napravlenie);
+    if(day>=borders.nachalo)group.seichas++;else{const w=calendar.iso_nedelja(day),i=keys.indexOf(calendar.kljuch_nedeli(w.god,w.nomer));if(i>=0)group.counts[i]++;}
+  }
+  return [...groups.values()].map(r=>({...r,mediana:mediana(r.counts),koefficient:settings.porog_peregruza}));
+}
+module.exports={nagruzka,mediana,den_v_zone,zakryto_po_napravlenijam};

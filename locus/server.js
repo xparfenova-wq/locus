@@ -72,6 +72,7 @@ const PODRUCHKI_KODA = {
                ...(PODRUCHKI_BAZA.onbording || {}) },
   podskazki: { skryt: p2.podskazki_skryt, peregruz: p2.podskazki_peregruz,
                ...(PODRUCHKI_BAZA.podskazki || {}) },
+  nastrojki_sistemy: {proverka:ctx=>require('./api/parametry-analitiki.js').handle({...ctx,dejstvie:'proverka'}),otmena_popytki:ctx=>require('./api/parametry-analitiki.js').handle({...ctx,dejstvie:'otmena_popytki'})},
   nastrojki: { proverka:ctx=>require('./api/nastrojki-komandy.js').read(ctx),otmena_popytki:ctx=>require('./api/nastrojki-komandy.js').cancel(ctx),vid: p2.nastrojki_vid, bot: p2.nastrojki_bot,
                ...(PODRUCHKI_BAZA.nastrojki || {}) },
   meta: { napravlenija: p2.meta_napravlenija, filtry_zadach: p2.meta_filtry_zadach,
@@ -922,6 +923,7 @@ async function obrabotat(req, res) {
     return otvet(res, 401, { oshibka: 'нужен автор запроса' });
   }
 
+  if(tablica==='nastrojki_sistemy')for(const field of adres.searchParams.keys())if(adres.searchParams.getAll(field).length!==1)throw new OshibkaVvoda('Параметр настроек должен быть один',field);
   if(tablica==='fokus')for(const field of adres.searchParams.keys())if(adres.searchParams.getAll(field).length!==1)throw new OshibkaVvoda('Параметр таймера должен быть один',field);
   if(tablica==='bazy')for(const name of adres.searchParams.keys())if(adres.searchParams.getAll(name).length!==1)throw new OshibkaVvoda('Параметр должен быть один',name);
   const okrCreationTable=['celi','rezultaty','zamery'].includes(tablica)&&!kljuch&&!dejstvie?tablica:tablica==='okr'&&!kljuch&&['celi','rezultaty','zamery'].includes(dejstvie)?dejstvie:null;

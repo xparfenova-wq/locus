@@ -1,10 +1,10 @@
 {
-  "base_working_revision": "d47fa51a554ed052e843ef2f3be91625eac3954c",
+  "base_working_revision": "a8f24c621a2a5010a612c6a4dd8174556740149b",
   "review_edition_tested": true,
   "review_tests": {
-    "node": 1508,
+    "node": 1533,
     "api": 447,
-    "ops": 44,
+    "ops": 45,
     "collector": 20,
     "design": 2,
     "failed": 0,
@@ -12,7 +12,7 @@
   },
   "review_browser_scenarios": [
     {
-      "scenario": "focus-task-ui",
+      "scenario": "system-settings-parameters-ui",
       "widths": [
         1440,
         1024,
@@ -24,7 +24,7 @@
       "production_writes": 0
     },
     {
-      "scenario": "insights-ui",
+      "scenario": "system-settings-specimen-ui",
       "widths": [
         1440,
         1024,
@@ -37,9 +37,9 @@
     }
   ],
   "base_revision_also_verified_on_isolated_linux": true,
-  "base_native_groups": 53,
+  "base_native_groups": 57,
   "criteria_ids_preserved": 1717,
-  "accepted_criteria": 232,
+  "accepted_criteria": 234,
   "product_goal_complete": false,
   "test_data": "synthetic only"
 }

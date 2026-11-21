@@ -1,7 +1,7 @@
 {
-  "base_revision": "d47fa51a554ed052e843ef2f3be91625eac3954c",
+  "base_revision": "a8f24c621a2a5010a612c6a4dd8174556740149b",
   "whole_goal_open": true,
-  "verified": 232,
+  "verified": 234,
   "total": 1717,
   "not_product_readiness_percent": true,
   "criteria": [
@@ -9903,13 +9903,13 @@
       "criterion": "К-1650",
       "title": "Пороги расчётов лежат в настройках, а не в коде",
       "section": "# LVIII. ВОЛНЫ РАССЫЛКИ, ПРОСРОЧКА, СВОДКА",
-      "status": "awaiting_individual_verification"
+      "status": "verified"
     },
     {
       "criterion": "К-1651",
       "title": "Часовой пояс и окно медианы влияют на расчёты, оба из настроек",
       "section": "# LVIII. ВОЛНЫ РАССЫЛКИ, ПРОСРОЧКА, СВОДКА",
-      "status": "awaiting_individual_verification"
+      "status": "verified"
     },
     {
       "criterion": "К-1652",

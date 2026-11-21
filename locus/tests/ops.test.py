@@ -42,6 +42,36 @@ class RecoveryTest(unittest.TestCase):
     def tearDown(self):
         self.tmp.cleanup()
 
+    def test_shared_settings_preserves_singleton_raw_values_and_refuses_unapproved_changes(self):
+        database=self.app/'db/locus.db';before_file=self.base/'before-shared-settings.db'
+        with contextlib.closing(sqlite3.connect(database))as db:
+            for name in ['nastrojki_sistemy_singleton','versija_nastroek_sistemy_insert','versija_nastroek_sistemy_update','versija_nastroek_sistemy_delete']:db.execute('DROP TRIGGER '+name)
+            db.execute('DROP TABLE versija_nastroek_sistemy');db.execute('DROP TABLE zaprosy_nastroek_sistemy');db.execute('DELETE FROM migracii WHERE nomer=151')
+            db.execute("INSERT INTO ljudi(id,imja,komanda,dostup,aktiven)VALUES(4900077,'Original settings owner',1,'polnyj',1)")
+            db.execute("UPDATE nastrojki_sistemy SET porog_peregruza='1.75',stavka_naloga=11,nedel_v_okne=NULL");db.commit()
+        with contextlib.closing(sqlite3.connect(database))as db,contextlib.closing(sqlite3.connect(before_file))as dest:db.backup(dest)
+        before=ops.db_state(before_file)
+        subprocess.run(['node','db/migrate.js'],cwd=self.app,env=dict(os.environ,LOCUS_BAZA=str(database)),check=True,capture_output=True)
+        ops.check_migration_counts(before,ops.db_state(database),self.app,before_file)
+        proof=ops.verify_shared_settings_state(before_file,database,self.app)
+        self.assertTrue(proof['exact_shared_settings_schema_verified']);self.assertEqual(proof['added_receipt_rows'],0)
+        with contextlib.closing(sqlite3.connect(database))as db:
+            self.assertEqual(db.execute('SELECT porog_peregruza,typeof(porog_peregruza),stavka_naloga,nedel_v_okne FROM nastrojki_sistemy').fetchone(),('1.75','text',11,None))
+            with self.assertRaises(sqlite3.IntegrityError):db.execute('INSERT INTO nastrojki_sistemy(stavka_naloga)VALUES(99)')
+        good=self.base/'good-shared-settings.db';shutil.copyfile(database,good)
+        changes=["UPDATE nastrojki_sistemy SET porog_peregruza='3'",
+                 "UPDATE migracii SET sha256='"+'a'*64+"'WHERE nomer=151",
+                 "CREATE TABLE unapproved_settings(id INTEGER)",
+                 "ALTER TABLE zaprosy_nastroek_sistemy ADD COLUMN unapproved TEXT",
+                 "UPDATE sqlite_sequence SET seq=seq+1 WHERE name='ljudi'",
+                 "INSERT INTO versija_nastroek_sistemy(id,versija)VALUES(1,1)",
+                 "CREATE TRIGGER unapproved_settings_trigger AFTER UPDATE ON nastrojki_sistemy BEGIN SELECT 1;END;"]
+        for change in changes:
+            shutil.copyfile(good,database)
+            with contextlib.closing(sqlite3.connect(database))as db:db.executescript(change)
+            with self.assertRaises(ValueError,msg=change):ops.verify_shared_settings_state(before_file,database,self.app)
+        shutil.copyfile(good,database)
+
     def test_insight_deferral_preserves_old_values_and_refuses_unapproved_changes(self):
         database=self.app/'db/locus.db';before_file=self.base/'before-insight-deferral.db'
         with contextlib.closing(sqlite3.connect(database))as db:

@@ -1214,7 +1214,7 @@ function podskazki_skryt(ctx) {
                                                      
 function podskazki_peregruz(ctx) {
   tolko(ctx.metod, 'GET');
-  const db=baza(),den=ctx.zapros.den||segodnja();
+  const db=baza(),den=ctx.zapros.den||require('./parametry-analitiki.js').today(db);
   const week=require('./kalendar.js').nedelja_iz_zaprosa(ctx.zapros,den);
   const loads=require('./nagruzka.js').nagruzka(db,{den,week});
   const mine=loads.find(l=>l.id===Number(ctx.avtor));

@@ -398,7 +398,8 @@ function refleksija({ zapros, avtor, metod }) {
 function insajty({ zapros, avtor, metod, uchityvat_otlozhennye=true }) {
   if (metod !== 'GET') throw Object.assign(new Error('сюда только GET'), { kod: 405 });
   const db = baza();
-  const den = zapros.den || segodnja();
+  const analyticSettings=require('./parametry-analitiki.js').values(db);
+  const den = zapros.den || require('./nagruzka.js').den_v_zone(new Date().toISOString(),analyticSettings.chasovoj_pojas);
   const najdeno = [];
   const dnej_s = (data) => Math.floor((Date.parse(den) - Date.parse(data)) / 86400000);
                                                             
@@ -447,23 +448,15 @@ function insajty({ zapros, avtor, metod, uchityvat_otlozhennye=true }) {
       `«${z.nazvanie}» висит ${sk(dnej_s(z.sozdano), 'день', 'дня', 'дней')} и не разбита на шаги`,
       `/zadachi.html?nomer=${z.nomer}`, z.napravlenie)));
 
-                                                                   
-                                                                    
+                                                                            
   bezopasno(() => {
-    const week = iso_nedelja(den), before = sdvinut_nedelju(week.god, week.nomer, -4);
-    const tek=week.god*100+week.nomer, start=before.god*100+before.nomer;
-    db.prepare(
-      `SELECT napravlenie,
-              sum(CASE WHEN god_sprinta*100+sprint = ? THEN 1 ELSE 0 END) seichas,
-              sum(CASE WHEN god_sprinta*100+sprint >= ? AND god_sprinta*100+sprint < ? THEN 1 ELSE 0 END) / 4.0 srednee
-         FROM zadachi WHERE status = 'sdelano' AND ${NE_UDALENA}
-        GROUP BY napravlenie`).all(tek, start, tek).forEach((r) => {
-      if (r.srednee >= 1 && r.seichas >= r.srednee * 1.5) {
-        dobavit('zadachi', 'zakryto_bolshe_obychnogo',
-          `закрыто ${r.seichas} при обычных ${Math.round(r.srednee)} за спринт`,
-          `/zadachi.html?napravlenie=${r.napravlenie}&status=sdelano`, r.napravlenie);
+    for(const r of require('./nagruzka.js').zakryto_po_napravlenijam(db,{den})){
+      if(r.mediana!=null&&r.seichas>r.mediana*r.koefficient){
+        dobavit('zadachi','zakryto_bolshe_obychnogo',
+          `закрыто ${r.seichas} при обычных ${r.mediana} за неделю`,
+          `/zadachi.html?napravlenie=${encodeURIComponent(r.napravlenie)}&status=sdelano`,r.napravlenie);
       }
-    });
+    }
   });
 
                
@@ -508,15 +501,15 @@ function insajty({ zapros, avtor, metod, uchityvat_otlozhennye=true }) {
                                                                 
   bezopasno(() => db.prepare(
     `SELECT s.id, s.chelovek_id, l.imja, s.napravlenie,
-            coalesce(n.norma_dnej, 14) norma, s.poslednee_obshenie
+            coalesce(n.norma_dnej, ?) norma, s.poslednee_obshenie
      FROM sotrudnichestva s
      JOIN ljudi l ON l.id = s.chelovek_id
      LEFT JOIN napravlenija n ON n.kod = s.napravlenie
      WHERE s.rol = 'klient' AND (s.arhiv IS NULL OR s.arhiv = 0)
        AND (s.stadija IS NULL OR s.stadija <> 'pauza')
        AND s.poslednee_obshenie IS NOT NULL
-       AND julianday(?) - julianday(s.poslednee_obshenie) > coalesce(n.norma_dnej, 14)
-     `).all(den).forEach((s) =>
+       AND julianday(?) - julianday(s.poslednee_obshenie) > coalesce(n.norma_dnej, ?)
+     `).all(analyticSettings.dnej_bez_obschenija_porog,den,analyticSettings.dnej_bez_obschenija_porog).forEach((s) =>
     dobavit('klienty', 'davno_ne_obschalis',
       `${s.imja}: ${sk(dnej_s(s.poslednee_obshenie), 'день', 'дня', 'дней')} без общения при норме ${s.norma}`,
       `/klient.html?id=${s.chelovek_id}`, s.napravlenie,{istochnik_kljucha:['sotrudnichestvo',s.id]})));

@@ -42,10 +42,11 @@ test('field versions track raw SQL, recursive triggers, rollback, keys and histo
     const rows=db.prepare('SELECT * FROM versii_polej ORDER BY tablica,obekt_id,pole').all();db.close();db=null;
     migrate();db=new DatabaseSync(file);assert.deepEqual(db.prepare('SELECT * FROM versii_polej ORDER BY tablica,obekt_id,pole').all(),rows);
     assert.equal(Object.values(db.prepare('PRAGMA integrity_check').get())[0],'ok');assert.equal(db.prepare('PRAGMA foreign_key_check').all().length,0);
-    assert.equal(db.prepare("SELECT count(*) n FROM sqlite_master WHERE type='trigger'").get().n,86);
+    assert.equal(db.prepare("SELECT count(*) n FROM sqlite_master WHERE type='trigger'").get().n,90);
     assert.equal(db.prepare("SELECT count(*) n FROM sqlite_master WHERE type='trigger' AND name='zaprosy_planov_kampanij_delete'").get().n,1);
     assert.equal(db.prepare("SELECT count(*) n FROM sqlite_master WHERE type='trigger' AND name='zaprosy_istochnikov_publikacij_udalenie'").get().n,1);
     for(const name of ['versii_tezisy_insert','versii_tezisy_update','versii_tezisy_delete'])assert.equal(db.prepare("SELECT count(*) n FROM sqlite_master WHERE type='trigger' AND name=?").get(name).n,1);
+    for(const name of ['nastrojki_sistemy_singleton','versija_nastroek_sistemy_insert','versija_nastroek_sistemy_update','versija_nastroek_sistemy_delete'])assert.equal(db.prepare("SELECT count(*) n FROM sqlite_master WHERE type='trigger' AND name=?").get(name).n,1);
     for(const name of ['versii_nastroek_insert','versii_nastroek_update','versii_nastroek_delete'])assert.equal(db.prepare("SELECT count(*) n FROM sqlite_master WHERE type='trigger' AND name=?").get(name).n,1);
   }finally{db?.close();fs.rmSync(dir,{recursive:true,force:true});}
 });

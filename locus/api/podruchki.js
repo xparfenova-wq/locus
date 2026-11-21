@@ -486,7 +486,7 @@ function zagruzka_cheloveka({ kljuch, metod, zapros }) {
   const db = baza();
   const c = chelovek_ili_imja(db, kljuch);
   const calendar = require('./kalendar.js');
-  const week = calendar.nedelja_iz_zaprosa(zapros, zapros.den || den_msk());
+  const week = calendar.nedelja_iz_zaprosa(zapros, zapros.den || require('./parametry-analitiki.js').today(db));
   const nedelja = week.nomer;
 
                                                                       
@@ -503,7 +503,7 @@ function zagruzka_cheloveka({ kljuch, metod, zapros }) {
     `SELECT count(*) k FROM zadachi
      WHERE otvetstvennyj = ? AND ${OTKRYTA} AND ${NE_UDALENA}`
   ).get(c.id).k;
-  const load=require('./nagruzka.js').nagruzka(db,{den:zapros.den||den_msk(),week,chelovek_id:c.id})[0];
+  const load=require('./nagruzka.js').nagruzka(db,{den:zapros.den||require('./parametry-analitiki.js').today(db),week,chelovek_id:c.id})[0];
   const zadach_nedeli=load?.otkryto??0,mediana=load?.mediana??null;
 
   return {
@@ -1464,10 +1464,7 @@ function obnovit_poslednjuju_zadachu(db, zadacha, kogda) {
 function sotr_davno_ne_obschalis({ metod, zapros }) {
   tolko(metod, 'GET');
   const db = baza();
-  const obschaja = db.prepare(
-    'SELECT dnej_bez_obschenija_porog p FROM nastrojki_sistemy LIMIT 1'
-  ).get();
-  const po_umolchaniju = (obschaja && obschaja.p) || 14;
+  const po_umolchaniju = require('./parametry-analitiki.js').values(db).dnej_bez_obschenija_porog;
 
   const uslovija = ["(s.arhiv IS NULL OR s.arhiv = 0)", "s.rol <> 'referal'"];
   const znachenija = [];

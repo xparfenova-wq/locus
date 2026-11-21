@@ -1,7 +1,7 @@
 {
   "whole_goal_open": true,
   "verified_product_revision": "d47fa51a554ed052e843ef2f3be91625eac3954c",
-  "verified_product_installed_msk": "21.11.2026",
+  "verified_product_installed_msk": "21.11.2026 16:57:02 МСК",
   "strict_accepted": 232,
   "criteria_total": 1717,
   "tests": {
@@ -9,7 +9,6 @@
     "api": 447,
     "ops": 44,
     "collector": 20,
-    "design": 2,
     "Mac_and_isolated_Linux": true
   },
   "native_groups": 53,

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+                      
 """Собирает schema.sql из СХЕМА-БАЗЫ.md.
 
 Схема в документе это источник истины. Генератор нужен, чтобы база
@@ -36,6 +36,8 @@ BEZ_ID = {
     'zaprosy_strategii': ['avtor', 'kljuch_hesh'],
     'zaprosy_pravok_celej': ['avtor', 'kljuch_hesh'],
     'versii_nastroek': ['chelovek_id'],
+    'versija_nastroek_sistemy': ['id'],
+    'zaprosy_nastroek_sistemy': ['avtor', 'kljuch_hesh'],
     'zaprosy_nastroek': ['avtor', 'kljuch_hesh'],
     'arhiv_strok_baz': ['stroka_id'],
     'zaprosy_baz': ['avtor', 'kljuch_hesh'],

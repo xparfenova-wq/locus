@@ -89,6 +89,7 @@ const PODRUCHKI = {
   meta: ['filtry_zadach', 'napravlenija'],
   moe_prostranstvo: ['grafik'],
   napravlenija: ['akkaunty', 'materialy', 'porjadok', 'strategija', 'svoi_znachenija', 'uslugi', 'vizity', 'vkladki', 'voronka'],
+  nastrojki_sistemy: ['proverka', 'otmena_popytki'],
   nastrojki: ['bot', 'vid', 'proverka', 'otmena_popytki'],
   nedeli: ['rassylki'],
   okr: ['celi', 'periody', 'rezultat', 'rezultaty', 'vehi', 'zadachi', 'zakryt', 'zamery'],

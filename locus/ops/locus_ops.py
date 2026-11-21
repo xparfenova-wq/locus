@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+                      
 """Private, self-contained backups and releases. No pip dependencies.
 
 Archives contain team data. Store them privately; never add them to Git.
@@ -786,6 +786,10 @@ def verify_insight_deferral_state(before_database, after_database, root):
     return verify_empty_receipt_state(before_database,after_database,root,150,['otlozhennye_insajty','zaprosy_insajtov'],'150-otlozhennye-insajty.sql','exact_insight_deferral_schema_verified')
 
 
+def verify_shared_settings_state(before_database, after_database, root):
+    return verify_empty_receipt_state(before_database,after_database,root,151,['versija_nastroek_sistemy','zaprosy_nastroek_sistemy'],'151-parametry-analitiki.sql','exact_shared_settings_schema_verified')
+
+
 def check_migration_counts(before, after, root, before_database=None):
                                                                                
                                                                                
@@ -877,6 +881,9 @@ def check_migration_counts(before, after, root, before_database=None):
         with contextlib.closing(sqlite3.connect(before_database))as old,contextlib.closing(sqlite3.connect(root/'db/locus.db'))as current:
             insight_conversion=not old.execute('SELECT count(*) FROM migracii WHERE nomer=150').fetchone()[0]and current.execute('SELECT count(*) FROM migracii WHERE nomer=150').fetchone()[0]==1
         if insight_conversion:verify_insight_deferral_state(before_database,root/'db/locus.db',root)
+        with contextlib.closing(sqlite3.connect(before_database))as old,contextlib.closing(sqlite3.connect(root/'db/locus.db'))as current:
+            shared_settings_conversion=not old.execute('SELECT count(*) FROM migracii WHERE nomer=151').fetchone()[0]and current.execute('SELECT count(*) FROM migracii WHERE nomer=151').fetchone()[0]==1
+        if shared_settings_conversion:verify_shared_settings_state(before_database,root/'db/locus.db',root)
 
 
 

@@ -33,6 +33,9 @@ test('личная медиана: пустые недели исключены,
     assert.equal(mine.nepustyh_nedel,7);assert.equal(little.mediana,null);assert.equal(little.peregruz,false);
     db.exec("UPDATE zadachi SET status='kogda_nibud' WHERE id=(SELECT max(id) FROM zadachi WHERE otvetstvennyj=1)");
     assert.equal(nagruzka(db,{den,chelovek_id:1})[0].peregruz,false);
+    db.exec("UPDATE nastrojki_sistemy SET porog_peregruza='3'");
+    assert.equal(nagruzka(db,{den,chelovek_id:1})[0].porog,24);assert.equal(nagruzka(db,{den,chelovek_id:1})[0].peregruz,false);
+    db.exec('UPDATE nastrojki_sistemy SET porog_peregruza=NULL');
     const late=insert.run(1,'sdelano',week.nomer);
     event.run(late.lastInsertRowid,'2026-11-15 22:30:00');
     assert.equal(nagruzka(db,{den,chelovek_id:1})[0].po_nedeljam.at(-1).zakryto,10);
