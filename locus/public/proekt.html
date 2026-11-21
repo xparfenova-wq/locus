@@ -1,0 +1,432 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Проект</title>
+<link rel="icon" href="/api/favicon?v=L" type="image/svg+xml">
+<link rel="stylesheet" href="/css/obschij.css">
+<style>
+.kroshki{display:flex;align-items:center;gap:7px;font-size:11.5px;
+color:var(--t3);padding:2px 0 14px;flex-wrap:wrap}
+.kroshki a{transition:color .14s}
+.kroshki a:hover{color:var(--t1)}
+.kroshki .razd{opacity:.4}
+.kroshki b{color:var(--t1);font-weight:400}
+.prj-sh{display:flex;align-items:flex-start;justify-content:space-between;
+gap:16px;padding-bottom:18px}
+.prj-im{font-size:21px;font-weight:500;letter-spacing:-.02em}
+.prj-pod{font-size:11.5px;color:var(--t3);margin-top:5px;
+display:flex;align-items:center;gap:8px}
+.plt{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--lin);
+margin-bottom:26px}
+.plt-k{padding:16px 18px;border-left:1px solid var(--lin);min-width:0}
+.plt-k:first-child{border-left:0}
+.plt-c{font-size:21px;font-weight:500;letter-spacing:-.02em;
+font-family:'Geist Mono',ui-monospace,monospace;font-feature-settings:"tnum"}
+.plt-c i{font-size:12px;color:var(--t3);font-style:normal;font-family:'Geist',sans-serif}
+                                                                 
+.plt-c.plt-skr{font-size:13px;font-weight:400;color:var(--t3);
+font-family:'Geist',sans-serif;letter-spacing:0}
+.pill-arh{color:var(--t3)}
+.plt-l{font-size:11.5px;color:var(--t3);margin-top:3px}
+.plt-d{font-size:10.5px;color:var(--t3);margin-top:5px}
+.sek-z{display:flex;align-items:baseline;gap:9px;font-size:11.5px;
+color:var(--t2);padding:22px 0 9px;letter-spacing:.01em}
+.sek-z .n{font-family:'Geist Mono',ui-monospace,monospace;font-size:10.5px;color:var(--t3)}
+.pr-kn{display:flex;align-items:center;gap:11px;flex-wrap:wrap}
+.plt-str{display:grid;grid-template-columns:minmax(0,1fr) minmax(110px,max-content) 76px 86px minmax(70px,max-content);
+gap:12px;align-items:center;padding:11px 0;border-bottom:1px solid var(--lin);
+font-size:13px}
+.plt-str .dj{text-align:right;font-size:11.5px}
+.plt-str .dj{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.plt-str .dj button{min-height:32px;font-size:11.5px;white-space:normal}
+.plt-str>span:first-child{min-width:0;overflow-wrap:anywhere}
+                                                                         
+.sm.vyshe,.plt-itog b.vyshe{color:var(--zh)}
+.plt-itog{display:flex;align-items:baseline;gap:7px;font-size:11.5px;
+color:var(--t3);padding:12px 0 2px}
+.plt-itog b{font-weight:500;color:var(--t1);
+font-family:'Geist Mono',ui-monospace,monospace;font-feature-settings:"tnum"}
+                                                                     
+.dok{display:grid;grid-template-columns:minmax(0,1fr) 72px 92px 86px 82px 86px;
+gap:12px;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--lin);
+font-size:13px}
+.dok-sh{font-size:10.5px;color:var(--t3);padding-bottom:7px}
+.dok .tp,.dok .nm{font-size:11.5px;color:var(--t3)}
+.dok .nm{font-family:'Geist Mono',ui-monospace,monospace}
+.dok .kt{font-size:11.5px;color:var(--t3)}
+.dok .dt{font-size:11.5px;color:var(--t3);text-align:right;
+font-family:'Geist Mono',ui-monospace,monospace}
+.dok-sh .dt,.dok-sh .kt{font-size:10.5px}
+.nedostupna{opacity:.45;pointer-events:none}
+                                                                     
+.zv-ch{padding:2px 0 4px}
+.zv-s{display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+font-size:13px;padding:8px 0;border-bottom:1px solid var(--lin)}
+.zv-s b{font-weight:500;font-family:'Geist Mono',ui-monospace,monospace;
+font-feature-settings:"tnum"}
+.zv-net{font-size:11.5px;color:var(--t3);padding:9px 0;line-height:1.5}
+.zv-v{display:flex;flex-direction:column;gap:2px;padding:13px 0 4px}
+.zv-r{display:flex;align-items:flex-start;gap:9px;font-size:13px;
+padding:8px 0;cursor:pointer;line-height:1.45}
+.zv-r input{margin-top:3px;accent-color:var(--tmn)}
+#zv-kuda{padding-top:6px}
+.plt-str .sm{font-family:'Geist Mono',ui-monospace,monospace;text-align:right;
+font-feature-settings:"tnum"}
+.plt-str .dt{font-size:11.5px;color:var(--t3);text-align:right;
+font-family:'Geist Mono',ui-monospace,monospace}
+.plt-str .st{font-size:11.5px;color:var(--t3)}
+.plt-str .st.ok{color:var(--zel,#1f8f4e)}
+.plt-str .st.zhd{color:var(--zh)}
+                                                                        
+.mat{display:grid;grid-template-columns:minmax(0,1fr) 82px 86px;gap:12px;
+align-items:baseline;padding:10px 0;border-bottom:1px solid var(--lin);font-size:13px}
+.mat .kt{font-size:11.5px;color:var(--t3)}
+.mat .dt{font-size:11.5px;color:var(--t3);text-align:right;
+font-family:'Geist Mono',ui-monospace,monospace}
+.mat a,.dok a{border-bottom:1px solid var(--lin)}
+.mat a:hover,.dok a:hover{color:var(--t1)}
+.zhrn{font-size:11.5px;color:var(--t2);padding:8px 0;
+border-bottom:1px solid var(--lin);display:grid;
+grid-template-columns:86px minmax(0,1fr) 90px;gap:10px;align-items:baseline}
+.zhrn .kg{font-family:'Geist Mono',ui-monospace,monospace;font-size:10.5px;color:var(--t3)}
+.zhrn .kt{font-size:11.5px;color:var(--t3);text-align:right}
+.net{font-size:11.5px;color:var(--t3);padding:13px 0}
+@media (max-width:760px){.plt{grid-template-columns:1fr}
+.plt-k{border-left:0;border-top:1px solid var(--lin)}
+.plt-k:first-child{border-top:0}
+.plt-str{grid-template-columns:minmax(0,1fr) auto;gap:6px 12px}
+.plt-str>span:first-child{grid-column:1/-1}
+.plt-str .sm{grid-column:1;grid-row:2;text-align:left}
+.plt-str .st{grid-column:2;grid-row:2}
+.plt-str .dt{display:block;grid-column:1;grid-row:3;text-align:left}
+.plt-str .dj{grid-column:2;grid-row:3}
+.plt-str .dj{grid-column:1/-1;grid-row:4;justify-content:flex-start}
+.plt-str .dj button{min-height:44px}
+.plt-str .dj a{display:inline-flex;align-items:center;min-height:var(--control-height-mobile)}
+.plt-str .st{font-size:10.5px;text-align:right}
+                                                                     
+                                                         
+.dok{grid-template-columns:minmax(0,1fr) 78px 80px}
+.dok .tp,.dok .kt{display:none}
+.dok>.dt:last-child{display:none}
+.mat{grid-template-columns:minmax(0,1fr) 80px}
+.mat .kt{display:none}
+                                                              
+                                                              
+                                                              
+                                                         
+.mat,.dok,.plt-str{min-height:44px;align-items:center}
+.mat a,.dok a{display:flex;align-items:center;min-height:44px}
+                                                             
+                                                         
+                                                               
+                                                          
+                                                            
+                                                         
+.kroshki{display:none}
+                                                             
+                                                               
+.prj-sh{flex-direction:column;gap:12px;align-items:stretch}
+.prj-im{font-size:20px}}
+.plt-str.prosro .st,.plt-str.prosro .dt{color:#c2410c}
+.plt-pr{display:block;font-style:normal;font-size:11.5px;color:#c2410c}
+.opl-vvod{border:0;background:transparent;font:inherit;font-size:13px;
+  width:100%;padding:0}
+.opl-vvod:focus{outline:none}
+.opl-razvilka{padding-top:10px}
+</style></head><body>
+<div id="menju"></div>
+<div class="wrap"><div class="kol">
+  <div id="kroshki"></div>
+  <div id="shapka"></div>
+  <div id="plitki"></div>
+  <div id="telo"></div>
+</div></div>
+<script src="/js/nedeli.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/obschij.js"></script>
+<script src="/js/kalendar.js"></script>
+<script src="/js/forma-platezha.js"></script>
+<script>
+(function () {
+let SOCSETI = {}, USLUGA = null;
+let SPRAV = null, P = null, KLIENT = null, ZADACHI = [], PLATEZHI = [],
+    MATERIALY = [], DOKUMENTY = [];
+const id = Number(window.LocusTaskRoute.query(location.href).get('id'));
+
+const dengi = n => n == null ? '—' : new Intl.NumberFormat('ru-RU',{maximumFractionDigits:2}).format(n)+' ₽';
+
+const summa_platezha=n=>new Intl.NumberFormat('ru-RU',{maximumFractionDigits:2}).format(n)+' ₽';
+const STADII = { idet: 'идёт', pauza: 'пауза', zavershen: 'завершён' };
+
+async function vseZadachiProekta(){
+  const rows=[],seen=new Set();let pages=1,total=null;
+  for(let page=1;page<=pages;page++){
+    const part=await API.spisok('zadachi',{proekt_id:id,na_stranice:200,stranica:page});
+    if(!Array.isArray(part.spisok)||!Number.isSafeInteger(part.stranic)||part.stranic<1||!Number.isSafeInteger(part.vsego)||part.vsego<0)throw new Error('Список задач не удалось подтвердить. Обнови карточку.');
+    if(total!==null&&total!==part.vsego||page>1&&pages!==part.stranic)throw new Error('Список задач изменился во время загрузки. Обнови карточку.');
+    total=part.vsego;pages=part.stranic;
+    for(const row of part.spisok){if(!Number.isSafeInteger(row.id)||seen.has(row.id))throw new Error('Список задач изменился во время загрузки. Обнови карточку.');seen.add(row.id);rows.push(row);}
+  }
+  if(rows.length!==total)throw new Error('Не все задачи загрузились. Обнови карточку.');
+  return rows;
+}
+function proveritStatistiku(value){
+  const date=x=>typeof x==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(x)&&Number.isFinite(Date.parse(x+'T12:00:00Z'))&&new Date(x+'T12:00:00Z').toISOString().slice(0,10)===x;
+  const fail=()=>{throw new Error('Статистику проекта не удалось подтвердить. Обнови карточку.');};
+  if(!value||value.proekt_id!==id||!Number.isSafeInteger(value.akkauntov)||value.akkauntov<0||!date(value.den))fail();
+  for(const field of ['podpischikov','za_nedelju']){const row=value[field];if(!row||!Number.isSafeInteger(row.akkauntov)||row.akkauntov<0||row.akkauntov>value.akkauntov||row.znachenie!==null&&(typeof row.znachenie!=='number'||!Number.isFinite(row.znachenie)||field==='podpischikov'&&row.znachenie<0)||row.akkauntov===0&&row.znachenie!==null||row.akkauntov>0&&row.znachenie===null)fail();if(row.akkauntov&&(!date(row.obnovleno_ot)||!date(row.obnovleno_do)||row.obnovleno_ot>row.obnovleno_do||row.obnovleno_do>value.den))fail();if(field==='za_nedelju'&&(typeof row.raznye_periody!=='boolean'||row.akkauntov&&(!date(row.period_s)||!date(row.period_po)||row.period_s>row.period_po||row.period_po>value.den)))fail();}
+  return value;
+}
+async function zagruzit() {
+  const next=await API.odna('proekty',id);
+  const [tasks,payments,materials,statistics,service,client]=await Promise.all([
+    vseZadachiProekta(),API.odna('proekty',id+'/platezhi'),API.odna('proekty',id+'/materialy'),
+    API.odna('proekty',id+'/statistika'),
+    next.usluga_id?API.odna('uslugi',next.usluga_id):Promise.resolve(null),
+    next.klient_id?API.odna('ljudi',next.klient_id):Promise.resolve(null),
+  ]);
+  if(!Array.isArray(payments.spisok)||!Array.isArray(materials.materialy)||!Array.isArray(materials.dokumenty))throw new Error('Данные проекта не удалось подтвердить. Обнови карточку.');
+  const stats=proveritStatistiku(statistics);
+  P=next;USLUGA=service;KLIENT=client;ZADACHI=tasks;PLATEZHI=payments.spisok;MATERIALY=materials.materialy;DOKUMENTY=materials.dokumenty;
+  SOCSETI={podpischikov:stats.podpischikov.znachenie,za_nedelju:stats.za_nedelju.znachenie,details:stats};
+}
+
+function kroshki() {
+  const n = O.naprPoKodu(P.napravlenie);
+                                                                
+                                                                    
+                                                                
+                                                            
+                                                         
+  const roditel = KLIENT
+    ? { adres: `/klient.html?id=${KLIENT.id}`, imja: KLIENT.imja }
+    : { adres: `/napravlenija.html?napravlenie=${P.napravlenie}`, imja: n.imja };
+
+  document.getElementById('kroshki').innerHTML = `<div class="kroshki">
+    ${KLIENT ? `<a href="/klient.html?id=${KLIENT.id}">${O.ekranirovat(KLIENT.imja)}</a>
+      <span class="razd">→</span>` : ''}
+    <a href="/napravlenija.html?napravlenie=${P.napravlenie}">${O.ekranirovat(n.imja)}</a>
+    <span class="razd">→</span><b>${O.ekranirovat(P.nazvanie)}</b>
+  </div>
+  <a class="kart-nazad" href="${roditel.adres}">
+    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M10 3 5 8l5 5" stroke="currentColor" stroke-width="1.5"
+        stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>${O.ekranirovat(roditel.imja)}</a>`;
+}
+
+function shapka() {
+  const vedet = (SPRAV.ljudi || []).find((l) => l.id === P.kto_vedet);
+  if (P && P.nazvanie) O.kroshkiPodpis?.(P.nazvanie);
+  document.getElementById('shapka').innerHTML = `<div class="prj-sh">
+    <div><div class="entity-title-row"><div class="prj-im">${O.ekranirovat(P.nazvanie)}</div>${O.entityCopyLink("/proekty/"+id)}</div>
+      <div class="prj-pod">
+        <span class="pill">${STADII[P.status] || P.status || 'идёт'}</span>
+        ${P.arhiv ? `<span class="pill pill-arh">в архиве${P.arhiv_s
+          ? ', ' + SPR.data(P.arhiv_s) : ''}</span>` : ''}
+        ${vedet?`<a class="project-lead-link" href="/klient.html?id=${vedet.id}">${O.avatar(vedet,20)}ведёт ${O.ekranirovat(vedet.imja)}</a>`:'<span>ведущий пока не указан</span>'}
+        ${P.usluga_id||P.usluga_svoja||P.usluga_tekst?'<span class="project-service-label">услуга: '+O.ekranirovat(USLUGA?.nazvanie||P.usluga_svoja||P.usluga_tekst||'Название услуги не загрузилось')+'</span>':''}
+      </div></div>
+    <div class="pr-kn"><button type="button" class="kn" data-project-edit>Изменить</button>
+      <button type="button" data-project-action data-project-id="${id}" class="kn" id="zavershit" style="padding:7px 15px;font-size:12px">${
+        P.status === 'zavershen' ? 'Вернуть в работу' : 'Завершить проект'}</button>
+      <button type="button" data-project-action data-project-id="${id}" class="kn" id="v-arhiv">${P.arhiv ? 'Вернуть из архива' : 'Убрать в архив'}</button>
+    </div>
+  </div>`;
+
+                                                                   
+                                                                    
+                                                  
+                                                            
+  document.getElementById('zavershit')?.addEventListener('click', () => {
+    if (P.status === 'zavershen') return vozobnovit();
+    dialogZavershenija();
+  });
+                                                            
+                              
+  document.getElementById('v-arhiv')?.addEventListener('click', dialogArhiva);
+  document.querySelector('[data-project-edit]')?.addEventListener('click',()=>O.projectEditUi().then(m=>m.open(id,{after:async()=>{await zagruzit();narisovat();}})).catch(error=>O.tost(error.message)));
+}
+
+async function dejstvieProekta(action){try{return await(await O.projectActionUi()).open(id,action,{versija:P.versija,after:async()=>{await zagruzit();narisovat();}});}catch(error){O.tost(error.message);}}
+async function vozobnovit(){return dejstvieProekta('vozobnovit');}
+async function dialogZavershenija(){return dejstvieProekta('zavershit');}
+function dialogArhiva(){return dejstvieProekta('arhiv');}
+
+function podpisStatistiki(){
+  const stats=SOCSETI.details,sub=stats.podpischikov,growth=stats.za_nedelju,notes=[];
+  if(sub.znachenie===null)notes.push('Данные пока не получены');
+  if(sub.akkauntov<stats.akkauntov&&sub.akkauntov)notes.push('данные по '+sub.akkauntov+' из '+stats.akkauntov+' аккаунтов');
+  if(sub.akkauntov&&sub.obnovleno_ot!==stats.den)notes.push('замеры от '+SPR.data(sub.obnovleno_ot)+(sub.obnovleno_do!==sub.obnovleno_ot?' до '+SPR.data(sub.obnovleno_do):''));
+  if(growth.znachenie!==null){const value=growth.znachenie;notes.push((value>0?'+':'')+value.toLocaleString('ru-RU')+(growth.raznye_periody?' за последние измеренные недели':growth.period_po===stats.den?' за неделю':' за неделю до '+SPR.data(growth.period_po)));if(growth.akkauntov<stats.akkauntov)notes.push('изменение по '+growth.akkauntov+' из '+stats.akkauntov+' аккаунтов');}
+  else if(sub.znachenie!==null)notes.push('для изменения за неделю не хватает снимков');
+  return notes.join('\n');
+}
+
+function plitki() {
+  const oplacheno = PLATEZHI.filter((p) => p.oplachen_at)
+    .reduce((a, p) => a + (p.summa || 0), 0);
+  const zhdem = PLATEZHI.filter((p) => !p.oplachen_at)
+    .reduce((a, p) => a + (p.summa || 0), 0);
+                                                                  
+  const week=SPR.kalendar.iso_nedelja(SPR.segodnja());
+  const na_nedele=ZADACHI.filter(z=>z.sprint===week.nomer&&z.god_sprinta===week.god).length;
+  const otkryto = ZADACHI.filter((z) =>
+    z.status !== 'sdelano' && z.status !== 'kogda_nibud').length;
+
+                                                                 
+                                                                     
+  const skryto = !!P.dengi_skryty;
+  document.getElementById('plitki').innerHTML = `<div class="plt">
+    <div class="plt-k"><div class="plt-c${skryto ? ' plt-skr' : ''}">${
+      skryto ? 'блок скрыт' : dengi(P.stoimost)}</div>
+      <div class="plt-l">стоимость</div>
+      <div class="plt-d">${skryto ? 'доступ без сумм' : ''}</div></div>
+    <div class="plt-k"><div class="plt-c${skryto ? ' plt-skr' : ''}">${
+      skryto ? 'блок скрыт' : dengi(oplacheno)}</div>
+      <div class="plt-l">оплачено</div>
+      <div class="plt-d">${skryto ? ''
+        : (zhdem ? 'ждём ' + dengi(zhdem) : 'всё пришло')}</div></div>
+    <div class="plt-k"><div class="plt-c">${na_nedele}<i class="slovo"> из ${ZADACHI.length}</i></div>
+      <div class="plt-l">задач на неделе</div>
+      <div class="plt-d">открыто ${otkryto}</div></div>
+    ${SOCSETI?.details?.akkauntov ? `
+    <div class="plt-k"><div class="plt-c">${SOCSETI.podpischikov==null?'—':SOCSETI.podpischikov.toLocaleString('ru-RU')}</div>
+      <div class="plt-l">подписчиков</div><div class="plt-d project-statistics-note">${O.ekranirovat(podpisStatistiki())}</div></div>` : ''}
+  </div>`;
+}
+
+function zagolovok(imja, skolko) {
+  const n = O.naprPoKodu(P.napravlenie);
+  return `<div class="sek-z">${imja}<i></i>` +
+    `<span class="n">${skolko}</span></div>`;
+}
+
+                                                                 
+                                                        
+const POLJA = {
+  status: 'стадия', stadija: 'стадия', arhiv: 'архив', rol: 'роль',
+  stoimost: 'стоимость', nazvanie: 'название', srok: 'срок',
+  otvetstvennyj: 'ответственный', napravlenie: 'направление',
+  sostojanie: 'состояние', procent: 'процент', vyplacheno: 'выплачено',
+  poslednee_obshenie: 'последнее общение', kto_vedet: 'кто ведёт',
+};
+const ZNACHENIJA = {
+  idet: 'идёт', pauza: 'пауза', zavershen: 'завершён',
+  v_plane: 'в плане', v_processe: 'в процессе',
+  na_soglasovanii: 'на согласовании', sdelano: 'сделано',
+  kogda_nibud: 'когда-нибудь', chernovik: 'черновик', aktivna: 'активна',
+  arhiv: 'архив', lid: 'лид', klient: 'клиент', referal: 'реферал',
+  da: 'да', net: 'нет',
+};
+const slovo = (v) => v == null || v === '' ? '—' : (ZNACHENIJA[v] || v);
+
+function po_chelovecheski(z) {
+  const pole = POLJA[z.pole] || z.pole || 'изменение';
+  if (z.bylo == null && z.stalo == null) return pole;
+                                                               
+                                   
+  if (String(z.bylo) === String(z.stalo)) return `${pole} без изменений`;
+  return `${pole}: ${slovo(z.bylo)} → ${slovo(z.stalo)}`;
+}
+
+function telo() {
+  const ch = [];
+  ch.push('<section class="project-context"><div class="sek-z">контекст проекта</div><div class="project-context-text">'+O.ekranirovat(P.kommentarij||'Контекст пока не заполнен')+'</div></section>');
+
+                                                             
+  const po_srochnosti = [...ZADACHI].sort((a, b) => {
+    const sa = a.srok || '9999', sb = b.srok || '9999';
+    return sa < sb ? -1 : sa > sb ? 1 : 0;
+  });
+  ch.push(zagolovok('задачи', ZADACHI.length) +
+    (po_srochnosti.length
+      ? po_srochnosti.map((z) => O.strokaZadachi(SPR.dlja_ekrana(z),
+          { bezNapravlenija: true })).join('')
+      : '<div class="net">задач нет</div>'));
+
+                                                                      
+                                                           
+  const net_summ = !!P.dengi_skryty;
+  const oplacheno_sum = PLATEZHI.filter((p) => p.oplachen_at)
+    .reduce((a, p) => a + (p.summa || 0), 0);
+  const perebor = P.stoimost && oplacheno_sum > P.stoimost;
+  ch.push(zagolovok('платежи', PLATEZHI.length) + '<div id="project-payment-create"></div>' +
+    (net_summ
+      ? '<div class="net">блок скрыт: доступ без сумм</div>'
+      : PLATEZHI.length ? PLATEZHI.map((p) => {
+      const prishel = !!p.oplachen_at;
+                                                                             
+      const bolshe = P.stoimost && (p.summa || 0) > P.stoimost;
+                                                                    
+                                                                 
+                                                          
+      const dnej_prosro = !prishel && p.zhdem_do
+        && p.zhdem_do < SPR.segodnja()
+        ? SPR.kalendar.raznica_dnej(p.zhdem_do,SPR.segodnja()) : 0;
+      return `<div class="plt-str${dnej_prosro ? ' prosro' : ''}">
+        <span>${O.ekranirovat(p.naznachenie || (p.nomer ? 'счёт № ' + p.nomer : 'платёж'))}</span>
+        <span class="sm${bolshe ? ' vyshe' : ''}"${bolshe
+          ? ' title="больше стоимости проекта"' : ''}>${summa_platezha(p.summa)}</span>
+        <span class="st${prishel ? ' ok' : ' zhd'}">${prishel ? 'пришло' : 'ждём'}</span>
+        <span class="dt">${prishel ? SPR.data(p.oplachen_at)
+          : (p.zhdem_do ? SPR.data(p.zhdem_do) : '—')}${dnej_prosro
+            ? `<i class="plt-pr">просрочен на ${dnej_prosro} ${
+                O.skolko(dnej_prosro, 'день', 'дня', 'дней')}</i>` : ''}</span>
+        <span class="dj">${prishel ? ''
+          : `<button type="button" class="kn" data-payment-task="${p.id}">задача по платежу</button><a class="fil-b" data-opl="${p.id}">пришло</a>`}</span>
+      </div>`;
+    }).join('') + `<div class="plt-itog">оплачено
+        <b class="${perebor ? 'vyshe' : ''}">${dengi(oplacheno_sum)}</b>${P.stoimost
+          ? ' из ' + dengi(P.stoimost) : ''}</div>`
+      : '<div class="net">платежей нет</div>'));
+
+                                                                  
+                                                                
+  ch.push('<div id="project-materials" data-material-add-id="pm-add"></div><div id="project-documents" data-material-add-id="pd-add"></div>');
+
+  ch.push('<div id="project-history"></div>');
+
+  document.getElementById('telo').innerHTML = ch.join('');
+  const materialRoot=document.getElementById('project-materials'),documentRoot=document.getElementById('project-documents');
+  O.materialBlocks({materialRoot,documentRoot,table:'proekty',key:id,bindings:{proekt_id:id},contextLabel:P.nazvanie});
+  O.entityHistory(document.getElementById('project-history'),{obekt:'proekt',id});
+
+                                                            
+                                                                 
+                                                    
+  document.querySelectorAll('#telo [data-opl]').forEach((e) =>
+    e.addEventListener('click', () => O.otmetitOplatu(Number(e.dataset.opl), {
+      proekt_id: id, posle: async () => { await zagruzit(); narisovat(); },
+    })));
+  document.querySelectorAll('#telo [data-payment-task]').forEach(button=>button.addEventListener('click',()=>O.formaZadachiModalka({platezh_id:Number(button.dataset.paymentTask),proekt_id:id})));
+}
+
+function narisovat() { kroshki(); shapka(); plitki(); telo(); O.ponumerovat();
+  if(!P.dengi_skryty)LocusPaymentCreate.mount(document.getElementById('project-payment-create'),{project:P,API,O,onChanged:async()=>{await zagruzit();narisovat();}});
+  O.vkljuchitDejstvijaZadach(document.getElementById('telo'), async () => { await zagruzit(); narisovat(); }); document.body.dataset.projectVersion=String(P.versija); }
+
+(async function start() {
+  try {
+    SPRAV = await SPR.zagruzit();
+    window.DANNYE = { napravlenija: SPRAV.napravlenija, ljudi: SPRAV.ljudi,
+                      statusy: SPRAV.statusy, tipy: SPRAV.tipy, zadachi: [] };
+    await zagruzit();
+    document.getElementById('menju').innerHTML = O.menju('Направления', {});
+    narisovat();
+    O.vkljuchitSkvoznoe();
+                                                          
+                                                  
+    document.body.dataset.gotovo = String(ZADACHI.length);
+    delete document.body.dataset.oshibka;
+  } catch (e) {
+    document.getElementById('telo').innerHTML = '<div class="pusto project-card-error"><div class="pusto-z">Не получилось загрузить</div><div class="pusto-p" data-project-card-error></div><button type="button" class="kn" data-project-card-retry>повторить загрузку</button></div>';
+    document.querySelector('[data-project-card-error]').textContent=e.message;
+    document.body.dataset.oshibka = e.message;
+    const retry=document.querySelector('[data-project-card-retry]');
+    retry.onclick=async()=>{retry.disabled=true;await start();};
+  }
+})();
+document.addEventListener('locus:projects-changed',()=>{zagruzit().then(narisovat).catch(error=>O.tost(error.message));});
+})();
+</script>
+</body></html>

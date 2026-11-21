@@ -1,0 +1,325 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Компоненты</title>
+<link rel="icon" href="/api/favicon?v=L" type="image/svg+xml">
+<link rel="stylesheet" href="/css/obschij.css">
+<style>
+  .kat{max-width:1100px;margin:0 auto}
+  .gr{margin-top:46px}
+  .gr-sh{display:flex;align-items:baseline;gap:12px;padding-bottom:9px;
+  border-bottom:1px solid var(--lin);margin-bottom:20px}
+  .gr-n{font-size:10.5px;color:var(--t3);letter-spacing:.14em;text-transform:uppercase}
+  .gr-p{font-size:11.5px;color:var(--t3);margin-left:auto}
+  .obr{margin-bottom:26px}
+  .obr-im{font-size:12.5px;font-weight:500;margin-bottom:3px}
+  .obr-op{font-size:11px;color:var(--t3);margin-bottom:13px}
+  .obr-pole{padding:18px 20px;background:var(--pole)}
+  .obr-pole.bel{background:#fff;border:1px solid var(--lin)}
+  .rjad{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+  .stolb{display:flex;flex-direction:column;gap:9px}
+  .dve{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media (max-width:760px){.dve{grid-template-columns:1fr}}
+</style>
+</head><body>
+
+<div id="menju"></div>
+
+<div class="wrap">
+<div class="kat">
+  <div class="sh">
+    <div class="sh-t">
+      <div class="sh-k">библиотека</div>
+      <div class="sh-n">Компоненты <span class="sv">из чего собраны экраны</span></div>
+    </div>
+  </div>
+  <div id="telo"></div>
+</div>
+</div>
+
+<script src="/js/dannye.js"></script>
+<script src="/js/obschij.js"></script>
+<script src="/js/kalendar.js"></script>
+<script>
+(function () {
+const { D } = O;
+document.getElementById('menju').innerHTML = O.menju('');
+
+function gr(imja, podpis, obrazcy) {
+  return `<div class="gr">
+    <div class="gr-sh"><span class="gr-n">${imja}</span><span class="gr-p">${podpis}</span></div>
+    ${obrazcy.join('')}
+  </div>`;
+}
+function obr(imja, opisanie, html, belyj) {
+  return `<div class="obr">
+    <div class="obr-im">${imja}</div>
+    <div class="obr-op">${opisanie}</div>
+    <div class="obr-pole${belyj ? ' bel' : ''}">${html}</div>
+  </div>`;
+}
+
+const T = [];
+
+                    
+T.push(gr('навигация', 'три ряда по центру, без сайдбара', [
+  obr('первый ряд: разделы', 'активный подчёркнут, остальные тихие',
+    `<div class="men-r" style="padding:0">
+      <a href="#">Пространство</a><a class="on" href="#">Задачи</a>
+      <a href="#">ОКР</a><a href="#">Планёрка</a><a href="#">Люди</a>
+    </div>`, true),
+  obr('второй ряд: направления чипами', 'счётчик моноширинный, цвет точкой',
+    `<div class="npr-chipy">
+      <a class="npr-ch on">все <span class="n">40</span></a>
+      ${D.napravlenija.slice(0, 5).map((n) =>
+        `<a class="npr-ch">${n.imja}<span class="n">${
+          D.zadachi.filter((z) => z.napravlenie === n.kod).length}</span></a>`).join('')}
+    </div>`, true),
+  obr('второй ряд: сегменты', 'когда выбор один из набора',
+    `<div class="men-r2" style="margin:0">
+      <span class="on">Команда</span><span>Клиенты</span><span>Лиды</span><span>Рефералы</span>
+    </div>`, true),
+  obr('третий ряд: панель людей', 'фото, активный подложкой',
+    `<div class="men-r3" style="margin:0;padding:0">
+      ${D.ljudi.map((l, i) => `<a class="chel ${i === 0 ? 'on' : ''}">${O.avatar(l, 18)}${l.imja}</a>`).join('')}
+    </div>`, true),
+  obr('период стрелками', 'неделя, спринт, месяц',
+    `<a class="ned" style="position:static;transform:none">
+      <span class="str l"></span><b>спринт 43</b>
+      <span class="nd">19–25 окт</span><span class="str r"></span></a>`, true),
+]));
+
+                    
+T.push(gr('заголовки экрана', 'кикер и название, без дублей', [
+  obr('шапка раздела', 'кикер тихий, название крупное, вторая часть серой',
+    `<div class="sh" style="margin:0">
+      <div class="sh-t">
+        <div class="sh-k">планёрка</div>
+        <div class="sh-n">Synapt <span class="sv">за неделю</span></div>
+      </div>
+      <a class="per"><b>в работе</b></a>
+    </div>`, true),
+  obr('заголовок секции', 'внутри полотна, справа подпись',
+    `<div class="sek" style="margin:0"><span class="sek-n">давно не общались</span>
+      <span class="sek-p">больше 14 дней</span></div>`, true),
+]));
+
+                
+T.push(gr('числа и сводки', 'моноширинные, кликабельные', [
+  obr('сводка двумя строками', 'нажатие на число фильтрует список',
+    `<div class="svod">
+      <div class="svod-r">
+        <a class="sv-e on"><span class="sv-c">13</span><span class="sv-l">в плане</span></a>
+        <a class="sv-e"><span class="sv-c">13</span><span class="sv-l">в работе</span></a>
+        <a class="sv-e"><span class="sv-c">3</span><span class="sv-l">на согласовании</span></a>
+        <a class="sv-e"><span class="sv-c">9</span><span class="sv-l">сделано</span></a>
+        <a class="sv-e"><span class="sv-c kr">13</span><span class="sv-l">просрочено</span></a>
+      </div>
+      <div class="svod-r">
+        <a class="sv-e"><span class="sv-c">15</span><span class="sv-l">клиентские</span></a>
+        <a class="sv-e"><span class="sv-c">6</span><span class="sv-l">продуктовые</span></a>
+        <a class="sv-e"><span class="sv-c">5</span><span class="sv-l">бизнесовые</span></a>
+        <a class="sv-e"><span class="sv-c">14</span><span class="sv-l">внутренние</span></a>
+        <a class="sv-e"><span class="sv-c">5</span><span class="sv-l">публикации</span></a>
+      </div>
+    </div>`, true),
+  obr('плитки бенто', 'линии вместо зазоров, число внизу',
+    `<div class="bento" style="border-bottom:1px solid var(--lin)">
+      <div class="k"><div class="k-l">пришло денег</div>
+        <div class="k-ch">420<span class="mel"> тыс ₽</span></div>
+        <div class="k-p">два платежа из трёх</div></div>
+      <div class="k"><div class="k-l">закрыто задач</div>
+        <div class="k-ch">24<span class="mel"> из 31</span></div>
+        <div class="k-p">на шесть больше прошлой</div></div>
+      <div class="k"><div class="k-l">просрочено</div>
+        <div class="k-ch">13</div>
+        <div class="k-p">девять на Никите</div></div>
+      <div class="k"><div class="k-l">давно не общались</div>
+        <div class="k-ch">6</div>
+        <div class="k-p">из них двое никогда</div></div>
+    </div>`, true),
+]));
+
+                 
+T.push(gr('строки списков', 'колонки фиксированные, элемент без значения всё равно есть', [
+  obr('строка задачи', 'галочка, метка, название, просрочка, статус, срок, аватар',
+    D.zadachi.slice(0, 3).map((z) => O.strokaZadachi(z)).join(''), true),
+  obr('подзадача', 'мельче и тише основной, отступ слева',
+    O.strokaZadachi(D.zadachi[0]) +
+    O.strokaZadachi({ ...D.zadachi[4], nazvanie: 'Собрать вопросы к созвону' }, { podzadacha: true }) +
+    O.strokaZadachi({ ...D.zadachi[5], nazvanie: 'Уточнить сроки', status: 'sdelano' }, { podzadacha: true }), true),
+  obr('строка человека', 'фото, направление точкой, стадия плашкой, дни без общения',
+    `<div class="sp">
+      ${D.klienty.slice(0, 4).map((k) => {
+        const n = O.naprPoKodu(k.napr);
+        return `<div class="s">
+          <span class="s-n">${k.imja}<div class="s-p">${k.kontekst}</div></span>
+          <span class="pill">${n.imja}</span>
+          <span class="dt${k.dnej > 14 ? ' pr' : ''}">${k.dnej ? k.dnej + ' дн' : 'сегодня'}</span>
+        </div>`;
+      }).join('')}
+    </div>`, true),
+]));
+
+                        
+T.push(gr('плашки и чипы', 'цвет живёт внутри плашки, не в тексте', [
+  obr('статусы', 'точка цветом, текст тихий',
+    `<div class="rjad">${D.statusy.map((s) => O.plashka(s.kod)).join('')}
+      <span class="pill">просрочено</span></div>`, true),
+  obr('чип фильтра', 'четыре состояния: обычный, наведение, активный, со сбросом',
+    `<div class="rjad">
+      <a class="fil-b">ответственный<span class="str"></span></a>
+      <a class="fil-b on">статус<span class="str"></span></a>
+      <a class="fil-b on">просроченные <span class="krest">×</span></a>
+      <span class="pere on"><span class="pere-b"></span>когда-нибудь</span>
+      <span class="pere"><span class="pere-b"></span>архив</span>
+    </div>`, true),
+  obr('выпадающий список', 'отдельной плашкой на отлёте, не приклеен',
+    `<div style="position:relative;height:150px">
+      <a class="fil-b on">направление<span class="str"></span></a>
+      <div class="vyp-sp" style="position:absolute;left:0;top:38px;display:block">
+        ${D.napravlenija.slice(0, 4).map((n, i) =>
+          `<a class="vyp-p${i === 1 ? ' on' : ''}">${n.imja}${
+            i === 1 ? '<span class="gal">✓</span>' : ''}</a>`).join('')}
+      </div>
+    </div>`, true),
+]));
+
+               
+T.push(gr('поля', 'без разделяющих линий, согласованный стандарт', [
+  obr('поля карточки', 'подпись слева тихая, значение обычным',
+    `<div class="pol">
+      <div class="pol-s"><span class="pol-n">направление</span>
+        <span class="pol-z">Synapt</span></div>
+      <div class="pol-s"><span class="pol-n">стадия</span>
+        <span class="pol-z">${O.plashka('v_processe')}</span></div>
+      <div class="pol-s"><span class="pol-n">ведёт</span>
+        <span class="pol-z">${O.avatar(O.chelovekPoImeni('Никита'), 20)}Никита</span></div>
+      <div class="pol-s"><span class="pol-n">срок</span>
+        <span class="pol-z">24 октября <span class="tihij" style="color:var(--t3);font-size:11px">осталось 2 дня</span></span></div>
+    </div>`, true),
+]));
+
+                   
+T.push(gr('прогресс', 'полоса, воронка, дуга, этапы', [
+  obr('полоса с подписью', 'название слева, процент справа',
+    `<div class="stolb">
+      ${D.celi.slice(0, 3).map((c) => `<div>
+        <div class="pr-sh"><span class="pr-n">${c.imja}</span><span class="pr-c">${c.progress}%</span></div>
+        <div class="pr-b"><i style="width:${c.progress}%"></i></div>
+      </div>`).join('')}
+    </div>`, true),
+  obr('воронка', 'полосы разной прозрачности, число рядом с подписью',
+    `<div class="vor">
+      <div class="vor-s"><div class="vor-sh"><span class="vor-n" style="flex:none;min-width:74px">лиды</span>
+        <span class="vor-c">47</span></div><div class="vor-p" style="width:100%"></div></div>
+      <div class="vor-s"><div class="vor-sh"><span class="vor-n" style="flex:none;min-width:74px">клиенты</span>
+        <span class="vor-c">12</span><span class="vor-pr" style="margin-left:auto">26%</span></div>
+        <div class="vor-p" style="width:26%"></div></div>
+      <div class="vor-s"><div class="vor-sh"><span class="vor-n" style="flex:none;min-width:74px">оплачено</span>
+        <span class="vor-c">9</span><span class="vor-pr" style="margin-left:auto">75% от клиентов</span></div>
+        <div class="vor-p" style="width:19%"></div></div>
+    </div>`, true),
+  obr('дуга и этапы', 'для спринта и волн рассылки',
+    `<div class="rjad" style="gap:44px">
+      <div style="display:flex;align-items:center;gap:15px">
+        <svg width="56" height="56" viewBox="0 0 56 56">
+          <circle cx="28" cy="28" r="24" fill="none" stroke="#eaeaec" stroke-width="4"/>
+          <circle cx="28" cy="28" r="24" fill="none" stroke="#0a0a0b" stroke-width="4"
+            stroke-dasharray="116 35" transform="rotate(-90 28 28)"/>
+        </svg>
+        <div><div style="font-size:26px;font-family:'Geist Mono',monospace;letter-spacing:-.04em">77<span style="font-size:17px;color:var(--t3)">%</span></div>
+          <div style="font-size:11.5px;color:var(--t2);margin-top:3px">спринт прошёл</div></div>
+      </div>
+      <div style="min-width:180px">
+        <div style="font-size:11.5px;color:var(--t2);margin-bottom:9px">рассылка, волна 3 из 5</div>
+        <div style="display:flex;gap:3px">
+          <i style="flex:1;height:5px;background:#0a0a0b"></i>
+          <i style="flex:1;height:5px;background:#0a0a0b"></i>
+          <i style="flex:1;height:5px;background:#0a0a0b;opacity:.4"></i>
+          <i style="flex:1;height:5px;background:#eaeaec"></i>
+          <i style="flex:1;height:5px;background:#eaeaec"></i>
+        </div>
+      </div>
+    </div>`, true),
+]));
+
+               
+T.push(gr('люди', 'фото настоящие, инициалы только у кого нет', [
+  obr('аватары', 'в строке 22px, в панели 18px, в карточке 20px',
+    `<div class="rjad">${D.ljudi.map((l) => O.avatar(l, 28)).join('')}</div>`, true),
+  obr('орбита', 'кто работает рядом',
+    `<div style="position:relative;height:112px;width:130px">
+      <span style="position:absolute;width:98px;height:98px;left:4px;top:6px;border:1px solid var(--lin);border-radius:50%"></span>
+      <span style="position:absolute;width:62px;height:62px;left:22px;top:24px;border:1px solid var(--lin);border-radius:50%"></span>
+      ${[[0,14],[52,0],[76,56],[18,74]].map(([x, y], i) =>
+        `<span style="position:absolute;left:${x}px;top:${y}px;width:30px;height:30px;border-radius:50%;overflow:hidden;border:2px solid #fff">
+          ${O.avatar(D.ljudi[i + 1], 26)}</span>`).join('')}
+    </div>`, true),
+]));
+
+                  
+T.push(gr('заметки', 'что команда записала за неделю', [
+  obr('карточка заметки', 'автор с фото, текст, день',
+    `<div style="display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--lin);border-bottom:1px solid var(--lin)">
+      ${['Закрыли этап по Технопродукту раньше срока',
+         'Съёмка с Наумовой перенеслась на 3 ноября',
+         'Агент под тендеры готов на две трети'].map((t, i) => `
+        <div style="padding:18px 20px;border-left:${i ? '1px solid var(--lin)' : '0'};display:flex;flex-direction:column;gap:11px">
+          <div style="display:flex;align-items:center;gap:8px">${O.avatar(D.ljudi[i + 1], 20)}
+            <span style="font-size:12px;font-weight:500">${D.ljudi[i + 1].imja}</span></div>
+          <div style="font-size:12.5px;line-height:1.5;color:var(--t2)">${t}</div>
+          <div style="font-size:10.5px;color:var(--t3);font-family:'Geist Mono',monospace;margin-top:auto">${['вторник','среда','четверг'][i]}</div>
+        </div>`).join('')}
+    </div>`, true),
+]));
+
+                         
+T.push(gr('всплывающее', 'кнопки за пределами карточки, согласованный стандарт', [
+  obr('модалка', 'крестик и действия вынесены вправо за карточку',
+    `<div style="background:var(--pole);padding:26px;display:grid;place-items:center">
+      <div class="mod-obertka" style="max-width:520px">
+        <div class="mod">
+          <div class="mod-sh">задача 4827 · synapt</div>
+          <div class="mod-im">Правки КП Технопродукту</div>
+          <div class="pol">
+            <div class="pol-s"><span class="pol-n">статус</span><span class="pol-z">${O.plashka('v_processe')}</span></div>
+            <div class="pol-s"><span class="pol-n">ответственный</span>
+              <span class="pol-z">${O.avatar(O.chelovekPoImeni('Никита'), 20)}Никита</span></div>
+            <div class="pol-s"><span class="pol-n">срок</span><span class="pol-z">24 октября</span></div>
+          </div>
+          <div class="mod-niz">
+            <a class="kn" style="padding:9px 18px;font-size:12px">Закрыть задачу</a>
+            <span class="rast"></span>
+            <a class="fil-b">удалить</a>
+          </div>
+        </div>
+        <div class="mod-knopki">
+          <a class="mod-kn">✕</a><a class="mod-kn">⧉</a><a class="mod-kn">···</a>
+        </div>
+      </div>
+    </div>`),
+  obr('тост с отменой', 'внизу по центру, тёмный',
+    `<div style="background:var(--pole);padding:26px;display:grid;place-items:center">
+      <div class="tost" style="position:static;transform:none">
+        <span>5 задач продлены на спринт 43</span><a>отменить</a>
+      </div>
+    </div>`),
+  obr('пустое состояние', 'когда фильтр ничего не дал',
+    `<div class="pusto" style="padding:34px"><div class="pusto-z">Ничего не нашлось</div>
+      <div class="pusto-p">попробуй снять фильтр «просроченные»</div></div>`, true),
+]));
+
+                    
+T.push(gr('пагинация', '50 строк на странице по ТЗ, тут 12 для примера', [
+  obr('номера страниц', 'моноширинные, активный подложкой',
+    `<div class="pag" style="margin:0">
+      <a class="pag-e">←</a><a class="pag-e on">1</a><a class="pag-e">2</a>
+      <a class="pag-e">3</a><a class="pag-e">4</a><a class="pag-e">→</a>
+      <span class="pag-s">38 задач</span>
+    </div>`, true),
+]));
+
+document.getElementById('telo').innerHTML = T.join('');
+document.body.dataset.gotovo = String(document.querySelectorAll('.obr').length);
+})();
+</script>
+</body></html>

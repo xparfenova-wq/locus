@@ -1,0 +1,52 @@
+const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),os=require('node:os');
+const {DatabaseSync}=require('node:sqlite'),{spawn,execFileSync}=require('node:child_process'),{randomBytes,randomUUID,scryptSync}=require('node:crypto');
+test('collector updates only an explicitly linked publication task with real private observations and atomic history',async t=>{
+ const root=path.resolve(__dirname,'..'),folder=fs.mkdtempSync(path.join(os.tmpdir(),'locus-publication-collector-')),file=path.join(folder,'fixture.db'),actor=9900703,key=randomBytes(32).toString('hex');
+ const env={...process.env,LOCUS_BAZA:file,LOCUS_FAJLY:path.join(folder,'files'),LOCUS_TEST_AUTH:'0',LOCUS_ADMIN_IDS:String(actor),LOCUS_KLJUCH_SBORA:key,NODE_ENV:'test'};let db,server,port,account,task,other,fingerprint,cookie;
+ const api=async(method,route,body,collector=false)=>{const r=await fetch('http://127.0.0.1:'+port+'/api/'+route,{method,headers:{connection:'close','content-type':'application/json',...(collector?{'x-locus-sborschik':key}:cookie?{cookie}:{})},...(body===undefined?{}:{body:JSON.stringify(body)})});return {status:r.status,body:await r.json(),headers:r.headers};};
+ const good=async(method,route,body,status=200,collector=false)=>{const r=await api(method,route,body,collector);assert.equal(r.status,status,route+' '+JSON.stringify(r.body));return r.body;};
+ const state=()=>JSON.stringify(['zadachi','istochniki_publikacij_zadach','zaprosy_istochnikov_publikacij','publikacii','zamery_publikacij','zapuski_sbora','zhurnal','versii_polej','sqlite_sequence'].map(table=>db.prepare('SELECT rowid,* FROM '+table+' ORDER BY rowid').all()));
+ const current=()=>db.prepare('SELECT * FROM zadachi WHERE id=?').get(task.id),link=()=>db.prepare('SELECT * FROM istochniki_publikacij_zadach WHERE zadacha_id=?').get(task.id);
+ const observed=()=>db.prepare("SELECT * FROM zhurnal WHERE obekt='zadacha' AND obekt_id=? AND pole='ohvat_zamer' ORDER BY id").all(task.id);
+ const packet=(hour,fields={})=>({kljuch_zapuska:randomUUID(),akkaunt_sha256:fingerprint,data:'2026-11-18',kogda:'2026-11-18T'+String(hour).padStart(2,'0')+':00:00Z',uroven:'graph',uspeh:true,publikacii:[{publikacija_id:'one',data_vyhoda:'2026-11-18',ohvat:100}],...fields});
+ const ingest=body=>good('POST','akkaunty/'+account.id+'/prinjat_sbor',body,201,true);
+ try{
+  execFileSync(process.execPath,['db/migrate.js'],{cwd:root,env,stdio:'pipe'});db=new DatabaseSync(file);db.prepare("INSERT INTO ljudi(id,imja,komanda,dostup,aktiven)VALUES(?,?,1,'polnyj',1)").run(actor,'Synthetic publication collector actor');
+  const salt=randomBytes(16).toString('hex');db.prepare('INSERT INTO vhod(chelovek_id,login,parol_hesh)VALUES(?,?,?)').run(actor,'publication-collector',salt+':'+scryptSync('synthetic-private-fixture',salt,64).toString('hex'));
+  server=spawn(process.execPath,['-e',"const NativeDate=Date;global.Date=class extends NativeDate{constructor(...args){super(...(args.length?args:['2026-11-19T12:00:00Z']));}static now(){return NativeDate.parse('2026-11-19T12:00:00Z');}};require('./server').server.listen(0,'127.0.0.1',function(){console.log(this.address().port)})"],{cwd:root,env,stdio:['ignore','pipe','pipe']});server.stderr.on('data',d=>process.stderr.write(d));port=await new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(new Error('startup')),10000);server.stdout.once('data',d=>{clearTimeout(timer);resolve(String(d).trim());});server.once('exit',()=>reject(new Error('exit')));});
+  const login=await api('POST','vhod/parol',{login:'publication-collector',parol:'synthetic-private-fixture'});assert.equal(login.status,200);cookie=login.headers.get('set-cookie').split(';')[0];
+  account=await good('POST','akkaunty',{nazvanie:'Synthetic private publication account',napravlenie:'media',ploshadka:'instagram',uroven:'graph',ssylka:'https://www.instagram.com/linked_fixture/'},201);
+  const taskPayload={napravlenie:'media',otvetstvennyj:actor,tip:'biznesovaja',publikacija:true,ploshadka:'instagram',format:'post',data_vyhoda:'2026-11-18',akkaunt_id:account.id};
+  task=await good('POST','zadachi',{...taskPayload,nazvanie:'Synthetic exact linked publication'},201);other=await good('POST','zadachi',{...taskPayload,nazvanie:'Synthetic same-day unlinked publication'},201);
+  const source=require('../api/istochnik-publikacii-zadachi.js'),accountRow=db.prepare('SELECT * FROM akkaunty WHERE id=?').get(account.id),context=require('../api/kontekst-akkaunta.js').kontekst(db,accountRow);
+                                                                              
+                                                                      
+  db.prepare('INSERT INTO istochniki_publikacij_zadach(zadacha_id,publikacija_id,akkaunt_id,akkaunt_kontekst,sobytie_zadachi,sobytie_akkaunta,avtor,sozdano)VALUES(?,?,?,?,?,?,?,?)').run(task.id,account.id+'_one',account.id,context,source.epoch(db,'zadacha',task.id),source.epoch(db,'akkaunt',account.id),actor,'2026-11-19 10:00:00');
+  fingerprint=(await good('GET','akkaunty',undefined,200,true)).spisok.find(a=>a.id===account.id).akkaunt_sha256;
+  await t.test('a real private packet updates the selected post, task and provenance while a same-day task stays unknown',async()=>{
+   assert.equal((await api('GET','zadachi',undefined,true)).status,401);const body=packet(10,{publikacii:[{publikacija_id:'one',data_vyhoda:'2026-11-18',ohvat:100},{publikacija_id:'two',data_vyhoda:'2026-11-18',ohvat:999}]});await ingest(body);
+   assert.equal(current().ohvat,100);assert.equal(db.prepare('SELECT ohvat FROM zadachi WHERE id=?').get(other.id).ohvat,null);assert.equal(link().ohvat_data,'2026-11-18');assert.equal(link().ohvat_moment,'2026-11-18T10:00:00.000Z');assert.equal(link().versija,1);assert.equal(link().versija_zamera,1);
+   const events=observed();assert.equal(events.length,1);assert.equal(events[0].kto,null);const actual=JSON.parse(events[0].stalo);assert.equal(actual.znachenie,100);assert.equal(actual.publikacija_id,account.id+'_one');assert.equal(actual.akkaunt_kontekst,context);assert.equal(actual.data,'2026-11-18');
+   const before=state(),again=await good('POST','akkaunty/'+account.id+'/prinjat_sbor',body,200,true);assert.equal(again.povtor,true);assert.equal(state(),before);
+  });
+  await t.test('known zero updates; fresh equal observations advance the source without changing unrelated task fields',async()=>{
+   await ingest(packet(11,{publikacii:[{publikacija_id:'one',ohvat:0}]}));assert.equal(current().ohvat,0);const version=current().versija;await ingest(packet(12,{publikacii:[{publikacija_id:'one',ohvat:0}]}));assert.equal(current().ohvat,0);assert.equal(current().versija,version);assert.equal(link().ohvat_moment,'2026-11-18T12:00:00.000Z');assert.equal(link().versija_zamera,3);assert.equal(link().versija,1);assert.equal(observed().length,3);
+  });
+  await t.test('late, public, missing and failed observations preserve the real last private zero and its date',async()=>{
+   const before=current(),sourceVersion=link().versija_zamera;await ingest(packet(9,{publikacii:[{publikacija_id:'one',ohvat:50}]}));await ingest(packet(13,{uroven:'public',publikacii:[{publikacija_id:'one',prosmotrov:2000}]}));await ingest(packet(14,{publikacii:[{publikacija_id:'one',prosmotrov:2100}]}));await ingest(packet(15,{uspeh:false,publikacii:[],primechanie:'Synthetic unavailable personal statistics'}));assert.deepEqual(current(),before);assert.equal(link().versija_zamera,sourceVersion);assert.equal(link().ohvat_moment,'2026-11-18T12:00:00.000Z');assert.equal(observed().length,3);
+   const saved=state(),invalid=packet(15,{uroven:'public',publikacii:[{publikacija_id:'one',ohvat:9999}]});assert.equal((await api('POST','akkaunty/'+account.id+'/prinjat_sbor',invalid,true)).status,400);assert.equal(state(),saved);
+  });
+  await t.test('a downstream source failure rolls back post, task, observation and collector receipt together',async()=>{
+   const before=state();db.exec("CREATE TRIGGER publication_source_failure BEFORE UPDATE ON istochniki_publikacij_zadach BEGIN SELECT RAISE(ABORT,'synthetic publication source failure'); END");try{const response=await api('POST','akkaunty/'+account.id+'/prinjat_sbor',packet(16,{publikacii:[{publikacija_id:'one',ohvat:250}]}),true);assert.equal(response.status,500);assert.equal(state(),before);}finally{db.exec('DROP TRIGGER publication_source_failure');}
+  });
+  await t.test('a linked source protects its factual date, account and measured projection from ordinary writes',async()=>{
+   for(const patch of [{data_vyhoda:'2026-11-19'},{publikacija:false},{akkaunt_id:null},{ohvat:999,kljuch_sbora:key}]){const before=state(),response=await api('PATCH','zadachi/'+task.nomer,{versija:current().versija,...patch});assert.equal(response.status,409);assert.equal(state(),before);}
+  });
+  await t.test('an independent account alias does not reassign the source or block a real newer measurement',async()=>{
+   const fresh=await good('GET','akkaunty/'+account.id);await good('PATCH','akkaunty/'+account.id,{versija:fresh.versija,nazvanie:'Synthetic renamed display alias'});fingerprint=(await good('GET','akkaunty',undefined,200,true)).spisok.find(a=>a.id===account.id).akkaunt_sha256;await ingest(packet(16,{publikacii:[{publikacija_id:'one',ohvat:7}]}));assert.equal(current().ohvat,7);assert.equal(link().versija,1);assert.equal(link().versija_zamera,4);assert.equal(source.valid(db,current(),link()),true);assert.equal(observed().length,4);
+  });
+  await t.test('repointing the account cannot silently transfer another source into the existing task',async()=>{
+   const fresh=await good('GET','akkaunty/'+account.id);await good('PATCH','akkaunty/'+account.id,{versija:fresh.versija,ssylka:'https://www.instagram.com/another_source_fixture/'});fingerprint=(await good('GET','akkaunty',undefined,200,true)).spisok.find(a=>a.id===account.id).akkaunt_sha256;await ingest(packet(17,{publikacii:[{publikacija_id:'one',ohvat:333}]}));assert.equal(current().ohvat,7);assert.equal(link().versija_zamera,4);assert.equal(source.valid(db,current(),link()),false);assert.equal(observed().length,4);assert.equal(db.prepare("SELECT count(*) n FROM versii_polej WHERE tablica=''").get().n,0);
+  });
+ }finally{if(server&&server.exitCode===null){const done=new Promise(resolve=>server.once('exit',resolve));server.kill();await done;}db?.close();fs.rmSync(folder,{recursive:true,force:true});}
+});

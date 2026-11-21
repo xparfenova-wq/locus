@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Знак Locus</title>
+<link rel="icon" href="/api/favicon?v=L" type="image/svg+xml">
+<link rel="stylesheet" href="/css/tokens.css">
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/components.css">
+<link rel="stylesheet" href="/css/znak.css">
+<style>
+  body { padding-bottom: var(--s8); }
+  .blok { margin-top: var(--s7); }
+  .blok > h2 { margin-bottom: var(--s2); }
+  .podpis { font-size: var(--t5); color: var(--n8); margin-bottom: var(--s4); }
+  .rjad { display: flex; align-items: center; gap: var(--s5); flex-wrap: wrap; }
+  .proba {
+    border: 1px dashed var(--n6); border-radius: var(--r-l);
+    padding: var(--s5); background: var(--n1);
+    display: flex; align-items: center; gap: var(--s4);
+  }
+  .proba-podpis { font-size: var(--t5); color: var(--n8); }
+  .temno { background: var(--n12); }
+  .temno .znak-setka line { stroke: rgba(255,255,255,.12); }
+  .temno .znak-svjaz { stroke: var(--n1); }
+  .temno .proba-podpis { color: var(--n7); }
+  .ikonka {
+    width: 96px; height: 96px; border-radius: 22px;
+    background: var(--n1); border: 1px solid var(--n4);
+    display: grid; place-content: center;
+  }
+  .ikonka-temn { background: var(--n12); border-color: var(--n12); }
+  .ikonka-temn .znak-setka line { stroke: rgba(255,255,255,.14); }
+  .ikonka-temn .znak-svjaz { stroke: var(--n1); }
+  .ekran {
+    border: 1px solid var(--n4); border-radius: var(--r-l);
+    overflow: hidden; background: var(--n1);
+  }
+  .ekran.v-kletka { background-color: var(--n1); }
+  .ekran-telo { padding: var(--s8) var(--s5); text-align: center; }
+</style>
+</head>
+<body>
+
+<div class="shapka">
+  <div class="kolonka rjad" style="width:100%;gap:var(--s3)">
+    <span class="znak" id="znak-shapka"></span>
+    <strong style="font-size:var(--t3)">Locus</strong>
+    <a class="razdel" href="/varianty2.html" style="margin-left:auto">варианты</a>
+    <a class="razdel" href="/komponenty.html">компоненты</a>
+  </div>
+</div>
+
+<div class="kolonka">
+
+<div class="blok">
+  <h1>Знак Locus</h1>
+  <p class="vtoroj tekst">Карта из точек и связей. Точки это люди, задачи, направления. Линия идёт под прямыми углами, как дороги на карте, а не как паутина. Метафора твоя, референс 124</p>
+</div>
+
+<div class="blok">
+  <h2>Размеры</h2>
+  <div class="podpis">знак рисуется кодом, поэтому живёт в любом размере без потери чёткости</div>
+  <div class="rjad">
+    <div class="proba"><span id="z-20"></span><span class="proba-podpis">20px, в строке</span></div>
+    <div class="proba"><span id="z-32"></span><span class="proba-podpis">32px, в шапке</span></div>
+    <div class="proba"><span id="z-56"></span><span class="proba-podpis">56px, на экране входа</span></div>
+    <div class="proba"><span id="z-96"></span><span class="proba-podpis">96px, онбординг</span></div>
+  </div>
+</div>
+
+<div class="blok">
+  <h2>Без сетки</h2>
+  <div class="podpis">для мелких размеров и плотных мест: клетка в 20px превращается в шум</div>
+  <div class="rjad">
+    <div class="proba"><span id="z-bez-20"></span><span class="proba-podpis">20px</span></div>
+    <div class="proba"><span id="z-bez-32"></span><span class="proba-podpis">32px</span></div>
+    <div class="proba"><span id="z-bez-56"></span><span class="proba-podpis">56px</span></div>
+  </div>
+</div>
+
+<div class="blok">
+  <h2>На тёмном</h2>
+  <div class="podpis">связь становится белой, точки сохраняют цвета направлений</div>
+  <div class="rjad">
+    <div class="proba temno"><span id="z-temn"></span><span class="proba-podpis">56px на тёмном</span></div>
+  </div>
+</div>
+
+<div class="blok">
+  <h2>Иконка на рабочий стол</h2>
+  <div class="podpis">то, что ты видишь, когда ставишь сайт на экран телефона</div>
+  <div class="rjad">
+    <div class="ikonka"><span id="z-ik-svet"></span></div>
+    <div class="ikonka ikonka-temn"><span id="z-ik-temn"></span></div>
+    <span class="proba-podpis">светлая и тёмная</span>
+  </div>
+</div>
+
+<div class="blok">
+  <h2>Анимация</h2>
+  <div class="podpis">три такта как ты описала: появляются точки, растёт линия, всё соединилось. Нажми, чтобы проиграть ещё раз</div>
+  <div class="rjad">
+    <div class="proba" style="cursor:pointer" id="proba-anim">
+      <span id="z-anim"></span>
+      <span class="proba-podpis">нажми для повтора</span>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <h2>Экран входа</h2>
+  <div class="podpis">знак крупно, фон в клетку продолжает приём</div>
+  <div class="ekran v-kletka">
+    <div class="ekran-telo">
+      <span id="z-vhod"></span>
+      <h2 style="margin-top:var(--s4)">Locus</h2>
+      <p class="vtoroj" style="margin-top:var(--s2)">рабочее пространство команды</p>
+      <div style="max-width:280px;margin:var(--s5) auto 0;display:grid;gap:var(--s3)">
+        <input class="pole" placeholder="почта">
+        <button class="knopka">Войти</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <h2>Приём продолжается на экранах</h2>
+  <div class="podpis">точка как маркер и связь между строками: та же форма, что в знаке</div>
+  <div class="kartochka">
+    <div class="kiker" style="margin-bottom:var(--s3)">задача и её подзадачи</div>
+    <div class="rjad" style="gap:var(--s2);margin-bottom:var(--s2)">
+      <span class="v-tochka" style="background:var(--dir-synapt)"></span>
+      <strong>Правки КП Технопродукту</strong>
+    </div>
+    <div class="v-svjaz-stroka rjad" style="gap:var(--s2);height:28px">
+      <span class="v-tochka" style="background:var(--n6);width:8px;height:8px"></span>
+      <span class="vtoroj">Собрать вопросы к созвону</span>
+    </div>
+    <div class="v-svjaz-stroka rjad" style="gap:var(--s2);height:28px">
+      <span class="v-tochka" style="background:var(--n6);width:8px;height:8px"></span>
+      <span class="vtoroj">Отправить смету</span>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script src="/js/znak.js"></script>
+<script>
+  const Z = window.ZnakLokusa;
+  const pary = [
+    ['znak-shapka', { razmer: 24, radius: 2.6, setka: false }],
+    ['z-20', { razmer: 20, radius: 2.2 }],
+    ['z-32', { razmer: 32, radius: 3 }],
+    ['z-56', { razmer: 56, radius: 5 }],
+    ['z-96', { razmer: 96, radius: 8 }],
+    ['z-bez-20', { razmer: 20, radius: 2.4, setka: false }],
+    ['z-bez-32', { razmer: 32, radius: 3.4, setka: false }],
+    ['z-bez-56', { razmer: 56, radius: 5.4, setka: false }],
+    ['z-temn', { razmer: 56, radius: 5 }],
+    ['z-ik-svet', { razmer: 56, radius: 5 }],
+    ['z-ik-temn', { razmer: 56, radius: 5 }],
+    ['z-anim', { razmer: 72, radius: 6 }],
+    ['z-vhod', { razmer: 96, radius: 8 }],
+  ];
+  for (const [id, n] of pary) {
+    const el = document.getElementById(id);
+    if (el) Z.vstavit(el, n);
+  }
+                                       
+  Z.ozhivit(document.getElementById('z-vhod'));
+  const proba = document.getElementById('z-anim');
+  Z.ozhivit(proba);
+                                                             
+  document.body.dataset.znakGotov = String(!!(Z && Z.narisovat && Z.ozhivit));
+  document.getElementById('proba-anim').addEventListener('click', () => {
+    proba.classList.remove('znak-ozhivaet', 'znak-sobran');
+    void proba.offsetWidth;
+    Z.ozhivit(proba);
+  });
+</script>
+</body>
+</html>

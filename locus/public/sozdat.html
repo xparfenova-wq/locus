@@ -1,0 +1,124 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Новая задача</title>
+<link rel="icon" href="/api/favicon?v=L" type="image/svg+xml">
+<link rel="stylesheet" href="/css/obschij.css">
+<style>
+                                                                
+                                                                  
+                                                            
+                                                          
+                                    
+.wrap{max-width:820px}
+#mesto-sozd .sozd.vstroen{display:block}
+.str-kn{position:fixed;top:12px;right:14px;display:flex;gap:9px;z-index:95}
+.str-kn .sozd-kn-k{border:1px solid var(--lin);background:#fff;
+box-shadow:none}
+                                                            
+                                                           
+                                   
+#menju .men{display:none}
+.wrap{padding-top:18px}
+@media (max-width:760px){
+  .str-kn{top:10px;right:12px}
+}
+                                                            
+                                                             
+@media (max-width:1180px){.wrap{padding-top:60px}}
+</style></head><body>
+<div id="menju"></div>
+<div class="wrap"><div id="mesto-sozd"></div></div>
+<div class="str-kn">
+  <a class="sozd-kn-k tmn" id="sozd-sozdat" title="создать задачу"
+     aria-label="создать">
+    <svg viewBox="0 0 18 18" fill="none"><path d="M4 9.2l3.3 3.3L14 5.6"
+      stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+      stroke-linejoin="round"/></svg></a>
+  <a class="sozd-kn-k" id="str-vverh" title="наверх страницы"
+     aria-label="наверх">
+    <svg viewBox="0 0 18 18" fill="none"><path d="M9 14.5V3.5M9 3.5L4.4 8.1M9 3.5l4.6 4.6"
+      stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+      stroke-linejoin="round"/></svg></a>
+  <a class="sozd-kn-k" id="str-krest" title="закрыть без сохранения"
+     aria-label="закрыть">
+    <svg viewBox="0 0 16 16" fill="none"><path d="M3.4 3.4l9.2 9.2M12.6 3.4l-9.2 9.2"
+      stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+</div>
+<script src="/js/nedeli.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/obschij.js"></script>
+<script src="/js/kalendar.js"></script>
+<script>
+(async function () {
+'use strict';
+const SPRAV = await SPR.zagruzit();
+window.DANNYE = { napravlenija: SPRAV.napravlenija, ljudi: SPRAV.ljudi,
+                  statusy: SPRAV.statusy, tipy: SPRAV.tipy, zadachi: [],
+                  shablony: [], celi: [], klienty: [], proekty: [] };
+const periodAddress = new URLSearchParams(location.search);
+if (periodAddress.get('sprint') && periodAddress.get('sprint') !== 'vse') {
+  window.DANNYE.nedelja = SPR.kalendar.razobrat_nedelju(periodAddress.get('sprint'),
+    Number(periodAddress.get('god_sprinta')) || SPR.kalendar.iso_nedelja(SPR.segodnja()).god);
+}
+document.getElementById('menju').innerHTML = O.menju('Задачи', { bez_formy: true });
+document.getElementById('mesto-sozd').innerHTML = O.kartaSozdanija();
+                                                               
+                                                                
+document.querySelector('#mesto-sozd .sozd')
+  ?.appendChild(document.querySelector('.str-kn'));
+
+const nazad = () => {
+  if (history.length > 1) history.back();
+  else location.href = '/zadachi.html';
+};
+document.getElementById('sozd').locusCreationReturn=nazad;
+                                                         
+                                                            
+async function sozdatZadachu(imja, polja) {
+  const ja = (SPRAV.ljudi || []).find((l) => l.id === API.ja)
+    || (SPRAV.ljudi || [])[0];
+  const dannye = {
+    ...polja,
+    napravlenie: polja.napravlenie || (SPRAV.napravlenija[0] || {}).kod,
+    otvetstvennyj: polja.otvetstvennyj ? Number(polja.otvetstvennyj)
+      : (ja ? ja.id : undefined),
+  };
+  const novaja = await API.sozdat('zadachi', dannye);
+  const backTimer=setTimeout(nazad,650);
+  O.toastCreatedTask(novaja,{posle:async()=>{clearTimeout(backTimer);nazad();}});
+}
+                                                                
+                                                                   
+                                              
+const a = new URLSearchParams(location.search);
+const proba = a.get('proba') === '1';
+if (proba) {
+  const zag = Number(a.get('zag')) || 21;
+  const zag_mob = Number(a.get('zag_mob')) || 17;
+  const st = document.createElement('style');
+  st.textContent = `html body #mesto-sozd .sozd-vvod{font-size:${zag}px !important;
+    line-height:1.2}
+    @media (max-width:760px){html body #mesto-sozd .sozd-vvod{
+    font-size:${zag_mob}px !important}}`;
+  document.head.appendChild(st);
+}
+O.vkljuchitSkvoznoe(proba
+  ? async () => O.tost('Это проба: задача не создаётся')
+  : sozdatZadachu);
+
+                                                              
+                                                           
+const kontekst = {};
+for (const k of ['srok', 'sprint', 'god_sprinta', 'napravlenie', 'data_vyhoda', 'roditel_id',
+  'otvetstvennyj', 'klient_id', 'proekt_id', 'cel_id', 'platezh_id', 'tip', 'publikacija', 'nazvanie', 'shablon']) {
+  if (a.get(k)) kontekst[k] = a.get(k);
+}
+if(a.get('kopija')){try{await(await O.taskCopy()).resume(a.get('kopija'));}catch(error){O.tost(error.message);}}else if (Object.keys(kontekst).length) O.formaZadachiModalka(kontekst);
+
+document.getElementById('str-vverh')?.addEventListener('click', () =>
+  window.scrollTo({ top: 0, behavior: 'smooth' }));
+document.getElementById('str-krest')?.addEventListener('click',()=>document.getElementById('sozd').locusRequestClose(nazad));
+setTimeout(()=>{if(!document.getElementById('sozd').contains(document.activeElement)&&!document.querySelector('.vyp.otkryt,.l-select-popup,.vyb-fon'))document.getElementById('sozd-imja')?.focus();},300);
+})();
+</script>
+</body></html>

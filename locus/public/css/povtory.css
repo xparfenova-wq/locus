@@ -1,0 +1,58 @@
+.pv-badge{display:inline-block;margin-left:8px;color:var(--t3);font-size:12px}
+.pv-day-note{display:block;color:var(--t3);font-size:var(--text-meta);line-height:1.5;overflow-wrap:anywhere}
+.pv-trash-note{color:var(--t2);font-size:var(--text-body);line-height:1.5;overflow-wrap:anywhere}
+.pv-footer button:disabled{opacity:.4;cursor:default}
+.pv-missed,.pv-link{border:0;background:transparent;color:var(--t2);font:inherit;
+  font-size:13px;min-height:44px;padding:8px;cursor:pointer;text-align:left}
+.pv-missed{display:block;padding:4px 0;font-size:12px;color:var(--t3)}
+.pv-warning{background:color-mix(in srgb,var(--pal-3,var(--kr)) 5%,var(--kart));border-radius:var(--radius-overlay)}
+.pv-modes,.pv-week,.pv-tools{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.pv-modes{margin-bottom:12px}.pv-week{margin-bottom:12px}
+.pv-modes button,.pv-week button{font-family:var(--font-ui);font-size:var(--text-body);font-weight:400;min-height:var(--control-height-mobile);
+  min-width:44px;cursor:var(--kursor),pointer;background:var(--kart);padding:9px 12px;
+  border:1px solid var(--lin);border-radius:var(--radius-pill)}
+.pv-modes button[aria-pressed="true"],.pv-week button[aria-pressed="true"]{
+  background:var(--pole);color:var(--t1);border-color:var(--t3)}
+.pv-week[hidden]{display:none}
+.pv-dates{display:grid;gap:4px;max-height:45vh;overflow:auto}
+.pv-day{display:flex;align-items:center;gap:12px;min-height:44px;font-size:13px}
+.pv-day>span{min-width:0;flex:1;overflow-wrap:anywhere}
+.pv-day input{width:18px;height:18px;accent-color:var(--t1,#1a1815)}
+.pv-day .pv-link{margin-left:auto;flex-shrink:0}
+.pv-history{margin-top:14px}.pv-history summary{cursor:pointer;min-height:44px;
+  display:flex;align-items:center;font-size:13px;color:var(--t3)}
+.pv-footer{margin-top:16px}.pv-tools{min-width:0}
+.pv-command{margin-top:16px;padding-top:12px;border-top:1px solid var(--lin);overflow-wrap:anywhere}
+.pv-command p{margin:0 0 10px}
+.pv-command-actions{display:flex;flex-wrap:wrap;gap:8px}
+.pv-command-actions>[hidden]{display:none}
+.pv-useful-row{align-items:flex-start;gap:16px}
+.pv-useful-row>span:first-child{min-width:0;flex:1;overflow-wrap:anywhere}
+.pv-useful-title{overflow-wrap:anywhere}
+.pv-new{display:flex;align-items:center;flex-wrap:wrap;gap:12px}
+.pv-new label{font-size:13px;min-height:44px;display:flex;align-items:center;gap:8px}
+.pv-new input[type=checkbox]{width:18px;height:18px;accent-color:var(--t1,#1a1815)}
+.pv-new select{font-family:var(--font-ui);font-size:var(--text-body);color:inherit;min-height:var(--control-height-mobile);background:transparent;
+  border:1px solid var(--lin);border-radius:var(--radius-field);padding:8px}
+.pv-new [hidden]{display:none}
+.pv-new-day{min-width:44px}.sozd[aria-busy=true]{opacity:.65}
+.kz-nazvanie{outline:none;min-width:4ch;display:inline-block;max-width:calc(100% - 24px);overflow-wrap:anywhere}
+.kz-opis[contenteditable]{outline:none;min-height:44px;white-space:pre-wrap}
+.kz-opis[contenteditable]:empty:before{content:attr(data-placeholder);color:var(--t3)}
+@media(max-width:600px){.pv-tools{align-items:flex-start;flex-direction:column;gap:0}
+  .pv-modes{gap:4px}.pv-modes button{padding-inline:10px}.pv-week{gap:2px}
+  .pv-week[data-frequency="vybrannye_dni"]:not([hidden]){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%}}
+
+.pv-date{display:inline-flex;min-width:0;border-bottom:1px solid var(--lin)}
+.pv-date input[type=date]{min-width:0;width:140px;min-height:var(--control-height-mobile);padding:8px 0;border:0;border-radius:0;background:transparent;color:var(--t1);font-family:var(--font-ui);font-size:inherit;text-align:left}
+@media(max-width:760px){.pv-date input[type=date]{font-size:var(--text-input-mobile)}}
+.sozd-publication-note{grid-column:1/-1;font-size:var(--text-meta);color:var(--zh)}
+.sozd-publication-note[hidden]{display:none}
+
+.sozd-account-hint{grid-column:1/-1;font-size:var(--text-meta);color:var(--t3);line-height:1.5;overflow-wrap:anywhere}
+.sozd-account-hint[hidden]{display:none}
+
+.pv-delete-actions{display:grid;gap:var(--space-2);margin-top:var(--space-3)}
+.pv-delete-actions .kn{width:100%;min-height:var(--control-height);justify-content:center}
+.pv-delete-actions button:disabled{opacity:.4;cursor:default}
+@media(max-width:760px){.pv-delete-actions .kn{min-height:var(--control-height-mobile)}}

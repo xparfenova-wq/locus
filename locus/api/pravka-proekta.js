@@ -1,0 +1,18 @@
+const {createHash,createHmac}=require('node:crypto');
+const {baza,OshibkaVvoda,Konflikt,NetDostupa,seichas}=require('../db/db.js');
+function key(value){if(typeof value!=='string'||!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value))throw new OshibkaVvoda('Нужен ключ одной правки','zapros_kljuch');return createHash('sha256').update(value.toLowerCase()).digest('hex');}
+function id(value){const n=Number(value);if(!Number.isSafeInteger(n)||n<1)throw new OshibkaVvoda('Нужен номер проекта','proekt_id');return n;}
+function receipt(db,actor,project,value){const row=db.prepare('SELECT * FROM zaprosy_pravok_proektov WHERE avtor=? AND kljuch_hesh=?').get(actor,key(value));if(row&&row.proekt_id!==project)throw new Konflikt('Ключ относится к правке другого проекта',{operation_key_reused:true});return row;}
+function present(project,actor){return require('./obschij.js').odna('proekty',require('./opisanija.js').OPISANIJA.proekty,project,actor);}
+function check(db,actor,project,value){const saved=receipt(db,actor,project,value);if(!saved)return {sostojanie:'ne_najdeno'};if(!saved.sohraneno)return {sostojanie:'otmeneno'};if(saved.udaleno||!db.prepare('SELECT id FROM proekty WHERE id=?').get(project))return {sostojanie:'udaleno',id:project};return {sostojanie:'sohraneno',id:project,versija_sohranenija:saved.versija_posle,proekt:present(project,actor)};}
+function apply(ctx){
+ if(ctx.metod!=='PATCH'||!ctx.kljuch||ctx.dejstvie||!Object.hasOwn(ctx.telo||{},'zapros_kljuch'))return null;
+ const db=baza(),project=id(ctx.kljuch),actor=ctx.avtor,body={...ctx.telo},value=body.zapros_kljuch;delete body.zapros_kljuch;key(value);if(Object.hasOwn(body,'stoimost')&&!require('./dengi-dostup.js').vidit(db,actor))throw new NetDostupa('Суммы недоступны');
+ const digest=createHmac('sha256',value.toLowerCase()).update(JSON.stringify({project,body:Object.fromEntries(Object.keys(body).sort().map(k=>[k,body[k]]))})).digest('hex'),saved=receipt(db,actor,project,value);
+ if(saved){if(!saved.sohraneno)throw new Konflikt('Правка отменена. Начни новое действие',{edit_cancelled:true});if(saved.zapros_hesh!==digest)throw new Konflikt('Под этим ключом уже отправлены другие поля',{operation_key_reused:true});const result=check(db,actor,project,value);if(result.sostojanie!=='sohraneno')throw Object.assign(new Error('Проект после этой правки уже удалён'),{kod:410,dannye:result});return {telo:{...result.proekt,povtor_pravki:true,versija_sohranenija:saved.versija_posle}};}
+ const row=require('./obschij.js').pravit('proekty',require('./opisanija.js').OPISANIJA.proekty,project,body,actor);
+ db.prepare('INSERT INTO zaprosy_pravok_proektov(avtor,kljuch_hesh,proekt_id,zapros_hesh,sohraneno,versija_posle,sozdano)VALUES(?,?,?,?,1,?,?)').run(actor,key(value),project,digest,row.versija,seichas());return {telo:row};
+}
+function read(ctx){if(ctx.metod!=='GET')throw Object.assign(new Error('Нужен GET'),{kod:405});for(const field of Object.keys(ctx.zapros||{}))if(field!=='zapros_kljuch')throw new OshibkaVvoda('Проверка принимает только ключ',field);return {telo:check(baza(),ctx.avtor,id(ctx.kljuch),ctx.zapros.zapros_kljuch)};}
+function cancel(ctx){if(ctx.metod!=='POST')throw Object.assign(new Error('Нужен POST'),{kod:405});const body=ctx.telo||{};for(const field of Object.keys(body))if(field!=='zapros_kljuch')throw new OshibkaVvoda('Отмена принимает только ключ',field);const db=baza(),project=id(ctx.kljuch),actor=ctx.avtor,value=body.zapros_kljuch;if(!receipt(db,actor,project,value))db.prepare('INSERT INTO zaprosy_pravok_proektov(avtor,kljuch_hesh,proekt_id,sozdano)VALUES(?,?,?,?)').run(actor,key(value),project,seichas());return {telo:check(db,actor,project,value)};}
+module.exports={apply,read,cancel};

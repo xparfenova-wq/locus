@@ -1,0 +1,8 @@
+.l-file-control{display:grid;gap:var(--space-2);min-width:0;position:relative}
+input.l-file-native[type=file]{position:absolute!important;inset:0!important;width:var(--border-width)!important;height:var(--border-width)!important;min-height:0!important;padding:var(--space-0)!important;margin:var(--space-0)!important;border:0!important;overflow:hidden!important;clip-path:inset(50%)!important;opacity:0!important;pointer-events:none!important}
+.l-file-control .l-file-button{justify-self:start;display:inline-flex;align-items:center;justify-content:center;min-height:var(--control-height);max-width:100%;font-family:var(--font-ui);font-size:var(--text-body);font-weight:var(--weight-normal);border:var(--border-width) solid var(--lin);border-radius:var(--radius-pill);color:var(--t1);background:var(--kart);padding:var(--field-pad-y) var(--space-5);white-space:normal;overflow-wrap:anywhere}
+.l-file-control .l-file-button:hover{background:var(--pole);border-color:var(--t3);color:var(--t1)}
+.l-file-control .l-file-button:focus-visible{outline:var(--focus-width) solid var(--t3);outline-offset:var(--focus-offset)}
+.l-file-control .l-file-button:disabled{color:var(--t3);cursor:default}
+.l-file-name{font-family:var(--font-ui);font-size:var(--text-meta);line-height:var(--line-body);color:var(--t2);overflow-wrap:anywhere;min-width:0}
+@media(max-width:760px){.l-file-control .l-file-button{min-height:var(--control-height-mobile)}}

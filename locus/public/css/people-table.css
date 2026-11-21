@@ -1,0 +1,5 @@
+.people-table-scroll{width:100%;max-width:100%;min-width:0;overflow-x:auto;scrollbar-width:thin;scrollbar-color:var(--t3) transparent}
+.people-table-scroll:focus-visible{outline:var(--focus-width) solid var(--t1);outline-offset:var(--focus-offset)}
+.people-table-scroll::-webkit-scrollbar{height:var(--space-2)}
+.people-table-scroll::-webkit-scrollbar-thumb{background:var(--lin);border-radius:var(--radius-pill)}
+@media(max-width:760px){.people-table-scroll .bz-im b{min-width:0;overflow-wrap:anywhere}}

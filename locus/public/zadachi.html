@@ -1,0 +1,1024 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Задачи</title>
+<link rel="icon" href="/api/favicon?v=L" type="image/svg+xml">
+<link rel="stylesheet" href="/css/obschij.css">
+<style>
+                                                                    
+.task-day-filter{position:relative;cursor:pointer}
+.task-day-filter input[type=date]{z-index:1;position:absolute;left:0;top:50%;transform:translateY(-50%);width:100%;height:var(--control-height);min-height:var(--control-height);margin:0;padding:0;border:0;opacity:0;cursor:inherit}
+.task-day-status{margin:8px 0 0;color:var(--t2);font-size:var(--text-meta);overflow-wrap:anywhere}
+.task-day-filter:has(input:focus-visible){outline:2px solid var(--t2);outline-offset:2px}
+@media(max-width:760px){.task-day-filter input[type=date]{height:var(--control-height-mobile);min-height:var(--control-height-mobile)}}
+
+                                                             
+                                             
+.wrap{padding-left:0;padding-right:0;max-width:none}
+@media (max-width:760px){.wrap{padding-left:16px;padding-right:16px}}
+                                                   
+.dsk{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;
+  align-items:stretch}
+.dsk-kol{background:var(--pole);border-radius:var(--radius-overlay);padding:10px;min-height:120px}
+.dsk-kol.nad{outline:2px dashed var(--t3);outline-offset:-2px}
+.dsk-sh{font-size:11.5px;color:var(--t3);text-transform:uppercase;
+  letter-spacing:.08em;padding:2px 4px 8px;display:flex;gap:6px;align-items:center}
+.dsk-k{background:#fff;border-radius:var(--radius-overlay);padding:10px 12px;margin-bottom:8px;
+  cursor:grab;display:flex;align-items:center;gap:8px;font-size:13px}
+.dsk-k:active{cursor:grabbing}
+.dsk-k .t7{width:7px;height:7px;border-radius:999px;background:var(--c);flex:none}
+.dsk-n{flex:1;min-width:0}
+.dsk-d{color:var(--t3);font-size:11.5px;white-space:nowrap}
+.dsk-pusto{color:var(--t3);font-size:12px;padding:6px 4px}
+@media (max-width:760px){.dsk{grid-template-columns:repeat(4,260px);overflow-x:auto}}
+.zs.taschim{opacity:.5}
+.sv-e:focus-visible{outline:2px solid var(--tmn);outline-offset:2px}
+</style>
+</head><body class="locus-tasks">
+<div id="menju"></div>
+<div class="wrap"><div class="kol">
+  <div id="shapka"></div>
+  <div id="svodka"></div>
+  <div id="kontrol"></div>
+  <div id="filtry"></div>
+  <div id="spisok"><div class="zagr"><span class="zagr-s">загрузка</span><span class="zagr-p"><i></i></span></div></div>
+  <div id="pagin"></div>
+</div></div>
+
+<script src="/js/nedeli.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/obschij.js"></script>
+<script src="/js/kalendar.js"></script>
+<script>
+(function () {
+let SPRAV = null, ZADACHI = [], OTVET = null, SVODKA = null, CHISLA_NAPR = {};
+                                                             
+                                                              
+                              
+const IZ_ADRESA = window.LocusTaskRoute.query(location.href);
+let fNapr = IZ_ADRESA.get('napravlenie') || null,
+    fStatus = IZ_ADRESA.get('status') || null,
+    fTip = IZ_ADRESA.get('tip') || null,
+    fProsro = IZ_ADRESA.get('prosrochennye') === '1' || IZ_ADRESA.get('prosrocheno') === '1',
+    fKlj = IZ_ADRESA.get('kljuchevye') === '1',
+    fDen = IZ_ADRESA.get('data') || null,
+                                                              
+                                                              
+                                                       
+    fChelovek = IZ_ADRESA.has('otvetstvennyj')
+      ? (IZ_ADRESA.get('otvetstvennyj') || null) : '__ja__',
+    fSprint = Number((String(IZ_ADRESA.get('sprint') || '').match(/^(?:\d{4}-W?)?(\d{1,2})$/i) || [])[1]) || null,
+    fGodSprinta = Number((String(IZ_ADRESA.get('sprint') || '').match(/^(\d{4})-W?\d{1,2}$/i) || [])[1]) || null,
+                                                                    
+                                                        
+    vseSprinty = IZ_ADRESA.get('sprint') === 'vse',
+    kogdaNibud = fStatus === 'kogda_nibud', arhiv = IZ_ADRESA.get('arhivnye') === '1';
+                                                                    
+                                                             
+let sprint = null, godSprinta = null, tekuschijSprint = null, tekuschijGod = null, NEDELJA = null;
+                                                                
+                                                  
+let SPRINTY = [];
+                                                                          
+                                                                  
+                                                         
+let srez = 'vse';
+                                                               
+let vid = 'spisok';
+                                                                   
+                                                        
+let fSort='srochnost';
+try{fSort=localStorage.getItem('locus-zadachi-sort')||fSort;}catch{                                           }
+                                                          
+let DINAMIKA = { tekuschij: [], sledujuschij: [] };
+let vid_prochitan = false;
+                                                              
+                                                            
+let menjaem_vid = false;
+                                                                      
+                                                                     
+                                                                
+                                                                 
+                                                                   
+                                                                   
+                                                                 
+                                      
+let PROEKTY = new Map(), KLIENTY = new Map(), RASSYLKI = new Map(),
+    spravki_prochitany = false;
+async function zagruzit_spravki() {
+  if (spravki_prochitany) return;
+  spravki_prochitany = true;
+  const [pr, kl, ra] = await Promise.all([
+    API.spisok('proekty', { na_stranice: 200 }).catch(() => null),
+    API.spisok('ljudi', { vneshnie: 1, na_stranice: 200 }).catch(() => null),
+    API.spisok('rassylki', { na_stranice: 200 }).catch(() => null),
+  ]);
+  PROEKTY = new Map(((pr && pr.spisok) || []).map((p) => [p.id, p.nazvanie]));
+  KLIENTY = new Map(((kl && kl.spisok) || []).map((k) => [k.id, k.imja]));
+  RASSYLKI = new Map(((ra && ra.spisok) || []).map((r) => [r.id, r.nazvanie]));
+}
+                                                                  
+                                           
+function s_imenami(z) {
+  return { ...z,
+    proekt_nazvanie: z.proekt_nazvanie || PROEKTY.get(z.proekt_id) || null,
+    klient_imja: z.klient_imja || KLIENTY.get(z.klient_id) || null };
+}
+const SREZY = {
+  vse: { imja: 'все', tipy: null },
+  klientskie: { imja: 'клиентские', tipy: ['klientskaja'] },
+  vnutrennie: { imja: 'внутренние',
+                tipy: ['vnutrennjaja', 'biznesovaja', 'produktovaja'] },
+};
+                                                                  
+                
+let stranica = 1;
+const NA_STRANICE = 50;
+
+let prioritet_prochitan = false;
+let zagruzkaOchered = Promise.resolve(), zaproshenPokaz = 0, primenenPokaz = 0;
+function zagruzit() {
+  const nomer = ++zaproshenPokaz;
+  const job = zagruzkaOchered.catch(() => {}).then(async () => {
+    if (nomer !== zaproshenPokaz) return false;
+    try { return await zagruzitDannye(nomer); }
+    catch (error) { if (nomer === zaproshenPokaz) throw error; return false; }
+  });
+  zagruzkaOchered = job;
+  return job;
+}
+
+async function zagruzitDannye(nomer) {
+                                                                  
+                                                              
+                                
+  if (!spravki_prochitany) {
+    spravki_prochitany = true;
+    const e = await API.ekran('ekran_zadach',
+      sprint === null ? {} : { sprint }).catch(() => null);
+    if (e) {
+      sprint = e.sprint;
+      tekuschijSprint = e.sprint;
+      tekuschijGod = e.nedelja.god;
+      NEDELJA = e.nedelja || null;
+      if (e.vid && !vid_prochitan) { vid = e.vid; vid_prochitan = true; }
+      PROEKTY = new Map((e.proekty || []).map((p) => [p.id, p.nazvanie]));
+      KLIENTY = new Map((e.vneshnie || []).map((k) => [k.id, k.imja]));
+      RASSYLKI = new Map((e.rassylki || []).map((r) => [r.id, r.nazvanie]));
+      SPRAV = SPR.iz_ekrana(e);
+      SPRINTY = Array.from({ length: 11 }, (_, i) => SPR.kalendar.sdvinut_nedelju(tekuschijGod,tekuschijSprint,-i));
+    }
+  }
+  if (!SPRAV) SPRAV = await SPR.zagruzit();
+                                                          
+                                                                  
+                                                                    
+                                                                    
+                      
+  if (!prioritet_prochitan) {
+    prioritet_prochitan = true;
+    let nast = null;
+    try { nast = await O.zagruzit_nastrojki(); } catch {                    }
+    if (!IZ_ADRESA.has('napravlenie')) {
+                                                              
+      if (nast && nast.prioritetnoe_napravlenie
+          && nast.prioritetnoe_napravlenie !== 'net') {
+        fNapr = nast.prioritetnoe_napravlenie;
+      }
+    } else if (IZ_ADRESA.get('napravlenie') === 'vse') fNapr = null;
+                                                                   
+                                                                 
+                                                           
+    if (fChelovek === '__ja__' && nast && nast.chi_zadachi === 'vse') {
+      fChelovek = null;
+    }
+  }
+  if (tekuschijSprint === null) {
+    const current = await API.ekran('nedeli', {});
+    tekuschijSprint = current.nomer;
+    tekuschijGod = current.god;
+  }
+  sprint = fSprint || tekuschijSprint;
+  godSprinta = fGodSprinta || tekuschijGod;
+                                                               
+  if (fChelovek === '__ja__') {
+    const ja = (SPRAV.ljudi || []).find((l) => l.id === Number(window.JA));
+    fChelovek = ja ? ja.imja : null;
+  }
+  window.DANNYE = {                                                   
+    napravlenija: SPRAV.napravlenija, ljudi: SPRAV.ljudi,
+    statusy: SPRAV.statusy.map((s) => ({ ...s, cvet: cvetStatusa(s.kod) })),
+    tipy: SPRAV.tipy, zadachi: [],
+                                                                    
+                                                                   
+    klienty_po_id: KLIENTY, proekty_po_id: PROEKTY,
+    rassylki_po_id: RASSYLKI,
+  };
+                                                                  
+                                                     
+  if (!NEDELJA || NEDELJA.nomer !== sprint || NEDELJA.god !== godSprinta) {
+    NEDELJA = await API.ekran('nedeli', { nedelja: sprint, god: godSprinta });
+  }
+  window.DANNYE.nedelja = NEDELJA;
+                                                                  
+                                                                    
+                                              
+  const f = { na_stranice: NA_STRANICE, stranica };
+                                                             
+                           
+    
+                                                                
+                                                             
+                                                                  
+                                                                  
+                                                               
+                                                             
+                                                            
+  if (!fDen && ((!arhiv && fStatus !== 'sdelano') || fSprint) && !(vseSprinty && !fSprint)) {
+    f.sprint = SPR.kalendar.kljuch_nedeli(godSprinta,fSprint || sprint);
+  }
+  if (fDen) f.data = fDen;
+  if (fNapr) f.napravlenie = fNapr;
+  if (fStatus) f.status = fStatus;
+                                                               
+                                                                
+  if (fTip) f[fTip.includes(',') ? 'tipy' : 'tip'] = fTip;
+
+                                                                 
+                                                                 
+  if (fChelovek) {
+    const chel = (SPRAV.ljudi || []).find((l) => l.imja === fChelovek);
+    f.otvetstvennyj = chel ? chel.id : fChelovek;
+  }
+  if (fProsro) f.prosrochennye = 1;
+  if (fKlj) f.kljuchevaja = 1;
+  if (arhiv) f.arhivnye = 1;
+  if (!kogdaNibud) f.bez_kogda_nibud = 1;
+                                                                 
+                                                                 
+                                                    
+                                                                     
+                                                                  
+                                                                  
+                                        
+    
+                                                                      
+                                                                
+                                                                   
+                                                                
+                                                                 
+                                                              
+                                                      
+  if (fDen && vid === 'dinamika') vid = 'spisok';
+  const nuzhna_dinamika = vid === 'dinamika';
+  const [otvet, svod, po_napr, tek, sled] = await Promise.all([
+    API.spisok('zadachi', f),
+    API.ekran('zadachi/svodka', f),
+    fNapr ? API.ekran('zadachi/svodka', { ...f, napravlenie: undefined }) : null,
+                                                              
+                                                                      
+    nuzhna_dinamika
+      ? API.spisok('zadachi', { ...f, stranica: 1, na_stranice: 200 }) : null,
+    nuzhna_dinamika
+      ? API.spisok('zadachi', { ...f, stranica: 1, na_stranice: 200,
+                                sprint: (() => { const n=SPR.kalendar.sdvinut_nedelju(godSprinta,sprint,1);
+                                  return SPR.kalendar.kljuch_nedeli(n.god,n.nomer); })() }) : null,
+  ]);
+  if (nomer !== zaproshenPokaz) return false;
+  OTVET = otvet;
+  SVODKA = svod;
+  CHISLA_NAPR = (po_napr || svod).po_napravlenijam || {};
+  ZADACHI = (otvet.spisok || []).map(prevratit);
+  window.DANNYE.zadachi = ZADACHI;
+  DINAMIKA = nuzhna_dinamika
+    ? { tekuschij: (tek.spisok || []).map(s_imenami),
+        sledujuschij: (sled.spisok || []).map(s_imenami) }
+    : { tekuschij: [], sledujuschij: [] };
+  primenenPokaz = nomer;
+  return true;
+}
+
+                                                                
+                                                                      
+                                           
+const NOMER_PAL = { v_processe: 1, v_plane: 2, na_soglasovanii: 3,
+  sdelano: 4, kogda_nibud: 5 };
+function cvetStatusa(k) {
+  const n = NOMER_PAL[k];
+  if (!n) return '#8b8d98';
+  const v = getComputedStyle(document.documentElement)
+    .getPropertyValue('--pal-' + n).trim();
+  return v || '#8b8d98';
+}
+
+                                                    
+function prevratit(z) {
+                                                      
+  return SPR.dlja_ekrana(z);
+}
+
+                                                               
+                                                                  
+                                                             
+                                  
+function otobrannye() {
+  const sp = [...ZADACHI];
+                                                                 
+                                               
+  if (fSort === 'status') {
+    const ves = { v_processe: 0, v_plane: 1, na_soglasovanii: 2, sdelano: 3 };
+    sp.sort((a, b) => (ves[a.status] ?? 9) - (ves[b.status] ?? 9));
+  } else if (fSort === 'ruchnoj') {
+    let svoj = [];
+    try { svoj = JSON.parse(localStorage.getItem('locus-zadachi-ruchnoj') || '[]'); }
+    catch { svoj = []; }
+    const mesto = new Map(svoj.map((n, i) => [n, i]));
+    sp.sort((a, b) => (mesto.has(a.nomer) ? mesto.get(a.nomer) : 1e9)
+      - (mesto.has(b.nomer) ? mesto.get(b.nomer) : 1e9));
+  }
+  return sp;
+}
+
+                                                                      
+                                                     
+function privjazatRuchnojPorjadok() {
+  if (fSort !== 'ruchnoj') return;
+  const mesto = document.getElementById('spisok');
+  if (!mesto) return;
+  let tjanem = null;
+  mesto.querySelectorAll('.zs').forEach((str) => {
+    str.setAttribute('draggable', 'true');
+    str.addEventListener('dragstart', () => { tjanem = str; str.classList.add('taschim'); });
+    str.addEventListener('dragend', () => {
+      str.classList.remove('taschim');
+      tjanem = null;
+      const nomera = [...mesto.querySelectorAll('.zs')]
+        .map((e) => Number(e.dataset.nomer)).filter(Boolean);
+      try { localStorage.setItem('locus-zadachi-ruchnoj', JSON.stringify(nomera)); } catch {}
+    });
+    str.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      if (!tjanem || tjanem === str) return;
+      const r = str.getBoundingClientRect();
+      const vyshe = e.clientY < r.top + r.height / 2;
+      str.parentElement.insertBefore(tjanem, vyshe ? str : str.nextSibling);
+    });
+  });
+}
+
+                                                                 
+                                                                       
+                      
+function tipyFiltrov() {
+                                                                     
+                                                                      
+  return [...SPRAV.tipy.filter(t => t.kod !== 'kasanie'), { kod: 'kasanie', imja: 'касания' }];
+}
+
+function svodka() {
+  const st = SPRAV.statusy.filter((s) => ['v_plane','v_processe','sdelano'].includes(s.kod));
+  const ps = SVODKA.po_statusu || {}, pt = SVODKA.po_tipu || {};
+  document.getElementById('svodka').innerHTML = `
+    <div class="svod">
+      <div class="svod-r">
+        ${st.map((s) => `<a role="button" tabindex="0" aria-pressed="${fStatus === s.kod}" class="sv-e${fStatus === s.kod ? ' on' : ''}" data-st="${s.kod}">
+          <span class="sv-c">${ps[s.kod] ?? 0}</span>
+          <span class="sv-l">${s.imja}</span></a>`).join('')}
+        <a role="button" tabindex="0" aria-pressed="${fProsro}" class="sv-e${fProsro ? ' on' : ''}" data-pr="1">
+          <span class="sv-c kr">${SVODKA.prosrocheno ?? 0}</span>
+          <span class="sv-l">просрочено</span></a>
+      </div>
+      <div class="svod-r">
+        ${tipyFiltrov().map((t) => `<a role="button" tabindex="0" aria-pressed="${fTip === t.kod}" class="sv-e${fTip === t.kod ? ' on' : ''}" data-tp="${t.kod}">
+          <span class="sv-c">${pt[t.kod] ?? 0}</span>
+          <span class="sv-l">${t.imja}</span></a>`).join('')}
+        <a class="sv-e"><span class="sv-c">${SVODKA.publikacij ?? 0}</span>
+          <span class="sv-l">публикации</span></a>
+      </div>
+    </div>`;
+  document.querySelectorAll('.sv-e[data-st]').forEach((e) => e.addEventListener('click', () => {
+    fStatus = fStatus === e.dataset.st ? null : e.dataset.st; zanovo();
+  }));
+  document.querySelectorAll('.sv-e[data-tp]').forEach((e) => e.addEventListener('click', () => {
+    fTip = fTip === e.dataset.tp ? null : e.dataset.tp; zanovo();
+  }));
+  document.querySelector('.sv-e[data-pr]')?.addEventListener('click', () => {
+    fProsro = !fProsro; zanovo();
+  });
+  document.querySelectorAll('.sv-e[role="button"]').forEach(el => el.addEventListener('keydown', event => {
+    if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); el.click(); }
+  }));
+}
+
+                                                               
+                                                                
+async function zanovo() {
+  stranica = 1;
+  try { await zagruzit(); narisovat(); }
+  catch (e) { O.tost('Не получилось: ' + e.message); }
+}
+
+let vyborDnja = 0;
+async function smenitDen(day) {
+  if (day === fDen) return;
+  if (day) { try { SPR.kalendar.data(day); } catch { O.tost('Выбери существующую дату'); return; } }
+  const request = ++vyborDnja, previous = {fDen,fSprint,fGodSprinta,vseSprinty,stranica};
+  fDen = day; fSprint = fGodSprinta = null; vseSprinty = false; stranica = 1;
+  const field=document.querySelector('.task-day-filter'),status=document.getElementById('day-filter-status');
+  field?.setAttribute('aria-busy','true');
+  if(status){status.hidden=false;status.textContent=day ? 'Загружаю день ' + SPR.data(day) : 'Загружаю неделю';}
+  try { await zagruzit(); narisovat(); }
+  catch (error) {
+    if (request !== vyborDnja) return;
+    ({fDen,fSprint,fGodSprinta,vseSprinty,stranica}=previous);
+    const input=document.getElementById('f-den'); if(input) input.value=fDen || '';
+    field?.setAttribute('aria-busy','false');
+    const message='Не удалось загрузить выбранный день.' + (error.kod>=400 && error.kod<500 ? ' ' + error.message : ' Повтори выбор даты.');
+    if(status){status.hidden=false;status.textContent=message;} else O.tost(message);
+  }
+}
+
+                                                                       
+                                          
+function kontrol() {
+                                                             
+                                                                     
+                                                      
+    
+                                                                   
+                                                                   
+                                                             
+                                                              
+                                                             
+  document.getElementById('kontrol').innerHTML = '';
+
+                                                                
+                                                                   
+                                                                 
+                                                            
+                                                                 
+                                                                  
+                                                                 
+                                                             
+                                                            
+  window.__smenitVid = async (novyj) => {
+    const e = { dataset: { vid: novyj } };
+    {
+      if (e.dataset.vid === vid) return;
+                                                                     
+                                                                     
+                                                                 
+                                 
+      if (menjaem_vid) return;
+      menjaem_vid = true;
+      vid = e.dataset.vid;
+                                                                  
+                                                                  
+                                                                    
+                                                                    
+                                         
+      try { await zagruzit(); }
+      catch (err) { O.tost('Не получилось: ' + err.message); }
+      narisovat();
+                                                                
+                                 
+                                                               
+                                      
+      try { await API.zapros('PATCH', '/nastrojki', { vid_zadach: vid }); }
+      catch {                                                  }
+      menjaem_vid = false;
+    }
+  };
+  document.querySelectorAll('#kontrol [data-srez]').forEach((e) =>
+    e.addEventListener('click', () => {
+      srez = e.dataset.srez;
+                                                                      
+                                         
+      fTip = null;
+      zanovo();
+    }));
+}
+
+                                                                       
+                                                                        
+                    
+function pagin() {
+  const mesto = document.getElementById('pagin');
+  const vsego = OTVET.vsego || 0;
+  const stranic = OTVET.stranic || 1;
+  if (stranic <= 1) {
+    mesto.innerHTML = vsego
+      ? `<div class="pag"><span class="pag-s">${vsego} ${sklonenie(vsego)}</span></div>` : '';
+    return;
+  }
+  const ot = (stranica - 1) * NA_STRANICE + 1;
+  const do_ = Math.min(stranica * NA_STRANICE, vsego);
+  const nabor = new Set([1, stranic, stranica, stranica - 1, stranica + 1]);
+  const vidimye = [...nabor].filter((n) => n >= 1 && n <= stranic).sort((a, b) => a - b);
+  mesto.innerHTML = `<div class="pag">
+    <a class="pag-e" data-str="${stranica - 1}">←</a>
+    ${vidimye.map((n, i) => (i > 0 && n - vidimye[i - 1] > 1
+      ? '<span class="pag-e">…</span>' : '')
+      + `<a class="pag-e${n === stranica ? ' on' : ''}" data-str="${n}">${n}</a>`).join('')}
+    <a class="pag-e" data-str="${stranica + 1}">→</a>
+    <span class="pag-s">${ot}–${do_} из ${vsego}</span>
+  </div>`;
+  document.querySelectorAll('[data-str]').forEach((e) =>
+    e.addEventListener('click', async () => {
+      const n = Number(e.dataset.str);
+      if (n < 1 || n > stranic || n === stranica) return;
+      stranica = n;
+      try { await zagruzit(); narisovat(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+      catch (err) { O.tost('Не получилось: ' + err.message); }
+    }));
+}
+
+function sklonenie(n) {
+  const o = n % 10, d = n % 100;
+  if (d >= 11 && d <= 14) return 'задач';
+  if (o === 1) return 'задача';
+  if (o >= 2 && o <= 4) return 'задачи';
+  return 'задач';
+}
+
+                                                           
+                  
+function chislo_chipa(n) {
+  return (n === null || n === undefined || n === 0)
+    ? '' : `<span class="ld-ch-n">${n}</span>`;
+}
+
+function filtry() {
+  const est = fStatus || fTip || fProsro || fKlj || fChelovek || fSprint || fDen || arhiv
+    || srez !== 'vse';
+                                                               
+                                                                   
+  const imja_statusa = arhiv ? 'архив'
+    : fStatus ? (SPRAV.statusy.find((s) => s.kod === fStatus)?.imja
+      || (fStatus === 'prosrochena' ? 'просрочено' : fStatus)) : 'статус';
+                                                                   
+                                                                 
+                                                                
+                                         
+  const imja_napr = fNapr ? (O.naprPoKodu(fNapr).imja || fNapr) : 'направление';
+  const CHIPY = {
+                                                                 
+                                                                   
+                                                             
+                                                                
+                                                
+    status: `<span class="vyp" data-chip="status"><a class="fil-b${
+      fStatus || arhiv ? ' on' : ''}" id="f-st">
+        ${O.ekranirovat(imja_statusa)}${chislo_chipa(fStatus ? SVODKA?.po_statusu?.[fStatus]
+          : SVODKA?.otkryto)}<span class="str"></span></a></span>`,
+                                                                 
+                                                                
+                                                             
+                   
+    napravlenie: `<span class="vyp" data-chip="napravlenie"><a class="fil-b${
+      fNapr ? ' on' : ''}" id="f-np">
+        ${O.ekranirovat(imja_napr)}${chislo_chipa(fNapr ? CHISLA_NAPR[fNapr] : null)
+        }<span class="str"></span></a></span>`,
+    chelovek: `<span class="vyp" data-chip="chelovek"><a class="fil-b${
+      fChelovek ? ' on' : ''}" id="f-ch">
+        ${O.ekranirovat(fChelovek || 'ответственный')}<span class="str"></span></a></span>`,
+    tip: `<span class="vyp" data-chip="tip"><a class="fil-b${fTip ? ' on' : ''}" id="f-tp">
+        ${fTip ? O.ekranirovat(fTip.split(',').map((k) =>
+          (tipyFiltrov().find((t) => t.kod === k.trim()) || { imja: k }).imja)
+          .join(', ')) : 'тип'}${
+        chislo_chipa(fTip && !fTip.includes(',') ? SVODKA?.po_tipu?.[fTip] : null)}<span class="str"></span></a></span>`,
+    den: `<label class="fil-b task-day-filter${fDen ? ' on' : ''}" data-chip="den"><span aria-hidden="true">${fDen ? 'день ' + O.ekranirovat(SPR.data(fDen)) + (fDen.slice(0,4) !== SPR.segodnja().slice(0,4) ? '.' + fDen.slice(0,4) : '') : 'день'}</span><input id="f-den" type="date" aria-label="День задач" value="${O.ekranirovat(fDen || '')}"></label>`,
+    sprint: `<span class="vyp" data-chip="sprint"><a class="fil-b${
+      fSprint ? ' on' : ''}" id="f-sp">
+        ${O.ekranirovat(fSprint ? 'спринт ' + fSprint : 'спринт')}<span class="str"></span></a></span>`,
+    vid: `<span class="vyp" data-chip="vid"><a class="fil-b" id="f-vid">${
+      vid === 'dinamika' ? 'динамикой' : vid === 'doska' ? 'доской'
+        : 'списком'}<span class="str"></span></a></span>`,
+    kljuch: `<a class="fil-b${fKlj ? ' on' : ''}" id="f-klj"
+               data-chip="kljuch">ключевые${chislo_chipa(SVODKA?.kljuchevye)}</a>`,
+    prosro: `<a class="fil-b${fProsro ? ' on' : ''}" id="f-pr"
+               data-chip="prosro">на сегодня${
+      chislo_chipa(SVODKA?.na_segodnja)}</a>`,
+    sort: `<span class="vyp" data-chip="sort"><a class="fil-b${
+      fSort !== 'srochnost' ? ' on' : ''}" id="f-sort">${
+      fSort === 'status' ? 'по статусу' : fSort === 'ruchnoj' ? 'свой порядок'
+        : 'по срочности'}<span class="str"></span></a></span>`,
+  };
+                                                                
+                                                                     
+                                                             
+                                                
+  const PO_UMOLCHANIJU = ['status', 'napravlenie', 'chelovek', 'tip',
+                          'sprint', 'den', 'kljuch', 'prosro', 'sort', 'vid'];
+                                                             
+                                                                  
+                                                                
+  const porjadok = O.porjadokChipov('zadach', PO_UMOLCHANIJU, (k) => CHIPY[k])
+    .filter((k) => k !== 'napravlenie'
+      && (window.innerWidth <= 760 || k !== 'chelovek'));
+
+  document.getElementById('filtry').innerHTML = `
+    <div class="fil-r" id="fil-r">
+      ${porjadok.map((k) => CHIPY[k]).join('')}
+      ${est ? '<a class="fil-sbros" id="f-sb">сбросить</a>' : ''}
+    </div><p id="day-filter-status" class="task-day-status" role="status" hidden></p>`;
+
+                                                                
+                                                        
+  O.vkljuchitPeretaskivanie(document.getElementById('fil-r'), 'zadach');
+
+                                                                 
+                                                               
+                              
+
+                                                           
+                                                              
+                                                  
+  if (document.getElementById('f-np')) O.vypadajuschij(document.getElementById('f-np'),
+    [{ kod: '', imja: 'все направления' }].concat(
+      (SPRAV.napravlenija || []).map((n) => ({ kod: n.kod, imja: n.imja, cvet: n.cvet }))),
+    fNapr || '')
+    .addEventListener('click', (e) => {
+      const p = e.target.closest('.vyp-p'); if (!p) return;
+      fNapr = p.dataset.kod || null;
+                                                           
+                                    
+      document.querySelectorAll('[data-napr]').forEach((c) =>
+        c.classList.toggle('on', (c.dataset.napr || '') === (fNapr || '')));
+      zanovo();
+    });
+
+                                                           
+  O.vypadajuschij(document.getElementById('f-sort'),
+    [{ kod: 'srochnost', imja: 'по срочности' },
+     { kod: 'status', imja: 'по статусу' },
+     { kod: 'ruchnoj', imja: 'вручную, перетаскиванием' }], fSort)
+    .addEventListener('click', (e) => {
+      const p = e.target.closest('.vyp-p'); if (!p || !p.dataset.kod) return;
+      fSort = p.dataset.kod;
+      try { localStorage.setItem('locus-zadachi-sort', fSort); } catch {}
+      narisovat();
+    });
+
+  O.vypadajuschij(document.getElementById('f-vid'),
+    [{ kod: 'spisok', imja: 'списком' }, { kod: 'dinamika', imja: 'динамикой' },
+     { kod: 'doska', imja: 'доской' }], vid)
+    .addEventListener('click', (e) => { const p = e.target.closest('.vyp-p'); if (!p) return;
+      window.__smenitVid(p.dataset.kod); });
+
+  if (document.getElementById('f-ch')) O.vypadajuschij(document.getElementById('f-ch'),
+    [{ kod: '', imja: 'все' }].concat(SPRAV.ljudi.map((l) => ({ kod: l.imja, imja: l.imja }))), fChelovek)
+    .addEventListener('click', (e) => { const p = e.target.closest('.vyp-p'); if (!p) return;
+                                                    
+      const selected=p.dataset.kod||null;
+      const snjat = fChelovek===selected;
+      fChelovek = snjat ? null : selected; zanovo(); });
+                                                                
+                                          
+    
+                                                                    
+                                                                    
+                                                    
+    
+                                                                   
+                                                                  
+                                                               
+                                                                  
+                                                               
+                                                                  
+                                                                   
+                                                                    
+                                       
+  O.vypadajuschij(document.getElementById('f-st'),
+    [{ kod: '', imja: 'любой' }]
+      .concat(SPRAV.statusy)
+      .concat([{ kod: 'arhiv', imja: 'архив' }]),
+    arhiv ? 'arhiv' : fStatus)
+    .addEventListener('click', (e) => { const p = e.target.closest('.vyp-p'); if (!p) return;
+                                                    
+      const selected=p.dataset.kod||null;
+      const snjat = selected==='arhiv'?arhiv:!arhiv&&fStatus===selected;
+      const kod = snjat ? null : selected;
+                                                              
+                                       
+      arhiv = kod === 'arhiv';
+      fStatus = arhiv ? null : kod;
+                                                                     
+                                                                 
+      kogdaNibud = kod === 'kogda_nibud';
+      zanovo(); });
+  O.vypadajuschij(document.getElementById('f-tp'),
+    [{ kod: '', imja: 'любой' }].concat(tipyFiltrov()), fTip)
+    .addEventListener('click', (e) => { const p = e.target.closest('.vyp-p'); if (!p) return;
+                                                    
+      const selected=p.dataset.kod||null;
+      const snjat = fTip===selected;
+      fTip = snjat ? null : selected; zanovo(); });
+
+                                                                      
+                                     
+  O.vypadajuschij(document.getElementById('f-sp'),
+    [{ kod: '', imja: 'любой' }].concat(SPRINTY.map((n) =>
+      ({ kod: SPR.kalendar.kljuch_nedeli(n.god,n.nomer), imja: 'спринт ' + n.nomer
+        + (n.god!==tekuschijGod?' / '+n.god:'') }))), fSprint ? SPR.kalendar.kljuch_nedeli(godSprinta,fSprint) : null)
+    .addEventListener('click', (e) => { const p = e.target.closest('.vyp-p'); if (!p) return;
+                                                    
+      const selected=p.dataset.kod?SPR.kalendar.razobrat_nedelju(p.dataset.kod,tekuschijGod):null;
+      const snjat=selected?fSprint===selected.nomer&&Number(fGodSprinta||tekuschijGod)===selected.god:vseSprinty;
+      const choice = !snjat ? selected : null;
+      fDen = null; fSprint = choice?.nomer || null; fGodSprinta = choice?.god || null;
+      vseSprinty = !fSprint;
+      zanovo(); });
+
+  document.getElementById('f-den')?.addEventListener('change', e => smenitDen(e.target.value || null));
+  document.getElementById('f-pr')?.addEventListener('click', () => { fProsro = !fProsro; zanovo(); });
+  document.getElementById('f-klj')?.addEventListener('click', () => { fKlj = !fKlj; zanovo(); });
+                                                                  
+                                        
+  document.getElementById('f-sb')?.addEventListener('click', () => {
+    fStatus = fTip = fChelovek = fSprint = fDen = null;
+    fGodSprinta = null;
+    fProsro = false; fKlj = false; arhiv = false; kogdaNibud = false;
+    vseSprinty = false; srez = 'vse'; zanovo();
+  });
+}
+
+                                                             
+                                                        
+                                                              
+                                                          
+                                              
+                                                                  
+                                                         
+function doska(sp) {
+  const statusy = (SPRAV.statusy || []).filter((x) => x.kod !== 'kogda_nibud');
+  return `<div class="dsk">${statusy.map((st) => {
+    const svoi = sp.filter((z) => z.status === st.kod);
+    return `<div class="dsk-kol" data-dsk-st="${st.kod}">
+      <div class="dsk-sh">${st.imja}<span class="n">${svoi.length}</span></div>
+      ${svoi.map((z) => {
+        const n = O.naprPoKodu(z.napravlenie);
+        return `<div class="dsk-k" draggable="${!z.povtorjaetsja}" role="button" tabindex="0"
+          data-nomer="${z.nomer}" data-versija="${z.versija}" data-status="${z.status}"
+          data-open-children="${Number(z.otkrytyh_podzadach)||0}" data-povtor="${z.povtorjaetsja?1:0}" data-pv-date="${z.den_vybora || ''}">
+          <span class="t7" style="--c:${n.cvet || 'var(--t3)'}"></span>
+          <span class="dsk-n">${O.ekranirovat(z.nazvanie)}${O.referralTaskAmount(z)}</span>
+          <span class="dsk-d">${O.ekranirovat(z.srok || '')}</span></div>`;
+      }).join('') || '<div class="dsk-pusto">пусто</div>'}
+    </div>`;
+  }).join('')}</div>`;
+}
+
+function privjazatDosku() {
+  let tjanem = null,draggedUntil=0;
+  document.querySelectorAll('.dsk-k').forEach((k) => {
+    k.addEventListener('dragstart', event => {
+      tjanem=Number(k.dataset.nomer);document.body.dataset.locusDragging='1';
+      event.dataTransfer?.setData('text/plain',String(tjanem));
+      if(event.dataTransfer)event.dataTransfer.effectAllowed='move';
+    });
+    k.addEventListener('dragend',()=>{delete document.body.dataset.locusDragging;draggedUntil=Date.now()+250;});
+    k.addEventListener('click', () => {if(Date.now()>=draggedUntil)O.otkrytZadachu(Number(k.dataset.nomer), k.dataset.pvDate || null);});
+  });
+  document.querySelectorAll('.dsk-kol').forEach((kol) => {
+    kol.addEventListener('dragover', (e) => { e.preventDefault(); kol.classList.add('nad'); });
+    kol.addEventListener('dragleave', () => kol.classList.remove('nad'));
+    kol.addEventListener('drop', async (e) => {
+      e.preventDefault();
+      delete document.body.dataset.locusDragging;
+      kol.classList.remove('nad');
+      if (!tjanem) return;
+      const novyj = kol.dataset.dskSt;
+      const z = ZADACHI.find((x) => x.nomer === tjanem);
+      tjanem = null;
+      if (!z || z.status === novyj) return;
+      if (z.povtorjaetsja) { O.tost('У повтора статус складывается из отметок по дням'); return; }
+      const card=document.querySelector('.dsk-k[data-nomer="'+z.nomer+'"]');
+      if(card)await O.smenitStatusZadachi(card,novyj,async()=>{await zagruzit();narisovat();});
+    });
+  });
+}
+
+function dinamika() {
+  const tek = DINAMIKA.tekuschij || [];
+  const sled = DINAMIKA.sledujuschij || [];
+
+                                                               
+                                                                   
+  const po_gruppam = (spisok) => {
+    const g = new Map();
+    for (const z of spisok) {
+      const kljuch = z.proekt_nazvanie || z.klient_imja
+        || (O.naprPoKodu(z.napravlenie).imja || z.napravlenie);
+      if (!g.has(kljuch)) g.set(kljuch, []);
+      g.get(kljuch).push(z);
+    }
+    return g;
+  };
+
+  const kolonka = (spisok, pusto) => {
+    const g = po_gruppam(spisok);
+    if (!g.size) return `<div class="net">${pusto}</div>`;
+    return [...g].map(([imja, zz]) =>
+      `<div class="din-g"><div class="din-g-z">${imja}` +
+      `<span class="n">${zz.length}</span></div>` +
+      O.sPodzadachami(zz).map((z) => O.strokaZadachi(SPR.dlja_ekrana(z),
+        { bezNapravlenija: true })).join('') + '</div>').join('');
+  };
+
+  return `<div class="din">
+    <div class="din-k">${kolonka(tek, 'на этот спринт задач нет')}</div>
+    <div class="din-k">${kolonka(sled,
+      'на следующий спринт пока ничего не планировали')}</div>
+  </div>`;
+}
+
+function spisok() {
+                                                                   
+                                                                 
+                           
+  const sp = vid === 'dinamika'
+    ? [...DINAMIKA.tekuschij, ...DINAMIKA.sledujuschij].map(SPR.dlja_ekrana)
+    : otobrannye();
+  document.body.dataset.vid = vid;
+  if (vid === 'doska') {
+                                                               
+                                                               
+    document.getElementById('spisok').innerHTML = doska(sp);
+    document.getElementById('spisok').classList.remove('plitkami');
+    privjazatDosku();
+    return;
+  }
+  if (vid === 'dinamika') {
+    document.getElementById('spisok').innerHTML = dinamika();
+    document.getElementById('spisok').classList.remove('plitkami');
+    document.body.dataset.vid = 'dinamika';
+  } else {
+                                                                    
+                                                                       
+                                                              
+                                           
+  let razmetka;
+  if (!sp.length) {
+    razmetka = '<div class="pusto"><div class="pusto-z">Ничего не нашлось</div>' +
+      '<div class="pusto-p">попробуй снять фильтр</div></div>';
+  } else if (fNapr) {
+    razmetka = O.sPodzadachami(sp).map((z) => O.strokaZadachi(z, { bezNapravlenija: true, bez_otvetstvennogo: Boolean(fChelovek) })).join('');
+  } else {
+    const gruppy = new Map();
+    sp.forEach((z) => {
+      if (!gruppy.has(z.napravlenie)) gruppy.set(z.napravlenie, []);
+      gruppy.get(z.napravlenie).push(z);
+    });
+    razmetka = [...gruppy].map(([kod, spisok]) => {
+      const n = O.naprPoKodu(kod);
+      const imja = (n.imja || kod).split(/[,(]/)[0].trim();
+      return `<div class="npr-zag">${imja}` +
+        `<i></i><span class="n">${spisok.length}</span></div>` +
+        O.sPodzadachami(spisok).map((z) => O.strokaZadachi(z, { bezNapravlenija: true, bez_otvetstvennogo: Boolean(fChelovek) })).join('');
+    }).join('');
+  }
+  document.getElementById('spisok').innerHTML = razmetka;
+  document.getElementById('spisok').classList.toggle('plitkami', vid === 'plitki');
+  document.body.dataset.vid = vid;
+  privjazatRuchnojPorjadok();
+  }
+
+                                                                   
+                                                             
+                                                                    
+                                    
+  document.querySelectorAll('.gal-b').forEach((g) => {
+    g.addEventListener('click', async (ev) => {
+      ev.stopPropagation();
+      const nomer = Number(g.closest('.zs')?.dataset.nomer);
+      const z = sp.find((x) => x.nomer === nomer);
+      if (!z) return;
+                                                            
+                                                          
+      await O.zakrytZadachu(nomer, g.closest('.zs'),
+        async () => { await zagruzit(); narisovat(); }, { bylo: z.status });
+    });
+  });
+
+                                   
+  O.vkljuchitStatusy((stroka, status) => O.smenitStatusZadachi(stroka, status,
+    async () => { await zagruzit(); narisovat(); }));
+}
+
+                                                                
+                                                                
+                                             
+function v_adres() {
+  const p = new URLSearchParams();
+  const direct=window.LocusTaskRoute.direct(location.href);
+  const nomer = direct?null:new URLSearchParams(location.search).get('nomer');
+  if (nomer) {
+    p.set('nomer', nomer);
+    const day = new URLSearchParams(location.search).get('den');
+    if (day) p.set('den', day);
+  }
+                                                              
+                                                              
+  if(!direct)p.set('napravlenie', fNapr || 'vse');
+  if (fStatus) p.set('status', fStatus);
+  if (fTip) p.set('tip', fTip);
+  if (fProsro) p.set('prosrochennye', '1');
+  if (fKlj) p.set('kljuchevye', '1');
+                                                              
+                                                              
+  p.set('otvetstvennyj', fChelovek ? String(fChelovek) : '');
+  if (fDen) p.set('data', fDen);
+  if (fSprint) p.set('sprint', SPR.kalendar.kljuch_nedeli(godSprinta,fSprint));
+  else if (vseSprinty) p.set('sprint', 'vse');
+  if (arhiv) p.set('arhivnye', '1');
+  const s = p.toString();
+  history.replaceState(null, '', (s ? '?' + s : location.pathname) + location.hash);
+}
+
+function narisovat() {
+  if (primenenPokaz !== zaproshenPokaz) return;
+  const label = document.querySelector('.ned b'), dates = document.querySelector('.ned .nd');
+  if (label) label.textContent = fDen ? new Intl.DateTimeFormat('ru',{weekday:'long',timeZone:'UTC'}).format(SPR.kalendar.data(fDen)) : vseSprinty ? 'все спринты' : `спринт ${sprint}${godSprinta!==tekuschijGod?' / '+godSprinta:''}`;
+  if (dates) dates.textContent = fDen ? SPR.data(fDen) + '.' + fDen.slice(0,4) : !vseSprinty && NEDELJA ? SPR.period(NEDELJA.nachalo, NEDELJA.konec) : '';
+                                                                                    
+                                                                           
+  v_adres();
+  svodka(); kontrol(); filtry(); spisok(); pagin();
+  O.ponumerovat();
+}
+
+(async function start() {
+  try {
+    await zagruzit();
+    document.getElementById('menju').innerHTML = O.menju('Задачи', {
+                                                           
+                                                             
+                                                                
+                                                              
+      ljudi: true,
+      napravlenija: true,
+                                                                       
+                                                                  
+      chisla: CHISLA_NAPR,
+      period: [`спринт ${sprint}`, NEDELJA ? SPR.period(NEDELJA.nachalo, NEDELJA.konec) : ''],
+    });
+    O.vkljuchitNapravlenija((kod) => { fNapr = kod; zanovo(); }, fNapr);
+                                                              
+                                                       
+                                                            
+    O.vkljuchitPeriod(async (shag) => {
+      if (fDen) { await smenitDen(SPR.kalendar.sdvinut_den(fDen,shag)); return; }
+      const previous = {sprint,godSprinta,fSprint,fGodSprinta,vseSprinty,NEDELJA};
+      const next = SPR.kalendar.sdvinut_nedelju(godSprinta,sprint,shag);
+      sprint = fSprint = next.nomer; godSprinta = fGodSprinta = next.god; vseSprinty = false;
+      try {
+        await zagruzit(); narisovat();
+      } catch (e) {
+        ({sprint,godSprinta,fSprint,fGodSprinta,vseSprinty,NEDELJA}=previous);
+        O.tost('Не получилось: ' + e.message);
+      }
+    });
+
+    O.vkljuchitLjudej((id) => {
+      const chel = (SPRAV.ljudi || []).find((l) => l.id === id);
+      fChelovek = chel ? chel.imja : null;
+      zanovo();
+    });
+                                                         
+    if (fChelovek) {
+      const tek = (SPRAV.ljudi || []).find((l) => l.imja === fChelovek);
+      if (tek && document.querySelector(`[data-chel="${tek.id}"]`)) {
+        document.querySelectorAll('[data-chel]').forEach((e) =>
+          e.classList.remove('on'));
+        document.querySelector(`[data-chel="${tek.id}"]`).classList.add('on');
+      }
+    }
+    narisovat();
+
+                                                                  
+                                                                   
+                                                            
+                                                  
+    window.OPROS = async () => { await zagruzit(); narisovat(); };
+    O.vkljuchitSkvoznoe(async (imja, polja = {}) => {
+      const dannye = {
+        ...polja,
+        nazvanie: imja,
+        napravlenie: polja.napravlenie || fNapr || 'synapt',
+        otvetstvennyj: polja.otvetstvennyj
+          ? Number(polja.otvetstvennyj) : SPRAV.ljudi[0].id,
+        ...(polja.povtorjaetsja ? {} : { sprint: polja.sprint || sprint, god_sprinta: polja.god_sprinta || godSprinta }),
+      };
+      const novaja = await API.sozdat('zadachi', dannye);
+      O.toastCreatedTask(novaja,{posle:async()=>{document.dispatchEvent(new CustomEvent('locus:zadacha-izmenena',{detail:{nomer:novaja.nomer}}));location.reload();}});
+    });
+    document.body.dataset.gotovo = String(ZADACHI.length);
+  } catch (e) {
+    document.getElementById('spisok').innerHTML =
+      `<div class="pusto"><div class="pusto-z">Не получилось загрузить</div>
+       <div class="pusto-p">${e.message}</div></div>`;
+    document.body.dataset.oshibka = e.message;
+  }
+})();
+})();
+</script>
+</body></html>

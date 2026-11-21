@@ -1,0 +1,10 @@
+[Unit]
+Description=Locus manual measurement queue every five minutes
+
+[Timer]
+OnBootSec=2min
+OnUnitInactiveSec=5min
+Unit=locus-novyj-sobrat.service
+
+[Install]
+WantedBy=timers.target

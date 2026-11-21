@@ -1,0 +1,456 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Поиск</title>
+<link rel="icon" href="/api/favicon?v=L" type="image/svg+xml">
+<link rel="stylesheet" href="/css/obschij.css">
+</head><body>
+<div id="menju"></div>
+<div class="wrap"><div class="psk-str">
+  <h1 class="psk-zag">Поиск по Locus</h1>
+  <label class="psk-pole-o">
+    <svg class="psk-pole-l" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+      <circle cx="8" cy="8" r="5.2" stroke="currentColor" stroke-width="1.4"/>
+      <path d="M11.8 11.8 16 16" stroke="currentColor" stroke-width="1.4"
+        stroke-linecap="round"/>
+    </svg>
+    <input class="psk-pole" id="pole" autocomplete="off" autofocus
+      placeholder="имя, телефон, почта, домен, задача, файл">
+    <a class="psk-x" id="ochistit" title="очистить" hidden>✕</a>
+  </label>
+  <div id="tipy"></div>
+  <div id="vydacha"></div>
+</div></div>
+<script src="/js/nedeli.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/obschij.js"></script>
+<script src="/js/kalendar.js"></script>
+<script>
+(function () {
+'use strict';
+
+                                                                
+                                                                
+                                                             
+                                                                 
+const IZ_ADRESA = new URLSearchParams(location.search);
+let chto = IZ_ADRESA.get('chto') || IZ_ADRESA.get('q') || '';
+let tip = IZ_ADRESA.get('tip') || '';
+let v_arhive = IZ_ADRESA.get('arhiv') === '1';
+                                                                 
+                                     
+let raskryto = new Set();
+let vybran = -1;
+
+                                                         
+                                                         
+                                                             
+                                                          
+                                    
+let SVOE = { kontakty: [], materialy: [], lenta: [], napravlenija: [], ljudi: new Map() };
+let GRUZIM = false;
+
+                                                             
+                                                                
+                                    
+const TIPY = [
+  { kod: 'chelovek',    imja: 'люди',        mnogo: 'ЛЮДИ' },
+  { kod: 'zadacha',     imja: 'задачи',      mnogo: 'ЗАДАЧИ' },
+  { kod: 'proekt',      imja: 'проекты',     mnogo: 'ПРОЕКТЫ' },
+  { kod: 'fajl',        imja: 'файлы',       mnogo: 'ФАЙЛЫ' },
+  { kod: 'stranica',    imja: 'страницы',    mnogo: 'СТРАНИЦЫ' },
+  { kod: 'napravlenie', imja: 'направления', mnogo: 'НАПРАВЛЕНИЯ' },
+  { kod: 'cel',         imja: 'цели',        mnogo: 'ЦЕЛИ' },
+  { kod: 'razdel',      imja: 'разделы',     mnogo: 'РАЗДЕЛЫ' },
+];
+const NA_GRUPPU = 5;
+
+                                                                 
+                                                             
+                                              
+const norma = (s) => String(s || '').toLowerCase().replace(/ё/g, 'е').trim();
+
+                                                                
+                                                               
+                                                            
+const cifry = (s) => String(s || '').replace(/\D+/g, '');
+
+                                                            
+                                                               
+function ekran(s) {
+  return String(s || '').replace(/[&<>"]/g, (c) =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+}
+function podsvetit(tekst, zapros) {
+  const t = String(tekst || '');
+  const n = norma(zapros);
+  if (!n) return ekran(t);
+  const i = norma(t).indexOf(n);
+  if (i < 0) return ekran(t);
+  return ekran(t.slice(0, i)) + '<mark>' + ekran(t.slice(i, i + n.length)) +
+         '</mark>' + ekran(t.slice(i + n.length));
+}
+
+async function zagruzit_svoe() {
+  if (GRUZIM || SVOE.napravlenija.length) return;
+  GRUZIM = true;
+  try {
+    const [k, m, l, n, lj] = await Promise.all([
+      API.spisok('kontakty', { na_stranice: 500 }).catch(() => ({ spisok: [] })),
+      API.spisok('materialy', { na_stranice: 500 }).catch(() => ({ spisok: [] })),
+      API.spisok('lenta', { na_stranice: 500 }).catch(() => ({ spisok: [] })),
+      API.spisok('napravlenija', {}).catch(() => ({ spisok: [] })),
+      API.spisok('ljudi', { na_stranice: 1000 }).catch(() => ({ spisok: [] })),
+    ]);
+    SVOE.kontakty = k.spisok || [];
+    SVOE.materialy = m.spisok || [];
+    SVOE.lenta = l.spisok || [];
+    SVOE.napravlenija = (n.spisok || []).filter((x) => !x.arhiv);
+    SVOE.ljudi = new Map((lj.spisok || []).map((x) => [x.id, x]));
+  } catch {                                                            }
+  GRUZIM = false;
+}
+
+                                                              
+                                
+function imja_napr(kod) {
+  const n = SVOE.napravlenija.find((x) => x.kod === kod);
+  if (n) return (n.nazvanie || kod).split(/[,(]/)[0].trim();
+  const iz_spravochnika = O.naprPoKodu(kod);
+  return (iz_spravochnika && iz_spravochnika.imja) || kod || '';
+}
+const STATUSY = { v_plane: 'в плане', v_processe: 'в процессе',
+  na_soglasovanii: 'на согласовании', sdelano: 'сделано',
+  kogda_nibud: 'когда-нибудь' };
+
+                                                                    
+async function s_servera(zapros) {
+  try {
+    const o = await API.ekran('poisk', { chto: zapros, skolko: 50 });
+    return (o.najdeno || []).map((x) => ({
+      tip: x.chto === 'chelovek' ? 'chelovek' : x.chto,
+      imja: x.imja,
+      adres: perevesti_adres(x),
+      pod: x.chto === 'zadacha'
+        ? [imja_napr(x.napravlenie), STATUSY[x.status] || x.status]
+            .filter(Boolean).join(', ')
+        : (x.napravlenie ? imja_napr(x.napravlenie) : ''),
+      tochno: x.tochno,
+    }));
+  } catch { return []; }
+}
+
+                                                                  
+                                                            
+                                                            
+                                   
+function perevesti_adres(x) {
+  if (x.chto === 'chelovek') return `/klient.html?id=${x.id}`;
+  if (x.chto === 'zadacha') return `/zadachi.html?nomer=${x.id}`;
+  if (x.chto === 'proekt') return `/proekt.html?id=${x.id}`;
+  if (x.chto === 'cel') return `/okr.html?cel=${x.id}`;
+  return x.adres || '/prostranstvo.html';
+}
+
+                                                              
+                                                     
+function na_meste(zapros) {
+  const n = norma(zapros);
+  const c = cifry(zapros);
+  const najdeno = [];
+
+                                                                
+                                                          
+  const po_kontaktu = new Map();
+  SVOE.kontakty.forEach((k) => {
+    const zn = String(k.znachenie || '');
+    const znn = String(k.znachenie_norm || zn);
+                                                                    
+    const po_cifram = c.length >= 3 && cifry(znn).includes(c);
+    const po_tekstu = n.length >= 2 && (norma(zn).includes(n) || norma(znn).includes(n));
+    if (!po_cifram && !po_tekstu) return;
+    const chel = SVOE.ljudi.get(k.chelovek_id);
+    if (!chel) return;
+                                                                 
+    if (po_kontaktu.has(chel.id)) return;
+    po_kontaktu.set(chel.id, true);
+    najdeno.push({
+      tip: 'chelovek', imja: chel.imja,
+      adres: `/klient.html?id=${chel.id}`,
+                                                                  
+      pod_syroe: zn, pod_podsvet: true,
+      pod: zn,
+      tochno: norma(zn) === n || cifry(znn) === c,
+    });
+  });
+
+                                              
+  if (n.length >= 2) {
+    SVOE.materialy.forEach((m) => {
+      const fajl = String(m.fajl || m.ssylka || '');
+      const hvost = fajl.split('/').pop() || '';
+      const sovpalo = norma(m.nazvanie).includes(n) || norma(hvost).includes(n);
+      if (!sovpalo) return;
+      najdeno.push({
+        tip: 'fajl',
+        imja: norma(hvost).includes(n) && hvost ? hvost : m.nazvanie,
+        adres: m.ssylka || m.fajl || (m.proekt_id ? `/proekt.html?id=${m.proekt_id}` : '#'),
+        pod: [imja_napr(m.napravlenie), hvost && hvost !== m.nazvanie ? m.nazvanie : '']
+          .filter(Boolean).join(', '),
+        tochno: norma(hvost) === n || norma(m.nazvanie) === n,
+      });
+    });
+
+                                                 
+    SVOE.lenta.forEach((z) => {
+      if (!norma(z.tekst).includes(n)) return;
+      najdeno.push({
+        tip: 'stranica',
+        imja: String(z.tekst || '').slice(0, 90),
+        adres: `/poleznoe.html#z-${z.id}`,
+        pod: [imja_napr(z.napravlenie), 'Полезное'].filter(Boolean).join(', '),
+        tochno: false,
+      });
+    });
+
+                                                            
+    SVOE.napravlenija.forEach((x) => {
+      if (!norma(x.nazvanie).includes(n) && !norma(x.kod).includes(n)) return;
+      najdeno.push({
+        tip: 'napravlenie', imja: (x.nazvanie || x.kod).split(/[,(]/)[0].trim(),
+        adres: `/napravlenija.html?napravlenie=${x.kod}`,
+        pod: 'направление',
+        tochno: norma(x.nazvanie) === n || norma(x.kod) === n,
+      });
+    });
+
+                                                                 
+                           
+    [['Пространство', '/prostranstvo.html'], ['Задачи', '/zadachi.html'],
+     ['ОКР', '/okr.html'], ['Планёрка', '/planerka.html'], ['Люди', '/ljudi.html'],
+     ['Направления', '/napravlenija.html'], ['Полезное', '/poleznoe.html'],
+     ['Кабинет', '/kabinet.html'], ['Рассылки', '/rassylka.html']]
+      .forEach(([imja, adres]) => {
+        if (!norma(imja).includes(n)) return;
+        najdeno.push({ tip: 'razdel', imja, adres, pod: 'раздел Locus',
+          tochno: norma(imja) === n });
+      });
+  }
+
+  return najdeno;
+}
+
+let tajmer = null;
+async function iskat() {
+  const uzel = document.getElementById('vydacha');
+  const zapros = chto.trim();
+  v_adres();
+  document.getElementById('ochistit').hidden = !zapros;
+
+  if (zapros.length < 2) {
+    tipy_rjad(null);
+    uzel.innerHTML = `<div class="psk-podsk">
+      Ищет людей по имени, телефону, почте и домену, задачи по названию,
+      проекты, файлы, страницы Полезного и направления<br>
+      Стрелки <b>↑ ↓</b> ходят по списку, <b>Enter</b> открывает,
+      <b>Esc</b> очищает
+    </div>`;
+    return;
+  }
+
+  await zagruzit_svoe();
+                                                            
+                                                       
+  if (chto.trim() !== zapros) return;
+
+  const [ot_servera] = await Promise.all([s_servera(zapros)]);
+  if (chto.trim() !== zapros) return;
+  const svoi = na_meste(zapros);
+
+                                                              
+                                                                
+  const vse = [];
+  const vidno = new Set();
+  ot_servera.concat(svoi).forEach((r) => {
+    const kljuch = r.tip + '|' + r.adres;
+    if (vidno.has(kljuch)) return;
+    vidno.add(kljuch);
+    vse.push(r);
+  });
+
+  narisovat(vse, zapros);
+}
+
+function tipy_rjad(po_tipam) {
+  const uzel = document.getElementById('tipy');
+  if (!po_tipam) {
+                                                                 
+    uzel.innerHTML = `<div class="psk-tipy">
+      <span class="psk-tipy-im">ищет</span>
+      ${TIPY.filter((t) => t.kod !== 'razdel')
+        .map((t) => `<span class="psk-tip">${t.imja}</span>`).join('')}
+    </div>`;
+    return;
+  }
+  const est = TIPY.filter((t) => (po_tipam[t.kod] || []).length);
+  if (!est.length) { uzel.innerHTML = ''; return; }
+  const vsego = Object.values(po_tipam).reduce((a, b) => a + b.length, 0);
+  uzel.innerHTML = `<div class="psk-tipy">
+    <a class="psk-tip${tip ? '' : ' on'}" data-tip="">всё<span class="psk-tip-n">${
+      vsego}</span></a>
+    ${est.map((t) => `<a class="psk-tip${tip === t.kod ? ' on' : ''}" data-tip="${t.kod}">${
+      t.imja}<span class="psk-tip-n">${po_tipam[t.kod].length}</span></a>`).join('')}
+  </div>`;
+  uzel.querySelectorAll('[data-tip]').forEach((e) =>
+    e.addEventListener('click', () => {
+      tip = e.dataset.tip === tip ? '' : e.dataset.tip;
+      raskryto = new Set(); vybran = -1;
+      iskat();
+    }));
+}
+
+function narisovat(vse, zapros) {
+  const uzel = document.getElementById('vydacha');
+
+                                                                
+                               
+  const po_tipam = {};
+  vse.forEach((r) => { (po_tipam[r.tip] = po_tipam[r.tip] || []).push(r); });
+  Object.values(po_tipam).forEach((g) =>
+    g.sort((a, b) => (b.tochno ? 1 : 0) - (a.tochno ? 1 : 0)));
+
+  tipy_rjad(po_tipam);
+
+  const gruppy = TIPY.filter((t) => (po_tipam[t.kod] || []).length)
+    .filter((t) => !tip || t.kod === tip);
+
+  if (!gruppy.length) {
+    uzel.innerHTML = `<div class="psk-pusto">
+      <div class="psk-pusto-z">Ничего не нашлось по запросу ${ekran(zapros)}</div>
+      <div class="psk-pusto-p">${v_arhive
+        ? 'в архиве тоже пусто'
+        : 'чаще всего искомое именно там'}</div>
+      ${v_arhive ? '' : '<a class="kn" id="v-arhiv">Искать в архиве</a>'}
+    </div>`;
+    document.getElementById('v-arhiv')?.addEventListener('click', async () => {
+      v_arhive = true;
+                                                            
+                                                        
+      try {
+        const o = await API.spisok('ljudi', { poisk: zapros, arhiv: 1, na_stranice: 50 });
+        const najdeno = (o.spisok || []).map((l) => ({
+          tip: 'chelovek', imja: l.imja, adres: `/klient.html?id=${l.id}`,
+          pod: 'в архиве', tochno: norma(l.imja) === norma(zapros),
+        }));
+        if (!najdeno.length) { narisovat([], zapros); return; }
+        narisovat(najdeno, zapros);
+      } catch (e) { O.tost('Не получилось: ' + e.message); }
+    });
+    return;
+  }
+
+                                                   
+  let nomer = 0;
+  uzel.innerHTML = '<div class="psk-vyd">' + gruppy.map((t) => {
+    const g = po_tipam[t.kod];
+    const vse_vidny = raskryto.has(t.kod) || g.length <= NA_GRUPPU;
+    const vidimye = vse_vidny ? g : g.slice(0, NA_GRUPPU);
+    return `<div class="psk-gr">
+      <div class="psk-gr-sh">
+        <span class="psk-gr-im">${t.mnogo}</span>
+        <span class="psk-gr-n">${g.length}</span>
+        ${vse_vidny ? '' :
+          `<a class="psk-gr-esche" data-esche="${t.kod}">ещё ${g.length - NA_GRUPPU}</a>`}
+      </div>
+      ${vidimye.map((r) => `<a class="psk-s" href="${r.adres}" data-n="${nomer++}">
+        <span class="psk-s-im">${podsvetit(r.imja, zapros)}</span>
+        ${r.pod ? `<span class="psk-s-pod">${
+          r.pod_podsvet ? podsvetit(r.pod, zapros) : ekran(r.pod)}</span>` : ''}
+      </a>`).join('')}
+    </div>`;
+  }).join('') + '</div>';
+
+  uzel.querySelectorAll('[data-esche]').forEach((e) =>
+    e.addEventListener('click', (ev) => {
+      ev.preventDefault();
+      raskryto.add(e.dataset.esche);
+      narisovat(vse, zapros);
+    }));
+
+                                                              
+  if (vybran < 0) vybran = 0;
+  otmetit();
+}
+
+function otmetit() {
+  const stroki = [...document.querySelectorAll('.psk-s')];
+  stroki.forEach((e, i) => e.classList.toggle('vybran', i === vybran));
+  const e = stroki[vybran];
+  if (e) e.scrollIntoView({ block: 'nearest' });
+}
+
+function v_adres() {
+  const p = new URLSearchParams();
+  if (chto.trim()) p.set('chto', chto.trim());
+  if (tip) p.set('tip', tip);
+  if (v_arhive) p.set('arhiv', '1');
+  const s = p.toString();
+  history.replaceState(null, '', s ? '?' + s : location.pathname);
+}
+
+(async function start() {
+  const SPRAV = await SPR.zagruzit();
+  window.DANNYE = { napravlenija: SPRAV.napravlenija, ljudi: SPRAV.ljudi,
+                    statusy: SPRAV.statusy, tipy: SPRAV.tipy, zadachi: [] };
+                                                               
+                                                  
+  document.getElementById('menju').innerHTML = O.menju('Поиск', {});
+  O.vkljuchitSkvoznoe();
+
+  const pole = document.getElementById('pole');
+  pole.value = chto;
+                                                                 
+  setTimeout(() => {
+    pole.focus();
+    pole.setSelectionRange(pole.value.length, pole.value.length);
+  }, 40);
+
+  pole.addEventListener('input', () => {
+    clearTimeout(tajmer);
+    chto = pole.value;
+    raskryto = new Set(); vybran = -1; v_arhive = false;
+                                                             
+                                      
+    tajmer = setTimeout(iskat, 240);
+  });
+
+  document.getElementById('ochistit').addEventListener('click', () => {
+    pole.value = ''; chto = ''; tip = ''; v_arhive = false;
+    raskryto = new Set(); vybran = -1;
+    iskat(); pole.focus();
+  });
+
+                                                            
+  document.addEventListener('keydown', (e) => {
+    const stroki = [...document.querySelectorAll('.psk-s')];
+    if (e.key === 'ArrowDown' && stroki.length) {
+      e.preventDefault(); vybran = Math.min(vybran + 1, stroki.length - 1); otmetit();
+    } else if (e.key === 'ArrowUp' && stroki.length) {
+      e.preventDefault(); vybran = Math.max(vybran - 1, 0); otmetit();
+    } else if (e.key === 'Enter' && stroki[vybran]) {
+      e.preventDefault(); location.href = stroki[vybran].getAttribute('href');
+    } else if (e.key === 'Escape') {
+                                                              
+                                                    
+      if (pole.value) {
+        e.preventDefault();
+        pole.value = ''; chto = ''; tip = ''; v_arhive = false;
+        raskryto = new Set(); vybran = -1; iskat(); pole.focus();
+      }
+    }
+  });
+
+  await iskat();
+  document.body.dataset.gotovo = '1';
+})();
+})();
+</script>
+</body></html>

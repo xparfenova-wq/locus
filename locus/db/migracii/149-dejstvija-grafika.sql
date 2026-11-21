@@ -1,0 +1,26 @@
+                                                                               
+CREATE TABLE IF NOT EXISTS dejstvija_grafika (
+ avtor INTEGER NOT NULL REFERENCES ljudi(id) ON DELETE CASCADE,
+ kljuch_hesh TEXT NOT NULL,
+ chelovek_id INTEGER NOT NULL,
+ god INTEGER NOT NULL,
+ nedelja INTEGER NOT NULL,
+ dejstvie TEXT NOT NULL,
+ roditel_kljuch_hesh TEXT,
+ zapros_hesh TEXT,
+ sohraneno INTEGER NOT NULL DEFAULT 0,
+ kontekst_vladelca TEXT,
+ server_dejstvie TEXT,
+ obratno_json TEXT,
+ rezultat_json TEXT,
+ sozdano TEXT NOT NULL,
+ PRIMARY KEY(avtor,kljuch_hesh),
+ CHECK (length(kljuch_hesh)=64 AND kljuch_hesh NOT GLOB '*[^0-9a-f]*'),
+ CHECK (typeof(chelovek_id)='integer' AND chelovek_id>0),
+ CHECK (typeof(god)='integer' AND god BETWEEN 1900 AND 9999),
+ CHECK (typeof(nedelja)='integer' AND nedelja BETWEEN 1 AND 53),
+ CHECK (dejstvie IN('sohranit','kopirovat','otmenit')),
+ CHECK (sohraneno IN(0,1)),
+ CHECK (roditel_kljuch_hesh IS NULL OR (dejstvie='otmenit' AND length(roditel_kljuch_hesh)=64 AND roditel_kljuch_hesh NOT GLOB '*[^0-9a-f]*')),
+ CHECK ((sohraneno=0 AND dejstvie='otmenit' AND zapros_hesh IS NULL AND obratno_json IS NULL AND rezultat_json IS NULL AND kontekst_vladelca IS NULL AND server_dejstvie IS NULL) OR (sohraneno=1 AND server_dejstvie IS NOT NULL AND length(server_dejstvie)=36 AND rezultat_json IS NOT NULL AND json_valid(rezultat_json) AND ((dejstvie IN('sohranit','kopirovat') AND roditel_kljuch_hesh IS NULL AND kontekst_vladelca IS NOT NULL AND length(kontekst_vladelca)=64 AND obratno_json IS NOT NULL AND json_valid(obratno_json)) OR (dejstvie='otmenit' AND roditel_kljuch_hesh IS NOT NULL AND zapros_hesh IS NOT NULL AND length(zapros_hesh)=64 AND zapros_hesh NOT GLOB '*[^0-9a-f]*' AND obratno_json IS NULL))))
+);

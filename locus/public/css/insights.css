@@ -1,0 +1,10 @@
+.insights-row{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--space-1);padding:var(--space-2) var(--space-0);border-bottom:var(--border-width) solid var(--lin)}
+.insights .insights-link{display:flex;align-items:start;gap:var(--space-2);min-width:var(--space-0);min-height:var(--control-height-mobile);padding:var(--space-0);color:var(--t1);text-decoration:none;font-size:var(--text-body);line-height:var(--line-body)}
+.insights .ins-t{white-space:normal;overflow-wrap:anywhere;overflow:visible;min-width:var(--space-0)}
+.insights .ks{flex-shrink:0;color:var(--t3);font-size:var(--text-meta)}
+.insights-actions{display:flex;flex-wrap:wrap;gap:var(--space-1)}
+.insights .kn{min-height:var(--control-height-mobile);font-size:var(--text-meta);white-space:normal}
+.insights-note{margin:var(--space-0);font-size:var(--text-meta);line-height:var(--line-body);color:var(--t2);overflow-wrap:anywhere}
+.insights-title{display:flex;align-items:center;font-size:var(--text-meta);color:var(--t2);margin-bottom:var(--space-2)}
+.insights-title .n{color:var(--t3)}
+.insights>[data-insights-more]{margin-top:var(--space-2)}

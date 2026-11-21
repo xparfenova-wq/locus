@@ -1,0 +1,121 @@
+                                      
+                                                         
+
+                                                        
+                                                       
+                                                               
+
+.znak {
+  display: inline-block;
+  line-height: 0;
+}
+
+                                           
+.znak-setka line {
+  stroke: var(--n4);
+  stroke-width: 1;
+}
+
+                         
+.znak-svjaz {
+  fill: none;
+  stroke: var(--n12);
+  stroke-width: 1.5;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+}
+
+                                          
+.znak-tochka { stroke: none; }
+
+                                                    
+
+                                             
+@keyframes znak-tochka-poyavilas {
+  from { opacity: 0; transform: scale(.4); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+                                                          
+@keyframes znak-linija-rastjot {
+  from { stroke-dashoffset: var(--dlina); }
+  to   { stroke-dashoffset: 0; }
+}
+
+                                             
+@keyframes znak-sobralos {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.02); }
+}
+
+.znak-ozhivaet .znak-tochka {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: znak-tochka-poyavilas .32s ease-out forwards;
+}
+.znak-ozhivaet .znak-tochka:nth-of-type(1) { animation-delay: .00s; }
+.znak-ozhivaet .znak-tochka:nth-of-type(2) { animation-delay: .07s; }
+.znak-ozhivaet .znak-tochka:nth-of-type(3) { animation-delay: .14s; }
+.znak-ozhivaet .znak-tochka:nth-of-type(4) { animation-delay: .21s; }
+.znak-ozhivaet .znak-tochka:nth-of-type(5) { animation-delay: .28s; }
+.znak-ozhivaet .znak-tochka:nth-of-type(6) { animation-delay: .35s; }
+
+.znak-ozhivaet .znak-svjaz {
+  stroke-dasharray: var(--dlina);
+  stroke-dashoffset: var(--dlina);
+  animation: znak-linija-rastjot .7s ease-in-out .42s forwards;
+}
+
+.znak-ozhivaet.znak-sobran {
+  animation: znak-sobralos .3s ease-in-out 1.14s;
+}
+
+                                                                        
+@media (prefers-reduced-motion: reduce) {
+  .znak-ozhivaet .znak-tochka,
+  .znak-ozhivaet .znak-svjaz,
+  .znak-ozhivaet.znak-sobran {
+    animation: none;
+    opacity: 1;
+    stroke-dashoffset: 0;
+    transform: none;
+  }
+}
+
+                                           
+
+                                                                 
+.v-kletka {
+  background-image:
+    linear-gradient(to right, var(--n4) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--n4) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.v-kletka-tiho {
+  background-image:
+    linear-gradient(to right, var(--n3) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--n3) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+                                                
+.v-tochka {
+  display: inline-block;
+  width: 10px; height: 10px; border-radius: 50%;
+  flex: 0 0 auto;
+}
+
+                                                                      
+.v-svjaz-stroka { position: relative; padding-left: var(--s5); }
+.v-svjaz-stroka::before {
+  content: ''; position: absolute;
+  left: 9px; top: 0; bottom: 50%;
+  border-left: 1.5px solid var(--n4);
+}
+.v-svjaz-stroka::after {
+  content: ''; position: absolute;
+  left: 9px; top: 50%; width: 10px;
+  border-top: 1.5px solid var(--n4);
+}
+.v-svjaz-stroka:last-child::before { bottom: 50%; }

@@ -1,0 +1,795 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Варианты компонентов</title>
+<link rel="icon" href="/api/favicon?v=L" type="image/svg+xml">
+<link rel="stylesheet" href="/css/tokens.css">
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/components.css">
+<link rel="stylesheet" href="/css/varianty.css">
+<style>
+  body { padding-bottom: var(--s8); }
+  .blok { margin-top: var(--s7); }
+  .blok > h2 { margin-bottom: var(--s2); }
+  .rjad { display: flex; align-items: center; gap: var(--s2); flex-wrap: wrap; }
+  .podpis { font-size: var(--t5); color: var(--n8); margin-bottom: var(--s4); }
+</style>
+</head>
+<body>
+
+<div class="shapka">
+  <div class="kolonka rjad" style="width:100%">
+    <strong style="font-size:var(--t3)">Locus</strong>
+    <span class="tihij" style="margin-left:var(--s4)">варианты компонентов</span>
+    <a class="razdel" href="/komponenty.html" style="margin-left:auto">принятые компоненты</a>
+  </div>
+</div>
+
+<div class="kolonka">
+
+<div class="blok">
+  <h1>Варианты компонентов</h1>
+  <p class="vtoroj tekst">По нескольку решений на каждый элемент. Выбирай букву, остальные уберу. Вариант А везде это то, что уже принято и работает на странице компонентов</p>
+</div>
+
+<div class="blok">
+  <h2>Строка задачи</h2>
+  <div class="podpis">четыре способа разделить строки в списке</div>
+  <div class="var-set">
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">А</span> линией снизу</div>
+      <div class="var-ramka">
+      <div class="stroka v-stroka-a">
+        <input class="galochka" type="checkbox"  aria-label="закрыть">
+        <span class="napr napr-synapt"></span>
+        <span class="stroka-nazvanie">Правки КП Технопродукту</span>
+        <span class="stroka-meta"><span class="plashka plashka-work">в процессе</span><span class="plashka plashka-late">просрочено</span></span>
+        <span class="stroka-data">20.10</span>
+        <span class="avatar">КП</span>
+        <span class="stroka-menju">···</span>
+      </div>
+      <div class="stroka v-stroka-a">
+        <input class="galochka" type="checkbox"  aria-label="закрыть">
+        <span class="napr napr-media"></span>
+        <span class="stroka-nazvanie">Созвон с Наумовой по стратегии</span>
+        <span class="stroka-meta"><span class="plashka plashka-plan">в плане</span></span>
+        <span class="stroka-data">23.10</span>
+        <span class="avatar">КП</span>
+        <span class="stroka-menju">···</span>
+      </div>
+      <div class="stroka v-stroka-a">
+        <input class="galochka" type="checkbox"  aria-label="закрыть">
+        <span class="napr napr-junior"></span>
+        <span class="stroka-nazvanie">Выгрузить контакты по школам</span>
+        <span class="stroka-meta"><span class="plashka plashka-done">сделано</span></span>
+        <span class="stroka-data">23.10</span>
+        <span class="avatar">НК</span>
+        <span class="stroka-menju">···</span>
+      </div>
+      </div>
+      <div class="var-pometka">как сейчас. Плотно, линия задаёт ритм</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">Б</span> без линий</div>
+      <div class="var-ramka">
+      <div class="stroka v-stroka-b">
+        <input class="galochka" type="checkbox"  aria-label="закрыть">
+        <span class="napr napr-synapt"></span>
+        <span class="stroka-nazvanie">Правки КП Технопродукту</span>
+        <span class="stroka-meta"><span class="plashka plashka-work">в процессе</span><span class="plashka plashka-late">просрочено</span></span>
+        <span class="stroka-data">20.10</span>
+        <span class="avatar">КП</span>
+        <span class="stroka-menju">···</span>
+      </div>
+      <div class="stroka v-stroka-b">
+        <input class="galochka" type="checkbox"  aria-label="закрыть">
+        <span class="napr napr-media"></span>
+        <span class="stroka-nazvanie">Созвон с Наумовой по стратегии</span>
+        <span class="stroka-meta"><span class="plashka plashka-plan">в плане</span></span>
+        <span class="stroka-data">23.10</span>
+        <span class="avatar">КП</span>
+        <span class="stroka-menju">···</span>
+      </div>
+      <div class="stroka v-stroka-b">
+        <input class="galochka" type="checkbox"  aria-label="закрыть">
+        <span class="napr napr-junior"></span>
+        <span class="stroka-nazvanie">Выгрузить контакты по школам</span>
+        <span class="stroka-meta"><span class="plashka plashka-done">сделано</span></span>
+        <span class="stroka-data">23.10</span>
+        <span class="avatar">НК</span>
+        <span class="stroka-menju">···</span>
+      </div>
+      </div>
+      <div class="var-pometka">тише всего, но при длинных названиях строки сливаются</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">В</span> карточками</div>
+      <div class="var-ramka">
+      <div class="stroka v-stroka-v">
+        <input class="galochka" type="checkbox"  aria-label="закрыть">
+        <span class="napr napr-synapt"></span>
+        <span class="stroka-nazvanie">Правки КП Технопродукту</span>
+        <span class="stroka-meta"><span class="plashka plashka-work">в процессе</span><span class="plashka plashka-late">просрочено</span></span>
+        <span class="stroka-data">20.10</span>
+        <span class="avatar">КП</span>
+        <span class="stroka-menju">···</span>
+      </div>
+      <div class="stroka v-stroka-v">
+        <input class="galochka" type="checkbox"  aria-label="закрыть">
+        <span class="napr napr-media"></span>
+        <span class="stroka-nazvanie">Созвон с Наумовой по стратегии</span>
+        <span class="stroka-meta"><span class="plashka plashka-plan">в плане</span></span>
+        <span class="stroka-data">23.10</span>
+        <span class="avatar">КП</span>
+        <span class="stroka-menju">···</span>
+      </div>
+      <div class="stroka v-stroka-v">
+        <input class="galochka" type="checkbox"  aria-label="закрыть">
+        <span class="napr napr-junior"></span>
+        <span class="stroka-nazvanie">Выгрузить контакты по школам</span>
+        <span class="stroka-meta"><span class="plashka plashka-done">сделано</span></span>
+        <span class="stroka-data">23.10</span>
+        <span class="avatar">НК</span>
+        <span class="stroka-menju">···</span>
+      </div>
+      </div>
+      <div class="var-pometka">каждая задача отдельной плашкой. Воздушнее, но в список влезает меньше</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">Г</span> зеброй</div>
+      <div class="var-ramka">
+      <div class="stroka v-stroka-g">
+        <input class="galochka" type="checkbox"  aria-label="закрыть">
+        <span class="napr napr-synapt"></span>
+        <span class="stroka-nazvanie">Правки КП Технопродукту</span>
+        <span class="stroka-meta"><span class="plashka plashka-work">в процессе</span><span class="plashka plashka-late">просрочено</span></span>
+        <span class="stroka-data">20.10</span>
+        <span class="avatar">КП</span>
+        <span class="stroka-menju">···</span>
+      </div>
+      <div class="stroka v-stroka-g">
+        <input class="galochka" type="checkbox"  aria-label="закрыть">
+        <span class="napr napr-media"></span>
+        <span class="stroka-nazvanie">Созвон с Наумовой по стратегии</span>
+        <span class="stroka-meta"><span class="plashka plashka-plan">в плане</span></span>
+        <span class="stroka-data">23.10</span>
+        <span class="avatar">КП</span>
+        <span class="stroka-menju">···</span>
+      </div>
+      <div class="stroka v-stroka-g">
+        <input class="galochka" type="checkbox"  aria-label="закрыть">
+        <span class="napr napr-junior"></span>
+        <span class="stroka-nazvanie">Выгрузить контакты по школам</span>
+        <span class="stroka-meta"><span class="plashka plashka-done">сделано</span></span>
+        <span class="stroka-data">23.10</span>
+        <span class="avatar">НК</span>
+        <span class="stroka-menju">···</span>
+      </div>
+      </div>
+      <div class="var-pometka">чётные подложкой. Хорошо сканируется вправо, но шумит</div>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <h2>Плашка статуса</h2>
+  <div class="podpis">как показывать статус в строке и карточке</div>
+  <div class="var-set">
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">А</span> залитая</div>
+      <div class="var-ramka">
+      <div class="rjad">
+        <span class="plashka plashka-plan ">в плане</span>
+        <span class="plashka plashka-work ">в процессе</span>
+        <span class="plashka plashka-review ">на согласовании</span>
+        <span class="plashka plashka-done ">сделано</span>
+        <span class="plashka plashka-late ">просрочено</span>
+      </div>
+      </div>
+      <div class="var-pometka">как сейчас. Читается издалека, но в строке с двумя плашками шумно</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">Б</span> точка и текст</div>
+      <div class="var-ramka">
+      <div class="rjad">
+        <span class="plashka plashka-plan v-plashka-b">в плане</span>
+        <span class="plashka plashka-work v-plashka-b">в процессе</span>
+        <span class="plashka plashka-review v-plashka-b">на согласовании</span>
+        <span class="plashka plashka-done v-plashka-b">сделано</span>
+        <span class="plashka plashka-late v-plashka-b">просрочено</span>
+      </div>
+      </div>
+      <div class="var-pometka">тише, занимает меньше места. Цвет несёт точка</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">В</span> контурная</div>
+      <div class="var-ramka">
+      <div class="rjad">
+        <span class="plashka plashka-plan v-plashka-v">в плане</span>
+        <span class="plashka plashka-work v-plashka-v">в процессе</span>
+        <span class="plashka plashka-review v-plashka-v">на согласовании</span>
+        <span class="plashka plashka-done v-plashka-v">сделано</span>
+        <span class="plashka plashka-late v-plashka-v">просрочено</span>
+      </div>
+      </div>
+      <div class="var-pometka">рамка цветом, фон белый. Тише залитой, заметнее точки</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">Г</span> просто текст</div>
+      <div class="var-ramka">
+      <div class="rjad">
+        <span class="plashka plashka-plan v-plashka-g">в плане</span>
+        <span class="plashka plashka-work v-plashka-g">в процессе</span>
+        <span class="plashka plashka-review v-plashka-g">на согласовании</span>
+        <span class="plashka plashka-done v-plashka-g">сделано</span>
+        <span class="plashka plashka-late v-plashka-g">просрочено</span>
+      </div>
+      </div>
+      <div class="var-pometka">самый тихий. Годится, когда статус не главное на экране</div>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <h2>Чипы фильтра</h2>
+  <div class="podpis">как показывать выбранный фильтр</div>
+  <div class="var-set">
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">А</span> рамка и светлая заливка</div>
+      <div class="var-ramka">
+      <div class="rjad ">
+        <button class="chip">все <span class="schetchik">24</span></button>
+        <button class="chip" aria-pressed="true">просроченные <span class="schetchik">3</span></button>
+        <button class="chip">на сегодня <span class="schetchik">7</span></button>
+        <button class="chip">участвую <span class="schetchik">4</span></button>
+      </div>
+      </div>
+      <div class="var-pometka">как сейчас. Акцент отвечает за «где я»</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">Б</span> сегментный переключатель</div>
+      <div class="var-ramka">
+      <div class="v-chipy-b">
+        <button class="chip">все <span class="schetchik">24</span></button>
+        <button class="chip" aria-pressed="true">просроченные <span class="schetchik">3</span></button>
+        <button class="chip">на сегодня <span class="schetchik">7</span></button>
+        <button class="chip">участвую <span class="schetchik">4</span></button>
+      </div>
+      </div>
+      <div class="var-pometka">общий контейнер, активный белым. Видно, что это один выбор из набора</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">В</span> подчёркиванием</div>
+      <div class="var-ramka">
+      <div class="rjad v-chipy-v">
+        <button class="chip">все <span class="schetchik">24</span></button>
+        <button class="chip" aria-pressed="true">просроченные <span class="schetchik">3</span></button>
+        <button class="chip">на сегодня <span class="schetchik">7</span></button>
+        <button class="chip">участвую <span class="schetchik">4</span></button>
+      </div>
+      </div>
+      <div class="var-pometka">как вкладки. Тише, но не видно, что можно выбрать несколько</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">Г</span> тёмный активный</div>
+      <div class="var-ramka">
+      <div class="rjad v-chipy-g">
+        <button class="chip">все <span class="schetchik">24</span></button>
+        <button class="chip" aria-pressed="true">просроченные <span class="schetchik">3</span></button>
+        <button class="chip">на сегодня <span class="schetchik">7</span></button>
+        <button class="chip">участвую <span class="schetchik">4</span></button>
+      </div>
+      </div>
+      <div class="var-pometka">чёрная заливка вместо акцента. Противоречит правилу «чёрный это действие»</div>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <h2>Плитка метрики</h2>
+  <div class="podpis">как подавать числа на дашборде</div>
+  <div class="var-set">
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">А</span> кикер сверху</div>
+      <div class="var-ramka">
+      <div class="bento">
+        <div class="plitka w3 ">
+        <div class="kiker">задач на сегодня</div>
+        <div class="plitka-chislo">7</div>
+        <div class="plitka-delta">из них 3 просрочены</div>
+        </div>
+        <div class="plitka w3 ">
+          <div class="kiker">закрыто за неделю</div>
+          <div class="plitka-chislo">24</div>
+          <div class="plitka-delta plitka-delta-rost">+6 к прошлой</div>
+        </div>
+        <div class="plitka w3 ">
+          <div class="kiker">давно не общались</div>
+          <div class="plitka-chislo">6</div>
+          <div class="plitka-delta">больше 14 дней</div>
+        </div>
+      </div>
+      </div>
+      <div class="var-pometka">как сейчас. Сначала о чём число, потом число</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">Б</span> число сверху</div>
+      <div class="var-ramka">
+      <div class="bento">
+        <div class="plitka w3 v-plitka-b">
+        <div class="kiker">задач на сегодня</div>
+        <div class="plitka-chislo">7</div>
+        <div class="plitka-delta">из них 3 просрочены</div>
+        </div>
+        <div class="plitka w3 v-plitka-b">
+          <div class="kiker">закрыто за неделю</div>
+          <div class="plitka-chislo">24</div>
+          <div class="plitka-delta plitka-delta-rost">+6 к прошлой</div>
+        </div>
+        <div class="plitka w3 v-plitka-b">
+          <div class="kiker">давно не общались</div>
+          <div class="plitka-chislo">6</div>
+          <div class="plitka-delta">больше 14 дней</div>
+        </div>
+      </div>
+      </div>
+      <div class="var-pometka">сначала цифра, подпись под ней. Быстрее сканируется ряд</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">В</span> без рамки</div>
+      <div class="var-ramka">
+      <div class="bento">
+        <div class="plitka w3 v-plitka-v">
+        <div class="kiker">задач на сегодня</div>
+        <div class="plitka-chislo">7</div>
+        <div class="plitka-delta">из них 3 просрочены</div>
+        </div>
+        <div class="plitka w3 v-plitka-v">
+          <div class="kiker">закрыто за неделю</div>
+          <div class="plitka-chislo">24</div>
+          <div class="plitka-delta plitka-delta-rost">+6 к прошлой</div>
+        </div>
+        <div class="plitka w3 v-plitka-v">
+          <div class="kiker">давно не общались</div>
+          <div class="plitka-chislo">6</div>
+          <div class="plitka-delta">больше 14 дней</div>
+        </div>
+      </div>
+      </div>
+      <div class="var-pometka">заливка вместо рамки. Спокойнее, но плитки хуже отделяются</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">Г</span> с полосой прогресса</div>
+      <div class="var-ramka">
+      <div class="bento">
+        <div class="plitka w3 v-plitka-g">
+        <div class="kiker">план недели</div>
+        <div class="plitka-chislo">18 из 24</div>
+        <div class="v-progress"><i style="width:75%"></i></div>
+        </div>
+        <div class="plitka w3 v-plitka-g">
+          <div class="kiker">закрыто за неделю</div>
+          <div class="plitka-chislo">24</div>
+          <div class="plitka-delta plitka-delta-rost">+6 к прошлой</div>
+        </div>
+        <div class="plitka w3 v-plitka-g">
+          <div class="kiker">давно не общались</div>
+          <div class="plitka-chislo">6</div>
+          <div class="plitka-delta">больше 14 дней</div>
+        </div>
+      </div>
+      </div>
+      <div class="var-pometka">годится, где есть план и факт</div>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <h2>Аватар</h2>
+  <div class="podpis">как показывать человека в строке</div>
+  <div class="var-set">
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">А</span> серый круг</div>
+      <div class="var-ramka">
+      <div class="rjad">
+        <span class="avatar ">КП</span>
+        <span class="avatar ">НК</span>
+        <span class="avatar ">ВМ</span>
+        <span class="avatar ">ЕГ</span>
+      </div>
+      </div>
+      <div class="var-pometka">как сейчас. Нейтрально, не спорит со статусами</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">Б</span> цветной круг</div>
+      <div class="var-ramka">
+      <div class="rjad">
+        <span class="avatar v-avatar-b">КП</span>
+        <span class="avatar v-avatar-b">НК</span>
+        <span class="avatar v-avatar-b">ВМ</span>
+        <span class="avatar v-avatar-b">ЕГ</span>
+      </div>
+      </div>
+      <div class="var-pometka">цвет закреплён за человеком. Быстрее узнаётся, но добавляет цвета на экран</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">В</span> квадрат</div>
+      <div class="var-ramka">
+      <div class="rjad">
+        <span class="avatar v-avatar-v">КП</span>
+        <span class="avatar v-avatar-v">НК</span>
+        <span class="avatar v-avatar-v">ВМ</span>
+        <span class="avatar v-avatar-v">ЕГ</span>
+      </div>
+      </div>
+      <div class="var-pometka">перекликается с метками направлений. Круг остался бы только у фото</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">Г</span> только буквы</div>
+      <div class="var-ramka">
+      <div class="rjad">
+        <span class="avatar v-avatar-g">КП</span>
+        <span class="avatar v-avatar-g">НК</span>
+        <span class="avatar v-avatar-g">ВМ</span>
+        <span class="avatar v-avatar-g">ЕГ</span>
+      </div>
+      </div>
+      <div class="var-pometka">самый тихий. На списке из 40 строк не рябит</div>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <h2>Пустое состояние</h2>
+  <div class="podpis">что показывать, когда данных нет</div>
+  <div class="var-set">
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">А</span> заголовок и подсказка</div>
+      <div class="var-ramka">
+      <div class="pusto">
+        <div class="pusto-zagolovok">На сегодня задач нет</div>
+        <div>Можно посмотреть просроченные или взять из следующего спринта</div>
+      </div>
+      </div>
+      <div class="var-pometka">как сейчас</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">Б</span> со знаком</div>
+      <div class="var-ramka">
+      <div class="pusto v-pusto-b">
+        <div class="v-znak">✓</div>
+        <div class="pusto-zagolovok">На сегодня задач нет</div>
+        <div>Всё закрыто</div>
+      </div>
+      </div>
+      <div class="var-pometka">знак задаёт настроение: галочка это «всё хорошо», а не «пусто»</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">В</span> слева и компактно</div>
+      <div class="var-ramka">
+      <div class="pusto v-pusto-v">
+        <div class="pusto-zagolovok">Ничего не нашлось</div>
+        <div>Попробуй снять фильтр «просроченные»</div>
+      </div>
+      </div>
+      <div class="var-pometka">для пустого результата фильтра: не событие, просто сообщение</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">Г</span> скелетон</div>
+      <div class="var-ramka">
+      <div class="v-skelet">
+        <i></i><i></i><i></i>
+      </div>
+      </div>
+      <div class="var-pometka">пока данные грузятся. Показывает форму будущего содержимого</div>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <h2>Тост</h2>
+  <div class="podpis">как сообщать о том, что произошло</div>
+  <div class="var-set">
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">А</span> тёмный</div>
+      <div class="var-ramka">
+      <div class="tost ">
+        Семёнов вернулся из архива: появилась задача 8088
+        <button class="knopka knopka-tihaja">Отменить</button>
+      </div>
+      </div>
+      <div class="var-pometka">как сейчас. Заметен на любом фоне</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">Б</span> светлый с рамкой</div>
+      <div class="var-ramka">
+      <div class="tost v-tost-b">
+        Семёнов вернулся из архива: появилась задача 8088
+        <button class="knopka knopka-tihaja">Отменить</button>
+      </div>
+      </div>
+      <div class="var-pometka">тише, не перетягивает внимание с работы</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">В</span> со знаком слева</div>
+      <div class="var-ramka">
+      <div class="tost v-tost-v">
+        Семёнов вернулся из архива: появилась задача 8088
+        <button class="knopka knopka-tihaja">Отменить</button>
+      </div>
+      </div>
+      <div class="var-pometka">квадрат цветом показывает характер события</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">Г</span> с таймером</div>
+      <div class="var-ramka">
+      <div class="tost v-tost-g">
+        Семёнов вернулся из архива: появилась задача 8088
+        <button class="knopka knopka-tihaja">Отменить</button>
+      </div>
+      </div>
+      <div class="var-pometka">полоса снизу показывает, сколько тост ещё провисит</div>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <h2>Карточка</h2>
+  <div class="podpis">как отделять карточку от фона</div>
+  <div class="var-set">
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">А</span> рамка</div>
+      <div class="var-ramka">
+      <div class="kartochka ">
+        <h3>Правки КП Технопродукту</h3>
+        <p class="vtoroj" style="margin-top:var(--s3)">Тендерный агент, второй этап. Нужно учесть правки Газизова по срокам</p>
+      </div>
+      </div>
+      <div class="var-pometka">как сейчас. Чёткая граница, ничего лишнего</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">Б</span> без рамки</div>
+      <div class="var-ramka">
+      <div class="kartochka v-kart-b">
+        <h3>Правки КП Технопродукту</h3>
+        <p class="vtoroj" style="margin-top:var(--s3)">Тендерный агент, второй этап. Нужно учесть правки Газизова по срокам</p>
+      </div>
+      </div>
+      <div class="var-pometka">белое на сером. Спокойнее, граница мягче</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">В</span> с тенью</div>
+      <div class="var-ramka">
+      <div class="kartochka v-kart-v">
+        <h3>Правки КП Технопродукту</h3>
+        <p class="vtoroj" style="margin-top:var(--s3)">Тендерный агент, второй этап. Нужно учесть правки Газизова по срокам</p>
+      </div>
+      </div>
+      <div class="var-pometka">отделяется подъёмом. Противоречит правилу «теней нет, кроме всплывающего»</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">Г</span> с шапкой</div>
+      <div class="var-ramka">
+      <div class="kartochka v-kart-g">
+        <div class="v-shapka">задача 4827</div>
+        <div class="v-telo">
+          <h3>Правки КП Технопродукту</h3>
+          <p class="vtoroj" style="margin-top:var(--s3)">Тендерный агент, второй этап</p>
+        </div>
+      </div>
+      </div>
+      <div class="var-pometka">шапка несёт служебное: номер, тип, направление</div>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <h2>Таблица</h2>
+  <div class="podpis">как оформлять шапку и строки</div>
+  <div class="var-set">
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">А</span> шапка подложкой</div>
+      <div class="var-ramka">
+      <table class="tablica ">
+        <thead><tr><th>человек</th><th>направление</th><th>стадия</th><th class="chislo">без общения</th></tr></thead>
+        <tbody>
+          <tr><td>Наумова Света</td><td>Медиа</td><td><span class="plashka plashka-work">в работе</span></td><td class="chislo">0 дней</td></tr>
+          <tr><td>Технопродукт</td><td>Synapt</td><td><span class="plashka plashka-review">на согласовании</span></td><td class="chislo">31 день</td></tr>
+          <tr><td>Семакин Игорь</td><td>Synapt</td><td><span class="plashka plashka-plan">не писали</span></td><td class="chislo">никогда</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="var-pometka">как сейчас. Шапка явно отделена</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">Б</span> шапка линией</div>
+      <div class="var-ramka">
+      <table class="tablica v-tabl-b">
+        <thead><tr><th>человек</th><th>направление</th><th>стадия</th><th class="chislo">без общения</th></tr></thead>
+        <tbody>
+          <tr><td>Наумова Света</td><td>Медиа</td><td><span class="plashka plashka-work">в работе</span></td><td class="chislo">0 дней</td></tr>
+          <tr><td>Технопродукт</td><td>Synapt</td><td><span class="plashka plashka-review">на согласовании</span></td><td class="chislo">31 день</td></tr>
+          <tr><td>Семакин Игорь</td><td>Synapt</td><td><span class="plashka plashka-plan">не писали</span></td><td class="chislo">никогда</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="var-pometka">тише, больше воздуха сверху</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">В</span> без линий</div>
+      <div class="var-ramka">
+      <table class="tablica v-tabl-v">
+        <thead><tr><th>человек</th><th>направление</th><th>стадия</th><th class="chislo">без общения</th></tr></thead>
+        <tbody>
+          <tr><td>Наумова Света</td><td>Медиа</td><td><span class="plashka plashka-work">в работе</span></td><td class="chislo">0 дней</td></tr>
+          <tr><td>Технопродукт</td><td>Synapt</td><td><span class="plashka plashka-review">на согласовании</span></td><td class="chislo">31 день</td></tr>
+          <tr><td>Семакин Игорь</td><td>Synapt</td><td><span class="plashka plashka-plan">не писали</span></td><td class="chislo">никогда</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="var-pometka">самая тихая. Работает, когда строк немного</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">Г</span> зебра</div>
+      <div class="var-ramka">
+      <table class="tablica v-tabl-g">
+        <thead><tr><th>человек</th><th>направление</th><th>стадия</th><th class="chislo">без общения</th></tr></thead>
+        <tbody>
+          <tr><td>Наумова Света</td><td>Медиа</td><td><span class="plashka plashka-work">в работе</span></td><td class="chislo">0 дней</td></tr>
+          <tr><td>Технопродукт</td><td>Synapt</td><td><span class="plashka plashka-review">на согласовании</span></td><td class="chislo">31 день</td></tr>
+          <tr><td>Семакин Игорь</td><td>Synapt</td><td><span class="plashka plashka-plan">не писали</span></td><td class="chislo">никогда</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="var-pometka">легко вести глазом вправо на широкой таблице</div>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <h2>Прогресс</h2>
+  <div class="podpis">пять способов показать, сколько сделано. Из третьей волны референсов</div>
+  <div class="var-set">
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">А</span> полоса с процентом слева</div>
+      <div class="var-ramka">
+        <div class="v-prog-a"><span class="v-chislo">40%</span><span class="v-polosa"><i style="width:40%"></i></span></div>
+        <div class="v-prog-a" style="margin-top:var(--s3)"><span class="v-chislo">75%</span><span class="v-polosa"><i style="width:75%"></i></span></div>
+      </div>
+      <div class="var-pometka">живёт внутри строки 40px, не раздувает её. Референс 21</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">Б</span> подпись слева, процент справа</div>
+      <div class="var-ramka">
+        <div class="v-prog-b">
+          <div class="v-verh"><span>Запустить Automy Junior</span><span>40%</span></div>
+          <div class="v-polosa"><i style="width:40%"></i></div>
+        </div>
+      </div>
+      <div class="var-pometka">для целей и результатов, где нужна подпись. Референс 3</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">В</span> процент капсулой на полосе</div>
+      <div class="var-ramka">
+        <div class="v-prog-v">
+          <span class="v-polosa"><i style="width:51%"></i></span>
+          <span class="v-kapsula">51%</span>
+        </div>
+      </div>
+      <div class="var-pometka">заметнее всего, но капсула перекрывает полосу. Референс 9</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">Г</span> дискретными сегментами</div>
+      <div class="var-ramka">
+        <div class="v-prog-g"><i class="est"></i><i class="est"></i><i class="est"></i><i></i><i></i></div>
+        <div class="var-pometka" style="margin-top:var(--s2)">3 из 5 этапов</div>
+      </div>
+      <div class="var-pometka">когда шагов немного и они считаемые: этапы проекта, волны рассылки</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">Д</span> просто числом</div>
+      <div class="var-ramka">
+        <div class="v-prog-d"><b>18</b> из 24 задач</div>
+      </div>
+      <div class="var-pometka">самый тихий. Там, где полоса была бы украшением</div>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <h2>Группировка списка</h2>
+  <div class="podpis">как отделять группы задач: по направлению, проекту или спринту</div>
+  <div class="var-set">
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">А</span> заголовок со счётчиком</div>
+      <div class="var-ramka" style="padding:0">
+        <div class="v-grup-a"><strong>Технопродукт</strong><span class="v-schet">4</span><button class="knopka knopka-tihaja" style="margin-left:auto;height:26px">Фильтр</button></div>
+        <div class="stroka"><input class="galochka" type="checkbox"><span class="napr napr-synapt"></span><span class="stroka-nazvanie">Правки КП по тендерному агенту</span><span class="stroka-meta"><span class="plashka plashka-work">в процессе</span></span><span class="stroka-data">20.10</span><span class="avatar">КП</span><span class="stroka-menju">···</span></div>
+        <div class="stroka"><input class="galochka" type="checkbox"><span class="napr napr-synapt"></span><span class="stroka-nazvanie">Созвон по срокам</span><span class="stroka-meta"><span class="plashka plashka-plan">в плане</span></span><span class="stroka-data">24.10</span><span class="avatar">НК</span><span class="stroka-menju">···</span></div>
+      </div>
+      <div class="var-pometka">счётчик в чипе, кнопка фильтра на уровне группы. Референс 21</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">Б</span> кикер с линией</div>
+      <div class="var-ramka" style="padding:0">
+        <div class="v-grup-b">технопродукт, 4</div>
+        <div class="stroka"><input class="galochka" type="checkbox"><span class="napr napr-synapt"></span><span class="stroka-nazvanie">Правки КП по тендерному агенту</span><span class="stroka-meta"><span class="plashka plashka-work">в процессе</span></span><span class="stroka-data">20.10</span><span class="avatar">КП</span><span class="stroka-menju">···</span></div>
+        <div class="stroka"><input class="galochka" type="checkbox"><span class="napr napr-synapt"></span><span class="stroka-nazvanie">Созвон по срокам</span><span class="stroka-meta"><span class="plashka plashka-plan">в плане</span></span><span class="stroka-data">24.10</span><span class="avatar">НК</span><span class="stroka-menju">···</span></div>
+      </div>
+      <div class="var-pometka">тише, группа не спорит со строками</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">В</span> сворачиваемая</div>
+      <div class="var-ramka" style="padding:0">
+        <div class="v-grup-v"><span class="v-strelka">▾</span><strong>Технопродукт</strong><span class="v-schet" style="background:var(--n3);padding:0 6px;border-radius:var(--r-pill);font-size:var(--t5);color:var(--n11)">4</span></div>
+        <div class="stroka"><input class="galochka" type="checkbox"><span class="napr napr-synapt"></span><span class="stroka-nazvanie">Правки КП по тендерному агенту</span><span class="stroka-meta"><span class="plashka plashka-work">в процессе</span></span><span class="stroka-data">20.10</span><span class="avatar">КП</span><span class="stroka-menju">···</span></div>
+      </div>
+      <div class="var-pometka">когда групп много: свернула лишнее, осталась своя</div>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <h2>Число на плитке</h2>
+  <div class="podpis">как набирать главное число дашборда. Приём из второй волны</div>
+  <div class="var-set">
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">А</span> одним кеглем</div>
+      <div class="var-ramka">
+        <div class="plitka" style="max-width:220px">
+          <div class="kiker">выручка за месяц</div>
+          <div class="plitka-chislo">1 240 000 ₽</div>
+          <div class="plitka-delta plitka-delta-rost">+18% к прошлому</div>
+        </div>
+      </div>
+      <div class="var-pometka">как сейчас. Ровно, но длинное число мельчает</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">Б</span> число как объект</div>
+      <div class="var-ramka">
+        <div class="plitka" style="max-width:220px">
+          <div class="kiker">рост выручки</div>
+          <div class="v-chislo-obekt"><span class="v-znak">+</span><span class="v-cifra">18</span><span class="v-edinica">%</span></div>
+          <div class="plitka-delta">к прошлому месяцу</div>
+        </div>
+      </div>
+      <div class="var-pometka">знак и единица тише цифры. Читается с двух метров. Референс 5f86f07b</div>
+    </div>
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">В</span> с полосой под числом</div>
+      <div class="var-ramka">
+        <div class="plitka" style="max-width:220px">
+          <div class="kiker">план недели</div>
+          <div class="plitka-chislo">18 из 24</div>
+          <div class="v-prog-b" style="margin-top:var(--s2)"><div class="v-polosa"><i style="width:75%"></i></div></div>
+        </div>
+      </div>
+      <div class="var-pometka">где есть план и факт: сразу видно, сколько осталось</div>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <h2>Ряд карточек без рамок</h2>
+  <div class="podpis">структура без теней и рамок. Приём из второй волны, референс 0f6186ed</div>
+  <div class="var-set">
+    <div class="var-blok">
+      <div class="var-imja"><span class="var-bukva">А</span> линиями и нумераторами</div>
+      <div class="var-ramka">
+        <div class="v-rjad-linijami">
+          <div><div class="v-nomer">001</div><h3 style="font-size:var(--t3)">Synapt</h3><p class="vtoroj" style="font-size:var(--t5);margin-top:var(--s2)">11 задач, 3 просрочены</p></div>
+          <div><div class="v-nomer">002</div><h3 style="font-size:var(--t3)">Медиа</h3><p class="vtoroj" style="font-size:var(--t5);margin-top:var(--s2)">6 задач</p></div>
+          <div><div class="v-nomer">003</div><h3 style="font-size:var(--t3)">Automy</h3><p class="vtoroj" style="font-size:var(--t5);margin-top:var(--s2)">4 задачи</p></div>
+          <div><div class="v-nomer">004</div><h3 style="font-size:var(--t3)">Платформа</h3><p class="vtoroj" style="font-size:var(--t5);margin-top:var(--s2)">2 задачи</p></div>
+        </div>
+      </div>
+      <div class="var-pometka">главный способ дать структуру там, где тени запрещены</div>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

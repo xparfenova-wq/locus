@@ -1,0 +1,1332 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Кабинет</title>
+<link rel="icon" href="/api/favicon?v=L" type="image/svg+xml">
+<link rel="stylesheet" href="/css/obschij.css">
+<style>
+                                                              
+                                                          
+@media (min-width:1061px){
+  .kol{width:auto;max-width:1040px;min-width:0}
+}
+.kab{display:grid;grid-template-columns:232px minmax(0,1fr);
+border:1px solid var(--lin);margin-bottom:26px}
+.kab-l{padding:21px 22px;border-right:1px solid var(--lin);min-width:0}
+.kab-foto{width:84px;height:84px;overflow:hidden;margin-bottom:14px}
+.kab-foto img{width:100%;height:100%;object-fit:cover;display:block}
+.kab-im{font-size:16px;font-weight:500;letter-spacing:-.02em}
+.kab-rol{font-size:11.5px;color:var(--t3);margin-top:3px}
+.kab-ci{margin-top:16px;display:flex;flex-direction:column;gap:7px}
+.kab-ci div{font-size:11.5px;color:var(--t3)}
+.kab-ci b{font-weight:400;color:var(--t1);
+font-family:'Geist Mono',ui-monospace,monospace;font-feature-settings:"tnum"}
+.kab-r{padding:6px 22px;min-width:0}
+.nastr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;
+align-items:center;padding:14px 0;border-bottom:1px solid var(--lin)}
+.nastr:last-child{border-bottom:0}
+.nastr-im{font-size:13px}
+.nastr-p{font-size:11.5px;color:var(--t3);margin-top:2px}
+.blk{margin-bottom:26px}
+.blk-z{display:flex;align-items:baseline;gap:9px;font-size:11.5px;color:var(--t2);
+padding:0 0 9px;letter-spacing:.01em}
+.blk-z .n{font-family:'Geist Mono',ui-monospace,monospace;font-size:10.5px;color:var(--t3)}
+                                                                  
+                                                                
+                                 
+.blk > .str{display:grid;grid-template-columns:minmax(0,1fr) 140px;gap:12px;
+align-items:center;padding:11px 0;border-bottom:1px solid var(--lin);font-size:13px}
+.str-p{font-size:11.5px;color:var(--t3);margin-top:2px}
+.str-r{font-size:11.5px;color:var(--t3);text-align:right;white-space:nowrap}
+                                                         
+.shag{display:grid;grid-template-columns:18px minmax(0,1fr);gap:11px;
+align-items:center;padding:10px 0;border-bottom:1px solid var(--lin);font-size:13px}
+.shag:last-child{border-bottom:0}
+.shag.gotov{color:var(--t3)}
+.shag-g{width:12px;height:12px;border:1px solid var(--lin);justify-self:center}
+.shag.gotov .shag-g{background:var(--tmn);border-color:var(--tmn);position:relative}
+.shag.gotov .shag-g::after{content:"";position:absolute;left:3px;top:1px;width:4px;height:7px;
+border-right:1.4px solid #fff;border-bottom:1.4px solid #fff;transform:rotate(42deg)}
+                                                                  
+                                                 
+.ank-p{font-size:11.5px;color:var(--t3);padding-bottom:12px;line-height:1.5}
+                                                                  
+                                                                 
+.sch-s{display:flex;align-items:center;justify-content:space-between;
+gap:14px;padding:8px 0}
+.sch-n{font-size:11.5px;color:var(--t3)}
+.sch-t{display:flex;gap:5px}
+.sch-v{width:32px;height:32px;display:grid;place-items:center;
+border:1px solid var(--lin);font-size:11.5px;color:var(--t3);
+font-family:'Geist Mono',ui-monospace,monospace;transition:all .14s}
+.sch-v:hover{border-color:var(--t3);color:var(--t1)}
+.sch-v.est{background:var(--tmn);border-color:var(--tmn);color:#fff}
+                                                               
+                                            
+.sch-ist{display:flex;align-items:flex-end;gap:3px;padding-top:13px;
+margin-top:9px;border-top:1px solid var(--lin)}
+.sch-ist i{width:7px;background:var(--lin);flex:none}
+.sch-ip{font-size:10.5px;color:var(--t3);margin-left:7px;align-self:center}
+@media (max-width:760px){
+  .sch-s{flex-direction:column;align-items:flex-start;gap:7px}
+  .sch-v{width:44px;height:44px}
+}
+.ank-g{padding-top:20px}
+.ank-g:first-of-type{padding-top:10px}
+.ank-g-z{font-size:10.5px;color:var(--t3);letter-spacing:.14em;
+text-transform:uppercase;padding-bottom:4px}
+.ank-polja{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+gap:0 26px}
+                                                               
+                                                            
+.ank-s{display:flex;flex-direction:column;gap:3px;min-height:0;
+border:0;padding:0}
+.ank-n{font-size:11.5px;color:var(--t3);padding-left:2px}
+.ank-v{width:100%;font-size:13px;border:0;background:none;
+border-bottom:1px solid var(--lin);border-radius:0;
+font-family:inherit;color:var(--t1);padding:6px 2px;min-height:0}
+.ank-v:focus{outline:none;border-bottom-color:var(--t1)}
+.ank-v::placeholder{color:var(--t3)}
+.ank-vid-b .ank-n{display:none}
+.ank-s:hover{background:rgba(0,0,0,.015)}
+@media (max-width:760px){
+  .ank-polja{grid-template-columns:1fr}
+  .ank-s{grid-template-columns:1fr;gap:1px;align-items:start;
+    padding:9px 0;min-height:0}
+  .ank-s:nth-of-type(2){border-top:1px solid var(--lin)}
+  .ank-v{padding:2px 0}
+}
+.ank-niz{display:flex;justify-content:flex-end;padding-top:14px}
+.net{font-size:11.5px;color:var(--t3);padding:14px 0}
+                                                               
+                                                                     
+@media (max-width:620px){
+  .nastr .pere,.nastr .fil-b,.nastr .vyp>.fil-b,.an-niz .kn,
+  #ses-vyjti{
+    min-height:44px;display:inline-flex;align-items:center;
+    padding-left:10px;padding-right:10px;margin-left:-10px}
+                                                                
+                                                                   
+  #ses-vyjti{margin-top:24px}
+}
+@media (max-width:760px){.kab{grid-template-columns:1fr}
+.kab-l{border-right:0;border-bottom:1px solid var(--lin)}
+.kab-r{padding:6px 18px}
+.nastr{grid-template-columns:1fr;gap:9px;align-items:start}
+.blk > .str{grid-template-columns:minmax(0,1fr) 92px}}
+
+                                                  
+                                                         
+                                                       
+                                             
+.en-s{align-items:flex-start}
+.en{display:flex;flex-direction:column;align-items:center;gap:4px;
+cursor:ns-resize;user-select:none;-webkit-user-select:none;
+touch-action:none;padding:4px 0}
+.en:focus-visible{outline:2px solid var(--t1);outline-offset:6px;
+border-radius:8px}
+.en-duga{position:relative;width:120px;height:68px}
+.en-duga svg{display:block}
+.en-fon{stroke:var(--lin);stroke-width:7}
+                                                               
+                                    
+.en-zal{stroke:var(--t1);stroke-width:7;
+transition:stroke-dashoffset .12s linear}
+.en-ch{position:absolute;left:0;right:0;bottom:2px;text-align:center;
+font-family:'Geist Mono',ui-monospace,monospace;
+font-size:24px;letter-spacing:-.04em;color:var(--t1);
+font-feature-settings:"tnum";line-height:1}
+.en-ch i{font-style:normal;font-size:11.5px;color:var(--t3);margin-left:1px}
+.en-pod{font-size:10.5px;color:var(--t3)}
+.en:hover .en-pod{color:var(--t2)}
+@media (max-width:760px){
+  .en-pod::before{content:"потяни пальцем"}
+  .en-pod{font-size:0}
+  .en-pod::before{font-size:10.5px}
+}
+                                                               
+                                                                  
+                                                               
+.kab[hidden],#kab-refl[hidden],#prochee .blk[hidden]{display:none !important}
+                                                              
+                                                                     
+                                                           
+#kab-refl{max-width:680px;margin:6px auto 0}
+.kab-rf{background:#fff;border:1.5px solid #a9a9b2 !important;border-radius:18px;
+padding:13px 17px 13px}
+.kab-rf:focus-within{border-color:var(--t3) !important}
+.kab-rf .vvod-stroka{display:flex;align-items:flex-end;gap:9px}
+.kab-rf .vvod-p{flex:1;min-width:0;border:0;background:transparent;
+font-family:inherit;font-size:13px;color:var(--t1);resize:none;
+min-height:24px;max-height:160px;line-height:1.5;display:block;padding:4px 0}
+.kab-rf .vvod-p:focus{outline:none}
+.kab-rf .vvod-p::placeholder{color:var(--t3)}
+.kab-rf .vvod-slat{flex:none;width:34px;height:34px;border-radius:50%;
+background:#fff;color:var(--t2);border:1px solid var(--lin);
+display:grid;place-content:center;transition:all .14s;cursor:var(--kursor), pointer}
+.kab-rf .vvod-slat:hover{background:var(--tmn);color:#fff;border-color:var(--tmn)}
+.kab-rf-pod{font-size:11.5px;color:var(--t3);margin:12px 2px 0;text-align:center}
+@media (max-width:760px){#kab-refl{margin:6px 0 0}.kab-rf .vvod-slat{width:44px;height:44px}}
+                                                       
+                                                             
+                                           
+.an{max-width:820px;margin:0 auto 26px}
+.an-p{font-size:12px;color:var(--t3);line-height:1.5;margin:0 0 4px}
+.an-g{margin-top:30px}
+.an-g-z{font-size:13px;font-weight:500;color:var(--t1);margin-bottom:12px}
+.an-polja{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 32px}
+.an-s{position:relative;display:grid;min-width:0}
+.an-shir{grid-column:1 / -1}
+                                                                   
+                                                                    
+                                                                          
+.an-n{order:-1;font-size:var(--text-caption);color:var(--t3);
+line-height:1.3;height:0;overflow:hidden;opacity:0;transition:opacity .14s;pointer-events:none}
+.an-v:not(:placeholder-shown) + .an-n{height:auto;opacity:1;margin-bottom:5px}
+.an-v{width:100%;box-sizing:border-box;border:0;border-bottom:1px solid var(--lin);
+border-radius:0;background:transparent;font-family:inherit;font-size:13px;
+color:var(--t1);line-height:1.45;padding:5px 2px 7px;resize:none;overflow:hidden;
+min-height:34px;display:block}
+.an-v::placeholder{color:var(--t3);opacity:1}
+.an-v:focus::placeholder{color:transparent}
+.an-v:focus{outline:none;border-bottom-color:var(--t1)}
+.an-niz{display:flex;justify-content:flex-end;margin-top:30px}
+@media (max-width:760px){
+  .an-polja{grid-template-columns:1fr;gap:16px}
+  .an-v{font-size:var(--text-input-mobile);min-height:var(--control-height-mobile)}
+  #ank-sohr{min-height:var(--control-height-mobile)}
+  .an-g{margin-top:26px}
+}
+                                                  
+a.shag-ves{cursor:var(--kursor), pointer}
+.shag-ves .shag-t{font-weight:500}
+.shag-ves:hover .shag-g{border-color:var(--t1)}
+.shag-t{min-width:0}
+                                        
+                                                               
+                                                  
+.kab-sohr,.kr-pere{margin-left:8px;flex:none}
+.kab-sohr{display:inline-flex;align-items:center;height:26px;padding:0 13px;
+border-radius:999px;font-size:11.5px;border:1px solid var(--lin);
+background:var(--pole);color:var(--t3);pointer-events:none;transition:all .14s}
+.kab-sohr.akt{background:#fff;color:var(--t1);pointer-events:auto;
+cursor:var(--kursor), pointer}
+.kab-sohr.akt:hover{background:var(--tmn);border-color:var(--tmn);color:#fff}
+.kr-pere{display:inline-flex;align-items:center;gap:6px;height:26px;
+box-sizing:border-box;padding:0 3px;border:1px solid var(--lin);border-radius:999px;
+font-size:11.5px;white-space:nowrap;background:#fff}
+.kr-pere b{font-weight:500;color:var(--t1)}
+.kr-d{color:var(--t3)}
+.kr-str{display:grid;place-content:center;width:20px;height:20px;border-radius:50%;
+color:var(--t2);cursor:var(--kursor), pointer;transition:background .14s}
+                                                                             
+.kr-str:hover{background:var(--pole);color:var(--t1)}
+.kr-str.vykl{opacity:.25;pointer-events:none}
+.kr-str svg{width:12px !important;height:12px !important;flex:none;display:block}
+#kab-r3 .kr-str{display:grid !important;min-width:20px}
+.kab-r4[hidden]{display:none !important}
+.kab-r4 .fil-b .n{margin-left:6px;color:var(--t3);font-size:10.5px}
+                                                                        
+.kr-spisok{display:flex;flex-direction:column;gap:8px;padding-bottom:210px}
+.kr-k{background:var(--pole);border-radius:12px;padding:13px 16px 14px}
+.kr-k-v{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.kr-gran{font-size:11.5px;color:var(--t2)}
+.kr-kogda{font-size:11.5px;color:var(--t3);margin-left:auto}
+.kr-k-t{font-size:13px;line-height:1.5;color:var(--t1)}
+.kr-pusto{font-size:13px;color:var(--t3);text-align:center;padding:48px 0 0}
+.kab-rf-niz{position:fixed;left:50%;transform:translateX(-50%);bottom:22px;
+z-index:60;width:min(680px,calc(100vw - 40px));margin:0}
+.kab-rf-fon{position:fixed;left:0;right:0;bottom:0;height:190px;z-index:40;
+pointer-events:none;background:linear-gradient(to bottom,rgba(255,255,255,0) 0%,
+rgba(255,255,255,.7) 18%,#fff 42%,#fff 100%)}
+@media (max-width:760px){
+  .kab-rf-niz{bottom:calc(84px + env(safe-area-inset-bottom));width:calc(100vw - 24px)}
+  .kab-rf-fon{height:260px}
+  .kr-spisok{padding-bottom:270px}
+  #kab-r3{flex-wrap:wrap;row-gap:8px}
+                                                                 
+                                                      
+  #kab-r4{justify-content:flex-start !important;padding-left:16px;padding-right:16px}
+}
+
+#kab-refl [hidden]{display:none!important}#kab-refl button,#kab-r4 button{font:inherit;min-height:44px}#kab-refl .vvod-pd button{border:0;background:transparent;color:inherit;cursor:pointer;white-space:nowrap}#kb-slat{border:0;background:transparent;cursor:pointer;min-width:44px;font-size:24px}#kb-slat:disabled{opacity:.35;cursor:default}.cabinet-draft-copy{box-sizing:border-box;width:100%;min-height:140px}#kab-refl [data-cabinet-reflection-status],#kab-refl [data-cabinet-reflection-counter]{font-size:12px;overflow-wrap:anywhere}#kab-refl [data-cabinet-reflection-drafts]{flex-wrap:wrap}#kab-refl [data-cabinet-reflection-drafts]:empty,#kab-refl [data-cabinet-reflection-status]:empty,#kab-refl [data-cabinet-reflection-counter]:empty{display:none}#kab-r4 button{background:transparent;color:inherit;border:0;cursor:pointer}#kab-refl .kr-k-t{white-space:pre-wrap;overflow-wrap:anywhere}
+@media(max-width:760px){#kb-tekst,.cabinet-draft-copy{font-size:16px}}
+
+.nastr-switch{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;
+  padding:0;border:0;background:none;flex:none;cursor:pointer;justify-self:end}
+.nastr-switch .pere{pointer-events:none;margin:0!important;padding:0!important;min-height:0!important}
+.nastr-switch:focus-visible,.pal-dejstvija button:focus-visible{outline:2px solid var(--t1);outline-offset:3px}
+.pal-dejstvija{display:flex;flex-wrap:wrap;gap:8px}
+.pal-dejstvija button{min-height:44px;font:inherit;cursor:pointer}
+.pal-dejstvija button:disabled{opacity:.4;cursor:default}
+.preferences-state ul{padding-left:20px;font-size:12px;overflow-wrap:anywhere}.preferences-state li{margin:8px 0}.preferences-state p:empty{display:none}.preferences-state p{font-size:12px;color:var(--t2);overflow-wrap:anywhere}
+.preferences-state .pending-command-actions{display:flex;gap:8px;flex-wrap:wrap}
+.preferences-state button{min-height:44px;max-width:100%;white-space:normal}
+
+</style><link rel="stylesheet" href="/css/schedule.css">
+</head><body>
+<div id="menju"></div>
+<div class="wrap"><div class="kol">
+  <div class="kab"><div class="kab-l" id="profil"></div>
+    <div class="kab-r" id="nastrojki"></div></div>
+  <div id="prochee"></div>
+  <div id="kab-refl" hidden></div>
+  <div id="kab-grafik" hidden></div>
+</div></div>
+<script src="/js/nedeli.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/obschij.js"></script>
+<script src="/js/kalendar.js"></script>
+<script src="/js/anketa.js"></script>
+<script src="/js/schedule-model.js"></script>
+<script src="/js/schedule-day-form.js"></script>
+<script src="/js/schedule-commands.js"></script>
+<script src="/js/cabinet-schedule.js"></script>
+<script src="/js/preferences-model.js"></script>
+<script src="/js/preferences-state.js"></script>
+<script>
+(function () {
+let SPRAV = null, JA = API.ja;
+let JA_CHELOVEK = null, N = null, VID = null, BOT = null,
+    SESSII = [], ONB = null, FOKUS = null, MOE = null,
+    ANKETA = null, MOJO = null, MOI_PROEKTY = [];
+
+                                                             
+                                                              
+  
+                                                             
+                                                          
+                                                               
+                                                              
+                                                
+const GRUPPY_ANKETY = LocusAnketa.gruppy;
+
+const POLJA_ANKETY = GRUPPY_ANKETY.flatMap(([, polja]) => polja);
+
+const DOSTUP = { polnyj: 'полный доступ', bez_deneg: 'без сумм',
+                 tolko_svoe: 'только своё', gost: 'гость' };
+const BOT_CHTO = { vse: 'всё', tolko_moi: 'только задачи на меня',
+                   tolko_prosrochki: 'только просрочки' };
+const VID_ZADACH = { spisok: 'списком', doska: 'доской' };
+                                                                
+                                                
+const CHI_ZADACHI = { moi: 'мои', vse: 'все' };
+
+function sklUstr(n) {
+  const o = n % 10, s = n % 100;
+  if (o === 1 && s !== 11) return 'устройство';
+  if (o >= 2 && o <= 4 && (s < 12 || s > 14)) return 'устройства';
+  return 'устройств';
+}
+
+async function zagruzit() {
+  const [chel, nastr, vid, bot, ses, onb, fok, ank, mojo] = await Promise.all([
+    API.odna('ljudi', JA + '/celikom'),
+    API.ekran('nastrojki', {}),
+    API.ekran('nastrojki/vid', {}),
+    API.ekran('nastrojki/bot', {}),
+    API.ekran('sessii', {}),
+    API.ekran('onbording', {}),
+    API.ekran('fokus', {}),
+    API.odna('anketa', JA).catch(() => null),
+    API.ekran('sostojanija/moe', {}).catch(() => null),
+  ]);
+  JA_CHELOVEK = chel; N = nastr; VID = vid; BOT = bot;
+  try {
+    const pr = await API.spisok('proekty', { na_stranice: 200 });
+    MOI_PROEKTY = (pr.spisok || []).filter((x) =>
+      !x.arhiv && x.kto_vedet === Number(JA));
+  } catch { MOI_PROEKTY = []; }
+  SESSII = ses.spisok || []; ONB = onb; FOKUS = fok;
+  ANKETA = ank; MOJO = mojo;
+}
+
+                            
+                                                                  
+                                                                  
+                                                                      
+                                                                    
+                               
+const IZM = {};
+let IZM_PILJULJA = null, PREFS = null, PILL_BASE = null;
+const est_izmenenija = () => Object.keys(IZM).length > 0 || IZM_PILJULJA !== null;
+
+                                                 
+function primenit_kursor(v) {
+  if (v) document.documentElement.dataset.kursor = 'sistemnyj';
+  else delete document.documentElement.dataset.kursor;
+}
+
+function otmetitSohranenie() {
+  const k = document.getElementById('kab-sohr');
+  if (!k) return;
+  const est = est_izmenenija() && (!PREFS || PREFS.canSave());
+  k.classList.toggle('akt', est);
+  k.setAttribute('aria-disabled', String(!est));
+  k.disabled = !est;
+}
+
+function pomenjat(pole, znachenie) {
+  if (!PREFS) return;
+  if (pole === 'razdely_menju') {
+    const initial = PREFS.confirmed().razdely_menju;
+    const effective = Array.isArray(initial) && initial.length ? initial : VSE_RAZDELY_PERVOGO;
+    if (effective.length === znachenie.length && effective.every(x=>znachenie.includes(x))) znachenie = initial;
+  }
+  PREFS.edit(pole, znachenie);
+}
+function validPreferencesExtra(extra) {
+  if (!extra || typeof extra !== 'object' || Array.isArray(extra)) return false;
+  if (extra.pill != null && (!Array.isArray(extra.pill) || !extra.pill.length ||
+      extra.pill.length > 4 || new Set(extra.pill).size !== extra.pill.length ||
+      extra.pill.some(v=>!VSE_RAZDELY_MENJU.includes(v)))) return false;
+  const p=extra.palette;
+  return p === undefined || p && typeof p === 'object' && validPalette(p.svoja) &&
+    ['custom','preset'].includes(p.origin) && (p.vybor === 'svoja' || Boolean(palitraPoKodu(p.vybor))) &&
+    typeof p.pravka === 'boolean' && Number.isInteger(p.sv_aktiv) && p.sv_aktiv >= -1 && p.sv_aktiv < 5 &&
+    Number.isFinite(p.jar) && p.jar >= 15 && p.jar <= 100 && Array.isArray(p.tochki) && p.tochki.length <= 5 &&
+    p.tochki.every(t=>t == null || ['x','y','ugol','t'].every(k=>Number.isFinite(t[k])) &&
+      t.x >= 0 && t.x <= 100 && t.y >= 0 && t.y <= 100 && t.t >= 0 && t.t <= 1);
+}
+function preferencesStart() {
+  PILL_BASE=razdely_piljuli_k().slice();
+  PREFS=LocusPreferencesState.create(N,{
+    extraDirty:e=>Boolean(e.palette?.pravka) || e.pill != null,
+    validateExtra:validPreferencesExtra,
+    fieldLabels:{...SWITCH_LABELS,bot_sobytija:'События бота',bot_chto:'Что присылать',startovyj_ekran:'Стартовый экран',
+      chi_zadachi:'Чьи задачи',vid_zadach:'Вид задач',razdely_menju:'Разделы меню',prioritetnoe_napravlenie:'Моё направление',
+      prioritetnye_napravlenija:'Приоритетные направления',svoi_cveta:'Цвета'},
+    formatValue:(field,value)=>{
+      if(field in SWITCH_LABELS)return value?'включено':'выключено';
+      if(field==='svoi_cveta')return JSON.stringify(value||{});
+      const names={...BOT_CHTO,...VID_ZADACH,...CHI_ZADACHI,net:'нет',
+        ...Object.fromEntries((VID.startovye_ekrany||[]).map(v=>[v.kod,v.imja])),
+        ...Object.fromEntries((SPRAV.napravlenija||[]).map(v=>[v.kod,v.imja]))};
+      if(Array.isArray(value))return value.map(v=>names[v]||v).join(', ')||'по умолчанию';
+      if(field==='bot_sobytija')return (BOT.sobytija||[]).map(v=>v.imja+': '+((Object.hasOwn(value||{},v.kod)?value[v.kod]:v.vkljucheno)?'включено':'выключено')).join(', ');
+      return names[value]||String(value??'по умолчанию');
+    },
+    onChange:({value,extra,dirty,reason})=>{
+      N=value;Object.keys(IZM).forEach(k=>delete IZM[k]);Object.assign(IZM,dirty);
+      IZM_PILJULJA=extra.pill ?? null;
+      if (extra.palette) Object.assign(PAL,extra.palette);
+      else if (reason === 'discard') palInit();
+      primenit_kursor(N.svoj_kursor);palPokaz();pererisovatNastrojki();otmetitSohranenie();
+    },
+    onActorChange:()=>{
+      for(const id of ['profil','nastrojki','prochee','kab-refl','kab-grafik'])document.getElementById(id)?.replaceChildren();
+      document.getElementById('kab-sohr')?.remove();
+      const place=document.getElementById('nastrojki');if(place)place.textContent='Аккаунт сменился. Открой страницу заново';
+    }
+  });
+}
+async function sohranitVse() {
+  if (!PREFS || !est_izmenenija() || !PREFS.canSave()) return;
+  const pill=IZM_PILJULJA?.slice(),telo=PREFS.dirty();
+  try {
+    await PREFS.save('pravka');
+    if (pill) {
+      const text=JSON.stringify(pill);
+      localStorage.setItem(KLJUCH_PILJULI_K,text);
+      if(localStorage.getItem(KLJUCH_PILJULI_K)!==text)throw new Error('Браузер не сохранил состав меню');
+      PILL_BASE=pill;
+      if(LocusPreferencesModel.same(PREFS.extra().pill,pill))PREFS.setExtra('pill',null);
+    }
+    if ('prioritetnoe_napravlenie' in telo) {
+      try {
+        const kod=PREFS.confirmed().prioritetnoe_napravlenie;
+        if(kod && kod!=='net')localStorage.setItem(KLJUCH_SVOJO_NAPR_K,kod);
+        else localStorage.removeItem(KLJUCH_SVOJO_NAPR_K);
+      } catch {}
+    }
+    if(pill)O.tost('Состав меню сохранён на этом устройстве');
+  } catch(e) { O.tost(e.serverConfirmed ? e.message : 'Сохранение не завершено: '+e.message); }
+}
+
+                                                           
+window.addEventListener('beforeunload', (e) => {
+  if (!PREFS?.hasUnsaved() && !PREFS?.pending()) return;
+  e.preventDefault();
+  e.returnValue = '';
+});
+
+function profil() {
+  const c = JA_CHELOVEK.chelovek;
+  const pochta = (JA_CHELOVEK.kontakty || []).find((k) => k.tip === 'pochta' && k.osnovnoj)
+    || (JA_CHELOVEK.kontakty || []).find((k) => k.tip === 'pochta');
+  const tg = (JA_CHELOVEK.kontakty || []).find((k) => k.tip === 'telegram');
+                                                                  
+  document.getElementById('profil').innerHTML =
+    (c.foto ? `<div class="kab-foto"><img src="${O.ekranirovat(c.foto)}" alt=""></div>`
+            : '<div class="kab-foto"></div>') +
+    `<div class="kab-im">${O.ekranirovat(c.imja)}</div>
+     <div class="kab-rol">${DOSTUP[c.dostup] || 'доступ не задан'}</div>
+     <!-- Открытые задачи, сессии фокуса и устройства убраны:
+          её слова 27 октября — «зачем мне информация про мои
+          открытые задачи, сессии фокуса и 9 устройств, а ещё
+          моя почта. Почему я её не могу редактировать»
+          Задачи живут в Задачах, фокус в Полезном -->
+     <div class="kab-ci">
+       <!-- Почта и телеграм редактируются прямо здесь -->
+       <label class="kab-pole"><span class="kab-pp">почта</span>
+         <input class="kab-pz" id="kab-pochta" type="email"
+           value="${O.ekranirovat(pochta ? pochta.znachenie : '')}"
+           placeholder="почта не указана"><span id="kab-pochta-osh" class="kab-contact-warning" role="status" aria-live="polite"></span></label>
+       <label class="kab-pole"><span class="kab-pp">телеграм</span>
+         <input class="kab-pz" id="kab-tg" type="text"
+           value="${O.ekranirovat(tg ? tg.znachenie : '')}"
+           placeholder="@имя"><span id="kab-tg-osh" class="kab-contact-warning" role="status" aria-live="polite"></span></label>
+     </div>`;
+
+                                                            
+                                                  
+  for (const [id, vid] of [['kab-pochta', 'pochta'], ['kab-tg', 'telegram']]) {
+    const pole = document.getElementById(id);
+    if (!pole) continue;
+    const warning=document.getElementById(id+'-osh');
+    let saved=vid==='pochta'?pochta:tg,pending=false,confirmedInput=pole.value.trim(),unknownDelete=null;
+    let contactId=saved?.id;
+    const remember=()=>{
+      JA_CHELOVEK.kontakty=(JA_CHELOVEK.kontakty||[]).filter(x=>x.id!==contactId&&x.id!==saved?.id);
+      if(saved)JA_CHELOVEK.kontakty.push(saved);
+      contactId=saved?.id;
+    };
+    const showDeleteCheck=()=>{
+      if(!warning||!unknownDelete)return;
+      const text=document.createElement('span');text.textContent='Удаление не подтверждено. Проверь результат перед следующим сохранением.';
+      const button=document.createElement('button');button.type='button';button.className='kn';button.textContent='проверить удаление';
+      button.addEventListener('click',()=>{if(unknownDelete)save();});warning.replaceChildren(text,button);
+    };
+    pole.addEventListener('input',()=>{warning?.replaceChildren();if(unknownDelete)showDeleteCheck();});
+    const save=async () => {
+      const znach = pole.value.trim();
+      if(pending||(!unknownDelete&&znach===confirmedInput))return;
+      pending=true;pole.disabled=true;
+      try {
+        if(unknownDelete){
+          const result=await API.udalitKontakt(unknownDelete.record,{zapros_kljuch:unknownDelete.key,proverit:true});
+          unknownDelete=null;warning?.replaceChildren();
+          if(result.scope_changed)throw API.oshibkaKontekstaKontakta();
+          if(result.deleted){
+            saved=null;confirmedInput='';remember();
+            O.tost(pole.value.trim()?'Удаление подтверждено. Новый текст остался в поле и ещё не сохранён.':'Контакт удалён');
+          }else O.tost('Контакт остался в базе. Чтобы удалить его, ещё раз очисти поле и выйди из него.');
+          return;
+        }
+        for(;;){
+          try{
+            if(saved){
+              if(znach)saved=await API.pravitZnachenieKontakta(saved,znach);
+              else{
+                const attempt={record:{...saved},key:API.kljuchZaprosa()};
+                try{await API.udalitKontakt(attempt.record,{zapros_kljuch:attempt.key});}
+                catch(error){if(error.kod===undefined||error.kod>=500)unknownDelete=attempt;throw error;}
+                saved=null;
+              }
+            }else if(znach)saved=(await API.sozdatKontakt({chelovek_id:c.id,tip:vid,znachenie:znach})).kontakt;
+            break;
+          }catch(error){
+            if(error.kod!==409||!error.telo?.tekuschee)throw error;
+            const current=error.telo.tekuschee;
+            if(current.chelovek_id!==c.id||current.tip!==vid)throw API.oshibkaKontekstaKontakta();
+            const choice=await O.razreshitKonflikt(error,{label:vid==='pochta'?'почта':'телеграм',local:znach||'Удалить контакт',current:current.znachenie});
+            if(choice==='load'){saved=current;pole.value=current.znachenie;confirmedInput=pole.value.trim();remember();return;}
+            if(choice!=='own')return;saved=current;
+          }
+        }
+        confirmedInput=znach;
+        remember();warning?.replaceChildren();
+        O.tost('Контакт сохранён');
+      } catch (e) {
+        if(unknownDelete)showDeleteCheck();
+        if(e.telo?.sessija_izmenilas)return;
+        if(O.preduprezhdenieKontakta(warning,e.telo,vid))return;
+        O.tost(unknownDelete?'Удаление не подтверждено. Проверь результат кнопкой под полем.'
+          :e.kod===undefined||e.kod>=500?'Сохранение контакта не подтверждено. Текст остался в поле; обнови данные перед повторной отправкой.':'Не получилось: '+e.message);
+      }finally{pending=false;if(pole.isConnected)pole.disabled=false;}
+    };
+    pole.addEventListener('blur',save);
+  }
+}
+
+const SWITCH_LABELS={bot_vkljuchen:'Присылать в Телеграм',tihie_chasy:'Тихие часы',
+  pokazyvat_v_rejtinge_fokusa:'Показывать меня в рейтинге фокуса',panel_ljudej:'Панель людей в меню',svoj_kursor:'Свой курсор'};
+function switchButton(checked,attribute,label) {
+  return '<button type="button" class="nastr-switch" '+attribute+' role="switch" aria-checked="'+Boolean(checked)+
+    '" aria-label="'+O.ekranirovat(label)+'"><span class="pere'+(checked?' on':'')+'"><span class="pere-b"></span></span></button>';
+}
+function perekljuchatel(pole) { return switchButton(N[pole],'data-pere="'+pole+'"',SWITCH_LABELS[pole]||pole); }
+function botEventValue(s) { return Object.hasOwn(N.bot_sobytija||{},s.kod) ? Boolean(N.bot_sobytija[s.kod]) : Boolean(s.vkljucheno); }
+
+function nastrojki() {
+                                                                        
+  document.getElementById('nastrojki').innerHTML = `
+    <div data-preferences-state class="preferences-state"></div>
+    <div class="nastr"><div><div class="nastr-im">Присылать в Телеграм</div>
+      <div class="nastr-p">${BOT.podkljuchen
+        ? 'бот пишет на ' + BOT.telegram
+        : 'телеграм не привязан, присылать некуда'}</div></div>
+      ${perekljuchatel('bot_vkljuchen')}</div>
+
+    <div class="nastr"><div><div class="nastr-im">Что присылать</div>
+      <div class="nastr-p">что попадает в сводку бота</div></div>
+      <span class="vyp"><a class="fil-b" id="bot-chto">${
+        BOT_CHTO[N.bot_chto] || 'всё'}<span class="str"></span></a></span></div>
+
+    <!-- События бота и стартовый экран внутри настроек, а не
+         отдельными блоками под карточкой. Её слова 29.10: «бот,
+         что присылает, и стартовый экран тоже должно быть в настройках» -->
+    ${(BOT.sobytija || []).map((s) => `
+    <div class="nastr"><div><div class="nastr-im">${
+      s.imja.charAt(0).toUpperCase() + s.imja.slice(1)}</div>
+      <div class="nastr-p">бот присылает в Телеграм</div></div>
+      ${switchButton(botEventValue(s),'data-bot-sob="'+s.kod+'"',s.imja)}</div>`).join('')}
+
+    <div class="nastr"><div><div class="nastr-im">Тихие часы</div>
+      <div class="nastr-p">с 22 до 9 бот молчит</div></div>
+      ${perekljuchatel('tihie_chasy')}</div>
+
+    ${(() => {
+      const sp = VID.startovye_ekrany || [];
+      if (!sp.length) return '';
+      const tek = N.startovyj_ekran || sp[0].kod;
+      const imja = (sp.find((t) => t.kod === tek) || sp[0]).imja;
+      return `<div class="nastr"><div><div class="nastr-im">Стартовый экран</div>
+        <div class="nastr-p">что открывается при входе в Locus</div></div>
+        <span class="vyp"><a class="fil-b" data-vid="startovyj_ekran"
+          data-tek="${tek}">${imja}<span class="str"></span></a></span></div>`;
+    })()}
+
+    <div class="nastr"><div><div class="nastr-im">Чьи задачи по умолчанию</div>
+      <div class="nastr-p">кто выбран на экране Задач, когда его открываешь</div></div>
+      <span class="vyp"><a class="fil-b" id="chi-zadachi">${
+        CHI_ZADACHI[N.chi_zadachi] || CHI_ZADACHI.moi}<span class="str"></span></a></span></div>
+
+    <div class="nastr"><div><div class="nastr-im">Показывать меня в рейтинге фокуса</div>
+      <div class="nastr-p">${N.pokazyvat_v_rejtinge_fokusa
+        ? 'команда видит мои сессии' : 'мои сессии видны только мне'}</div></div>
+      ${perekljuchatel('pokazyvat_v_rejtinge_fokusa')}</div>
+
+    <div class="nastr"><div><div class="nastr-im">Панель людей в меню</div>
+      <div class="nastr-p">третий ряд с лицами команды</div></div>
+      ${perekljuchatel('panel_ljudej')}</div>
+
+    <div class="nastr"><div><div class="nastr-im">Свой курсор</div>
+      <div class="nastr-p">${N.svoj_kursor
+        ? 'обычный курсор системы' : 'фирменный курсор Locus'}</div></div>
+      ${perekljuchatel('svoj_kursor')}</div>
+
+    <div class="nastr"><div><div class="nastr-im">Вид задач по умолчанию</div>
+      <div class="nastr-p">каким открывается экран Задач</div></div>
+      <span class="vyp"><a class="fil-b" id="vid-zadach">${
+        VID_ZADACH[N.vid_zadach] || 'списком'}<span class="str"></span></a></span></div>
+
+    <div class="nastr nastr-menju" id="nastrojka-menju"><div>
+      <div class="nastr-im">Меню на телефоне</div>
+      <div class="nastr-p">четыре раздела в нижней пилюле, остальные под стрелкой</div>
+      <div class="menju-vybor" id="menju-vybor"></div></div></div>
+
+    <div class="nastr nastr-menju"><div>
+      <div class="nastr-im">Моё направление</div>
+      <div class="nastr-p">встаёт первым в списке и выбирается само на Задачах</div>
+      <div class="menju-vybor" id="napr-vybor"></div></div></div>
+
+    <div class="nastr nastr-menju"><div>
+      <div class="nastr-im">Разделы в меню</div>
+      <div class="nastr-p">первые четыре по порядку стоят в нижней пилюле, остальные под стрелкой «ещё»; новый встаёт в конец</div>
+      <div class="menju-vybor" id="razdely-vybor"></div></div></div>
+
+    <div class="nastr nastr-menju"><div>
+      <div class="nastr-im">Приоритетные направления</div>
+      <div class="nastr-p">стоят первыми во втором уровне, остальные под стрелкой</div>
+      <div class="menju-vybor" id="prior-vybor"></div></div></div>
+
+    <div class="nastr nastr-menju"><div>
+      <div class="nastr-im">Цвета</div>
+      <div class="nastr-p">палитра статусов: готовая или своя</div>
+      <div class="cveta-vybor" id="cveta-vybor"></div></div></div>`;
+}
+
+                                                                      
+                                                               
+                      
+                                                                    
+const VSE_RAZDELY_PERVOGO = ['Пространство', 'Задачи', 'Планёрка',
+  'Люди', 'Направления', 'Полезное', 'Уведомления'];
+
+function narisovatRazdely() {
+  const mesto = document.getElementById('razdely-vybor');
+  if (!mesto) return;
+  const vybrany = Array.isArray(N.razdely_menju) && N.razdely_menju.length
+    ? N.razdely_menju : VSE_RAZDELY_PERVOGO;
+                                                                     
+                                                    
+  const ostalnye = VSE_RAZDELY_PERVOGO.filter((r) => !vybrany.includes(r));
+                                                                        
+  const zhivye = vybrany.filter((r) => VSE_RAZDELY_PERVOGO.includes(r));
+  mesto.innerHTML = zhivye
+    .map((r, i) => `<a class="npr-ch on" data-razdel="${r}"><span class="n">${i + 1}</span>${r}</a>`)
+    .concat(ostalnye.map((r) => `<a class="npr-ch" data-razdel="${r}">${r}</a>`))
+    .join('');
+}
+
+function narisovatPrioritetnye() {
+  const mesto = document.getElementById('prior-vybor');
+  if (!mesto) return;
+  const vybrany = Array.isArray(N.prioritetnye_napravlenija)
+    ? N.prioritetnye_napravlenija : [];
+  mesto.innerHTML = (window.DANNYE?.napravlenija || []).map((n) =>
+    `<a class="npr-ch${vybrany.includes(n.kod) ? ' on' : ''}"
+        data-prior="${n.kod}">${n.imja}</a>`).join('');
+}
+
+                
+                                                                     
+                                             
+const SLOTY_PALITRY = ['в работе', 'в плане', 'на согласовании', 'сделано',
+  'когда-нибудь'];
+
+                                                        
+                                                          
+                      
+const PAL = { vybor: 'firmennaja', svoja: [], sv_aktiv: -1, tochki: [],
+              pravka: false, jar: 100, origin: 'preset' };
+const palitraPoKodu = (kod) => O.PALITRY_LOKUSA.find((p) => p.kod === kod);
+
+const validPalette=v=>Array.isArray(v)&&v.length===5&&v.every(c=>typeof c==='string'&&/^#[0-9a-f]{6}$/i.test(c));
+function activePalette(n) {
+  const cv=n.svoi_cveta||{},preset=palitraPoKodu(cv.palitra);
+  return (preset?.cveta || (validPalette(cv.primenennaja_palitra)?cv.primenennaja_palitra:null) ||
+    (validPalette(cv.svoja_palitra)?cv.svoja_palitra:null) || O.PALITRY_LOKUSA[0].cveta).slice();
+}
+function palInit() {
+  const cv=N.svoi_cveta||{},saved=validPalette(cv.svoja_palitra)?cv.svoja_palitra:null;
+  const preset=palitraPoKodu(cv.palitra),active=activePalette(N);
+  const own=Boolean(saved)&&(!preset || !LocusPreferencesModel.same(saved,active));
+  PAL.vybor=own?'svoja':(preset?.kod || (saved?'svoja':'firmennaja'));
+  PAL.origin=own?'custom':'preset';PAL.svoja=(own?saved:active).slice();
+  PAL.sv_aktiv=-1;PAL.tochki=[];PAL.pravka=false;PAL.jar=100;
+}
+function rememberPalette() { PREFS?.setExtra('palette',PAL,false);otmetitSohranenie(); }
+function palPokaz() { O.primenit_svoi_cveta(N);if(PAL.pravka)O.primenitPalitru(PAL.svoja); }
+function paletteActions() {
+  const saved=N.svoi_cveta?.svoja_palitra,confirmed=PREFS?.confirmed()||N;
+  const save=PAL.pravka&&!LocusPreferencesModel.same(PAL.svoja,saved);
+  const apply=(PAL.pravka||PAL.origin==='custom')&&
+    (!LocusPreferencesModel.same(PAL.svoja,activePalette(confirmed))||Object.keys(confirmed.svoi_cveta?.status||{}).length>0);
+  return {save,apply};
+}
+
+function narisovatCveta() {
+  const mesto = document.getElementById('cveta-vybor');
+  if (!mesto) return;
+  const moja = (N.svoi_cveta || {}).svoja_palitra;
+  const actions=paletteActions(),canSave=Boolean(PREFS?.canSave());
+  const plitka = (kod, imja, cveta) =>
+    `<a class="pal-plitka${PAL.vybor === kod && !PAL.pravka ? ' on' : ''}" data-palitra="${kod}">
+      <span class="pal-krugi">${cveta.map((c) => `<i style="background:${c}"></i>`).join('')}</span>
+      <span class="pal-imja">${imja}</span></a>`;
+  const t = PAL.tochki[PAL.sv_aktiv];
+                                                                  
+                                                                        
+  mesto.innerHTML = `
+    <div class="pal-nabor">${O.PALITRY_LOKUSA.map((p) => plitka(p.kod, p.imja, p.cveta)).join('')}
+      ${validPalette(moja) ? plitka('svoja', 'моя', moja) : ''}</div>
+    <div class="pal-kast">
+      <div class="pal-kast-z">кастомизировать</div>
+      <div class="pal-sloty">${SLOTY_PALITRY.map((im, i) =>
+        `<a class="pal-slot${PAL.sv_aktiv === i ? ' on' : ''}" data-pal-sv="${i}">
+          <span class="pal-sv" style="background:${PAL.svoja[i] || '#e5e5e8'}"></span>
+          <span class="pal-sl-im">${im}</span></a>`).join('')}</div>
+      ${PAL.sv_aktiv >= 0 ? `<div class="pal-krug-r">
+        <div class="pal-krug" id="pal-krug" style="--tma:${(1 - PAL.jar / 100).toFixed(2)}">
+          <i class="pal-tochka" id="pal-tochka" ${t
+            ? `style="left:${t.x}%;top:${t.y}%"` : 'hidden'}></i></div>
+        <div class="pal-jar">
+          <span class="pal-jar-im">${SLOTY_PALITRY[PAL.sv_aktiv]}: яркость</span>
+          <input type="range" id="pal-jar" min="15" max="100" value="${PAL.jar}"
+            aria-label="яркость">
+          <span class="pal-pod">нажми на цвет в круге, следующий статус встанет сам</span>
+        </div></div>`
+        : '<div class="pal-pod pal-pod-v">нажми на статус, чтобы выбрать ему цвет</div>'}
+      ${PAL.pravka || actions.apply ? `<div class="pal-dejstvija">
+        <button type="button" class="kn" id="pal-sohr" ${actions.save&&canSave?'':'disabled'}>Сохранить</button>
+        <button type="button" class="kn" id="pal-primenit" ${actions.apply&&canSave?'':'disabled'}>Применить</button>
+        <button type="button" class="kn" id="pal-sbros">Сбросить</button></div>` : ''}
+    </div>`;
+}
+
+                                                             
+                                                           
+                                                    
+function cvetKruga(ugol, t, v) {
+  const h = ((ugol % 360) + 360) % 360 / 60;
+  const x = 1 - Math.abs((h % 2) - 1);
+  const [r, g, b] = h < 1 ? [1, x, 0] : h < 2 ? [x, 1, 0] : h < 3 ? [0, 1, x]
+    : h < 4 ? [0, x, 1] : h < 5 ? [x, 0, 1] : [1, 0, x];
+  const k = (c) => Math.round((c * t + (1 - t)) * 255 * v);
+  return '#' + [k(r), k(g), k(b)].map((c) =>
+    Math.max(0, Math.min(255, c)).toString(16).padStart(2, '0')).join('').toUpperCase();
+}
+
+function palIzTochki(ev, krug) {
+  const r = krug.getBoundingClientRect();
+  const dx = ev.clientX - (r.left + r.width / 2);
+  const dy = ev.clientY - (r.top + r.height / 2);
+  const rad = r.width / 2;
+  const d = Math.hypot(dx, dy) || 1;
+  const t = Math.min(1, d / rad);
+  const ugol = Math.atan2(dx, -dy) * 180 / Math.PI;
+  const k = t >= 1 ? rad / d : 1;
+  return { ugol, t, x: 50 + (dx * k / r.width) * 100, y: 50 + (dy * k / r.height) * 100 };
+}
+
+function palPostavit(p) {
+  const i = PAL.sv_aktiv;
+  if (i < 0) return;
+  PAL.tochki[i] = p;
+  PAL.svoja[i] = cvetKruga(p.ugol, p.t, PAL.jar / 100);
+  PAL.pravka = true;PAL.origin='custom';
+  rememberPalette();
+  const sv = document.querySelector(`[data-pal-sv="${i}"] .pal-sv`);
+  if (sv) sv.style.background = PAL.svoja[i];
+  const tochka = document.getElementById('pal-tochka');
+  if (tochka) { tochka.hidden = false; tochka.style.left = p.x + '%'; tochka.style.top = p.y + '%'; }
+  O.primenitPalitru(PAL.svoja);
+}
+
+async function palSohranitNabor(primenit) {
+  if(!PREFS?.canSave() || !(primenit?paletteActions().apply:paletteActions().save))return;
+  rememberPalette();
+  try { await PREFS.save(primenit?'palitra_primenit':'palitra_sohranit',PAL.svoja); }
+  catch(e) { O.tost(e.serverConfirmed?e.message:'Сохранение не завершено: '+e.message); }
+}
+
+function cvet_po_umolchaniju(vid, kod) {
+  const pere = vid === 'status' ? `--st-${kod}` : `--npr-${kod}`;
+  const z = getComputedStyle(document.documentElement)
+    .getPropertyValue(pere).trim();
+  if (/^#[0-9a-f]{6}$/i.test(z)) return z;
+  return vid === 'status' ? '#9a9aa3' : '#7182CB';
+}
+
+                                                                  
+                                                                  
+                                                     
+const VSE_RAZDELY_MENJU = ['Пространство', 'Задачи', 'Планёрка',
+  'Люди', 'Направления', 'Полезное'];
+const KLJUCH_PILJULI_K = 'locus-niz-razdely';
+
+function razdely_piljuli_k() {
+  if (IZM_PILJULJA) return IZM_PILJULJA;
+  try {
+    const s = localStorage.getItem(KLJUCH_PILJULI_K);
+    const spisok = s ? JSON.parse(s) : null;
+    if (Array.isArray(spisok) && spisok.length) {
+      const zhivye = spisok.filter((r) => VSE_RAZDELY_MENJU.includes(r));
+      if (zhivye.length) return zhivye.slice(0, 4);
+    }
+  } catch {                       }
+  return ['Пространство', 'Задачи', 'Планёрка', 'Люди'];
+}
+
+function narisovatVyborMenju() {
+  const mesto = document.getElementById('menju-vybor');
+  if (!mesto) return;
+  const vybrany = razdely_piljuli_k();
+  mesto.innerHTML = VSE_RAZDELY_MENJU.map((r) =>
+    `<a class="npr-ch${vybrany.includes(r) ? ' on' : ''}" data-menju="${r}">${r}</a>`)
+    .join('');
+}
+
+const KLJUCH_SVOJO_NAPR_K = 'locus-svojo-napravlenie';
+
+function narisovatVyborNapr() {
+  const mesto = document.getElementById('napr-vybor');
+  if (!mesto) return;
+  let svojo = (N && N.prioritetnoe_napravlenie) || null;
+  if (!svojo) {
+    try { svojo = localStorage.getItem(KLJUCH_SVOJO_NAPR_K); } catch {}
+  }
+  if (svojo === 'net') svojo = null;
+  const spisok = (SPRAV.napravlenija || []);
+  mesto.innerHTML = `<a class="npr-ch${!svojo ? ' on' : ''}" data-napr-svoe="">нет</a>`
+    + spisok.map((n) => {
+      const imja = (n.imja || n.nazvanie || n.kod).split(/[,(]/)[0].trim();
+      return `<a class="npr-ch${n.kod === svojo ? ' on' : ''}" data-napr-svoe="${n.kod}">${imja}</a>`;
+    }).join('');
+}
+
+function pererisovatNastrojki() {
+  const focused=document.activeElement,focusKey=focused?.dataset.pere?['data-pere',focused.dataset.pere]:
+    focused?.dataset.botSob?['data-bot-sob',focused.dataset.botSob]:null;
+  nastrojki();
+  narisovatVyborMenju();
+  narisovatVyborNapr();
+  narisovatRazdely();
+  narisovatPrioritetnye();
+  narisovatCveta();
+  privjazatNastrojki();
+  PREFS?.render(document.querySelector('[data-preferences-state]'));
+  otmetitSohranenie();O.ponumerovat();
+  if(focusKey)document.querySelector('['+focusKey[0]+'="'+CSS.escape(focusKey[1])+'"]')?.focus({preventScroll:true});
+}
+
+                                                              
+                         
+function privjazatNastrojki() {
+  document.querySelectorAll('#nastrojki [data-vid]').forEach((e) => {
+    const kljuch = e.dataset.vid;
+    const punkty = (VID.startovye_ekrany || []);
+    O.vypadajuschij(e, punkty.map((t) => ({ kod: t.kod, imja: t.imja })),
+      e.dataset.tek);
+    e.parentElement.addEventListener('click', (ev) => {
+      const p = ev.target.closest('.vyp-p');
+      if (!p || !p.dataset.kod) return;
+      pomenjat(kljuch, p.dataset.kod);
+    });
+  });
+  const spisok = (id, nabor, tek, pole) => {
+    const b = document.getElementById(id);
+    if (!b) return;
+    O.vypadajuschij(b, Object.entries(nabor).map(([kod, imja]) => ({ kod, imja })), tek)
+      .addEventListener('click', (ev) => {
+        const p = ev.target.closest('.vyp-p'); if (!p) return;
+        pomenjat(pole, p.dataset.kod);
+      });
+  };
+  spisok('bot-chto', BOT_CHTO, N.bot_chto || 'vse', 'bot_chto');
+  spisok('chi-zadachi', CHI_ZADACHI, N.chi_zadachi || 'moi', 'chi_zadachi');
+  spisok('vid-zadach', VID_ZADACH, N.vid_zadach || 'spisok', 'vid_zadach');
+}
+
+                                                                
+                                                                 
+                                                                 
+                                                            
+function vkljuchitNastrojki() {
+  const blok = document.getElementById('nastrojki');
+  if (!blok || blok.dataset.privjazan) return;
+  blok.dataset.privjazan = '1';
+
+  blok.addEventListener('click', (e) => {
+    const pere = e.target.closest('[data-pere]');
+    if (pere) { pomenjat(pere.dataset.pere, !N[pere.dataset.pere]); return; }
+
+    const bs = e.target.closest('[data-bot-sob]');
+    if (bs) {
+      const s = (BOT.sobytija || []).find((x) => x.kod === bs.dataset.botSob);
+      if (!s) return;
+const nabor=structuredClone(N.bot_sobytija||{}),initial=PREFS.confirmed().bot_sobytija||{};
+      const next=!botEventValue(s);nabor[s.kod]=next;
+      if(!Object.hasOwn(initial,s.kod)&&next===Boolean(s.vkljucheno))delete nabor[s.kod];
+      pomenjat('bot_sobytija',Object.keys(nabor).length?nabor:(PREFS.confirmed().bot_sobytija??{}));
+
+      return;
+    }
+
+    const mn = e.target.closest('[data-menju]');
+    if (mn) {
+      const r = mn.dataset.menju;
+      let vybrany = razdely_piljuli_k().slice();
+      if (vybrany.includes(r)) {
+                                                                     
+        if (vybrany.length <= 1) { O.tost('Хотя бы один раздел нужен'); return; }
+        vybrany = vybrany.filter((x) => x !== r);
+      } else {
+        if (vybrany.length >= 4) {
+          O.tost('В пилюле четыре места: сними лишний раздел'); return;
+        }
+                                                        
+        vybrany = VSE_RAZDELY_MENJU.filter((x) => vybrany.includes(x) || x === r);
+      }
+      PREFS.setExtra('pill',LocusPreferencesModel.same(vybrany,PILL_BASE)?null:vybrany);
+      return;
+    }
+
+    const ns = e.target.closest('[data-napr-svoe]');
+    if (ns) { pomenjat('prioritetnoe_napravlenie', ns.dataset.naprSvoe || 'net'); return; }
+
+    const rz = e.target.closest('[data-razdel]');
+    if (rz) {
+      const r = rz.dataset.razdel;
+      const bylo = Array.isArray(N.razdely_menju) && N.razdely_menju.length
+        ? N.razdely_menju : VSE_RAZDELY_PERVOGO;
+      let stalo;
+      if (bylo.includes(r)) {
+        if (bylo.length <= 2) { O.tost('Меньше двух разделов меню не бывает'); return; }
+        stalo = bylo.filter((x) => x !== r);
+      } else stalo = [...bylo, r];
+      pomenjat('razdely_menju', stalo);
+      return;
+    }
+
+    const pr = e.target.closest('[data-prior]');
+    if (pr) {
+      const kod = pr.dataset.prior;
+      const bylo = Array.isArray(N.prioritetnye_napravlenija)
+        ? N.prioritetnye_napravlenija : [];
+      pomenjat('prioritetnye_napravlenija',
+        bylo.includes(kod) ? bylo.filter((x) => x !== kod) : [...bylo, kod]);
+      return;
+    }
+
+                                                                       
+    const pl = e.target.closest('[data-palitra]');
+    if (pl) {
+      const kod = pl.dataset.palitra;
+      const svoi = JSON.parse(JSON.stringify(N.svoi_cveta || {}));
+const confirmed=PREFS.confirmed().svoi_cveta||{};
+      const initialCode=palitraPoKodu(confirmed.palitra)?.kod || (validPalette(confirmed.svoja_palitra)?'svoja':'firmennaja');
+      if(kod===initialCode){
+        for(const field of ['palitra','primenennaja_palitra','status']){
+          if(Object.hasOwn(confirmed,field))svoi[field]=structuredClone(confirmed[field]);else delete svoi[field];
+        }
+      }else{
+        if(kod==='svoja'){delete svoi.palitra;svoi.primenennaja_palitra=svoi.svoja_palitra.slice();}
+        else svoi.palitra=kod;
+        delete svoi.status;
+      }
+      PAL.vybor=kod;PAL.origin=kod==='svoja'?'custom':'preset';
+      PAL.pravka=false;PAL.sv_aktiv=-1;PAL.tochki=[];
+      PAL.svoja=(kod==='svoja'?svoi.svoja_palitra:palitraPoKodu(kod).cveta).slice();
+      rememberPalette();pomenjat('svoi_cveta',svoi);palPokaz();return;
+    }
+
+    const sv = e.target.closest('[data-pal-sv]');
+    if (sv) {
+      const i = Number(sv.dataset.palSv);
+      PAL.sv_aktiv = PAL.sv_aktiv === i ? -1 : i;
+      rememberPalette();narisovatCveta();
+      return;
+    }
+    if (e.target.closest('#pal-sohr')) { palSohranitNabor(false); return; }
+    if (e.target.closest('#pal-primenit')) { palSohranitNabor(true); return; }
+    if (e.target.closest('#pal-sbros')) {
+      palInit();
+rememberPalette();palPokaz();narisovatCveta();
+    }
+
+  });
+
+  let tjanu = false;
+  blok.addEventListener('pointerdown', (ev) => {
+    const krug = ev.target.closest('#pal-krug');
+    if (!krug) return;
+    ev.preventDefault();
+    tjanu = true;
+    try { krug.setPointerCapture(ev.pointerId); } catch {                   }
+    palPostavit(palIzTochki(ev, krug));
+  });
+  blok.addEventListener('pointermove', (ev) => {
+    if (!tjanu) return;
+    const krug = document.getElementById('pal-krug');
+    if (krug) palPostavit(palIzTochki(ev, krug));
+  });
+  const otpustil = () => {
+    if (!tjanu) return;
+    tjanu = false;
+                                                       
+    if (PAL.sv_aktiv < SLOTY_PALITRY.length - 1) PAL.sv_aktiv += 1;
+    rememberPalette();narisovatCveta();
+  };
+  blok.addEventListener('pointerup', otpustil);
+  blok.addEventListener('pointercancel', otpustil);
+  blok.addEventListener('input', (ev) => {
+    if (ev.target.id !== 'pal-jar') return;
+    PAL.jar = Number(ev.target.value) || 100;
+    document.getElementById('pal-krug')?.style.setProperty('--tma',
+      (1 - PAL.jar / 100).toFixed(2));
+    const t = PAL.tochki[PAL.sv_aktiv];
+    if (t) palPostavit(t); else rememberPalette();
+  });
+}
+
+function prochee() {
+  const ch = [];
+
+                                                               
+                                                                  
+                                                              
+                                                   
+  ch.push(`<div class="blk">
+    <div class="blk-z">онбординг<i></i><span class="n">${ONB.sdelano} из ${ONB.vsego}</span></div>
+    <div class="pr-b" style="margin-bottom:12px"><i style="width:${ONB.procent}%"></i></div>
+    <a class="shag shag-ves" id="onb-sbros"><span class="shag-g"></span>
+      <span class="shag-t">Пройти онбординг целиком
+        <div class="shag-p">все шаги с первого, отметки начнутся заново</div></span></a>
+    ${(ONB.shagi || []).map((s) =>
+      `<div class="shag${s.sdelano ? ' gotov' : ''}"><span class="shag-g"></span>
+        <span>${s.imja}</span></div>`).join('')}
+  </div>`);
+
+                                                                    
+                                                         
+  const A = ANKETA || {};
+  const zapolneno = POLJA_ANKETY
+    .filter(([k]) => A[k] != null && String(A[k]).trim() !== '').length;
+                                                               
+                                                               
+                                                                
+                                                             
+                                             
+  const esc = (t) => String(t || '').replace(/&/g, '&amp;').replace(/</g, '&lt;');
+  ch.push(`<div class="blk an">
+    <div class="blk-z">анкета<i></i>
+      <span class="n">${zapolneno} из ${POLJA_ANKETY.length}</span></div>
+    <div class="an-p">Всё необязательное: заполняй, что хочется.
+      Команда читает это в Полезном, во вкладке Команда</div>
+    ${GRUPPY_ANKETY.map(([gruppa, polja]) =>
+      `<section class="an-g"><div class="an-g-z">${gruppa}</div>
+        <div class="an-polja">${polja.map(([kod, imja], i) =>
+          `<label class="an-s${polja.length % 2 && i === polja.length - 1 ? ' an-shir' : ''}">
+            <textarea class="an-v" data-ank="${kod}" rows="1"
+              placeholder="${esc(LocusAnketa.podpis(kod,JA_CHELOVEK?.chelovek?.pol)||imja)}">${esc(A[kod])}</textarea>
+            <span class="an-n">${esc(LocusAnketa.podpis(kod,JA_CHELOVEK?.chelovek?.pol)||imja)}</span>
+          </label>`).join('')}</div>
+      </section>`).join('')}
+    <div class="an-niz"><button type="button" class="kn tmn" id="ank-sohr">Сохранить</button></div>
+  </div>`);
+
+
+                                                           
+                                                                  
+                                                            
+                                               
+
+                                                             
+                                                                
+                                                             
+                                              
+
+                                                               
+                                                       
+  if (MOI_PROEKTY.length) {
+    ch.push(`<div class="blk">
+      <div class="blk-z">мои проекты<i></i>
+        <span class="n">${MOI_PROEKTY.length}</span></div>
+      ${MOI_PROEKTY.map((x) => `<div class="str">
+        <span>${x.nazvanie}</span>
+        <span class="str-r">${x.napravlenie || ''}</span></div>`).join('')}
+    </div>`);
+  }
+
+                                                       
+                                                           
+                                                               
+
+                                                          
+                                                       
+
+  document.getElementById('prochee').innerHTML = ch.join('');
+}
+
+const KAB_VKLADKI = [['nastrojki', 'настройки'], ['anketa', 'анкета'],
+  ['grafik','график'], ['refleksija', 'рефлексия'], ['onbording', 'онбординг']];
+let kab_vkladka = new URLSearchParams(location.search).get('vkladka') || 'nastrojki';
+let anketa_vid = new URLSearchParams(location.search).get('anketa') || 'a';
+
+                                                                  
+                                                                
+                                                                   
+                                                          
+function narisovatKabVkladki() {
+  const r3 = document.getElementById('kab-r3');
+  if (!r3) return;
+  const est = est_izmenenija() && (!PREFS || PREFS.canSave());
+  r3.innerHTML = KAB_VKLADKI.map(([kod, imja]) =>
+    `<a class="fil-b${kab_vkladka === kod ? ' on' : ''}"
+      data-kab-vkl="${kod}">${imja}</a>`).join('')
+    + (kab_vkladka === 'nastrojki'
+      ? `<button type="button" class="kab-sohr${est ? ' akt' : ''}" id="kab-sohr"
+          aria-disabled="${!est}" ${est?'':'disabled'}>Сохранить</button>` : '')
+    + (kab_vkladka === 'refleksija'
+      ? `<span class="kr-pere" id="kr-pere">
+          <a class="kr-str" data-kr="-1" aria-label="предыдущий спринт">
+            <svg viewBox="0 0 16 16" width="12" height="12" fill="none"><path d="M10 3.5 5.5 8l4.5 4.5"
+              stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <b id="kr-sprint">спринт</b><span class="kr-d" id="kr-daty"></span>
+          <a class="kr-str" data-kr="1" aria-label="следующий спринт">
+            <svg viewBox="0 0 16 16" width="12" height="12" fill="none"><path d="M6 3.5 10.5 8 6 12.5"
+              stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </span>` : '');
+  r3.querySelectorAll('[data-kab-vkl]').forEach((e) =>
+    e.addEventListener('click', () => {
+      kab_vkladka = e.dataset.kabVkl;
+      const q = new URLSearchParams(location.search);
+      q.set('vkladka', kab_vkladka);
+      history.replaceState(null, '', '?' + q.toString());
+      narisovatKabVkladki();
+      primenitKabVkladku();
+    }));
+  document.getElementById('kab-sohr')?.addEventListener('click', sohranitVse);
+  r3.querySelectorAll('[data-kr]').forEach((e) =>
+    e.addEventListener('click', () => reflShag(Number(e.dataset.kr))));
+  if (kab_vkladka === 'refleksija' && REFL.gotov) narisovatRefl();
+}
+
+                                                             
+                                       
+function primenitKabVkladku() {
+  const kab = document.querySelector('.kab');
+  const refl = document.getElementById('kab-refl');
+  const schedule=document.getElementById('kab-grafik');if(schedule){schedule.hidden=kab_vkladka!=='grafik';if(!schedule.hidden&&!cabinetSchedule){try{cabinetSchedule=LocusCabinetSchedule.mount({root:schedule,API,O,calendar:SPR.kalendar,today:SPR.segodnja()});}catch(error){schedule.textContent='Не удалось открыть график. '+error.message;}}}
+  for (const b of document.querySelectorAll('#prochee .blk')) {
+    const z = (b.querySelector('.blk-z')?.textContent || '').toLowerCase();
+    const kuda = z.includes('онбординг') ? 'onbording'
+      : z.includes('анкета') || z.includes('про меня') ? 'anketa' : 'nastrojki';
+    b.hidden = kuda !== kab_vkladka;
+  }
+  if (kab) kab.hidden = kab_vkladka !== 'nastrojki';
+  if (kab_vkladka === 'anketa') anketaRostVse();
+  const r4 = document.getElementById('kab-r4');
+  if (r4) r4.hidden = kab_vkladka !== 'refleksija';
+  if (refl) {
+    refl.hidden = kab_vkladka !== 'refleksija';
+    if (!refl.hidden && !REFL.gotov) kabRefleksija();
+  }
+}
+
+                                                                  
+const REFL={gotov:false};let cabinetReflection=null,cabinetSchedule=null;
+function narisovatRefl(){cabinetReflection?.renderHeader();}
+function reflShag(step){cabinetReflection?.navigate(step);}
+async function kabRefleksija(){
+ const root=document.getElementById('kab-refl');if(!root||REFL.gotov)return;REFL.gotov=true;root.textContent='Открываю рефлексию…';
+ try{cabinetReflection=(await O.cabinetReflectionUi()).mount({root,actor:JA,calendar:SPR.kalendar,today:SPR.segodnja(),onHeader:narisovatKabVkladki});cabinetReflection.renderHeader();}catch(error){REFL.gotov=false;root.replaceChildren(document.createTextNode('Не удалось открыть личную рефлексию. '+error.message+' '));const b=document.createElement('button');b.type='button';b.className='kn';b.textContent='повторить';b.onclick=kabRefleksija;root.append(b);if(new URL(location.href).searchParams.has('nedelja')){const current=document.createElement('button');current.type='button';current.className='kn';current.textContent='открыть текущую неделю';current.onclick=()=>{const address=new URL(location.href);address.searchParams.delete('nedelja');history.replaceState(history.state,'',address);kabRefleksija();};root.append(current);}}
+}
+
+function anketaRost(t) {
+  if (!t.offsetParent) return;
+  t.style.height = 'auto';
+  t.style.height = Math.max(t.scrollHeight, 0) + 'px';
+}
+function anketaRostVse() {
+  requestAnimationFrame(() => document.querySelectorAll('.an-v').forEach(anketaRost));
+}
+
+function narisovat() {
+  profil(); pererisovatNastrojki(); prochee(); privjazat();
+  primenitKabVkladku();
+}
+
+function privjazat() {
+  document.getElementById('onb-sbros')?.addEventListener('click', async (ev) => {
+    const kn = ev.currentTarget;
+    kn.classList.add('gotov');
+    try {
+                                                               
+                                                        
+      await API.dejstvie('/onbording/sbros', {});
+      O.tost('Онбординг начинается с первого шага');
+      setTimeout(() => { location.href = '/poleznoe.html?onbording=1'; }, 500);
+    } catch (e) {
+      kn.classList.remove('gotov');
+      O.tost('Не получилось: ' + e.message);
+    }
+  });
+
+                                                                
+                                                                  
+                                                               
+                                 
+  document.querySelectorAll('.an-v').forEach((t) => {
+    t.addEventListener('input', () => anketaRost(t));
+  });
+  anketaRostVse();
+
+                                                                  
+                                                         
+  let anketa_sohranjaetsja=false;
+  document.getElementById('ank-sohr')?.addEventListener('click', async () => {
+    if(anketa_sohranjaetsja)return;
+    const telo = {};
+    document.querySelectorAll('[data-ank]').forEach((e) => {
+      const v = e.value.trim();
+      if(!ANKETA||v!==String(ANKETA[e.dataset.ank]??'').trim())telo[e.dataset.ank]=v===''?null:v;
+    });
+    if(ANKETA&&!Object.keys(telo).length){O.tost('Нет изменений');return;}
+    anketa_sohranjaetsja=true;
+    try {
+      let expected=ANKETA?.versija;
+      for(;;){
+        try{
+          ANKETA=expected===undefined?await API.sozdat('anketa',{chelovek_id:JA,...telo})
+            :await API.pravit('anketa',JA,{versija:expected,...telo});
+          break;
+        }catch(error){
+          if(error.kod!==409||!error.telo?.tekuschee)throw error;
+          const live=error.telo.tekuschee;
+          const describe=row=>Object.keys(telo).map(key=>LocusAnketa.podpis(key,JA_CHELOVEK?.chelovek?.pol)+': '+String(row[key]??'')).join('\n\n');
+          const choice=await O.razreshitKonflikt(error,{label:'анкета',local:describe(telo),current:describe(live)});
+          if(choice==='load'){ANKETA=live;prochee();privjazat();primenitKabVkladku();return;}
+          if(choice!=='own')return;
+          expected=live.versija;
+        }
+      }
+      prochee(); privjazat(); primenitKabVkladku();
+      O.tost('Сохранено');
+    } catch (e) { O.tost('Не получилось: ' + e.message); }
+    finally{anketa_sohranjaetsja=false;}
+  });
+
+  document.getElementById('ses-vyjti')?.addEventListener('click', async () => {
+    try {
+      await API.udalit('sessii', 'vse');
+      const ses = await API.ekran('sessii', {});
+      SESSII = ses.spisok || [];
+      narisovat();
+      O.tost('Вышли со всех устройств');
+    } catch (e) { O.tost('Не получилось: ' + e.message); }
+  });
+}
+
+(async function start() {
+  try {
+    SPRAV = await SPR.zagruzit();
+    window.DANNYE = { napravlenija: SPRAV.napravlenija, ljudi: SPRAV.ljudi,
+                      statusy: SPRAV.statusy, tipy: SPRAV.tipy, zadachi: [] };
+    JA = API.ja;
+    await zagruzit();
+                                                        
+                                                               
+                                                                  
+                                                                
+                                   
+    document.getElementById('menju').innerHTML = O.menju('Пространство', {
+      podrazdely: O.PODRAZDELY_PROSTRANSTVA,
+      podrazdel: 'про меня',
+    });
+                                                                   
+                                                               
+    {
+      const men = document.querySelector('#menju .men');
+      if (men && !document.getElementById('kab-r3')) {
+        const r3 = document.createElement('div');
+        r3.className = 'men-r3 men-r3-fil';
+        r3.id = 'kab-r3';
+        men.appendChild(r3);
+      }
+                                                                
+      if (men && !document.getElementById('kab-r4')) {
+        const r4 = document.createElement('div');
+        r4.className = 'men-r3 men-r3-fil kab-r4';
+        r4.id = 'kab-r4';
+        r4.hidden = true;
+        men.appendChild(r4);
+      }
+      narisovatKabVkladki();
+    }
+    preferencesStart();palInit();
+    vkljuchitNastrojki();
+    narisovat();
+    O.vkljuchitSkvoznoe();
+    document.body.dataset.gotovo = String((ONB.shagi || []).length);
+  } catch (e) {
+    document.getElementById('prochee').innerHTML =
+      `<div class="pusto"><div class="pusto-z">Не получилось загрузить</div>
+       <div class="pusto-p">${e.message}</div></div>`;
+    document.body.dataset.oshibka = e.message;
+  }
+})();
+})();
+</script>
+</body></html>

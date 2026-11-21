@@ -1,0 +1,65 @@
+<!doctype html><html lang="ru"><head>
+<meta charset="utf-8"><title>Уведомления</title>
+<link rel="icon" href="/api/favicon?v=L" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="stylesheet" href="/css/obschij.css">
+<style>
+                                                         
+                                                          
+                                                              
+                                                    
+.uv-stranica{max-width:720px;margin:0 auto}
+.uv-s{display:grid;grid-template-columns:7px minmax(0,1fr) auto;
+gap:12px;align-items:start;padding:15px 0;
+border-bottom:1px solid var(--lin);transition:background .14s}
+.uv-s:hover{background:rgba(0,0,0,.016)}
+.uv-t{width:7px;height:7px;border-radius:50%;background:var(--kr);
+margin-top:5px}
+.uv-s.proch .uv-t{background:var(--lin)}
+.uv-im{font-size:13px;color:var(--t1);display:block}
+.uv-p{font-size:12px;color:var(--t3);margin-top:3px}
+.uv-kogda{font-size:12px;color:var(--t3);white-space:nowrap;
+font-variant-numeric:tabular-nums}
+.uv-sh{display:flex;align-items:center;gap:8px;padding:2px 0 12px;
+position:sticky;top:0;z-index:40;background:var(--bg,#fff)}
+                                                                  
+.uv-ob{position:relative;overflow:hidden}
+.uv-ob .uv-s{transition:transform .18s;background:#fff}
+.uv-ob.svajp .uv-s{transform:translateX(-112px)}
+.uv-svajp{position:absolute;right:0;top:0;bottom:0;width:104px;
+  display:flex;align-items:center;justify-content:center;
+  font:inherit;font-size:12px;color:#fff;background:var(--tmn);border:0;cursor:pointer;
+  transform:translateX(104px);transition:transform .18s}
+.uv-ob.svajp .uv-svajp{transform:none}
+@media (hover:hover){
+  .uv-ob:hover .uv-s{transform:translateX(-112px)}
+  .uv-ob:hover .uv-svajp{transform:none}
+}
+.uv-ob:focus-within .uv-s{transform:translateX(-112px)}
+.uv-ob:focus-within .uv-svajp{transform:none}
+.uv-ob .uv-s:focus-visible{transform:none}
+.uv-content{min-width:0;overflow-wrap:anywhere}
+.uv-im{white-space:pre-wrap;overflow-wrap:anywhere}
+.uv-clamp{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.uv-expand{border:0;background:none;color:var(--t3);font:inherit;font-size:12px;padding:4px 0;margin-left:19px;cursor:pointer}
+.uv-more,.uv-status{margin:16px 0}
+.uv-status{font-size:13px;color:var(--t2)}
+.uv-svajp:disabled{opacity:.6}
+@media(max-width:600px){.uv-kogda{white-space:normal;max-width:64px;line-height:1.5}.uv-svajp,.uv-expand{min-height:44px}.uv-sh [data-uv-srez]{min-height:44px}}
+</style>
+</head><body>
+<div id="menju"></div>
+<div class="wrap"><div class="uv-stranica">
+                                                             
+                                                  
+  <div class="uv-sh">
+    <a class="fil-b on" role="button" tabindex="0" data-uv-srez="novye">непрочитанные<span class="n" id="uv-n"></span></a>
+    <a class="fil-b" role="button" tabindex="0" data-uv-srez="prochitannye">прочитанные</a>
+  </div>
+  <div id="spisok"><div class="zagr"><span class="zagr-s">загрузка</span><span class="zagr-p"><i></i></span></div></div>
+</div></div>
+<script src="/js/nedeli.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/obschij.js"></script>
+<script src="/js/uvedomlenija.js"></script>
+</body></html>

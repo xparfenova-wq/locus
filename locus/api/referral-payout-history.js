@@ -1,0 +1,15 @@
+const {data}=require('./platezhi.js');
+function context(row){try{return JSON.parse(row.srez)||{};}catch{return {};}}
+function fact(row){const v=context(row).vyplata;if(!v||typeof v.summa!=='number'||!Number.isFinite(v.summa)||v.summa<=0)return null;try{return {summa:v.summa,data:data(v.data,'data')};}catch{return null;}}
+function rows(db,id){return db.prepare("SELECT * FROM zhurnal WHERE obekt='sotrudnichestvo' AND obekt_id=? AND pole='vyplacheno' ORDER BY id").all(id);}
+function states(events){const roots=new Map(),active=new Map();for(const row of events){const c=context(row),back=c.obratno_k_vyplate;if(Number.isSafeInteger(back)&&roots.has(back)){const root=roots.get(back);roots.set(row.id,root);active.set(root,!active.get(root));}else if(fact(row)){roots.set(row.id,row.id);active.set(row.id,true);}}return active;}
+function last(db,cooperation){const events=rows(db,cooperation.id),active=states(events),created=db.prepare("SELECT max(id) id FROM zhurnal WHERE obekt='sotrudnichestvo' AND obekt_id=? AND pole='sozdano'").get(cooperation.id)?.id||0;let latest=null;
+ for(const row of events){if(row.id<created)continue;const c=context(row);if(c.chelovek_id&&c.chelovek_id!==cooperation.chelovek_id||c.napravlenie&&c.napravlenie!==cooperation.napravlenie)continue;let day;
+  const value=fact(row);if(value){if(!active.get(row.id))continue;day=value.data;}else{const legacy=/\(выплата [^)]+ от (\d{4}-\d{2}-\d{2})\)$/.exec(String(row.stalo||''));if(legacy)try{day=data(legacy[1],'data');}catch{}}
+  if(day&&(!latest||day>latest))latest=day;
+ }return latest;
+}
+function undone(db,id,event){return states(rows(db,id)).get(event)===false;}
+function canUndo(db,current,event){const action=context(event).dejstvie_id;if(!action||!current||!fact(event))return false;const command=db.prepare("SELECT * FROM zhurnal WHERE json_extract(srez,'$.dejstvie_id')=? ORDER BY id").all(action);if(!command.length)return false;try{require('./referral-payout-link.js').assertPayoutUnlinked(db,command);require('./referral-task-history.js').assertComplete(db,command);for(const row of command){const table=require('./obschij.js').TABLICA_OBEKTA[row.obekt];if(!table)return false;const target=table==='sotrudnichestva'?current:db.prepare('SELECT * FROM '+table+' WHERE id=?').get(row.obekt_id);if(!target)return false;require('./otmena-versii.js').proverit(db,table,target,row);}return true;}catch{return false;}}
+function markUndo(db,plan,head){if(plan.tablica!=='sotrudnichestva')return;for(const original of plan.zapisi){if(original.pole!=='vyplacheno')continue;const c=context(original);if(!c.vyplata&&!c.obratno_k_vyplate)continue;const inverse=db.prepare("SELECT * FROM zhurnal WHERE id>? AND obekt='sotrudnichestvo' AND obekt_id=? AND pole='vyplacheno' ORDER BY id DESC LIMIT 1").get(head,original.obekt_id);if(!inverse)throw new Error('Undo journal entry missing');db.prepare('UPDATE zhurnal SET srez=? WHERE id=?').run(JSON.stringify({...context(inverse),obratno_k_vyplate:original.id}),inverse.id);}}
+module.exports={context,fact,rows,last,undone,canUndo,markUndo};

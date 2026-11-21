@@ -1,0 +1,1374 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>ОКР</title>
+<link rel="icon" href="/api/favicon?v=L" type="image/svg+xml">
+<link rel="stylesheet" href="/css/obschij.css">
+<link rel="stylesheet" href="/css/goal-editor.css">
+<style>
+                                                             
+                                                              
+.wrap{max-width:1680px}
+.wrap>.kol{max-width:none;width:100%;min-width:0}
+
+                                                          
+                                                           
+                                          
+.vid{display:inline-flex;gap:2px;padding:3px;background:var(--pole);
+border-radius:var(--r-pill)}
+.vid-e{font-size:11.5px;color:var(--t2);padding:5px 13px;
+border-radius:var(--r-pill);white-space:nowrap;transition:all .14s}
+.vid-e:hover{color:var(--t1)}
+.vid-e.on{background:#fff;color:var(--t1);font-weight:500;
+box-shadow:none}
+
+                                                            
+                                                          
+.plt{display:grid;grid-template-columns:repeat(4,1fr);
+border-top:1px solid var(--lin);border-bottom:1px solid var(--lin);
+margin-bottom:26px}
+.plt-k{padding:22px 26px;border-left:1px solid var(--lin);min-width:0;
+display:block;transition:background .14s}
+.plt-k:first-child{border-left:0;padding-left:0}
+.plt-k[data-srez]:hover{background:var(--pole)}
+.plt-k.on{background:var(--pole)}
+.plt-l{display:block;font-size:10.5px;color:var(--t3);letter-spacing:.1em;
+text-transform:uppercase;margin-bottom:12px}
+.plt-c{display:flex;align-items:baseline;gap:8px;font-size:46px;font-weight:500;
+letter-spacing:-.045em;line-height:.95;font-family:'Geist Mono',ui-monospace,monospace;
+font-feature-settings:"tnum";white-space:nowrap}
+.plt-c.kr{color:var(--kr)}
+.plt-c .iz{font-size:13px;color:var(--t3);font-style:normal;
+letter-spacing:0;font-weight:400}
+.plt-d{display:block;font-size:11.5px;color:var(--t3);margin-top:11px;line-height:1.35}
+@media (max-width:1100px){.plt-c{font-size:36px}.plt-k{padding:18px 20px}}
+@media (max-width:760px){.plt{grid-template-columns:repeat(2,1fr)}
+.plt-k:nth-child(3){border-left:0;padding-left:0}
+.plt-k:nth-child(n+3){border-top:1px solid var(--lin)}
+.plt-c{font-size:32px}.plt-k{padding:16px 14px}}
+
+.cel{border-bottom:1px solid var(--lin)}
+                                                             
+                                                              
+                                                              
+                                                               
+.cel-sh{display:grid;grid-template-columns:52px minmax(0,1fr) auto 150px 24px;
+gap:20px;align-items:center;padding:19px 0;transition:background .14s}
+                                                         
+                                                                
+                                                             
+                            
+.cel-sh:hover{background:none}
+.cel-sh:hover .cel-im{color:var(--t1)}
+                                                                
+.cel-doli{font-family:'Geist Mono',ui-monospace,monospace;
+font-size:21px;letter-spacing:-.04em;color:var(--t1);
+font-feature-settings:"tnum";text-align:right;line-height:1}
+.cel-doli i{font-style:normal;font-size:11.5px;color:var(--t3);
+margin-left:1px}
+                                                                   
+.cel-sh.ugroza .cel-doli{color:#FF6716}
+                                                                     
+.cel-sh.tiho{opacity:.62}
+.cel-sh.tiho:hover{opacity:1}
+                                                                
+                                                          
+.cel-pb .pr-b{display:block;width:100%}
+.cel-ch{display:flex;flex-direction:column;align-items:flex-end;gap:4px;
+white-space:nowrap}
+.cel-sp{font-size:10.5px;color:var(--t3);font-feature-settings:"tnum"}
+                                                             
+                                                            
+                                                              
+                                                                  
+@media (max-width:860px){
+.cel-sh{grid-template-columns:46px minmax(0,1fr) auto 24px;gap:8px 12px;
+align-items:start}
+.cel-doli{grid-column:1/2;grid-row:1/3;align-self:center;font-size:21px}
+.cel-im{grid-column:2/3}
+.cel-vl{grid-column:3/4;justify-self:end}
+.cel-str{grid-column:4/5;align-self:center}
+.cel-ch{grid-column:2/-1;flex-direction:row;align-items:baseline;
+justify-content:flex-start;gap:10px}
+}
+.cel-im{font-size:13px;min-width:0;display:block}
+.cel-f{display:block;font-size:11.5px;color:var(--t3);margin-top:3px}
+.cel-vl{font-size:11.5px;color:var(--kr);white-space:nowrap}
+.pr-b{position:relative}
+                                                                           
+.pr-b u{position:absolute;top:-2px;width:1px;height:calc(100% + 4px);
+background:var(--t3);opacity:.5}
+.ust-p{font-size:10.5px;color:var(--zh);margin-left:8px}
+                                                            
+                                    
+.cel-pr{font-size:21px;font-weight:500;letter-spacing:-.03em;line-height:1;
+font-family:'Geist Mono',ui-monospace,monospace;font-feature-settings:"tnum";
+display:inline-flex;align-items:baseline;gap:3px}
+.cel-pr i{font-size:11.5px;color:var(--t3);font-style:normal;font-weight:400;
+letter-spacing:0}
+.cel-pr.kr{color:var(--kr)}
+.cel-str{width:10px;height:10px;flex:none;justify-self:center;
+background:var(--t3);transition:transform .14s;
+-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2.4 4 L5 6.6 L7.6 4' fill='none' stroke='%23000' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/10px 10px no-repeat;
+mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2.4 4 L5 6.6 L7.6 4' fill='none' stroke='%23000' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/10px 10px no-repeat}
+.cel.otkr .cel-str{transform:rotate(180deg)}
+.cel-telo{display:none;padding:0 0 16px 24px}
+.cel.otkr .cel-telo{display:block}
+.rez{display:grid;grid-template-columns:minmax(0,1fr) 78px 78px 70px 24px;gap:12px;
+align-items:center;padding:9px 0;font-size:11.5px;border-top:1px solid var(--lin)}
+                                                                   
+                                                   
+.rez-sh{font-size:10.5px;color:var(--t3);letter-spacing:.08em;
+text-transform:uppercase;border-top:0;padding-bottom:4px}
+.rez-sh span:nth-child(n+2){text-align:right}
+                                                              
+.rez-net{font-size:11.5px;color:var(--t3);padding:12px 0;line-height:1.45;
+border-top:1px solid var(--lin);max-width:520px}
+                                                             
+                                                              
+                                                                    
+.rez-niz{display:flex;align-items:center;gap:13px;padding:14px 0 4px;
+border-top:1px solid var(--lin);flex-wrap:wrap}
+.rez-niz i{flex:1;height:0}
+.dob-r{padding:8px 16px;font-size:12px;white-space:nowrap}
+.rez-pod{font-size:10.5px;color:var(--t3)}
+.udal-c{font-size:11.5px;color:var(--t3);white-space:nowrap;transition:color .14s}
+.udal-c:hover{color:var(--kr)}
+.rez-n{color:var(--t2);min-width:0}
+.rez-n[role="button"]{cursor:pointer}
+.rez-c{font-family:'Geist Mono',monospace;font-feature-settings:"tnum";text-align:right;color:var(--t2)}
+.rez-c.kr{color:var(--kr)}
+.rez-c.vvod{border-bottom:1px dashed var(--lin);padding-bottom:1px;
+cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22'%3E%3Cpath d='M11 3v16M8 3h6M8 19h6' stroke='%231a1815' stroke-width='1.4'/%3E%3C/svg%3E") 11 11, text}
+.rez-c.vvod:focus{outline:none;border-bottom-color:var(--t1);color:var(--t1)}
+.udal{font-size:13px;color:var(--lin);text-align:center;transition:color .14s}
+.udal:hover{color:var(--kr)}
+.dob{font-size:11.5px;color:var(--t3);padding:9px 0;transition:color .14s;display:inline-block}
+.dob:hover{color:var(--t1)}
+                                                                 
+                                             
+.nov-obj{padding-top:22px}
+.nov-z{font-size:10.5px;color:var(--t3);letter-spacing:.1em;text-transform:uppercase}
+.nov-p{font-size:11.5px;color:var(--t3);margin-top:10px;line-height:1.45;max-width:560px}
+.nov{display:grid;grid-template-columns:minmax(0,1fr) 200px auto;gap:14px;
+align-items:center;padding:13px 0 0}
+.nov .kn{padding:9px 18px;font-size:12px;white-space:nowrap}
+@media (max-width:760px){.nov{grid-template-columns:minmax(0,1fr)}}
+.nov input,.nov select{border:0;border-bottom:1px solid var(--lin);background:transparent;
+font-family:inherit;font-size:13px;padding:5px 0;color:var(--t1)}
+.nov input:focus,.nov select:focus{outline:none;border-bottom-color:var(--t1)}
+.nov input::placeholder{color:var(--t3)}
+                                                                     
+                               
+.zak-s{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12px;color:var(--t2);
+padding-bottom:12px;border-bottom:1px solid var(--lin)}
+.zak-p{font-size:11.5px;color:var(--t3);padding:12px 0 4px}
+.zak-r{display:grid;grid-template-columns:16px minmax(0,1fr) auto;gap:10px;
+align-items:center;padding:7px 0;font-size:12px;border-top:1px solid var(--lin)}
+.zak-r span:nth-of-type(1){min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.zak-c{font-family:'Geist Mono',ui-monospace,monospace;font-size:11.5px;
+color:var(--t3);font-feature-settings:"tnum"}
+                                              
+.zam-f{display:grid;grid-template-columns:94px minmax(0,1fr);gap:12px 14px;
+align-items:center;font-size:12px;padding-bottom:4px}
+.zam-l{font-size:11.5px;color:var(--t3)}
+.zam-v{font-family:'Geist Mono',ui-monospace,monospace;font-feature-settings:"tnum"}
+.zam-f input{border:0;border-bottom:1px solid var(--lin);background:transparent;
+font-family:inherit;font-size:13px;padding:5px 0;color:var(--t1);width:100%}
+.zam-f input:focus{outline:none;border-bottom-color:var(--t1)}
+.zam-f input::placeholder{color:var(--t3)}
+.zam-f select{font:inherit;color:var(--t1);background:var(--fon);border:1px solid var(--lin);min-height:44px;max-width:100%;width:100%}
+.rez-ist{display:block;color:var(--zh);font-size:11px;margin-top:5px;white-space:normal}
+.r-formula{grid-column:1/-1;display:grid;gap:10px}
+.r-formula[hidden]{display:none}
+.r-proverka{font-size:12px;line-height:1.5;overflow-wrap:anywhere}
+#r-proverit{min-height:44px;text-align:left;border:1px solid var(--lin);background:transparent;color:var(--t1);padding:8px;cursor:pointer}
+#rp-obnovit,#rp-moe{min-height:44px;font:inherit;text-align:left;border:1px solid var(--lin);background:transparent;color:var(--t1);padding:8px;cursor:pointer}
+                                                                   
+                                                                
+                                                                   
+                                                                   
+                                                                  
+                  
+
+                                                                   
+                                                                   
+                   
+                                                          
+                                                                   
+                                                                  
+                                                                  
+                                                               
+                                                               
+
+                                                                
+                                                          
+.okr-dve{display:block}
+.okr-celi{min-width:0;max-width:1180px}
+#celi{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+gap:0 26px;align-items:start}
+#celi>.pusto{grid-column:1/-1}
+                                                               
+                                                
+.cel.otkr{grid-column:auto}
+@media (max-width:860px){#celi{grid-template-columns:minmax(0,1fr);gap:0}}
+                                                              
+                                                              
+                                                               
+.cel{scroll-margin-top:160px}
+.cel-tochki{display:none;justify-content:center;gap:7px;padding:14px 0 6px}
+.cel-tochki a{width:6px;height:6px;border-radius:50%;background:var(--lin);
+transition:background .2s,transform .2s}
+.cel-tochki a.on{background:var(--t1);transform:scale(1.25)}
+@media (max-width:760px){
+  .cel{scroll-margin-top:96px}
+  #celi{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+  margin:0 -16px;align-items:flex-start}
+  #celi::-webkit-scrollbar{display:none}
+  #celi>.cel{flex:0 0 100%;box-sizing:border-box;padding:0 16px;
+  scroll-snap-align:center;scroll-snap-stop:always}
+  #celi>.pusto,#celi>.zagr{flex:0 0 100%;padding:0 16px}
+  .cel-tochki{display:flex}
+}
+
+                                                              
+                                                                
+                                                                
+                                  
+#celi>.cel:not(.otkr) .cel-sh{grid-template-columns:52px minmax(0,1fr) auto;
+gap:3px 14px;align-items:start;padding:15px 0}
+#celi>.cel:not(.otkr) .cel-doli{grid-column:1/2;grid-row:1/4;
+align-self:center;text-align:left}
+#celi>.cel:not(.otkr) .cel-im{grid-column:2/3;grid-row:1/2}
+#celi>.cel:not(.otkr) .cel-ch{grid-column:3/4;grid-row:1/2;
+flex-direction:row;align-items:baseline;gap:9px;justify-content:flex-end}
+#celi>.cel:not(.otkr) .cel-vl{grid-column:2/3;grid-row:2/3;font-size:10.5px}
+#celi>.cel:not(.otkr) .cel-pb{grid-column:2/-1;grid-row:3/4;margin-top:5px}
+#celi>.cel:not(.otkr) .cel-str{grid-column:3/4;grid-row:2/3;justify-self:end}
+#celi>.cel:not(.otkr) .cel-sp{font-size:10.5px}
+
+                                                               
+                                                             
+                                                                
+                                       
+.vrn{border-top:1px solid var(--lin);padding-top:16px}
+.vrn-z{font-size:10.5px;color:var(--t3);letter-spacing:.1em;
+text-transform:uppercase;margin-bottom:16px}
+.vrn-s{padding:10px 0;border-bottom:1px solid var(--lin)}
+.vrn-s:last-of-type{border-bottom:0}
+.vrn-sh{display:flex;align-items:baseline;justify-content:space-between;
+gap:10px;margin-bottom:6px}
+.vrn-i{font-size:11.5px;color:var(--t2)}
+.vrn-c{font-family:'Geist Mono',ui-monospace,monospace;font-feature-settings:"tnum";
+font-size:15px;letter-spacing:-.02em;color:var(--t1)}
+.vrn-p{height:4px;background:var(--pole);overflow:hidden}
+.vrn-p i{display:block;height:100%;background:var(--tmn)}
+.vrn-d{font-size:10.5px;color:var(--t3);margin-top:5px;
+font-family:'Geist Mono',ui-monospace,monospace;font-feature-settings:"tnum"}
+                                                              
+.vrn-u{font-size:11.5px;color:var(--t2);padding:14px 0 0;line-height:1.5;
+border-top:1px solid var(--lin);margin-top:14px}
+.vrn-u b{font-weight:500}
+.vrn-o{font-size:10.5px;color:var(--t3);padding-top:7px}
+
+                                                                    
+                                                            
+.rez-c.sam{border-bottom:0;color:var(--t1)}
+                                                                   
+.rez-sam{font-size:10.5px;color:var(--t3);margin-left:7px;white-space:nowrap}
+
+                                       
+.zad-blok{border-top:1px solid var(--lin);margin-top:16px;padding-top:14px}
+.zad-z{font-size:10.5px;color:var(--t3);letter-spacing:.08em;
+text-transform:uppercase;margin-bottom:9px}
+.zad-s{display:grid;grid-template-columns:minmax(0,1fr) 120px 90px 24px;
+gap:12px;align-items:center;padding:8px 0;font-size:12px;
+border-top:1px solid var(--lin)}
+.zad-s .im{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.zad-s .st{font-size:11.5px;color:var(--t3)}
+.zad-s .dt{font-family:'Geist Mono',ui-monospace,monospace;font-size:11.5px;
+color:var(--t3);text-align:right;font-feature-settings:"tnum"}
+.zad-net{font-size:11.5px;color:var(--t3);padding:9px 0;line-height:1.45;max-width:520px}
+.zad-niz{padding-top:11px}
+.pri-z{padding:7px 14px;font-size:11.5px}
+                                                          
+                                                                
+.veha-d{display:flex;align-items:center;gap:10px;padding:2px 2px 8px}
+.sdel-z{font-size:11.5px;color:var(--t2);border-bottom:1px solid var(--lin);
+cursor:pointer;transition:color .14s}
+.sdel-z:hover{color:var(--t1)}
+.veha-p{font-size:10.5px;color:var(--t3)}
+.otc-z{font-size:13px;color:var(--lin);text-align:center;transition:color .14s}
+.otc-z:hover{color:var(--kr)}
+                                              
+.vyb-z-pole{width:100%;border:0;border-bottom:1px solid var(--lin);
+background:transparent;font-family:inherit;font-size:13px;padding:7px 0;
+color:var(--t1);margin-bottom:6px}
+.vyb-z-pole:focus{outline:none;border-bottom-color:var(--t1)}
+.vyb-z-sp{max-height:320px;overflow-y:auto}
+.vyb-z-s{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;
+align-items:center;padding:9px 2px;font-size:12px;
+border-top:1px solid var(--lin);transition:background .12s}
+.vyb-z-s:hover{background:var(--pole)}
+.vyb-z-s .im{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vyb-z-s .np{font-size:10.5px;color:var(--t3);white-space:nowrap}
+
+                                                             
+                                                  
+
+                                                          
+                                                       
+                                                   
+                                                             
+@media (max-width:760px){
+                                                         
+                                                           
+                                               
+.men-r2-obj{flex-direction:column;align-items:stretch;gap:7px}
+.men-r2-obj>.npr-chipy{width:100%;max-width:100%}
+.men-r2-dejstvie{position:static;transform:none;margin:0;
+width:100%;display:flex;justify-content:center;
+overflow-x:auto;scrollbar-width:none;padding:0 16px}
+.men-r2-dejstvie::-webkit-scrollbar{display:none}
+.vid{flex:none}
+.vid-e{min-height:44px;display:inline-flex;align-items:center}
+
+                                                            
+                                                            
+                                                        
+.plt{grid-template-columns:repeat(2,minmax(0,1fr));margin-bottom:20px}
+                                                                 
+                                                                
+                                                                 
+.plt-k,.plt-k:first-child{padding:15px 13px;border-left:1px solid var(--lin)}
+.plt-k:nth-child(2n+1){border-left:0}
+.plt-k:nth-child(n+3){border-top:1px solid var(--lin)}
+.plt-c{font-size:29px}
+.plt-l{font-size:9.5px;letter-spacing:.07em;margin-bottom:8px;line-height:1.25}
+.plt-d{font-size:10.5px;margin-top:8px;line-height:1.3}
+
+                                                           
+                                                              
+                                                   
+                                                          
+                                                             
+                                           
+                                                              
+                                                               
+                                                          
+                                
+                                                            
+                                                                  
+                
+#celi>.cel .cel-sh,
+#celi>.cel:not(.otkr) .cel-sh{
+grid-template-columns:48px minmax(0,1fr) 24px;
+gap:5px 12px;padding:14px 0;align-items:center;min-height:56px}
+#celi>.cel .cel-doli,
+#celi>.cel:not(.otkr) .cel-doli{grid-column:1/2;grid-row:1/4;
+align-self:start;text-align:left;font-size:21px;padding-top:1px}
+#celi>.cel .cel-im,
+#celi>.cel:not(.otkr) .cel-im{grid-column:2/3;grid-row:1;
+font-size:13px;line-height:1.3}
+#celi>.cel .cel-str,
+#celi>.cel:not(.otkr) .cel-str{grid-column:3/4;grid-row:1;
+justify-self:end;align-self:center}
+#celi>.cel .cel-ch,
+#celi>.cel:not(.otkr) .cel-ch{grid-column:2/-1;grid-row:2;
+flex-direction:row;flex-wrap:wrap;align-items:baseline;
+justify-content:flex-start;gap:4px 10px;white-space:normal}
+#celi>.cel .cel-vl,
+#celi>.cel:not(.otkr) .cel-vl{grid-column:2/-1;grid-row:3;
+font-size:10.5px;justify-self:start}
+#celi>.cel .cel-pb,
+#celi>.cel:not(.otkr) .cel-pb{grid-column:1/-1;grid-row:4;
+margin-top:4px;width:100%}
+#celi>.cel .cel-sp,
+#celi>.cel:not(.otkr) .cel-sp{white-space:normal;font-size:10.5px}
+.cel-str{width:10px;height:10px;position:relative}
+                                                           
+.cel-str::after{content:"";position:absolute;left:50%;top:50%;
+width:44px;height:44px;transform:translate(-50%,-50%) rotate(-45deg)}
+.cel-telo{padding:0 0 14px 0}
+
+                                                           
+                                                          
+                                                            
+                                                              
+                                              
+.cel-telo .rez{grid-template-columns:minmax(0,1fr) 24px;
+gap:7px 12px;padding:12px 0;font-size:13px;min-height:52px;
+align-items:center}
+.cel-telo .rez>.rez-n{grid-column:1/2;grid-row:1}
+.cel-telo .rez>.udal{grid-column:2/3;grid-row:1;justify-self:end;
+width:34px;height:34px;display:inline-flex;align-items:center;
+justify-content:center;font-size:16px}
+                                                               
+                                                                    
+                                                                    
+                                                                 
+                                                           
+                                            
+.cel-telo .rez{grid-template-columns:repeat(3,minmax(0,1fr)) 24px}
+.cel-telo .rez>.rez-n{grid-column:1/4;grid-row:1}
+.cel-telo .rez>.rez-n[role="button"]{min-height:44px}
+.cel-telo .rez>.udal{grid-column:4/5;grid-row:1}
+.cel-telo .rez>span:nth-child(2){grid-column:1/2;grid-row:2}
+.cel-telo .rez>span:nth-child(3){grid-column:2/3;grid-row:2}
+.cel-telo .rez>span:nth-child(4){grid-column:3/4;grid-row:2}
+.cel-telo .rez>.rez-c{justify-self:start;text-align:left;
+white-space:nowrap;font-size:13px;
+display:inline-flex;align-items:center;gap:5px;max-width:100%}
+.cel-telo .rez>.rez-c::before{font-size:10px;color:var(--t3);
+font-family:inherit;letter-spacing:.04em;flex:none}
+.cel-telo .rez>span:nth-child(2)::before{content:"факт"}
+.cel-telo .rez>span:nth-child(3)::before{content:"план"}
+.cel-telo .rez>span:nth-child(4)::before{content:"доля"}
+                                                                 
+.cel-telo .rez>.rez-c.vvod{min-height:36px;padding:0 7px;
+border:1px solid var(--lin);border-radius:8px;align-items:center}
+                                                                 
+.cel-telo .rez-sh{display:none}
+                                                            
+.rez-niz{flex-wrap:wrap;gap:9px}
+.rez-niz .kn{min-height:44px;display:inline-flex;align-items:center}
+
+                                                            
+.nov{grid-template-columns:minmax(0,1fr);gap:10px}
+.nov input,.nov select{min-height:44px;font-size:16px;width:100%}
+}
+.kv-rez{padding:10px 0;border-top:1px solid var(--lin)}
+.kv-rez:first-child{border-top:0}
+.kv-im{font-size:13px;margin-bottom:8px}
+.kv-im .n{color:var(--t3);font-size:12px;margin-left:8px}
+.kv-setka{display:flex;gap:10px;flex-wrap:wrap}
+.kv-kl{display:flex;flex-direction:column;gap:4px;font-size:11.5px;color:var(--t3)}
+.kv-vvod{width:86px;border:0;background:var(--pole);border-radius:8px;
+  padding:7px 9px;font:inherit;font-size:13px}
+.kv-vvod:focus{outline:none}
+.kv-sverka{font-size:12px;color:var(--t3);padding-top:7px}
+.kv-sverka.mimo{color:#c2410c}
+.kv-uzhe{font-size:12px;color:#c2410c;padding-top:8px}
+.po-kv{margin-left:8px}
+.rez-ned{display:block;font-style:normal;font-size:10.5px;color:var(--t3)}
+.rez-ned.tiho{color:var(--t3);opacity:.7}
+.okr-deletion-state{font-size:13px;margin:12px 0;overflow-wrap:anywhere}
+.okr-deletion-state:has(details[hidden]):not(:has(.okr-deletion-pending)):has(p:empty){margin:0}
+.okr-deletion-state summary{cursor:pointer;min-height:44px;display:flex;align-items:center}
+.okr-deleted-row,.okr-deletion-pending{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:8px 0;border-bottom:1px solid var(--lin)}
+.okr-deleted-row>span{flex:1;min-width:0}.okr-deletion-state button{min-height:44px;max-width:100%;white-space:normal}
+.okr-deletion-pending p{flex-basis:100%}.goal-incomplete{display:block;font-size:11px;font-weight:400;color:var(--t3)}.rez-base-unknown{display:block;font:11px/1.4 inherit;color:var(--t3);white-space:normal}
+.rez-base-unknown button{display:block;min-height:44px;max-width:100%;font-size:11px}.result-base-actions{display:flex;flex-wrap:wrap;gap:8px}.result-base-actions button{min-height:44px;max-width:100%}.measurement-latest{display:block;font-size:11px;line-height:1.5;overflow-wrap:anywhere;color:var(--t3);margin-top:6px}.measurement-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}.measurement-actions button,.milestone-state{font-size:11px;min-height:44px;white-space:normal;max-width:100%}.measurement-history-row{border-bottom:1px solid var(--lin);padding:8px 0;overflow-wrap:anywhere}.measurement-history-row p{margin:4px 0;font-size:13px}.measurement-history-actions button{min-height:44px;max-width:100%}
+.rez-base-unknown button{padding:8px 10px;white-space:normal;overflow-wrap:anywhere}
+@media(max-width:760px){
+ .cel-telo .rez>.rez-c{min-width:0;flex-wrap:wrap}
+ .cel-telo .rez>.rez-c>.rez-base-unknown{flex:0 0 100%;min-width:0}
+}
+</style></head><body>
+<div id="menju"></div>
+<div class="wrap"><div class="kol">
+                                                                  
+                                                                     
+                                                           
+                                             
+  <div class="okr-dve">
+    <div class="okr-celi">
+      <div id="goal-publication-pending"></div>
+      <div id="goal-edit-pending"></div>
+      <div id="period-plan-pending"></div>
+      <div id="okr-deletion-state"></div>
+      <div id="okr-window-state" class="goal-window-status" role="status" hidden></div>
+      <p id="okr-fact-context" class="measurement-latest" role="status"></p>
+      <div id="celi"><div class="zagr"><span class="zagr-s">загрузка</span><span class="zagr-p"><i></i></span></div></div>
+      <div class="cel-tochki" id="cel-tochki"></div>
+      <div id="novaja"></div>
+    </div>
+  </div>
+</div></div>
+<script src="/js/nedeli.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/obschij.js"></script>
+<script src="/js/kalendar.js"></script>
+<script src="/js/forma-rezultata.js"></script>
+<script src="/js/goal-state.js"></script>
+<script src="/js/goal-edit-model.js"></script>
+<script src="/js/goal-editor.js"></script>
+<script src="/js/okr-delete.js"></script>
+<script src="/js/decimal-plan.js"></script>
+<script src="/js/goal-window-model.js"></script>
+<script src="/js/period-plan-state.js"></script>
+<script src="/js/period-plan-form.js"></script>
+<script>
+(function () {
+                                                                 
+                                                              
+                                                                  
+                                             
+let SPRAV = null, VSE_CELI = [], CELI = [], otkrytye = new Set();
+let goalEditor,periodPlanner;
+
+                                                         
+function skl(n, odna, dve, pjat) {
+  const d = n % 10, st = n % 100;
+  if (st >= 11 && st <= 14) return pjat;
+  if (d === 1) return odna;
+  if (d >= 2 && d <= 4) return dve;
+  return pjat;
+}
+
+                                                                   
+                                                                            
+function progress(c) { return c.procent ?? null; }
+
+                                                               
+                                          
+function sobrat_menju() {
+  if (VSTROEN) { document.getElementById('menju').innerHTML = ''; return; }
+                                                               
+                                                                
+  document.getElementById('menju').innerHTML = O.menju('Направления', {
+    napravlenija: true,
+    chisla: celej_po_napravlenijam(),
+    period: [nazvanie_perioda(shownPeriod()), SPR.period(shownWindow()?.okno.nachalo||OKR.nachalo, shownWindow()?.okno.konec||OKR.konec)],
+    dejstvie: vid_perioda(),
+                                                             
+                                  
+    sprint: sprint_perekljuchatel(),
+    mobilnyj_period: true,
+  });
+}
+
+                                                         
+                                                               
+function sprint_perekljuchatel() {
+  if (!OKR || !OKR.sprint) return null;
+  const segodnja = SPR.segodnja();
+  const vid = !den_okr || (den_okr >= OKR.nachalo_sprinta && den_okr <= OKR.konec_sprinta
+                           && OKR.nachalo_sprinta <= segodnja && OKR.konec_sprinta >= segodnja)
+    ? 'сейчас'
+    : OKR.konec_sprinta < segodnja ? 'как было' : 'прогноз';
+  return [`спринт ${OKR.sprint}`, vid];
+}
+
+                                                                  
+function sdvinut_sprint(shag) {
+  const ot = den_okr || SPR.segodnja();
+  den_okr = SPR.kalendar.sdvinut_den(ot,shag*7);
+  const u = new URL(location.href);
+  u.searchParams.set('den', den_okr);
+  history.replaceState(null, '', u);
+}
+
+                                                               
+const OKR_QUERY=window.LocusTaskRoute.query(location.href);
+let period_id = OKR_QUERY.get('period') || 'sejchas';
+                                                              
+                                                            
+const CEL_IZ_ADRESA = Number(OKR_QUERY.get('cel')) || null;
+let selectedGoalId=CEL_IZ_ADRESA;
+let view_period=OKR_QUERY.get('okno')||null;
+let windowReadError=null;
+let cel_slajd=CEL_IZ_ADRESA;
+let nabljudatel_celej;
+                                                                
+                                                             
+const VSTROEN = new URLSearchParams(location.search).get('vstroen') === '1';
+const NAPR_IZ_ADRESA = new URLSearchParams(location.search).get('napravlenie') || '';
+if (VSTROEN) document.body.dataset.vstroen = '1';
+
+                                                                 
+                                                            
+                                 
+  
+                                                                   
+                                                                  
+                                                                 
+                                                               
+                                                         
+               
+let den_okr = new URLSearchParams(location.search).get('den') || null;
+
+                                                                     
+                                                               
+                                  
+let OKR = null,loadGeneration=0;
+async function zagruzit() {
+  const generation=++loadGeneration;
+  const goalId=selectedGoalId,wantedWindow=view_period;
+  let references,screen;
+  try{
+    [references,screen]=await Promise.all([SPR.zagruzit(),API.ekran('okr',{period:period_id,...(goalId?{cel:goalId,...(wantedWindow?{okno:wantedWindow}:{})}:{}),...(den_okr?{den:den_okr}:{})})]);
+    if(generation!==loadGeneration)return;
+    if(goalId&&wantedWindow&&!LocusGoalWindow.selected(screen.celi?.find(goal=>goal.id===goalId),wantedWindow))throw new Error('Ответ не подтвердил выбранную цель и временной срез');
+  }catch(error){
+    if(generation!==loadGeneration)return;
+    if(goalId&&wantedWindow){windowReadError={period:wantedWindow,message:error.message,denied:[401,403,404].includes(error.kod)};if(windowReadError.denied){if(OKR)OKR.celi=[];VSE_CELI=[];CELI=[];}}
+    throw error;
+  }
+  if(generation!==loadGeneration)return;
+  windowReadError=null;
+  SPRAV=references;OKR=screen;
+  window.DANNYE={napravlenija:SPRAV.napravlenija,ljudi:SPRAV.ljudi,statusy:SPRAV.statusy,tipy:SPRAV.tipy,zadachi:[]};
+  VSE_CELI=OKR.celi||[];CELI=VSE_CELI;
+}
+
+                                                             
+let fSrez = '';
+                                                                 
+let fNapr = new URLSearchParams(location.search).get('napravlenie') || '';
+
+                                                                           
+const SLOVAMI = { po_grafiku: '', otstaem: 'отстаём', pod_ugrozoj: 'под угрозой',net_dannyh:'нет замера' };
+
+                                                                            
+const za_sprint=c=>c.skryto?.includes('dengi')?null:(c.dvizhenie_sprinta??null);
+let deletionController;
+
+function narisovat() {
+  renderWindowState();
+  if(windowReadError?.denied){document.getElementById('celi').replaceChildren();document.getElementById('novaja').replaceChildren();return;}
+  const draftName=document.getElementById('n-imja')?.value;
+  const draftDirection=document.getElementById('n-napr')?.value;
+  const draftThesis=document.getElementById('n-tezis')?.value||'';
+  const draftKey=document.querySelector('#novaja .nov-obj')?.dataset.okrCreationKey||crypto.randomUUID();
+  deletionController=LocusOkrDelete.mount(document.getElementById('okr-deletion-state'),{API,O,beforeDelete:action=>{if(action.table==='celi'&&selectedGoalId===action.id)adres();},onChanged:async action=>{ZADACHI_CELI.clear();if(action?.kind==='restore'&&action.result?.sostojanie==='vosstanovleno'){const restored=action.result;cel_slajd=restored.cel_id;otkrytye.add(restored.cel_id);if(restored.period_id&&restored.period_id!==OKR.period){period_id=restored.period_id;den_okr=null;}if(fNapr&&fNapr!==restored.napravlenie)fNapr=restored.napravlenie;adres();}await zagruzit();narisovat();obnovitShapku();}});
+                                                     
+  CELI = fNapr ? VSE_CELI.filter((c) => c.napravlenie === fNapr) : VSE_CELI;
+
+  const sred = CELI.length
+    ? CELI.some(c=>progress(c)==null)?null:Math.round(CELI.reduce((s, c) => s + progress(c), 0) / CELI.length) : 0;
+                                                                       
+                                                                      
+  const otstajut = CELI.filter((c) => c.status_celi !== 'po_grafiku').length;
+  const rezultatov = CELI.reduce((s, c) => s + c.rezultaty.length, 0);
+                                                                 
+                                                  
+  const bez_rez = CELI.filter((c) => !c.rezultaty.length).length;
+
+                                                               
+                                                                    
+  const plitka = (srez, podpis, chislo, edinica, pojasnenie, krasnoe) =>
+    `<a class="plt-k${srez !== null && fSrez === srez ? ' on' : ''}"${
+      srez === null ? '' : ` data-srez="${srez}"`}>
+      <span class="plt-l">${podpis}</span>
+      <span class="plt-c${krasnoe ? ' kr' : ''}">${chislo}${
+        edinica ? `<i class="iz">${edinica}</i>` : ''}</span>
+      <span class="plt-d">${pojasnenie}</span></a>`;
+
+                                                               
+                                                              
+                                                         
+
+                                                                        
+  const vidimye = CELI.filter((c) => {
+    if (fSrez === 'otstajut') return c.status_celi !== 'po_grafiku';
+    if (fSrez === 'bez_rezultatov') return !c.rezultaty.length;
+    if (fSrez === 'ustareli') return c.rezultaty.some((r) => r.ustarel);
+    return true;
+  });
+
+  document.getElementById('okr-fact-context').textContent=OKR.istoricheskij?'Факты на '+OKR.na_datu+' по текущим целям и планам. Если истории нет, значение не рассчитано. Сохранённые итоги недели — в планёрках.':den_okr&&den_okr>SPR.segodnja()?'Ожидание на '+den_okr+'. Факты известны на '+OKR.na_datu+'; будущие результаты не предсказаны.':'';
+  document.getElementById('celi').innerHTML = vidimye.length ? vidimye.map((c) => {
+    const p = progress(c);
+    const otkr = otkrytye.has(c.id);
+    const napr = SPRAV.napravlenija.find((n) => n.kod === c.napravlenie);
+    const sprint = za_sprint(c);
+    return `<div class="cel${otkr ? ' otkr' : ''}" data-id="${c.id}">
+      <div class="cel-sh${c.status_celi === 'pod_ugrozoj' ? ' ugroza' : ''}${
+        sprint === 0 ? ' tiho' : ''}" data-tog="${c.id}">
+        <span class="cel-doli">${c.skryto?.includes('dengi')||c.procent==null ? '—' : `${p}<i class="slovo">%</i>`}</span>
+        <span class="cel-im">${O.ekranirovat(c.nazvanie)}${O.entityCopyLink('/okr/'+c.id)}${c.nepolnaja?'<small class="goal-incomplete">цель неполная: нужно минимум два результата</small>':''}${c.podskazka?'<small class="goal-incomplete">'+O.ekranirovat(c.podskazka)+'</small>':''}<span class="cel-f">${
+          napr ? O.ekranirovat(napr.imja) : ''}${c.otkrytyh_zadach
+            ? ', ' + c.otkrytyh_zadach + ' ' + skl(c.otkrytyh_zadach,
+                'открытая задача', 'открытые задачи', 'открытых задач') : ''}</span></span>
+        <span class="cel-vl">${SLOVAMI[c.status_celi] || ''}</span>
+        <!-- Полосы с процентами убраны: её слова 28 октября —
+             «мне не нравятся эти полосочки, блоки с процентами,
+             мне некрасиво от них в разделе ОКР». Число слева
+             уже говорит, насколько цель закрыта, а отставание
+             от графика сказано словами справа -->
+        <span class="cel-ch">
+          <span class="cel-sp">${c.skryto?.includes('dengi') ? 'денежный блок скрыт' : sprint === null ? 'нет сравнения за неделю'
+            : sprint > 0 ? `+${sprint}% за спринт`
+            : sprint < 0 ? `${sprint}% за спринт`
+            : 'без движения'}</span>
+        </span>
+        <span class="cel-str"></span>
+      </div>
+      <div class="cel-telo">
+        <div class="goal-edit-toolbar"><button type="button" class="kn" data-goal-edit="${c.id}">сведения о цели</button></div>
+        ${c.strategija?.udalen?'<p class="measurement-latest">Связанный тезис стратегии удалён</p>':c.strategija?.url?`<p class="goal-strategy-source">из стратегии: <a href="${O.ekranirovat(c.strategija.url)}" data-goal-strategy-source>${O.ekranirovat(c.strategija.tekst)}</a></p>`:'<p class="measurement-latest">Без опоры на стратегию</p>'}
+        ${c.rezultaty.length ? `<div class="rez rez-sh">
+          <span>результат</span><span>факт</span><span>план</span>
+          <span>доля</span><span></span></div>` : ''}
+        ${c.rezultaty.map((r) => {
+          if (r.skryto?.includes('dengi')) return `<div class="rez" data-rez="${r.id}">
+            <span class="rez-n">${O.ekranirovat(r.nazvanie)}</span>
+            <span class="rez-sam">денежный блок скрыт</span></div>`;
+          const view=selectedGoalId===c.id&&view_period?LocusGoalWindow.selected(c):null;
+          if(view&&view.okno.period!==String(c.period_id))return windowResult(c,r,view);
+          const dolja = r.progress_pct;
+          const historical=r.na_datu<SPR.segodnja();
+          const manual=r.tip!=='veha'&&(r.istochnik??'ruchnoj_zamer')==='ruchnoj_zamer',last=r.zamery?.[0];
+          const leadMode=r.schitaetsja_sam&&['lidov','novyh_lidov','lidov_ot_referalov'].includes(r.formula);
+          return `<div class="rez${r.ustarel ? ' ust' : ''}" data-cel="${c.id}" data-rez="${r.id}">
+            <span class="rez-n"${leadMode?` role="button" tabindex="0" data-lead-mode="${r.id}" title="изменить, каких лидов считать"`:""}>${O.ekranirovat(r.nazvanie)}${r.schitaetsja_sam
+              ? '<span class="rez-sam">считается само</span>'+(leadMode?'<br><span class="rez-pod">'+(r.schitat_lidov==='vse'?'все, с кем работали':'только новые')+'</span>':'')
+              : r.istochnik === 'akkaunt'
+                ? '<span class="rez-sam">из аккаунта</span>'
+                : r.ustarel
+                ? `<span class="ust-p">замер ${r.dnej_bez_zamera} ${
+                    skl(r.dnej_bez_zamera, 'день', 'дня', 'дней')} назад</span>` : ''}${r.polnota_dannyh&&!r.polnota_dannyh.polnaja
+                ? `<span class="rez-ist">Учтены подтверждённые переходы. Без полной истории: ${r.polnota_dannyh.bez_istorii}</span>` : ''}${r.polnota_publikacij&&r.formula==='ohvat_publikacij'?`<small class="measurement-latest" data-publication-coverage>Подтверждённый охват: ${O.ekranirovat(r.polnota_publikacij.izvestnyj_ohvat??'—')}; охват по ${O.ekranirovat(r.polnota_publikacij.ohvat_po)} из ${O.ekranirovat(r.polnota_publikacij.ohvat_iz)}${r.polnota_publikacij.bez_istorii?`; ещё требуют проверки: ${O.ekranirovat(r.polnota_publikacij.bez_istorii)}`:''}</small>`:''}${!manual&&r.obnovleno?`<small class="measurement-latest">данные от ${O.ekranirovat(r.obnovleno)}</small>`:''}${r.pochemu_net_fakta?`<small class="measurement-latest">${O.ekranirovat(r.pochemu_net_fakta)}</small>`:''}${manual?`<small class="measurement-latest">${last?O.ekranirovat(last.data)+' · '+O.ekranirovat(last.kto_imja||'автор не указан')+' · '+O.ekranirovat(typeof last.otkuda==='string'?last.otkuda:'источник в старом формате'):'Замеров пока нет'}</small><span class="measurement-actions"><button type="button" class="kn" data-new-measure="${r.id}">добавить замер</button><button type="button" class="kn" data-measure-history="${r.id}">все замеры</button></span>`:''}</span>
+            ${r.tip==='veha'&&historical?`<span class="rez-c">${r.fakt===null?'нет данных':r.fakt?'закрыта':'не закрыта'}</span>`:r.tip==='veha'?`<span class="rez-c"><button type="button" class="kn milestone-state" role="checkbox" aria-checked="${!!r.zakryta}" data-milestone-state="${r.id}">${r.zakryta?'закрыта':'не закрыта'}</button></span>`:r.istochnik==='formula'||r.istochnik==='akkaunt'||historical
+              ? `<span class="rez-c sam" title="число берётся из источника">${O.ekranirovat(r.fakt??'—')}</span>`
+              : `<span class="rez-c vvod" contenteditable="true" data-pole="fakt">${O.ekranirovat(r.fakt??'')}</span>`}
+            ${r.tip==='veha'?'<span class="rez-c">—</span>':`<span class="rez-c vvod" contenteditable="true" data-pole="plan">${O.ekranirovat(r.plan??'')}</span>`}
+            <span class="rez-c${dolja!=null&&dolja < 50 ? ' kr' : ''}">${dolja==null?'—':dolja+'%'}${r.tip!=='veha'?`<small class="rez-base-unknown">${r.baza_ne_zadana?'база не задана':'база: '+O.ekranirovat(r.baza)}<button type="button" class="kn" data-base-edit="${r.id}">${r.baza_ne_zadana?'задать':'изменить'}</button></small>`:''}${
+              r.dvizhenie_nedeli ? `<i class="rez-ned">${r.dvizhenie_nedeli>0?'+':''}${r.dvizhenie_nedeli} за неделю</i>`
+                : r.dvizhenie_nedeli === 0 ? '<i class="rez-ned tiho">без движения</i>' : ''}</span>
+            <a class="udal" data-ur="${r.id}" data-cel="${c.id}" title="удалить результат">×</a>
+          </div>${r.tip === 'veha' && !r.zakryta ? `<div class="veha-d">
+            <a class="sdel-z" data-sz="${r.id}" data-cel="${c.id}">сделать задачей</a>
+            <span class="veha-p">закроешь задачу, веха закроется сама</span>
+          </div>` : ''}`;
+        }).join('')}
+        ${c.rezultaty.length ? '' : `<div class="rez-net">
+          Прогресс цели считается по её результатам. Пока ни одного нет,
+          цель так и будет стоять на нуле</div>`}
+        <div class="rez-niz">
+          <a class="kn tmn dob-r" data-dr="${c.id}">+ добавить результат</a>
+          ${c.prava_celi?.mozhno_pravit&&/^\d{4}(?:-Q[1-4])?$/.test(String(c.period_id || ''))
+            ? `<button type="button" class="kn po-kv" data-kv="${c.id}">${String(c.period_id).includes('Q')?'разбить по месяцам':'разбить по кварталам'}</button>` : ''}
+          <span class="rez-pod">у результата есть план и факт, доля считается сама</span>
+          <i></i>
+          ${c.prava_celi?.mozhno_pravit?`<a class="udal-c" data-uc="${c.id}">удалить цель</a>`:''}
+        </div>
+        <!-- Задачи цели. Её слова 25 октября: «как мне тут задачу-то
+             прикрепить?» Раньше число открытых задач стояло в шапке
+             цели, а посмотреть их и привязать новую было негде -->
+        <div data-goal-state="${c.id}"></div>
+        <div data-goal-history="${c.id}"></div>
+        <div class="zad-blok" data-zadachi="${c.id}">
+          <div class="zad-z">задачи цели</div>
+          <div class="zad-sp">грузятся</div>
+          <div class="zad-niz">
+            <a class="kn pri-z" data-pz="${c.id}">+ прикрепить задачу</a>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('') : `<div class="pusto"><div class="pusto-z">${
+    fSrez ? 'По этому срезу пусто'
+      : fNapr ? 'В этом направлении целей нет' : 'Целей на период нет'}</div>
+    <div class="pusto-p">${fSrez === 'otstajut' ? 'все цели идут по графику'
+      : fSrez === 'bez_rezultatov' ? 'у каждой цели есть результаты'
+      : fSrez === 'ustareli' ? 'замеры свежие' : 'заведи первую снизу'}</div></div>`;
+
+                                                               
+                                                                  
+                                                               
+                                                                  
+                                                   
+  document.getElementById('novaja').innerHTML = `<div class="nov-obj" data-okr-creation-key="${draftKey}">
+    <div class="nov-z">новая цель на ${nazvanie_perioda(OKR.period)}</div>
+    <div class="nov">
+      <input id="n-imja" aria-label="Название новой цели" aria-describedby="n-name-counter" placeholder="например, выйти на 10 клиентов чекапа">
+      <select id="n-napr">${SPRAV.napravlenija.map((n) =>
+        `<option value="${n.kod}"${n.kod === (fNapr || 'synapt')
+          ? ' selected' : ''}>${n.imja}</option>`).join('')}</select>
+      <a class="kn tmn" id="n-dob">Добавить цель</a>
+    </div>
+    <small id="n-name-counter" class="goal-name-counter" aria-live="polite"></small>
+    <label class="goal-strategy-picker"><span class="mod-n">Из какой стратегии</span><select id="n-tezis" class="pl" aria-label="Из какой стратегии"><option value="">Без опоры на стратегию</option></select><small role="status" data-goal-strategy-status></small><button type="button" class="kn" data-goal-strategy-retry hidden>повторить загрузку тезисов</button></label>
+    <div class="nov-p">после добавления попросим сразу завести первый результат:
+      прогресс цели берётся из них, а не ставится руками</div>
+  </div>`;
+
+  if(draftName!==undefined)document.getElementById('n-imja').value=draftName;
+  if(draftDirection!==undefined)document.getElementById('n-napr').value=draftDirection;
+  mountGoalStrategyPicker(document.querySelector('#novaja .nov-obj'),draftThesis);
+  narisovatTochkiCelej(vidimye.length);
+  const spisok=document.getElementById('celi');
+  const slide=Math.max(0,vidimye.findIndex(c=>c.id===cel_slajd));
+  if(matchMedia('(max-width:760px)').matches)spisok.scrollLeft=slide*spisok.clientWidth;
+  nabljudatel_celej?.disconnect();
+  nabljudatel_celej=new ResizeObserver(visota_slajda);
+  spisok.querySelectorAll(':scope>.cel').forEach(e=>nabljudatel_celej.observe(e));
+  visota_slajda();
+  privjazat();
+  if(!goalEditor)goalEditor=LocusGoalEditor.create({API,O,onSaved:async()=>{await zagruzit();narisovat();}});
+  goalEditor.mount(document.getElementById('goal-edit-pending'));
+  if(!periodPlanner)periodPlanner=LocusPeriodPlanForm.create({API,O,onSaved:async()=>{await zagruzit();narisovat();}});
+  periodPlanner.mount(document.getElementById('period-plan-pending'));
+  for(const button of document.querySelectorAll('[data-goal-edit]'))button.onclick=()=>goalEditor.open(Number(button.dataset.goalEdit));
+  for(const root of document.querySelectorAll('.cel [data-goal-state]'))LocusGoalState.mount(root,{goal:VSE_CELI.find(c=>c.id===Number(root.dataset.goalState)),API,onChanged:async()=>{await zagruzit();narisovat();}});
+  LocusGoalState.mountPending(document.getElementById('goal-publication-pending'),{visibleGoals:vidimye,API,onChanged:async()=>{await zagruzit();narisovat();}});
+  for(const root of document.querySelectorAll('.cel.otkr [data-goal-history]'))O.entityHistory(root,{obekt:'cel',id:Number(root.dataset.goalHistory)});
+  applyGoalReadOnly();
+  O.ponumerovat();
+}
+
+document.addEventListener('locus:history-layout',()=>visota_slajda());
+let slideHeightFrame=0;
+function visota_slajda(){
+  if(slideHeightFrame)return;
+  slideHeightFrame=requestAnimationFrame(()=>{
+    slideHeightFrame=0;const sp=document.getElementById('celi');if(!sp?.isConnected)return;
+    let height='';
+    if(matchMedia('(max-width:760px)').matches){
+      const cards=[...sp.querySelectorAll(':scope>.cel')],index=Math.min(cards.length-1,Math.round(sp.scrollLeft/(sp.clientWidth||1)));
+      if(cards[index])height=cards[index].offsetHeight+'px';
+    }
+                                                                           
+                                                                      
+    if(sp.style.height!==height)sp.style.height=height;
+  });
+}
+
+                                                                  
+                                                                   
+function applyGoalReadOnly(){
+ const selector='[data-dr],[data-kv],[data-ur],[data-uc],[data-base-edit],[data-lead-mode],[data-new-measure],[data-milestone-state],[data-sz],[data-pz],[data-otc],[data-goal-publish]';
+ for(const card of document.querySelectorAll('.cel')){const goal=VSE_CELI.find(c=>c.id===Number(card.dataset.id));if(!OKR.zakryt&&goal?.sostojanie!=='arhiv')continue;card.dataset.goalReadOnly='1';const note=document.createElement('p');note.className='goal-readonly-note';note.textContent=OKR.zakryt?'Период закрыт. Доступен просмотр':'Цель в архиве. Доступен просмотр';card.querySelector('.cel-telo').prepend(note);
+  const mutable=node=>node.matches(selector)&&!(node.matches('[data-goal-publish]')&&node.textContent.startsWith('проверить'));
+  for(const node of card.querySelectorAll(selector)){if(!mutable(node))continue;node.setAttribute('aria-disabled','true');node.classList.add('goal-readonly-action');node.tabIndex=-1;if('disabled'in node)node.disabled=true;}
+  for(const node of card.querySelectorAll('[contenteditable]')){node.contentEditable='false';node.setAttribute('aria-readonly','true');node.tabIndex=-1;}
+  card.addEventListener('click',event=>{const target=event.target.closest(selector);if(target&&mutable(target)){event.preventDefault();event.stopImmediatePropagation();}},true);
+ }
+ if(OKR.zakryt){const form=document.querySelector('#novaja .nov-obj');if(form)form.inert=true;for(const node of document.querySelectorAll('#novaja input,#novaja select,#novaja button'))node.disabled=true;const note=document.createElement('p');note.className='goal-readonly-note';note.textContent='Период закрыт. Новую цель можно добавить в открытый период';document.getElementById('novaja').prepend(note);}
+}
+
+function mountGoalStrategyPicker(root,selected){
+ const direction=root.querySelector('#n-napr'),select=root.querySelector('#n-tezis'),status=root.querySelector('[data-goal-strategy-status]'),retry=root.querySelector('[data-goal-strategy-retry]');let generation=0;
+ async function load(chosen=''){
+  const token=++generation,code=direction.value;select.disabled=true;root.dataset.strategyLoading='1';status.textContent='Загружаем тезисы стратегии';retry.hidden=true;select.replaceChildren(new Option('Без опоры на стратегию',''));
+  try{const result=await API.zapros('GET','/tezisy?napravlenie='+encodeURIComponent(code));if(!root.isConnected||generation!==token||direction.value!==code)return;if(!Array.isArray(result.spisok))throw new Error('Не удалось прочитать тезисы стратегии');for(const row of result.spisok){if(row.napravlenie!==code||row.udaleno)continue;select.add(new Option(row.god+' — '+row.tekst,String(row.id)));}select.value=chosen;select.disabled=false;delete root.dataset.strategyLoading;status.textContent=chosen&&!select.value?'Прежний тезис больше недоступен. Выбери другой или оставь цель без связи':'';
+  }catch(error){if(!root.isConnected||generation!==token)return;status.textContent=error.message;retry.hidden=false;}
+ }
+ direction.addEventListener('change',()=>load());retry.onclick=()=>load();load(selected);
+}
+
+function narisovatTochkiCelej(skolko) {
+  const mesto = document.getElementById('cel-tochki');
+  const sp = document.getElementById('celi');
+  if (!mesto || !sp) return;
+  mesto.innerHTML = skolko > 1 ? Array.from({ length: skolko }, (_, i) =>
+    `<a data-ct="${i}"${i === 0 ? ' class="on"' : ''} aria-label="цель ${i + 1}"></a>`).join('') : '';
+  const tochki = mesto.querySelectorAll('[data-ct]');
+  if (!sp.dataset.tochki) {
+    sp.dataset.tochki = '1';
+    sp.addEventListener('scroll', () => {
+      const tek = Math.round(sp.scrollLeft / (sp.clientWidth || 1));
+      const card=sp.querySelectorAll(':scope>.cel')[tek];
+      if(card)cel_slajd=Number(card.dataset.id);
+      visota_slajda();
+      document.querySelectorAll('#cel-tochki [data-ct]')
+        .forEach((t, i) => t.classList.toggle('on', i === tek));
+    }, { passive: true });
+  }
+  tochki.forEach((t) => t.addEventListener('click', () =>
+    sp.scrollTo({ left: Number(t.dataset.ct) * sp.clientWidth, behavior: 'smooth' })));
+}
+
+                                                                    
+  
+                                                                   
+                                                                   
+                                                                   
+                                                                     
+const ZADACHI_CELI = new Map(),TASK_READ_ERRORS=new Map(),TASK_READ_GENERATIONS=new Map();
+
+async function zagruzit_zadachi(cel_id) {
+  const generation=(TASK_READ_GENERATIONS.get(cel_id)||0)+1;TASK_READ_GENERATIONS.set(cel_id,generation);
+  try {
+    const o = await API.zapros('GET','/okr/zadachi?cel='+cel_id);
+    if(!Array.isArray(o.spisok))throw new Error('Не удалось прочитать задачи цели');
+    if(TASK_READ_GENERATIONS.get(cel_id)!==generation)return;
+    ZADACHI_CELI.set(cel_id,o.spisok);TASK_READ_ERRORS.delete(cel_id);
+  } catch(error) { if(TASK_READ_GENERATIONS.get(cel_id)===generation){ZADACHI_CELI.delete(cel_id);TASK_READ_ERRORS.set(cel_id,error.message);} }
+}
+
+function narisovat_zadachi(cel_id) {
+  const blok = document.querySelector(`[data-zadachi="${cel_id}"] .zad-sp`);
+  if (!blok) return;
+  if(TASK_READ_ERRORS.has(cel_id)){blok.innerHTML='<p class="measurement-latest">'+O.ekranirovat(TASK_READ_ERRORS.get(cel_id))+'</p><button class="kn" type="button" data-goal-tasks-retry>повторить загрузку</button>';blok.querySelector('button').onclick=async()=>{TASK_READ_ERRORS.delete(cel_id);blok.textContent='Загрузка задач';await zagruzit_zadachi(cel_id);narisovat_zadachi(cel_id);};return;}
+  const sp = ZADACHI_CELI.get(cel_id);
+  if (!sp) { blok.innerHTML = '<div class="zad-net">грузятся</div>'; return; }
+  blok.innerHTML = sp.length ? sp.map((z) => `<div class="zad-s">
+      <a class="im" data-goal-task-open="${z.nomer}" href="/${encodeURIComponent(z.napravlenie||'zadachi')}/${z.nomer}">${O.ekranirovat(z.nazvanie)}</a>
+      <span class="st">${O.statusPoKodu
+        ? (O.statusPoKodu(z.status)?.imja || z.status || '') : (z.status || '')}</span>
+      <span class="dt">${z.srok ? SPR.data(z.srok) : '—'}</span>
+      <a class="otc-z" data-otc="${z.nomer}" data-cel="${cel_id}"
+         title="открепить от цели">×</a>
+    </div>`).join('')
+    : `<div class="zad-net">К цели не прикреплено ни одной задачи.
+       Прикрепи те, которыми её двигаешь: по ним будет видно,
+       чем цель закрывается, а не только числом в результате</div>`;
+  privjazat_zadachi(cel_id);
+}
+
+function privjazat_zadachi(cel_id) {
+  document.querySelectorAll(`[data-zadachi="${cel_id}"] [data-goal-task-open]`).forEach(link=>link.addEventListener('click',event=>{if(event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;event.preventDefault();O.otkrytZadachu(Number(link.dataset.goalTaskOpen),null,location.pathname+location.search+location.hash).catch(error=>O.tost(error.message));}));
+  document.querySelectorAll(`[data-zadachi="${cel_id}"] [data-otc]`).forEach((e) =>
+    e.addEventListener('click', async (ev) => {
+      ev.stopPropagation();
+      const nomer = Number(e.dataset.otc);
+      try {
+        const seen=(ZADACHI_CELI.get(cel_id)||[]).find(z=>z.nomer===nomer);
+        if(!seen)throw new Error('Обнови список задач цели');
+        const previous={cel_id:seen.cel_id,rezultat_id:seen.rezultat_id};
+        const saved=await API.pravit('zadachi',nomer,{versija:seen.versija,cel_id:null,rezultat_id:null});
+        await zagruzit_zadachi(cel_id);
+        await zagruzit();narisovat();
+        O.tost('Задача откреплена от цели',async()=>{
+          await API.pravit('zadachi',nomer,{versija:saved.versija,...previous});
+          await zagruzit_zadachi(cel_id);await zagruzit();narisovat();
+        });
+      } catch (err) { O.tost('Не получилось: ' + err.message); }
+    }));
+}
+
+                                                                     
+                                                           
+async function prikrepit_zadachu(cel) {
+                                                              
+                                                        
+  let vse = [];
+  try {
+    let stranica = 1, stranic = 1;
+    do {
+      const o = await API.ekran('zadachi', { stranica });
+      vse = vse.concat(o.spisok || []);
+      stranic = o.stranic || 1;
+      stranica += 1;
+    } while (stranica <= stranic && stranica <= 20);
+  } catch { vse = []; }
+                                                                
+                     
+  const svobodnye = vse.filter((z) => !z.cel_id
+    && !z.udaleno && z.status !== 'sdelano');
+
+  const stroka = (z) => `<a class="vyb-z-s" data-vz="${z.nomer}">
+    <span class="im">${z.nazvanie}</span>
+    <span class="np">${O.naprPoKodu(z.napravlenie)?.imja || ''}</span></a>`;
+
+  O.modalka(`Прикрепить задачу к цели «${cel.nazvanie}»`, `
+    <input class="vyb-z-pole" id="vz-poisk" placeholder="найти задачу" autofocus>
+    <div class="vyb-z-sp" id="vz-sp">${svobodnye.length
+      ? svobodnye.map(stroka).join('')
+      : '<div class="zad-net">Свободных задач нет: все уже прикреплены к целям</div>'}</div>`,
+    (zakryt) => {
+      const poisk = document.getElementById('vz-poisk');
+      poisk?.focus();
+      poisk?.addEventListener('input', () => {
+        const q = poisk.value.trim().toLowerCase();
+        const vidno = q ? svobodnye.filter((z) =>
+          String(z.nazvanie).toLowerCase().includes(q)) : svobodnye;
+        document.getElementById('vz-sp').innerHTML = vidno.length
+          ? vidno.map(stroka).join('')
+          : '<div class="zad-net">По этому слову ничего</div>';
+      });
+      document.getElementById('vz-sp')?.addEventListener('click', async (ev) => {
+        const s = ev.target.closest('[data-vz]');
+        if (!s) return;
+        const nomer = Number(s.dataset.vz);
+        zakryt();
+        try {
+          const seen=svobodnye.find(z=>z.nomer===nomer);
+          if(!seen)throw new Error('Обнови список свободных задач');
+          const saved=await API.pravit('zadachi',nomer,{versija:seen.versija,cel_id:cel.id,rezultat_id:null});
+          otkrytye.add(cel.id);
+          await zagruzit_zadachi(cel.id);await zagruzit();narisovat();
+          O.tost('Задача прикреплена к цели',async()=>{
+            await API.pravit('zadachi',nomer,{versija:saved.versija,cel_id:seen.cel_id,rezultat_id:seen.rezultat_id});
+            await zagruzit_zadachi(cel.id);await zagruzit();narisovat();
+          });
+        } catch (err) { O.tost('Не получилось: ' + err.message); }
+      });
+    });
+}
+
+                                                                      
+                                                                       
+function voronka() {
+  const v = OKR.voronka;
+  const mesto = document.getElementById('voronka');
+  if (!mesto) return;
+  if (!v || !v.stupeni || !v.stupeni[0] || !v.stupeni[0].chislo) {
+    mesto.innerHTML = `<div class="vrn"><div class="vrn-z">воронка</div>
+      <div class="vrn-o">рассылок пока нет, считать не из чего</div></div>`;
+    return;
+  }
+  const baza = v.stupeni[0].chislo;
+  mesto.innerHTML = `<div class="vrn">
+    <div class="vrn-z">воронка рассылок</div>
+    ${v.stupeni.map((st, i) => `<div class="vrn-s">
+      <div class="vrn-sh"><span class="vrn-i">${st.imja}</span>
+        <span class="vrn-c">${st.chislo}</span></div>
+      <div class="vrn-p"><i style="width:${baza ? Math.round(st.chislo / baza * 100) : 0}%"></i></div>
+      <div class="vrn-d">${i === 0 ? 'вся база'
+        : `${st.dolja}% от «${v.stupeni[i - 1].imja}»`}</div>
+    </div>`).join('')}
+    ${v.uzkoe_mesto ? `<div class="vrn-u">Сильнее всего рвётся на шаге
+      <b>${v.uzkoe_mesto.imja}</b>: проходит ${v.uzkoe_mesto.dolja}%</div>` : ''}
+    ${v.otkazy ? `<div class="vrn-o">отказались ${v.otkazy}</div>` : ''}
+  </div>`;
+}
+
+async function istorijaZamerov(rez){
+ const close=O.modalka('Все замеры результата: '+rez.nazvanie,'<p class="measurement-history-status" role="status"></p><div class="measurement-history-list"></div><div class="measurement-history-actions"></div>',null,{poverh:true}),root=document.querySelector('.vyb-fon:last-of-type'),list=root.querySelector('.measurement-history-list'),status=root.querySelector('.measurement-history-status'),actions=root.querySelector('.measurement-history-actions');let cursor=null,busy=false;
+ async function load(){if(busy)return;busy=true;actions.replaceChildren();status.textContent='Загружаю замеры…';try{
+  const result=await API.spisok('okr/zamery',{istoriya:1,rezultat_id:rez.id,skolko:30,...(cursor?{prodolzhit:cursor}:{})});if(!root.isConnected)return;
+  if(!Array.isArray(result.spisok)||!Number.isSafeInteger(result.vsego))throw new Error('История не подтверждена');
+  for(const row of result.spisok){if(row.rezultat_id!==rez.id)throw new Error('Ответ относится к другому результату');const item=document.createElement('article'),head=document.createElement('p'),source=document.createElement('p');item.className='measurement-history-row';head.textContent=String(row.znachenie)+' · '+String(row.data)+' · '+String(row.kto_imja||'автор не указан');source.textContent=typeof row.otkuda==='string'?row.otkuda:'источник сохранён в старом формате';item.append(head,source);list.append(item);}
+  cursor=result.prodolzhit;status.textContent='Показано '+list.children.length+' из '+result.vsego+'. Прежние замеры сохранены.';if(cursor)add('показать ещё',load,'measurementHistoryMore');
+ }catch(error){if(root.isConnected){status.textContent='Не удалось прочитать историю: '+error.message;add('повторить чтение',load,'measurementHistoryRetry');}}finally{busy=false;}}
+ function add(text,action,tag){const b=document.createElement('button');b.type='button';b.className='kn ostavit-vnutri';b.textContent=text;b.dataset[tag]='1';b.onclick=action;actions.append(b);}
+ await load();return close;
+}
+
+function sprositOtkuda(rez,chislo){return O.zamer({rez,znachenie:chislo,onChanged:async()=>{await zagruzit();narisovat();}});}
+
+                                                                      
+                                                                 
+                                                               
+                                                                
+                                                                 
+function sprositRezultat(cel,posle){
+  return LocusResultForm.otkryt({cel,posle,API,O,mozhetVidatDengi:OKR.mozhet_videt_dengi,
+    onChanged:async()=>{otkrytye.add(cel.id);await zagruzit();narisovat();}});
+}
+
+function privjazat() {
+  document.querySelectorAll('[data-srez]').forEach((e) =>
+    e.addEventListener('click', () => {
+                                                            
+      fSrez = fSrez === e.dataset.srez ? '' : e.dataset.srez;
+      narisovat();
+    }));
+
+  document.querySelectorAll('[data-tog]').forEach((e) => e.addEventListener('click', (ev) => {
+    if (ev.target.closest('.udal, .vvod, .dob')) return;
+    const id = +e.dataset.tog;
+    if(otkrytye.has(id)){otkrytye.delete(id);if(selectedGoalId===id)adres();}else{otkrytye.add(id);selectedGoalId=id;view_period=null;cel_slajd=id;writeGoalAddress();}
+    narisovat();
+    obnovitShapku();
+  }));
+
+                                          
+  document.querySelectorAll('.rez-c.vvod').forEach((e) => {
+    e.addEventListener('blur', async () => {
+      const stroka = e.closest('.rez');
+      const cel = CELI.find((c) => c.id === +stroka.dataset.cel);
+      const rez = cel.rezultaty.find((r) => r.id === +stroka.dataset.rez);
+      const raw=e.textContent.trim().replace(/\s/g,'').replace(',','.');
+      const chislo = raw===''?NaN:Number(raw);
+      if(chislo===rez[e.dataset.pole])return;
+      if (!Number.isFinite(chislo) || (e.dataset.pole==='plan'&&chislo<=0)) { O.tost('Укажи корректное число');narisovat(); return; }
+      try {
+        if (e.dataset.pole === 'plan') {
+          await LocusResultForm.plan({rez,chislo,API,O,onChanged:async()=>{await zagruzit();narisovat();}});
+        } else {
+                                                                    
+                                                                         
+                                                       
+          sprositOtkuda(rez, chislo);
+        }
+      } catch (err) { O.tost('Не получилось: ' + err.message); narisovat(); }
+    });
+    e.addEventListener('keydown', (ev) => { if (ev.key === 'Enter') { ev.preventDefault(); e.blur(); } });
+  });
+
+  for(const button of document.querySelectorAll('[data-base-edit]'))button.onclick=event=>{event.stopPropagation();const rez=CELI.flatMap(c=>c.rezultaty).find(r=>r.id===Number(button.dataset.baseEdit));if(rez)LocusResultForm.baza({rez,API,O,onChanged:async()=>{await zagruzit();narisovat();}});};
+
+  for(const button of document.querySelectorAll('[data-new-measure],[data-measure-history],[data-milestone-state]'))button.addEventListener('click',async event=>{
+    event.stopPropagation();const id=Number(button.dataset.newMeasure||button.dataset.measureHistory||button.dataset.milestoneState),rez=CELI.flatMap(c=>c.rezultaty).find(r=>r.id===id);if(!rez)return;
+    try{if(button.dataset.newMeasure)O.zamer({rez,onChanged:async()=>{await zagruzit();narisovat();}});else if(button.dataset.measureHistory)await istorijaZamerov(rez);else{button.disabled=true;const saved=await API.pravit('rezultaty',rez.id,{versija:rez.versija,zakryta:!rez.zakryta});await zagruzit();narisovat();O.tost(saved.zakryta?'Веха закрыта':'Веха открыта');}}catch(error){O.tost(error.message);}finally{button.disabled=false;}
+  });
+
+  document.querySelectorAll('[data-lead-mode]').forEach(button=>button.addEventListener('click',event=>{
+    event.stopPropagation();
+    const result=CELI.flatMap(goal=>goal.rezultaty||[]).find(row=>row.id===Number(button.dataset.leadMode));
+    if(result)LocusResultForm.lidy({rez:result,API,O,onChanged:async()=>{await zagruzit();narisovat();}});
+  }));
+
+  document.querySelectorAll('[data-dr]').forEach((e) => e.addEventListener('click', (ev) => {
+    ev.stopPropagation();
+    const cel = CELI.find((c) => c.id === +e.dataset.dr);
+    if (cel) sprositRezultat(cel);
+  }));
+
+                                                                      
+  document.querySelectorAll('[data-kv]').forEach(button=>button.addEventListener('click',event=>{
+    event.stopPropagation();const goal=CELI.find(row=>row.id===Number(button.dataset.kv));
+    if(goal)periodPlanner.open(goal.id,String(goal.period_id));
+  }));
+
+  document.querySelectorAll('[data-pz]').forEach((e) => e.addEventListener('click', (ev) => {
+    ev.stopPropagation();
+    const cel = CELI.find((c) => c.id === +e.dataset.pz);
+    if (cel) prikrepit_zadachu(cel);
+  }));
+                                                             
+                                                             
+                                     
+  document.querySelectorAll('[data-sz]').forEach((e) => e.addEventListener('click', async (ev) => {
+    ev.stopPropagation();
+    if(e.dataset.saving)return;
+    const cel = CELI.find((c) => c.id === +e.dataset.cel);
+    const r = cel && cel.rezultaty.find((x) => x.id === +e.dataset.sz);
+    if (!r) return;
+    e.dataset.saving='1';e.setAttribute('aria-busy','true');
+    let z;
+    try { z=await API.dejstvie('/okr/vehi/'+r.id+'/zadachi',{}); }
+    catch(err){O.tost('Не получилось создать задачу: '+err.message);}
+    if(z){
+      ZADACHI_CELI.delete(cel.id);
+      try{
+        await zagruzit_zadachi(cel.id);narisovat();
+        O.tost(`Задача №${z.nomer} создана и привязана к вехе`);
+      }catch{O.tost(`Задача №${z.nomer} создана. Список не обновился, обнови страницу`);}
+    }
+    delete e.dataset.saving;e.removeAttribute('aria-busy');
+  }));
+                                                                         
+                                                              
+  document.querySelectorAll('[data-zadachi]').forEach(async (e) => {
+    const id = +e.dataset.zadachi;
+    if (!ZADACHI_CELI.has(id)) { await zagruzit_zadachi(id); }
+    narisovat_zadachi(id);
+  });
+
+  for(const node of document.querySelectorAll('[data-ur],[data-uc]'))node.addEventListener('click',async ev=>{
+    ev.stopPropagation();
+    try{await deletionController.confirm(node.dataset.ur?'rezultaty':'celi',Number(node.dataset.ur||node.dataset.uc));}
+    catch(error){O.tost(error.message);}
+  });
+
+  const goalForm=document.querySelector('#novaja .nov-obj');
+  const nameInput=goalForm.querySelector('#n-imja'),nameCounter=goalForm.querySelector('#n-name-counter');
+  const updateNameCounter=()=>{const length=[...nameInput.value.trim()].length;nameCounter.textContent=length+' / 300';nameCounter.classList.toggle('over',length>300);};
+  nameInput.addEventListener('input',updateNameCounter);updateNameCounter();
+  O.sozdanieOkrFormy(goalForm,goalForm.dataset.okrCreationKey,async saved=>{cel_slajd=saved.id;otkrytye.add(saved.id);document.getElementById('n-imja').value='';goalForm.dataset.okrCreationKey=crypto.randomUUID();await zagruzit();narisovat();});
+  document.getElementById('n-dob').addEventListener('click', async () => {
+    if(goalForm.dataset.sending==='1')return;
+    if(goalForm.dataset.strategyLoading==='1'){O.tost('Сначала дождись загрузки тезисов стратегии');return;}
+    const imja = document.getElementById('n-imja').value.trim();
+    if([...imja].length>300){O.tost('Название цели не длиннее 300 знаков');return;}
+    if (!imja) { O.tost('Напиши название цели'); return; }
+    goalForm.dataset.sending='1';
+    try {
+                                                                        
+                                                                       
+      const novaja = await API.sozdat('celi', {
+        nazvanie: imja, napravlenie: document.getElementById('n-napr').value,
+        period_id: OKR.period,tezis_id:document.getElementById('n-tezis').value?Number(document.getElementById('n-tezis').value):null,zapros_kljuch:goalForm.dataset.okrCreationKey });
+      VSE_CELI.push({ ...novaja, rezultaty: [], procent: 0,
+                      status_celi: 'po_grafiku', otkrytyh_zadach: 0 });
+      otkrytye.add(novaja.id);cel_slajd=novaja.id;
+      document.getElementById('n-imja').value = '';
+      document.getElementById('n-tezis').value='';
+      goalForm.dataset.okrCreationKey=crypto.randomUUID();
+      narisovat();
+                                                                
+                                         
+      if (novaja.podskazka) O.tost(novaja.podskazka);
+                                                                     
+                                                                    
+                                                                      
+                                                       
+      sprositRezultat({ ...novaja, nazvanie: imja }, () => {
+        O.tost(`Цель «${imja}» добавлена`, async () => {
+          await LocusOkrDelete.removeKnown('celi',novaja);
+        });
+      });
+    } catch (err) { O.tost('Не получилось: ' + err.message); }
+    finally{delete goalForm.dataset.sending;}
+  });
+}
+
+                                                                 
+
+                                                                  
+                                                    
+function celej_po_napravlenijam() {
+  const sch = {};
+  for (const n of SPRAV.napravlenija) sch[n.kod] = 0;
+  for (const c of VSE_CELI) sch[c.napravlenie] = (sch[c.napravlenie] || 0) + 1;
+  return sch;
+}
+
+                                                                
+                                                                 
+                                                          
+                             
+const MESJACY = ['январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль',
+                 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'];
+
+function nazvanie_perioda(id) {
+  const kv = String(id).match(/^(\d{4})-Q([1-4])$/);
+  if (kv) return `${kv[2]} квартал ${kv[1]}`;
+  const ms = String(id).match(/^(\d{4})-(\d{2})$/);
+  if (ms) return `${MESJACY[Number(ms[2]) - 1]} ${ms[1]}`;
+  return `${id} год`;
+}
+
+                                                               
+function shownWindow(){return selectedGoalId&&view_period?LocusGoalWindow.selected(OKR?.celi?.find(goal=>goal.id===selectedGoalId)):null;}
+function shownPeriod(){return shownWindow()?.okno.period||OKR?.period||period_id;}
+function writeGoalAddress(){const query=new URLSearchParams();if(den_okr)query.set('den',den_okr);if(VSTROEN)query.set('vstroen','1');if(view_period)query.set('okno',view_period);history.replaceState(null,'','/okr/'+selectedGoalId+(query.size?'?'+query:''));}
+async function loadWindow(){
+  if(!OKR){location.reload();return;}
+  try{await zagruzit();narisovat();obnovitKontekstOkna();}
+  catch(error){narisovat();obnovitKontekstOkna();O.tost('Не удалось обновить срез: '+error.message);}
+}
+let anchorTarget=null,anchorObserver=null,anchorListeners=false,anchorFollow=null,anchorFrame=0;
+function scheduleGoalAnchor(){if(!anchorFollow||anchorFrame)return;anchorFrame=requestAnimationFrame(()=>{anchorFrame=0;anchorFollow?.();});}
+function pokazatKontekstCeli(node){
+ if(!node)return;anchorTarget=node;
+ const follow=()=>{if(anchorTarget!==node||!node.isConnected)return;const header=document.getElementById('menju'),gap=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--space-3'))||0,inset=header?Math.max(0,header.getBoundingClientRect().bottom):0,delta=node.getBoundingClientRect().top-inset-gap;if(Math.abs(delta)>0.5)window.scrollBy({top:delta,behavior:'instant'});};
+ anchorFollow=follow;
+ if(!anchorListeners){
+  for(const event of ['wheel','touchstart','pointerdown','keydown'])document.addEventListener(event,()=>{anchorTarget=null;anchorFollow=null;},{passive:true,capture:true});
+  for(const event of ['scroll','pageshow','resize'])window.addEventListener(event,scheduleGoalAnchor,{passive:true});anchorListeners=true;
+ }
+                                                                          
+                                                                             
+                                                              
+ if(selectedGoalId&&'scrollRestoration'in history)history.scrollRestoration='manual';
+ anchorObserver?.disconnect();const header=document.getElementById('menju');if(typeof ResizeObserver==='function'){anchorObserver=new ResizeObserver(scheduleGoalAnchor);if(header)anchorObserver.observe(header);if(node.parentElement)anchorObserver.observe(node.parentElement);}
+ follow();scheduleGoalAnchor();document.fonts?.ready.then(scheduleGoalAnchor);
+}
+function obnovitKontekstOkna(){obnovitShapku();const status=document.getElementById('okr-window-state');pokazatKontekstCeli(status&&!status.hidden?status:selectedGoalId?document.querySelector(`.cel[data-id="${selectedGoalId}"]`):document.getElementById('celi'));}
+function renderWindowState(){
+ const host=document.getElementById('okr-window-state'),view=shownWindow();if(!host)return;host.replaceChildren();host.hidden=!windowReadError&&!view;if(host.hidden)return;
+ const text=document.createElement('p');
+ if(windowReadError){text.textContent='Не удалось загрузить выбранный срез. '+windowReadError.message+(view?' Показан предыдущий срез.':'');const retry=document.createElement('button');retry.type='button';retry.className='kn';retry.dataset.windowRetry='1';retry.textContent='повторить загрузку';retry.onclick=loadWindow;host.append(text,retry);}
+ else{text.textContent='Срез: '+nazvanie_perioda(view.okno.period)+'. Цель и её общий прогресс: '+nazvanie_perioda(period_id)+'.'+(view.okno.pochemu?' '+view.okno.pochemu:!view.rezultaty.every(row=>row.plan_na_okno_zadan||row.skryto?.includes('dengi'))?' План на этот срез отдельно не задан.':'');host.append(text);}
+ if(selectedGoalId&&view&&/^\d{4}(?:-Q[1-4])?$/.test(view.okno.period)&&CELI.find(g=>g.id===selectedGoalId)?.prava_celi?.mozhno_pravit&&view.okno.dostupno){const plan=document.createElement('button');plan.type='button';plan.className='kn';plan.dataset.windowPlanOpen='1';plan.textContent=view.okno.period.includes('Q')?'планы по месяцам':'планы по кварталам';plan.onclick=()=>periodPlanner.open(selectedGoalId,view.okno.period);host.append(plan);}
+ if(selectedGoalId){const back=document.createElement('button');back.type='button';back.className='kn';back.dataset.windowOriginal='1';back.textContent='к периоду цели';back.onclick=()=>{view_period=null;writeGoalAddress();loadWindow();};host.append(back);}
+ if(selectedGoalId){let target;try{target=LocusGoalWindow.parse(view_period||view?.okno.period||period_id).id;}catch{return;}const list=document.createElement('button');list.type='button';list.className='kn';list.dataset.windowList='1';list.textContent='все цели периода';list.setAttribute('aria-label','Все цели: '+nazvanie_perioda(target));list.onclick=()=>{period_id=target;adres();loadWindow();};host.append(list);}
+}
+function windowResult(goal,row,view){
+ const value=view.rezultaty.find(result=>result.id===row.id),usesMovement=!!value?.plan_perioda,display=usesMovement?value?.dvizhenie_perioda:value?.fakt,text=display==null?'нет данных':row.tip==='veha'?(display?'закрыта':'не закрыта'):LocusDecimalPlan.format(display),esc=O.ekranirovat;
+ const overall=row.fakt==null?'нет данных':row.tip==='veha'?(row.fakt?'закрыта':'не закрыта'):LocusDecimalPlan.format(row.fakt);
+ const original='Цель '+nazvanie_perioda(goal.period_id)+': '+overall+(row.tip==='veha'?'':', план '+(row.plan==null?'не задан':LocusDecimalPlan.format(row.plan)))+(row.progress_pct==null?'':', '+row.progress_pct+'%');
+ return `<div class="rez goal-window-result" data-rez="${row.id}" data-cel="${goal.id}"><span class="rez-n">${esc(row.nazvanie)}<small class="goal-window-caption" data-window-caption>${esc(nazvanie_perioda(view.okno.period))}. ${esc(usesMovement?(value?.pochemu_net_dvizhenija||('Движение за период. Значение на '+SPR.data(value.na_datu)+': '+(value.fakt==null?'нет данных':LocusDecimalPlan.format(value.fakt)))):value?.pochemu_net_fakta||('Значение на '+SPR.data(value.na_datu)))}${value?.otkuda?'<br>'+esc(value.otkuda)+(value.kto_imja?' · '+esc(value.kto_imja):''):''}</small><small class="goal-window-caption" data-window-overall>${esc(original)}</small>${(row.istochnik??'ruchnoj_zamer')==='ruchnoj_zamer'&&row.tip!=='veha'?`<span class="measurement-actions"><button type="button" class="kn" data-measure-history="${row.id}">все замеры</button></span>`:''}</span><span class="rez-c" data-window-fact>${esc(text)}</span><span class="rez-c" data-window-plan>${value?.plan==null?'—':esc(LocusDecimalPlan.format(value.plan))}</span><span class="rez-c" data-window-progress>${value?.progress_pct==null?'—':esc(value.progress_pct)+'%'}</span><span></span></div>`;
+}
+
+function vid_perioda() {
+  const tip = LocusGoalWindow.parse(shownPeriod()).kind;
+  return '<span class="vid">' +
+    [['квартал', 'kvartal'], ['месяц', 'mesjac'], ['год', 'god']].map(([imja, kod]) =>
+      `<a class="vid-e${kod === tip ? ' on' : ''}" data-vid="${kod}">${imja}</a>`).join('') +
+    '</span>';
+}
+
+                                                   
+function obnovitShapku() {
+  const b = document.querySelector('.ned-period b');
+  if (b) b.textContent = nazvanie_perioda(shownPeriod());
+  const nd = document.querySelector('.ned-period .nd');
+  if (nd) nd.textContent = SPR.period(shownWindow()?.okno.nachalo||OKR.nachalo, shownWindow()?.okno.konec||OKR.konec);
+  document.querySelectorAll('[data-vid]').forEach((e) =>
+    e.classList.toggle('on', e.dataset.vid === LocusGoalWindow.parse(shownPeriod()).kind));
+}
+
+function vkljuchitVidPerioda() {
+  document.querySelectorAll('[data-vid]').forEach((e) =>
+    e.addEventListener('click', async () => {
+      if (e.classList.contains('on')) return;
+      const next=LocusGoalWindow.choose(shownPeriod(),e.dataset.vid,SPR.segodnja());
+      if(selectedGoalId){view_period=next;writeGoalAddress();await loadWindow();}
+      else{period_id=next;adres();try{await zagruzit();narisovat();obnovitShapku();}catch(error){O.tost('Не получилось: '+error.message);}}
+    }));
+}
+
+                                                              
+                                         
+function vkljuchitNapravlenija() {
+  document.querySelectorAll('[data-napr]').forEach((e) => {
+    e.classList.toggle('on', (e.dataset.napr || '') === fNapr);
+    e.addEventListener('click', () => {
+      fNapr = e.dataset.napr || '';
+      document.querySelectorAll('[data-napr]').forEach((x) =>
+        x.classList.toggle('on', (x.dataset.napr || '') === fNapr));
+      adres(); narisovat();
+    });
+  });
+}
+
+function adres() {
+  selectedGoalId=null;view_period=null;windowReadError=null;const query=new URLSearchParams();query.set('period',period_id);if(fNapr)query.set('napravlenie',fNapr);if(den_okr)query.set('den',den_okr);if(VSTROEN)query.set('vstroen','1');history.replaceState(null,'','/okr.html?'+query);
+}
+
+(async function start() {
+  try {
+    if(selectedGoalId){const goal=await API.zapros('GET','/okr?'+new URLSearchParams({nomer:selectedGoalId,...(den_okr?{den:den_okr}:{})}));if(goal.id!==selectedGoalId||!goal.period_id)throw new Error('Не удалось подтвердить выбранную цель');period_id=goal.period_id;fNapr=goal.napravlenie;const url=new URL(location.href);if(window.LocusTaskRoute.entity(url)?.table==='celi'){for(const key of ['cel','nomer','period','napravlenie'])url.searchParams.delete(key);}else{url.searchParams.set('period',period_id);url.searchParams.set('napravlenie',fNapr);}history.replaceState(null,'',url.pathname+url.search+url.hash);}
+    await zagruzit();
+                                                            
+                                                                 
+                                                                  
+                                   
+      
+                                                              
+                                                             
+                                                                 
+                                          
+    sobrat_menju();
+    vkljuchitNapravlenija();
+    vkljuchitVidPerioda();
+                                                   
+                                                                  
+    if (CEL_IZ_ADRESA) {
+      otkrytye.add(CEL_IZ_ADRESA);
+      narisovat();
+    }
+                                                              
+                                                              
+    const perevjazatShapku = () => {
+      vkljuchitNapravlenija();
+      vkljuchitVidPerioda();
+      O.vkljuchitSkvoznoe();
+      O.vkljuchitSprint(async (shag) => {
+        sdvinut_sprint(shag);
+        await zagruzit();
+        sobrat_menju();
+        perevjazatShapku();
+        narisovat();
+      });
+    };
+    O.vkljuchitSprint(async (shag) => {
+      sdvinut_sprint(shag);
+      await zagruzit();
+      sobrat_menju();
+      perevjazatShapku();
+      narisovat();
+    });
+    narisovat();
+
+    if(CEL_IZ_ADRESA)pokazatKontekstCeli(view_period?document.getElementById('okr-window-state'):document.querySelector(`.cel[data-id="${CEL_IZ_ADRESA}"]`));
+
+    window.OPROS = async () => { await zagruzit(); narisovat(); };
+    O.vkljuchitSkvoznoe();
+                                                            
+                                                                
+                             
+    O.vkljuchitPeriod(async (shag) => {
+      let next;try{next=LocusGoalWindow.shifted(shownPeriod(),shag);}catch(error){O.tost(error.message);return;}
+      if(selectedGoalId){view_period=next;writeGoalAddress();await loadWindow();}
+      else{period_id=next;adres();try{await zagruzit();narisovat();obnovitShapku();}catch(error){O.tost('Не получилось: '+error.message);}}
+    });
+    document.body.dataset.gotovo = String(CELI.length);
+  } catch (e) {
+    renderWindowState();
+    document.getElementById('celi').innerHTML =
+      `<div class="pusto"><div class="pusto-z">Не получилось загрузить</div>
+       <div class="pusto-p">${e.message}</div></div>`;
+    document.body.dataset.oshibka = e.message;
+  }
+})();
+})();
+</script>
+</body></html>

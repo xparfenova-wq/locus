@@ -1,0 +1,19 @@
+const {spawn}=require('node:child_process'),path=require('node:path');
+const {baza,OshibkaVvoda}=require('../db/db.js');
+const MAX=8*1024*1024;
+function bytes(req){return new Promise((resolve,reject)=>{let chunks=[],size=0,done=false;const fail=(message,kod=400)=>{if(done)return;done=true;chunks=[];reject(Object.assign(new Error(message),{kod}));};req.on('data',chunk=>{if(done)return;size+=chunk.length;if(size>MAX)return fail('Файл больше 8 МБ',413);chunks.push(chunk);});req.on('end',()=>{if(done)return;done=true;if(!size)return reject(new OshibkaVvoda('Файл пуст'));resolve(Buffer.concat(chunks,size));});req.on('aborted',()=>fail('Файл получен не целиком'));req.on('error',()=>fail('Не удалось получить файл'));if(Number(req.headers['content-length'])>MAX){fail('Файл больше 8 МБ',413);req.resume();}});}
+function xlsx(buffer,sheet){return new Promise((resolve,reject)=>{
+ const child=spawn('python3',[path.join(__dirname,'../ops/base_table_xlsx.py'),...(sheet?[String(sheet)]:[])],{env:{...process.env,PYTHONIOENCODING:'utf-8',PYTHONDONTWRITEBYTECODE:'1'},stdio:['pipe','pipe','ignore']});let chunks=[],size=0,settled=false;const finish=(error,result)=>{if(settled)return;settled=true;clearTimeout(timer);if(error)reject(error);else resolve(result);},timer=setTimeout(()=>{child.kill('SIGKILL');finish(new OshibkaVvoda('Чтение XLSX заняло слишком много времени. Раздели файл на меньшие листы'));},15000);
+ child.on('error',()=>finish(new Error('Сервис чтения XLSX пока недоступен')));child.stdout.on('data',chunk=>{size+=chunk.length;if(size>MAX){child.kill('SIGKILL');finish(new OshibkaVvoda('В XLSX слишком много текста'));return;}chunks.push(chunk);});child.stdin.on('error',()=>{});child.on('close',code=>{let value;try{value=JSON.parse(Buffer.concat(chunks).toString('utf8'));}catch{return finish(new OshibkaVvoda('Не удалось прочитать XLSX'));}if(code!==0||value.oshibka)return finish(new OshibkaVvoda(value.oshibka||'Не удалось прочитать XLSX'));finish(null,value);});child.stdin.end(buffer);
+});}
+async function readChecked(req,{id,query}){
+ const api=require('./bazy-pravki.js').importApi;api.row(baza(),'baza',id);for(const key of query.keys())if(!['imja_fajla','list','kodirovka','razdelitel'].includes(key)||query.getAll(key).length!==1)throw new OshibkaVvoda('Неизвестный или повторный параметр файла',key);
+ const name=query.get('imja_fajla');if(typeof name!=='string'||name.length>512||/[\u0000-\u001f]/.test(name))throw new OshibkaVvoda('Нужно имя файла');const extension=name.toLowerCase().split('.').pop();if(!['csv','tsv','xlsx'].includes(extension))throw new OshibkaVvoda('Выбери файл CSV, TSV или XLSX');let sheet=null;if(query.has('list'))sheet=api.positive(query.get('list'),'list');const encoding=query.get('kodirovka')||'utf-8';if(!['utf-8','windows-1251','utf-16le','utf-16be'].includes(encoding))throw new OshibkaVvoda('Неизвестная кодировка');const delimiter=query.get('razdelitel');if(delimiter!==null&&![';',',','\t'].includes(delimiter))throw new OshibkaVvoda('Неизвестный разделитель');
+ const buffer=await bytes(req);let result;if(extension==='xlsx')result=await xlsx(buffer,sheet);else{
+  let text;try{const actual=buffer[0]===0xff&&buffer[1]===0xfe?'utf-16le':buffer[0]===0xfe&&buffer[1]===0xff?'utf-16be':encoding;text=new TextDecoder(actual,{fatal:true}).decode(buffer);}catch{throw new OshibkaVvoda('Файл не читается в выбранной кодировке. Выбери кодировку и повтори');}
+  try{const table=require('../public/js/base-table.js');result=table.decodeExport(table.parse(text,{delimiter:delimiter??(extension==='tsv'?'\t':null),maxRows:5002}));}catch(e){throw new OshibkaVvoda(e.message);}
+ }
+ return {...result,imja_fajla:name,tolko_chtenie:true};
+}
+async function read(req,context){try{return await readChecked(req,context);}catch(error){req.resume();throw error;}}
+module.exports={read};

@@ -1,0 +1,15 @@
+{
+  "name": "locus",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Внутренняя рабочая система команды",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "migrate": "node db/migrate.js",
+    "test": "npm run test:design && node --test tests/*.test.js && node tests/run-suite.js && python3 tests/ops.test.py && python3 tests/collector.test.py",
+    "test:design": "python3 ops/design_system.py && python3 ops/design_inventory.py && python3 ops/design_guard.py && python3 tests/design_guard.test.py"
+  }
+}

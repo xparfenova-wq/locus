@@ -1,0 +1,2231 @@
+{
+  "kind": "callsite-inventory-not-visual-acceptance",
+  "source_files_sha256": {
+    "public/404.html": "70e773655147bbfe29cc51e579e70d0071e92f14147a561132bb5b20823361ad",
+    "public/akkaunt.html": "7736c77ea9f8904ddbb015ba5c0c0da67a9e0e2928dbf3070c9c7362418a9878",
+    "public/akkaunty-udalennye.html": "1e3ce9c8556a380a415a1d9361083de2f5ad88b84f0340ade59055084815eb8c",
+    "public/baza.html": "b480e623f74a2d791db6161d582312c3202c14b76f0b69b82e6f5a562e4cc756",
+    "public/bazy.html": "a4c840b3ff4b5a92dec95242022c6e2054032fceea92dc1f1e5067936cb79afd",
+    "public/brendbuk.html": "7fc18bb8362ea1131b003ec975eb2f8e00648ff8327165b94affc3a2a045b582",
+    "public/ekran-zadachi.html": "6bf6f9ed07ecae63a0a4169b0209165e2c7052cc8198b8991133eaa3f8c0aad7",
+    "public/index.html": "0cdefa57627b8477e7c12fb1c0dfdca873ac5ce43a9f8fe3477052d34389d126",
+    "public/js/account-create.js": "bbbcdf89dbb40f5f9c62c94cbe4fce634b13a9b58e012a7f56a4d6abf0f14ca5",
+    "public/js/account-detail.js": "7b9bf747d8069df59392389a3555437971f185aba1e35ea9cc23557d92780bfe",
+    "public/js/account-edit.js": "365eaf6b6b409e401420529ce33faac4fc1f3a81fad99978883aa4f0ff7ab2e2",
+    "public/js/account-trash.js": "bc3c4a3cbd500f5703c55a57cffeadd515b69b8dbe75b6537a1b73c62942e52d",
+    "public/js/anketa.js": "30aeb6e11c2a910aa9601917e05dfb626eae60a39c882808c68321d7a64ce53f",
+    "public/js/api.js": "ad809c7d250d0e56360976e0b0e4975aaab535024ee63df7dfabf4923524fa30",
+    "public/js/archive-actions.js": "3c2f0f3dafeae7e1bd2e260c267ec9a4ed6b6851f3205466b86c6d11bf580d41",
+    "public/js/archive-state.js": "5fe7c3b0e84c79d5e027bd82062fa42a5cbc2cddc03138ce023584d5c63f8b5c",
+    "public/js/archive-view.js": "fd420ff598ddb5a4e078fa70ac3a123895f63d43892f14521749f06f83ac1365",
+    "public/js/base-import.js": "1d795c3e0c00ee83fa9a63f6091a144cffa16fd37ba2b8279a0871b302b626e5",
+    "public/js/base-state.js": "341fcada7005bc37b3a715a0214d0a6dc3adf3edb3fd468a64e953e02a20390e",
+    "public/js/base-table.js": "8fe16a8298be91a9245df5d3cddfd5705854de189facf3e471f4304f56da8328",
+    "public/js/bazy.js": "5a6c6c782652ad997c7149ba88deea6f603ab014d6f63d941bfeaa5262da7dd6",
+    "public/js/bezopasnyj-html.js": "df683d8d3c43657734ebc1757c6fb3d2a7f931414e9837f447a76115fcfa5fa0",
+    "public/js/broadcast-state.js": "44b5aeb3ef9f8ec9517abbb7af230b2b0b454f25a4ee2e77855a6bf0a20388dc",
+    "public/js/cabinet-reflection.js": "d6e5f048866a33574faebdfd8d2b3047712d656ca81d5d8aa693148e0f49a29e",
+    "public/js/cabinet-schedule.js": "f5cc6d05d546ec6def1525ce1e46c8e392e395c4a3de2ddb182201ab7fe70936",
+    "public/js/campaign-create.js": "471efbd9c850d69fd53634aa151ff85926a317bd248737f70892e1da4edf3ed5",
+    "public/js/campaign-plan.js": "c2ee4136a038d265963b0823e170caa9eb06bae070bd2a8907a6d7ef20bab3eb",
+    "public/js/context-hints-model.js": "e5f5d257e6d4c79d79370419ccc325f7b8a4b61aafbf3ff079826323e0a18af1",
+    "public/js/context-hints.js": "ff872b223e38ca8821926991d24c8d4079d48e6e3c641fb1aa04c4d151a2b398",
+    "public/js/controls.js": "da07bea872acf2255fb532bdca3bf4dda23f0055c46d9a0f3708f64aa3186d1b",
+    "public/js/dannye.js": "0bcb19543684034aa096874a4034b58b878373f75ba0bc0e5a1d955d2fee312b",
+    "public/js/decimal-plan.js": "b5fad4826e8fdad994f801df20176788742c2e753770ec43d097bb76f6159ad0",
+    "public/js/error-context.js": "31afb247fd859171b58065b0ce9a1b38d6eca0a147b162dce15e76f3e65a4dc8",
+    "public/js/error-report.js": "10ab7a1278e480893c005cc13c762573d16987c1b7d5369eaf6667d7a85c6e2d",
+    "public/js/feed-state.js": "d8ffde48fb651e38b35ac29f7fd94ba5a3fa8fa31eb2ee019130c8b1608dabeb",
+    "public/js/feed-text.js": "9d73b6e286e3e1564abe22cd70ece6962a3954d4daf8502cdb17b847051ec9ff",
+    "public/js/focus-state.js": "53f205a06ce47e4ff658136ac1c6c0bec2331d8df3c3b9539020905046e9ce0b",
+    "public/js/focus-task.js": "44d894964b446592ea6a9e7c66afdd1d5abe3a11e2bebce638455ef15049c305",
+    "public/js/focus-time.js": "5063ee16a98c5c3768bd588a995c247d9d8a6bb3122577f6ba52383c5f392077",
+    "public/js/forma-platezha.js": "545fbf283783bebec286f929b0d868b10411aae592de02b514c147630929bdd2",
+    "public/js/forma-rezultata.js": "6ebed3cf7a57ca7e56eecec12173cd5a7c65f07952394239c209f6fcbc103863",
+    "public/js/goal-edit-model.js": "fa34df977bbde30deb3697e5e6a73ce4cf6d888cf599f28f789e8d9c37ed50ab",
+    "public/js/goal-editor.js": "c4041e08281e2f1a4a1813d6621490297e49939a4e0e6ea763b12f5008f5a1cc",
+    "public/js/goal-state.js": "603824290969d358a8a9132e347b2fbb8acbcb5c7d375266779f1f72df64df26",
+    "public/js/goal-window-model.js": "11688a897c8a9d25d9ae96564dc1a83cf966118d0a93bb2cf8fc88a111ccdff5",
+    "public/js/insights.js": "288ac7712744643a2ae147d9ec20eadb72dd8a8b768948147d727c5d8fb41d5f",
+    "public/js/istorija.js": "02181d08d1bafc7126ba99cb4dcd5278ba89e178be1bfedb9a7029f7b2ba0214",
+    "public/js/kalendar.js": "2e1b2568230b017eff1c5e80482e599d447a44345eb940cd7d97b9d621d4a42b",
+    "public/js/karta.js": "2b665413ccbe227a00a3c0f725fded93961613d4e1dff7783828652d449f92eb",
+    "public/js/kommentarii.js": "df632a6f3a06e09f1c8a96a400a8c7007f35e7a74502a45b3df0d89dd3ce989e",
+    "public/js/kontakt-drag.js": "0e1705011c8714fc4b1d01038a6f853d156e59e2182f1cd4d34aa34591e3903c",
+    "public/js/materialy.js": "26edd782a5a198f3178c694cd0617761a2338f19a363c0f93306a31f639b0a08",
+    "public/js/nedeli.js": "d8edf3b35dbf7e1122aa7dd46aacb0d97092e938c502d69b567f8c18810130eb",
+    "public/js/obschij.js": "1ef7cc8af5ec8b923e0938d0aab87259d46c0a475ed49cad6d37fda3479690a1",
+    "public/js/okr-delete.js": "2bcb3d8f28e8ef810607de8d32fa6b61926a5ecb19e50020c3ef4aea9adfaf15",
+    "public/js/period-plan-form.js": "496994e6601b9eab26cf9d01d7c6efbd92792f3be1198ba1d5625499bf19ace3",
+    "public/js/period-plan-state.js": "26c043bddb85d8f899e3c2808830184f1e616bb8df32005342dc19373aee12b0",
+    "public/js/povtory.js": "7d82bfeb017ea0b0944449d07b0a73368539b51ca938860c6729d7d7b6c7b885",
+    "public/js/preferences-model.js": "fd27056d10cd56348f4b234b923da20664a020545ad0176668037d8d47e0c7aa",
+    "public/js/preferences-state.js": "b77c2fb011c2326d22be14fda234ab0717a6352557493a7f1f7efc2512442512",
+    "public/js/proekt-dejstvija.js": "b3915151e3425f250587b3ca9628c9ee3169e56d6574744200d7b2d99109bd3c",
+    "public/js/proekt-pravka.js": "bcf87b5465538119aa4da66a07399752ef75c03f341c940e3979acd368587f6e",
+    "public/js/readiness.js": "0a97dc1fdd3b06bb82290c2ee2b15d95407b87f09cc692fdd23f2ea8de019946",
+    "public/js/referral-payout-link.js": "694ef3298914710c7db9c00cca41ca1ce2bafb62bd848d4814db6a2d8230479f",
+    "public/js/referral-payout-state.js": "3f76746a9909868821fa70235d6640e71736a2191e06f06f16cb02e923b52563",
+    "public/js/referral-payout-undo.js": "d77cd59b629c9effbd8ae3a5e748aa547a5ef7f9d4adbcfa1a7ea37fe85744b3",
+    "public/js/referral-payout.js": "b603dd579c7324b9e686ee77558929b2a6503728fcce5d947519e0d18d0f0d6b",
+    "public/js/referral-tasks.js": "b7ed822f64c88211fa5dfb8419c466be0166072caa334070cbbe24565e11522d",
+    "public/js/referral-terms-recovery.js": "f526e0227718acdbf7511c0a530d3b0d4479701b24bf996ed961d694dc4dedd3",
+    "public/js/referral-terms-state.js": "66a83fde7594accf10ceda9480475ec0533c4aff85fbdb4b6613ab7efdf26c26",
+    "public/js/referral-terms-undo.js": "9c1b2b93f9c85847191a3a743c12ed528cdb6d1ab12a7e0697d7274b24c5a2e7",
+    "public/js/referral-terms.js": "4c96ef9c3bcdf35ded47fdeb34906c3592b919833cbb6ed52f41bb3dda8dcb88",
+    "public/js/schedule-commands.js": "b4440c9e83b8f901befdb4c26dbdb0fef6be3da11cd2b76d9078f862d3c9782a",
+    "public/js/schedule-day-form.js": "d0e476479b4e03e8c810a66189b8eebe884ab5a7fea209e0c7c7d26793601287",
+    "public/js/schedule-model.js": "625967fdc77b3b77d798bea6a5e457ae8d601377de9dc4191d078a4caff88f41",
+    "public/js/shablony.js": "fbe9d2144abf852582f85c7e6806b81e4a0077e8acbb0bc6bcddb2f53694a0bb",
+    "public/js/sozdanie-proekta.js": "475ac8d4eb85f912553cfc68114e19357f611e2c865c249a7c91463875e2ec71",
+    "public/js/strategy-editor.js": "342f2eb94986d8e7e3c7587d4e52e0912411a97246372a8e6f967df7fc1230f8",
+    "public/js/strategy-model.js": "cc15e8f93ed65f71b4afe901881dae2d67282756853674d42bcdd3bfc4880948",
+    "public/js/suggestions.js": "0bba1b1a6dd7e09f44329257fa96204c9fad42d41eee0337b5062e5803c58c36",
+    "public/js/task-account.js": "437f6e8279d483120fa73624470d462c0454d25099a7f835a6fd2813b64ee22d",
+    "public/js/task-campaign-form.js": "4d8548d6817608918b49141008ed12c6d7afa2c3fbc4b4c5413f770a2d5e495f",
+    "public/js/task-children.js": "25ab760a7d7a6cd62e82d141a45eecbffdd7e079c41498e610fc1b30757d8c20",
+    "public/js/task-context-model.js": "b714c62ded6267c7afcf4a340fca71d1f57d5b8b97ea77f9f1238d137f60298c",
+    "public/js/task-context.js": "d1b422724ab693980b3803f76a83f49bcfddf5f8e3b6a2aa70777ee447cdb20f",
+    "public/js/task-copy.js": "036df405647acfc067efe3b499907b754e228b4d517342c3361308119771786c",
+    "public/js/task-edit.js": "11a6c768a528bebd8a013383328f70a99ebadf269e94baee1f75378d7b1d2b6e",
+    "public/js/task-publication-settings.js": "530797ea092de5e6c34c588c9f3b2f3d5c789dfe4e3af25128947cb9e2a8c5fa",
+    "public/js/task-publication.js": "5931938a8d0b296f1d28bb670b4403a98ec66252e013ef5297cee92794e821db",
+    "public/js/task-route-model.js": "fc82899f3add780272d700acf2195e87ebef15a96f5ec82a2467a1ec2cb80999",
+    "public/js/task-state.js": "3a0d94f3b1a2e9b18ca3fefd571633675e7eafd6710dac622fa08853bbfee7ca",
+    "public/js/task-workload.js": "b73595d0b4899a66dcdebeaa4e355923e1076bdea66a0da3ddbbad2cb621a29b",
+    "public/js/telefon-input.js": "92a69e6fc833a6977229529290360454d48fd00397906a84f1be25da07dcf72f",
+    "public/js/telefony.js": "a3d2e82bc368a34d33a390b27e169121f81a9bfd525f395e8536df69c0c60e88",
+    "public/js/uchastniki.js": "57ae6ba0e8890b2b598fe844e05be1f2270e3d12f3e34314c4e58173c02ffe39",
+    "public/js/ui-specimen-boundary.js": "2c256d3ac23c576f78c9e8292cb6d92458efa3977a10b2824a4573411ede97cb",
+    "public/js/ui-specimen.js": "b6014e24e1daddfd609c1be71a7884b11a21bffa773e26fd1c765784633aef78",
+    "public/js/ui-system.js": "3b12a9fabc85511c0ec6e644f1c78e8de94e698f41feedf6cfa5ea9423acf841",
+    "public/js/upominanija.js": "5436d3d10ad0f51c1e11bab8c7d9aa0c02208f5b8c5dc0d235e16f11958ce5bb",
+    "public/js/uslugi-sostojanie.js": "8e7b0614d2ffadb7f22cdf4c9cd6f95771b3da3097fedff6f3a399a54d5db22d",
+    "public/js/uslugi.js": "14e3834f73271cac2d33f423677544cd68b27aea7891d9931aa36139c769a08e",
+    "public/js/uvedomlenija.js": "4db6091ade16b703c6042782a9d209d15fa85240907811f87e86334f05db84ad",
+    "public/js/validacija-kontakta.js": "a5ba721ea85c0386281e31bf9cf08596f450a811cd78dc6eaca688173e916b11",
+    "public/js/weekly-snapshot-form.js": "4789e60728c459e305380247462ccdfe17e5601be003a06915c5a36115872812",
+    "public/js/weekly-snapshot-state.js": "aef9339a3cb9e02e590ff416fdb944bdbe217df23d7036ffa85918a7818f5e20",
+    "public/js/znak.js": "1983331f0db60da572fef0cacb49939e5eb4b9651f4cebf61fe7e286104b9ec0",
+    "public/kabinet.html": "b06ddb468ff2f4f5b06411890b885fd260bb0e62972e4f813a7a1824b3ad1dbc",
+    "public/klient.html": "649e83bd331f664bb539e3ee292dc84f267bff66ccf6446d3aeaccdca70f145d",
+    "public/komponenty.html": "62137251ef3b5d8c5c8490b85720e9ccef54504ef55f809d58b9fd073d6e00f5",
+    "public/ljudi.html": "f327b8105b22c85e1eae3f3541955e45606c1f2131a827a44a1b0d7300c9f22d",
+    "public/napravlenija.html": "52cadd1e742f13166ae03bd09fb6aceea68d98f154ca062b04483aae5c0f56ca",
+    "public/okna.html": "3e9271be360b99b99c0e36cf90d62f89eaf6e3a80b886025d6c587a4ff69206c",
+    "public/okr.html": "7111575a90878745345b688da13d88d03ee8edf235abc4be0f37eae09413bdf3",
+    "public/palitry.html": "462ee00c1c43c96481b6c2a5a7df747b41645ddb1bfb0ad334a827548ec397fa",
+    "public/planerka.html": "1b578a477456de9a7a5dea147d245c0f96d90d7324fea2905cfbf17324df62c1",
+    "public/poisk.html": "99b4fb8db4cdaa1f6162b4d08839b4dcfcde9eae6bcd14e2c50a95d6c5a957fd",
+    "public/poleznoe.html": "2d04a78fa6dbb4aa7237ad82dc30f6075b56a1544d8eef397e23dcfce4a6f4c9",
+    "public/proba-kartochki.html": "43d1b76b905e46d2a5eb2394329bb57d575cde368ae4e64903b18f1b8ba8f719",
+    "public/proba.html": "606155b6d900a24188b6c57b22ef8b3ee67273377936538226a91b2b0e14c997",
+    "public/proekt.html": "846b842609988b32eaa21249b3b2c59e00b6f429928a86604a292d22e7340497",
+    "public/prostranstvo.html": "45516bb6668ea5776a2b4e845e6ce7a117f492223012b3acb7c34281b347410b",
+    "public/rassylka.html": "77e4bf8d90d64c1de9e67e66b5098e2f6445990d7c5325e834021c4b8e27d90d",
+    "public/readiness.html": "a7998ef7429d7c423f9159930d8c965e2b3ba9691f49e690ee8d623bd387de1b",
+    "public/sozdat.html": "eed69fc0d28cbe61eac69e63c52517d75cb29a14ff2cbe34c4f80b2dde53722f",
+    "public/ui-specimen.html": "738ff47c7b98d877c94d1b1f33dcb6b050e8a47cc6959988e63dde42ef676f9f",
+    "public/ui-system.html": "aa6784ca162ddaa06527f6ad1b52e0994ca786e42f643fa00edaec99e48070a1",
+    "public/uvedomlenija.html": "914a52ecb2e757fd95ced3392b2ee7fa7e05e5353d2408bac85f4bf6d86e3583",
+    "public/varianty.html": "96b482c2e03307bee1dac72205de7e90755473d58db54f749ae42c861b9a4e49",
+    "public/varianty2.html": "18c06ea60dce4ec9636d2b92433ae79c434aecacd54046c0aa0feb67670a3040",
+    "public/varianty3.html": "d7bc81f92b240c3d950eaa53b12df7486c7b24d3f207247415b12304b6ab4737",
+    "public/vhod.html": "7dfcf2756dedc6ded21712106a3ea11733e4837dce5fc2ee0870076bc4f5736a",
+    "public/zadachi.html": "fb89df29d256277b1a3405870ae3ed8615e76b80742fb15337a71860069728f9",
+    "public/znak.html": "3a2ced4c90988ba5e85a8be6f9fa9e4d2399adb2c3763dc22fc4e865efe7d7c6"
+  },
+  "modals": [
+    {
+      "title": "Удалить аккаунт",
+      "title_kind": "literal_variants",
+      "file": "public/js/account-edit.js",
+      "line": 74,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Сбросить черновик",
+      "title_kind": "literal_variants",
+      "file": "public/js/account-edit.js",
+      "line": 79,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Системное окно: api",
+      "title_kind": "native_dialog",
+      "file": "public/js/api.js",
+      "line": 19,
+      "visual_review": "pending",
+      "component": "dialog"
+    },
+    {
+      "title": "Окно с названием по сценарию",
+      "title_kind": "dynamic",
+      "file": "public/js/archive-actions.js",
+      "line": 11,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Загрузить в базу · ",
+      "title_kind": "literal_variants",
+      "file": "public/js/base-import.js",
+      "line": 9,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Сравнить черновики импорта",
+      "title_kind": "literal_variants",
+      "file": "public/js/base-import.js",
+      "line": 15,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Импорт завершён",
+      "title_kind": "literal_variants",
+      "file": "public/js/base-import.js",
+      "line": 46,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Проверить сохранение базы",
+      "title_kind": "literal_variants",
+      "file": "public/js/base-state.js",
+      "line": 35,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Окно с названием по сценарию",
+      "title_kind": "dynamic",
+      "file": "public/js/bazy.js",
+      "line": 25,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Сравнить черновики",
+      "title_kind": "literal_variants",
+      "file": "public/js/bazy.js",
+      "line": 34,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Сравнить правки",
+      "title_kind": "literal_variants",
+      "file": "public/js/bazy.js",
+      "line": 35,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Убрать этап?",
+      "title_kind": "literal_variants",
+      "file": "public/js/bazy.js",
+      "line": 45,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Вложения · ",
+      "title_kind": "literal_variants",
+      "file": "public/js/bazy.js",
+      "line": 47,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Убрать из базы / Вернуть в базу",
+      "title_kind": "literal_variants",
+      "file": "public/js/bazy.js",
+      "line": 57,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Проверить действие рассылки",
+      "title_kind": "literal_variants",
+      "file": "public/js/broadcast-state.js",
+      "line": 43,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Сохранённый черновик",
+      "title_kind": "literal_variants",
+      "file": "public/js/cabinet-reflection.js",
+      "line": 25,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Сверить и заменить черновик",
+      "title_kind": "literal_variants",
+      "file": "public/js/cabinet-reflection.js",
+      "line": 30,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Сохранённые версии черновика",
+      "title_kind": "literal_variants",
+      "file": "public/js/cabinet-reflection.js",
+      "line": 39,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Период графика",
+      "title_kind": "literal_variants",
+      "file": "public/js/cabinet-schedule.js",
+      "line": 17,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Несохранённые правки",
+      "title_kind": "literal_variants",
+      "file": "public/js/cabinet-schedule.js",
+      "line": 46,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Кампания создана",
+      "title_kind": "literal_variants",
+      "file": "public/js/campaign-create.js",
+      "line": 19,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Проверить создание кампании",
+      "title_kind": "literal_variants",
+      "file": "public/js/campaign-create.js",
+      "line": 26,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Новая рассылка",
+      "title_kind": "literal_variants",
+      "file": "public/js/campaign-create.js",
+      "line": 49,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Проверить изменение плана",
+      "title_kind": "literal_variants",
+      "file": "public/js/campaign-plan.js",
+      "line": 27,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Общий план кампании",
+      "title_kind": "literal_variants",
+      "file": "public/js/campaign-plan.js",
+      "line": 40,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Что сломалось",
+      "title_kind": "literal_variants",
+      "file": "public/js/error-report.js",
+      "line": 17,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Журнал ошибок",
+      "title_kind": "literal_variants",
+      "file": "public/js/error-report.js",
+      "line": 66,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Проверить отправку записи",
+      "title_kind": "literal_variants",
+      "file": "public/js/feed-state.js",
+      "line": 65,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Проверить действие таймера",
+      "title_kind": "literal_variants",
+      "file": "public/js/focus-state.js",
+      "line": 43,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Добавить платёж",
+      "title_kind": "literal_variants",
+      "file": "public/js/forma-platezha.js",
+      "line": 88,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Окно с названием по сценарию",
+      "title_kind": "dynamic",
+      "file": "public/js/forma-rezultata.js",
+      "line": 16,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "План уже изменён",
+      "title_kind": "literal_variants",
+      "file": "public/js/forma-rezultata.js",
+      "line": 165,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Каких лидов считать",
+      "title_kind": "literal_variants",
+      "file": "public/js/forma-rezultata.js",
+      "line": 198,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "База результата: ",
+      "title_kind": "literal_variants",
+      "file": "public/js/forma-rezultata.js",
+      "line": 227,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Проверка сохранения",
+      "title_kind": "literal_variants",
+      "file": "public/js/goal-editor.js",
+      "line": 20,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Сведения о цели",
+      "title_kind": "literal_variants",
+      "file": "public/js/goal-editor.js",
+      "line": 35,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Убрать цель в архив? / Вернуть цель в работу?",
+      "title_kind": "literal_variants",
+      "file": "public/js/goal-editor.js",
+      "line": 49,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "dokument / новый документ / новый материал",
+      "title_kind": "literal_variants",
+      "file": "public/js/materialy.js",
+      "line": 25,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "убрать  / dokument / документ / материал",
+      "title_kind": "literal_variants",
+      "file": "public/js/materialy.js",
+      "line": 174,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "изменить  / dokument / документ / материал",
+      "title_kind": "literal_variants",
+      "file": "public/js/materialy.js",
+      "line": 182,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Окно с названием по сценарию",
+      "title_kind": "dynamic",
+      "file": "public/js/obschij.js",
+      "line": 175,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Без названия задачу не сохранить. Закрыть и потерять?",
+      "title_kind": "literal_variants",
+      "file": "public/js/obschij.js",
+      "line": 1989,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "rekomendacija / Кто порекомендовал / Какая рассылка",
+      "title_kind": "literal_variants",
+      "file": "public/js/obschij.js",
+      "line": 3200,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Новое контактное лицо / Новый человек",
+      "title_kind": "literal_variants",
+      "file": "public/js/obschij.js",
+      "line": 3289,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Окно с названием по сценарию",
+      "title_kind": "dynamic",
+      "file": "public/js/obschij.js",
+      "line": 3789,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Скопируй вручную",
+      "title_kind": "literal_variants",
+      "file": "public/js/obschij.js",
+      "line": 4613,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Проверить создание",
+      "title_kind": "literal_variants",
+      "file": "public/js/obschij.js",
+      "line": 5447,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Новый замер / : ",
+      "title_kind": "literal_variants",
+      "file": "public/js/obschij.js",
+      "line": 5454,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Проверить создание задачи",
+      "title_kind": "literal_variants",
+      "file": "public/js/obschij.js",
+      "line": 5501,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Проверить отмену задачи",
+      "title_kind": "literal_variants",
+      "file": "public/js/obschij.js",
+      "line": 5552,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Проверить платёж",
+      "title_kind": "literal_variants",
+      "file": "public/js/obschij.js",
+      "line": 5644,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Пришла оплата",
+      "title_kind": "literal_variants",
+      "file": "public/js/obschij.js",
+      "line": 5656,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Удалить  / celi / цель / результат /  « / »",
+      "title_kind": "literal_variants",
+      "file": "public/js/okr-delete.js",
+      "line": 59,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Проверка планов",
+      "title_kind": "literal_variants",
+      "file": "public/js/period-plan-form.js",
+      "line": 19,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Разбить по месяцам / Разбить по кварталам",
+      "title_kind": "literal_variants",
+      "file": "public/js/period-plan-form.js",
+      "line": 32,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Задача ",
+      "title_kind": "literal_variants",
+      "file": "public/js/povtory.js",
+      "line": 94,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Отметки по дням / История отметок",
+      "title_kind": "literal_variants",
+      "file": "public/js/povtory.js",
+      "line": 207,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Повторение / Включить повторение",
+      "title_kind": "literal_variants",
+      "file": "public/js/povtory.js",
+      "line": 253,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Удалить задачу",
+      "title_kind": "literal_variants",
+      "file": "public/js/povtory.js",
+      "line": 275,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Проверить сохранение настроек",
+      "title_kind": "literal_variants",
+      "file": "public/js/preferences-state.js",
+      "line": 35,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Проверить действие проекта",
+      "title_kind": "literal_variants",
+      "file": "public/js/proekt-dejstvija.js",
+      "line": 50,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "arhiv / Убрать проект в архив / Вернуть проект из архива / Завершить проект ",
+      "title_kind": "literal_variants",
+      "file": "public/js/proekt-dejstvija.js",
+      "line": 72,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Проверить правку проекта",
+      "title_kind": "literal_variants",
+      "file": "public/js/proekt-pravka.js",
+      "line": 32,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Изменить проект",
+      "title_kind": "literal_variants",
+      "file": "public/js/proekt-pravka.js",
+      "line": 59,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Сравнить правки проекта",
+      "title_kind": "literal_variants",
+      "file": "public/js/proekt-pravka.js",
+      "line": 75,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Проверить отмену связи",
+      "title_kind": "literal_variants",
+      "file": "public/js/referral-payout-link.js",
+      "line": 23,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Проверить связь выплаты",
+      "title_kind": "literal_variants",
+      "file": "public/js/referral-payout-link.js",
+      "line": 48,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Снять связь с выплатой / Выплата уже отмечена",
+      "title_kind": "literal_variants",
+      "file": "public/js/referral-payout-link.js",
+      "line": 66,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Сравнить связь выплаты",
+      "title_kind": "literal_variants",
+      "file": "public/js/referral-payout-link.js",
+      "line": 82,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Проверить отметку выплаты",
+      "title_kind": "literal_variants",
+      "file": "public/js/referral-payout-state.js",
+      "line": 27,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Проверить отмену выплаты",
+      "title_kind": "literal_variants",
+      "file": "public/js/referral-payout-undo.js",
+      "line": 12,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Отметить выплату",
+      "title_kind": "literal_variants",
+      "file": "public/js/referral-payout.js",
+      "line": 9,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Сравнить отметку выплаты",
+      "title_kind": "literal_variants",
+      "file": "public/js/referral-payout.js",
+      "line": 18,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Проверить создание задач",
+      "title_kind": "literal_variants",
+      "file": "public/js/referral-tasks.js",
+      "line": 16,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Задачи по рефералу",
+      "title_kind": "literal_variants",
+      "file": "public/js/referral-tasks.js",
+      "line": 30,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Сравнить задачи",
+      "title_kind": "literal_variants",
+      "file": "public/js/referral-tasks.js",
+      "line": 36,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Подтвердить выплату по задаче",
+      "title_kind": "literal_variants",
+      "file": "public/js/referral-tasks.js",
+      "line": 45,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Проверить условия реферала",
+      "title_kind": "literal_variants",
+      "file": "public/js/referral-terms-recovery.js",
+      "line": 5,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Проверить отмену условий",
+      "title_kind": "literal_variants",
+      "file": "public/js/referral-terms-undo.js",
+      "line": 12,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Условия реферала",
+      "title_kind": "literal_variants",
+      "file": "public/js/referral-terms.js",
+      "line": 23,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Сравнить условия",
+      "title_kind": "literal_variants",
+      "file": "public/js/referral-terms.js",
+      "line": 59,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Проверить сохранение графика",
+      "title_kind": "literal_variants",
+      "file": "public/js/schedule-commands.js",
+      "line": 35,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Вернуть предыдущий график",
+      "title_kind": "literal_variants",
+      "file": "public/js/schedule-commands.js",
+      "line": 52,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Окно с названием по сценарию",
+      "title_kind": "dynamic",
+      "file": "public/js/schedule-day-form.js",
+      "line": 5,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Проверить сохранение шаблона",
+      "title_kind": "literal_variants",
+      "file": "public/js/shablony.js",
+      "line": 33,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Окно с названием по сценарию",
+      "title_kind": "dynamic",
+      "file": "public/js/shablony.js",
+      "line": 75,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Сравнить шаблон",
+      "title_kind": "literal_variants",
+      "file": "public/js/shablony.js",
+      "line": 90,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Удалить шаблон?",
+      "title_kind": "literal_variants",
+      "file": "public/js/shablony.js",
+      "line": 110,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Проверить создание проекта",
+      "title_kind": "literal_variants",
+      "file": "public/js/sozdanie-proekta.js",
+      "line": 20,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Новый проект",
+      "title_kind": "literal_variants",
+      "file": "public/js/sozdanie-proekta.js",
+      "line": 38,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Проверка сохранения",
+      "title_kind": "literal_variants",
+      "file": "public/js/strategy-editor.js",
+      "line": 28,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Тезис стратегии / Новый тезис",
+      "title_kind": "literal_variants",
+      "file": "public/js/strategy-editor.js",
+      "line": 42,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Удалить тезис?",
+      "title_kind": "literal_variants",
+      "file": "public/js/strategy-editor.js",
+      "line": 65,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Сравнить черновики",
+      "title_kind": "literal_variants",
+      "file": "public/js/task-campaign-form.js",
+      "line": 24,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Какая рассылка",
+      "title_kind": "literal_variants",
+      "file": "public/js/task-campaign-form.js",
+      "line": 33,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "undo / Проверка возврата полей / Проверка сохранения задачи",
+      "title_kind": "literal_variants",
+      "file": "public/js/task-context.js",
+      "line": 49,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Параметры задачи",
+      "title_kind": "literal_variants",
+      "file": "public/js/task-context.js",
+      "line": 70,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Настройки публикации",
+      "title_kind": "literal_variants",
+      "file": "public/js/task-publication-settings.js",
+      "line": 45,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "settings / Проверить настройки публикации / Проверить источник публикации",
+      "title_kind": "literal_variants",
+      "file": "public/js/task-publication.js",
+      "line": 78,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Отсоединить публикацию",
+      "title_kind": "literal_variants",
+      "file": "public/js/task-publication.js",
+      "line": 114,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Связать вышедшую публикацию",
+      "title_kind": "literal_variants",
+      "file": "public/js/task-publication.js",
+      "line": 119,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Закрыть задачу?",
+      "title_kind": "literal_variants",
+      "file": "public/js/task-state.js",
+      "line": 60,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Обновить замер?",
+      "title_kind": "literal_variants",
+      "file": "public/js/task-state.js",
+      "line": 88,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Страна телефона",
+      "title_kind": "literal_variants",
+      "file": "public/js/telefon-input.js",
+      "line": 65,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Окно с названием по сценарию",
+      "title_kind": "dynamic",
+      "file": "public/js/ui-specimen.js",
+      "line": 31,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Проверить действие услуги",
+      "title_kind": "literal_variants",
+      "file": "public/js/uslugi-sostojanie.js",
+      "line": 89,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Окно с названием по сценарию",
+      "title_kind": "dynamic",
+      "file": "public/js/uslugi.js",
+      "line": 31,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Сравнить правки услуги",
+      "title_kind": "literal_variants",
+      "file": "public/js/uslugi.js",
+      "line": 81,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Окно с названием по сценарию",
+      "title_kind": "dynamic",
+      "file": "public/js/weekly-snapshot-form.js",
+      "line": 35,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Запланировать следующее касание?",
+      "title_kind": "literal_variants",
+      "file": "public/klient.html",
+      "line": 526,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Когда следующее касание",
+      "title_kind": "literal_variants",
+      "file": "public/klient.html",
+      "line": 552,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Направление задачи",
+      "title_kind": "literal_variants",
+      "file": "public/klient.html",
+      "line": 590,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Порядок контактов",
+      "title_kind": "literal_variants",
+      "file": "public/klient.html",
+      "line": 824,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Источник прихода",
+      "title_kind": "literal_variants",
+      "file": "public/klient.html",
+      "line": 1692,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Контакт по направлению",
+      "title_kind": "literal_variants",
+      "file": "public/klient.html",
+      "line": 1704,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Сделать собственным",
+      "title_kind": "literal_variants",
+      "file": "public/klient.html",
+      "line": 1739,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Своя стадия",
+      "title_kind": "literal_variants",
+      "file": "public/klient.html",
+      "line": 1800,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "новый контакт",
+      "title_kind": "literal_variants",
+      "file": "public/klient.html",
+      "line": 1876,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "новая связь",
+      "title_kind": "literal_variants",
+      "file": "public/klient.html",
+      "line": 1988,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "направление человека",
+      "title_kind": "literal_variants",
+      "file": "public/klient.html",
+      "line": 2061,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Направление рассылки",
+      "title_kind": "literal_variants",
+      "file": "public/ljudi.html",
+      "line": 155,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "По источникам",
+      "title_kind": "literal_variants",
+      "file": "public/ljudi.html",
+      "line": 407,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Цель из стратегии",
+      "title_kind": "literal_variants",
+      "file": "public/napravlenija.html",
+      "line": 613,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Новый человек",
+      "title_kind": "literal_variants",
+      "file": "public/okna.html",
+      "line": 296,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Направление человека",
+      "title_kind": "literal_variants",
+      "file": "public/okna.html",
+      "line": 315,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Новый контакт",
+      "title_kind": "literal_variants",
+      "file": "public/okna.html",
+      "line": 324,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Новая связь",
+      "title_kind": "literal_variants",
+      "file": "public/okna.html",
+      "line": 340,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Новый материал",
+      "title_kind": "literal_variants",
+      "file": "public/okna.html",
+      "line": 351,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Новый документ",
+      "title_kind": "literal_variants",
+      "file": "public/okna.html",
+      "line": 360,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Запланировать следующее касание?",
+      "title_kind": "literal_variants",
+      "file": "public/okna.html",
+      "line": 373,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Когда следующее касание",
+      "title_kind": "literal_variants",
+      "file": "public/okna.html",
+      "line": 383,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Своя стадия",
+      "title_kind": "literal_variants",
+      "file": "public/okna.html",
+      "line": 390,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Новый проект",
+      "title_kind": "literal_variants",
+      "file": "public/okna.html",
+      "line": 406,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Пришла оплата",
+      "title_kind": "literal_variants",
+      "file": "public/okna.html",
+      "line": 419,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Завершить проект Платформа благодарности",
+      "title_kind": "literal_variants",
+      "file": "public/okna.html",
+      "line": 440,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Убрать проект в архив",
+      "title_kind": "literal_variants",
+      "file": "public/okna.html",
+      "line": 458,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Услуга направления",
+      "title_kind": "literal_variants",
+      "file": "public/okna.html",
+      "line": 467,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Новая рассылка",
+      "title_kind": "literal_variants",
+      "file": "public/okna.html",
+      "line": 476,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Создать рассылку",
+      "title_kind": "literal_variants",
+      "file": "public/okna.html",
+      "line": 487,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Цель из тезиса стратегии",
+      "title_kind": "literal_variants",
+      "file": "public/okna.html",
+      "line": 496,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Результат цели «Регулярный спрос»",
+      "title_kind": "literal_variants",
+      "file": "public/okna.html",
+      "line": 503,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Замер: проведённых чекапов",
+      "title_kind": "literal_variants",
+      "file": "public/okna.html",
+      "line": 511,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Разбить по кварталам",
+      "title_kind": "literal_variants",
+      "file": "public/okna.html",
+      "line": 519,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "По источникам",
+      "title_kind": "literal_variants",
+      "file": "public/okna.html",
+      "line": 537,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Сделать рассылкой",
+      "title_kind": "literal_variants",
+      "file": "public/okna.html",
+      "line": 547,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Проекты",
+      "title_kind": "literal_variants",
+      "file": "public/okna.html",
+      "line": 562,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Вернуть проект из архива",
+      "title_kind": "literal_variants",
+      "file": "public/okna.html",
+      "line": 588,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Кому писать",
+      "title_kind": "literal_variants",
+      "file": "public/okna.html",
+      "line": 596,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Сравнить недели",
+      "title_kind": "literal_variants",
+      "file": "public/okna.html",
+      "line": 604,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Прикрепить задачу к цели «Регулярный спрос»",
+      "title_kind": "literal_variants",
+      "file": "public/okna.html",
+      "line": 633,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Собрать смету проекта",
+      "title_kind": "literal_variants",
+      "file": "public/okna.html",
+      "line": 650,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Новый шаблон",
+      "title_kind": "literal_variants",
+      "file": "public/okna.html",
+      "line": 671,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Удалить цель «Регулярный спрос»",
+      "title_kind": "literal_variants",
+      "file": "public/okna.html",
+      "line": 699,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Окно с названием по сценарию",
+      "title_kind": "dynamic",
+      "file": "public/okr.html",
+      "line": 956,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Все замеры результата: ",
+      "title_kind": "literal_variants",
+      "file": "public/okr.html",
+      "line": 1020,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Сравнить недели",
+      "title_kind": "literal_variants",
+      "file": "public/planerka.html",
+      "line": 989,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Сохранённый черновик",
+      "title_kind": "literal_variants",
+      "file": "public/poleznoe.html",
+      "line": 2318,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Создать новый черновик?",
+      "title_kind": "literal_variants",
+      "file": "public/poleznoe.html",
+      "line": 2318,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Сохранённые версии черновика",
+      "title_kind": "literal_variants",
+      "file": "public/poleznoe.html",
+      "line": 2319,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Команда: ",
+      "title_kind": "literal_variants",
+      "file": "public/poleznoe.html",
+      "line": 3137,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Заметка: ",
+      "title_kind": "literal_variants",
+      "file": "public/poleznoe.html",
+      "line": 3141,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Сверить график",
+      "title_kind": "literal_variants",
+      "file": "public/poleznoe.html",
+      "line": 4943,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Проекты",
+      "title_kind": "literal_variants",
+      "file": "public/prostranstvo.html",
+      "line": 410,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Новая волна",
+      "title_kind": "literal_variants",
+      "file": "public/rassylka.html",
+      "line": 426,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Пополнить исходную отправку",
+      "title_kind": "literal_variants",
+      "file": "public/rassylka.html",
+      "line": 447,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    },
+    {
+      "title": "Добавить людей",
+      "title_kind": "literal_variants",
+      "file": "public/rassylka.html",
+      "line": 458,
+      "visual_review": "pending",
+      "component": "O.modalka"
+    }
+  ],
+  "choices": [
+    {
+      "component": "select",
+      "file": "public/js/account-create.js",
+      "line": 17,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/account-create.js",
+      "line": 20,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/account-create.js",
+      "line": 21,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/account-edit.js",
+      "line": 14,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/account-edit.js",
+      "line": 16,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/account-edit.js",
+      "line": 17,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/account-edit.js",
+      "line": 18,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/account-edit.js",
+      "line": 19,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/base-import.js",
+      "line": 9,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/base-import.js",
+      "line": 19,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/base-import.js",
+      "line": 20,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/base-import.js",
+      "line": 21,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/base-import.js",
+      "line": 32,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/base-import.js",
+      "line": 33,
+      "visual_review": "pending"
+    },
+    {
+      "component": "details",
+      "file": "public/js/base-import.js",
+      "line": 35,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/base-import.js",
+      "line": 40,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/bazy.js",
+      "line": 24,
+      "visual_review": "pending"
+    },
+    {
+      "component": "datalist",
+      "file": "public/js/bazy.js",
+      "line": 24,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/bazy.js",
+      "line": 62,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/bazy.js",
+      "line": 62,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/cabinet-schedule.js",
+      "line": 17,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/cabinet-schedule.js",
+      "line": 17,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/cabinet-schedule.js",
+      "line": 17,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/campaign-create.js",
+      "line": 49,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/campaign-create.js",
+      "line": 49,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/campaign-create.js",
+      "line": 49,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/campaign-create.js",
+      "line": 49,
+      "visual_review": "pending"
+    },
+    {
+      "component": "details",
+      "file": "public/js/campaign-create.js",
+      "line": 49,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/forma-rezultata.js",
+      "line": 20,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/forma-rezultata.js",
+      "line": 23,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/forma-rezultata.js",
+      "line": 26,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/forma-rezultata.js",
+      "line": 28,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/forma-rezultata.js",
+      "line": 34,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/forma-rezultata.js",
+      "line": 36,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/forma-rezultata.js",
+      "line": 200,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/goal-editor.js",
+      "line": 35,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/goal-editor.js",
+      "line": 35,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/goal-editor.js",
+      "line": 35,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/kommentarii.js",
+      "line": 53,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/materialy.js",
+      "line": 27,
+      "visual_review": "pending"
+    },
+    {
+      "component": "details",
+      "file": "public/js/materialy.js",
+      "line": 31,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/materialy.js",
+      "line": 44,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/materialy.js",
+      "line": 108,
+      "visual_review": "pending"
+    },
+    {
+      "component": "details",
+      "file": "public/js/materialy.js",
+      "line": 109,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/materialy.js",
+      "line": 182,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/obschij.js",
+      "line": 1019,
+      "visual_review": "pending"
+    },
+    {
+      "component": "datalist",
+      "file": "public/js/obschij.js",
+      "line": 1038,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/js/obschij.js",
+      "line": 1220,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/js/obschij.js",
+      "line": 1380,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/obschij.js",
+      "line": 1909,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/js/obschij.js",
+      "line": 2652,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/js/obschij.js",
+      "line": 2744,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/js/obschij.js",
+      "line": 3016,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/obschij.js",
+      "line": 3237,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/obschij.js",
+      "line": 3297,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/obschij.js",
+      "line": 3303,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/js/obschij.js",
+      "line": 4068,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/obschij.js",
+      "line": 5454,
+      "visual_review": "pending"
+    },
+    {
+      "component": "details",
+      "file": "public/js/okr-delete.js",
+      "line": 13,
+      "visual_review": "pending"
+    },
+    {
+      "component": "details",
+      "file": "public/js/povtory.js",
+      "line": 194,
+      "visual_review": "pending"
+    },
+    {
+      "component": "details",
+      "file": "public/js/povtory.js",
+      "line": 298,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/proekt-dejstvija.js",
+      "line": 80,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/js/proekt-pravka.js",
+      "line": 69,
+      "visual_review": "pending"
+    },
+    {
+      "component": "details",
+      "file": "public/js/readiness.js",
+      "line": 1,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/referral-tasks.js",
+      "line": 30,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/referral-tasks.js",
+      "line": 30,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/referral-terms.js",
+      "line": 27,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/referral-terms.js",
+      "line": 29,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/js/sozdanie-proekta.js",
+      "line": 42,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/strategy-editor.js",
+      "line": 42,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/js/task-account.js",
+      "line": 15,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/task-campaign-form.js",
+      "line": 43,
+      "visual_review": "pending"
+    },
+    {
+      "component": "datalist",
+      "file": "public/js/task-publication-settings.js",
+      "line": 53,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/uchastniki.js",
+      "line": 7,
+      "visual_review": "pending"
+    },
+    {
+      "component": "datalist",
+      "file": "public/js/ui-specimen.js",
+      "line": 8,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/ui-specimen.js",
+      "line": 9,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/ui-specimen.js",
+      "line": 9,
+      "visual_review": "pending"
+    },
+    {
+      "component": "details",
+      "file": "public/js/ui-specimen.js",
+      "line": 13,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/js/ui-specimen.js",
+      "line": 25,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/js/ui-specimen.js",
+      "line": 25,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/ui-system.js",
+      "line": 3,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/ui-system.js",
+      "line": 3,
+      "visual_review": "pending"
+    },
+    {
+      "component": "details",
+      "file": "public/js/ui-system.js",
+      "line": 6,
+      "visual_review": "pending"
+    },
+    {
+      "component": "details",
+      "file": "public/js/ui-system.js",
+      "line": 7,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/js/uslugi.js",
+      "line": 44,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/kabinet.html",
+      "line": 879,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/kabinet.html",
+      "line": 890,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/klient.html",
+      "line": 503,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/klient.html",
+      "line": 1749,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/klient.html",
+      "line": 1759,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/klient.html",
+      "line": 1781,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/klient.html",
+      "line": 1958,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/klient.html",
+      "line": 2010,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/klient.html",
+      "line": 2018,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/klient.html",
+      "line": 2088,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/klient.html",
+      "line": 2095,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/ljudi.html",
+      "line": 155,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/ljudi.html",
+      "line": 322,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/ljudi.html",
+      "line": 347,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/ljudi.html",
+      "line": 365,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/ljudi.html",
+      "line": 417,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/ljudi.html",
+      "line": 432,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/ljudi.html",
+      "line": 512,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/ljudi.html",
+      "line": 815,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/napravlenija.html",
+      "line": 424,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/napravlenija.html",
+      "line": 613,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/napravlenija.html",
+      "line": 640,
+      "visual_review": "pending"
+    },
+    {
+      "component": "details",
+      "file": "public/napravlenija.html",
+      "line": 1312,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/okna.html",
+      "line": 214,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/okr.html",
+      "line": 776,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/okr.html",
+      "line": 782,
+      "visual_review": "pending"
+    },
+    {
+      "component": "details",
+      "file": "public/poleznoe.html",
+      "line": 1729,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/poleznoe.html",
+      "line": 3199,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/poleznoe.html",
+      "line": 3949,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/prostranstvo.html",
+      "line": 252,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/prostranstvo.html",
+      "line": 258,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/rassylka.html",
+      "line": 209,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/rassylka.html",
+      "line": 391,
+      "visual_review": "pending"
+    },
+    {
+      "component": "select",
+      "file": "public/rassylka.html",
+      "line": 429,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/zadachi.html",
+      "line": 635,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/zadachi.html",
+      "line": 650,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/zadachi.html",
+      "line": 661,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/zadachi.html",
+      "line": 667,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/zadachi.html",
+      "line": 690,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/zadachi.html",
+      "line": 708,
+      "visual_review": "pending"
+    },
+    {
+      "component": "O.vypadajuschij",
+      "file": "public/zadachi.html",
+      "line": 718,
+      "visual_review": "pending"
+    }
+  ],
+  "limits": [
+    "Static call sites include dynamic title variants; conditional content and every runtime state still need browser review",
+    "Creation panels and inline editors also belong to the component migration; this list does not claim all visual elements were reviewed",
+    "No business data or source dialogue is included"
+  ]
+}

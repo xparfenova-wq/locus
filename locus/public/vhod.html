@@ -1,0 +1,295 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Locus</title>
+<link rel="icon" href="/api/favicon?v=L" type="image/svg+xml">
+<link rel="stylesheet" href="/css/obschij.css">
+<style>
+body{display:grid;place-items:center;min-height:100dvh;padding:40px 0}
+.vh{display:grid;grid-template-columns:1.25fr 1fr;align-items:center;
+gap:80px;max-width:1340px;width:100%;padding:0 56px}
+.vh-l{position:relative}
+.krt{width:100%;height:auto;display:block;overflow:visible}
+                                                                        
+.krt-f{-webkit-mask:radial-gradient(ellipse 62% 62% at 50% 50%,#000 42%,transparent 86%);
+mask:radial-gradient(ellipse 62% 62% at 50% 50%,#000 42%,transparent 86%)}
+                                                                
+                                                          
+                                                                 
+                                                          
+                                                             
+
+                                            
+.krt-f{opacity:0;animation:prjam 1.1s .05s forwards}
+
+                                                   
+                                                                
+.krt-t{opacity:0;animation:krug .42s cubic-bezier(.25,1.1,.4,1) forwards;
+animation-delay:calc(.25s + var(--z) * .09s);
+transform-box:fill-box;transform-origin:center}
+@keyframes krug{
+  0%{opacity:0;transform:scale(.35)}
+  100%{opacity:1;transform:none}}
+                                           
+.krt-ch{font-family:'Geist Mono',ui-monospace,monospace;font-size:8px;
+fill:var(--t3)}
+
+                                                            
+                                                             
+.krt-l{stroke-dasharray:1;stroke-dashoffset:1;
+animation:rost .5s cubic-bezier(.3,.7,.3,1) forwards;
+animation-delay:calc(1.05s + var(--z) * .07s)}
+
+                                                       
+                            
+.krt-tochki{animation:sojedinilos .7s cubic-bezier(.3,1.1,.4,1) 1.95s both;
+transform-box:fill-box;transform-origin:center}
+@keyframes sojedinilos{
+  0%{transform:scale(1)}
+  40%{transform:scale(1.035)}
+  100%{transform:scale(1)}}
+
+                                                                 
+                                                        
+                                                          
+                                                         
+                                                          
+                                                            
+                                                      
+                                            
+.krt-jadro{will-change:transform;transform-box:fill-box;
+transform-origin:center}
+.krt-t:nth-child(1) .krt-jadro{animation:dysh1 19s ease-in-out 2.7s infinite}
+.krt-t:nth-child(2) .krt-jadro{animation:dysh2 23s ease-in-out 2.9s infinite}
+.krt-t:nth-child(3) .krt-jadro{animation:dysh3 17s ease-in-out 3.1s infinite}
+.krt-t:nth-child(4) .krt-jadro{animation:dysh4 21s ease-in-out 2.8s infinite}
+.krt-t:nth-child(5) .krt-jadro{animation:dysh1 25s ease-in-out 3.3s infinite}
+.krt-t:nth-child(6) .krt-jadro{animation:dysh3 20s ease-in-out 3.0s infinite}
+.krt-t:nth-child(7) .krt-jadro{animation:dysh2 18s ease-in-out 3.4s infinite}
+.krt-t:nth-child(8) .krt-jadro{animation:dysh4 24s ease-in-out 2.6s infinite}
+                                                           
+                                                                   
+@keyframes dysh1{
+  0%,100%{transform:translate(0,0)}
+  30%{transform:translate(6px,-3px)}
+  62%{transform:translate(-2px,4px)}}
+@keyframes dysh2{
+  0%,100%{transform:translate(0,0)}
+  34%{transform:translate(-5px,3px)}
+  68%{transform:translate(3px,-5px)}}
+@keyframes dysh3{
+  0%,100%{transform:translate(0,0)}
+  28%{transform:translate(4px,5px)}
+  70%{transform:translate(-4px,-2px)}}
+@keyframes dysh4{
+  0%,100%{transform:translate(0,0)}
+  40%{transform:translate(-6px,-4px)}
+  74%{transform:translate(2px,3px)}}
+.krt-p{font-size:9.5px;fill:var(--t3);font-family:'Geist',sans-serif;
+transform:translateY(8px);
+letter-spacing:.02em;opacity:0;animation:prjam .5s forwards;
+animation-delay:calc(1.5s + var(--z) * .05s)}
+@keyframes prjam{from{opacity:0}to{opacity:1}}
+@keyframes rost{to{stroke-dashoffset:0}}
+@keyframes tochka{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}
+.krt-t{transform-box:fill-box;transform-origin:center}
+
+.vh-t{max-width:420px}
+.vh-z{display:flex;align-items:center;gap:10px;margin-bottom:26px;
+opacity:0;animation:vverh .6s .2s forwards}
+.vh-z b{font-size:17px;font-weight:500;letter-spacing:-.01em}
+
+                                                              
+                                                       
+                                                                
+.lg{display:flex;align-items:baseline;gap:1px;margin-bottom:30px}
+.lg i{font-style:normal;font-size:62px;font-weight:600;
+letter-spacing:-.04em;line-height:1;display:inline-block;
+opacity:0;transform:translateY(-14px) rotate(-6deg);
+animation:bukva .52s cubic-bezier(.22,1.2,.36,1) forwards;
+animation-delay:calc(.25s + var(--b) * .11s)}
+                                                                  
+                                       
+@keyframes bukva{
+  60%{opacity:1;transform:translateY(2px) rotate(1.5deg)}
+  to{opacity:1;transform:none}}
+                                                    
+.lg-t{width:9px;height:9px;border-radius:50%;background:var(--pal-3);
+align-self:flex-end;margin:0 0 7px 4px;opacity:0;transform:scale(.3);
+animation:lgt .4s cubic-bezier(.2,1.3,.4,1) .92s forwards}
+@keyframes lgt{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){
+  .lg i,.lg-t{animation:none;opacity:1;transform:none}}
+                                                               
+                                                           
+                                          
+.vh-h{font-family:'Geist Mono',ui-monospace,monospace;
+font-size:30px;font-weight:500;letter-spacing:-.04em;line-height:1.2;
+margin-bottom:13px;opacity:0;animation:vverh .6s 1.05s forwards}
+.vh-o{font-size:15px;color:var(--t2);line-height:1.5;margin-bottom:30px;
+opacity:0;animation:vverh .6s 1.25s forwards}
+                                                            
+                                                             
+.vh-f{opacity:0;animation:vverh .6s 1.45s forwards}
+                                                               
+                                                             
+                                                              
+@keyframes vverh{from{opacity:0;transform:translateY(7px)}
+to{opacity:1;transform:none}}
+.vh-p{display:block;width:100%;border:0;border-bottom:1px solid var(--lin);
+background:transparent;font-family:inherit;font-size:13px;padding:10px 0;
+color:var(--t1);margin-bottom:22px;transition:border-color .16s}
+.vh-p:focus{outline:none;border-bottom-color:var(--t1)}
+                                                                  
+                                                                   
+.vh-p.pusto{border-bottom-color:var(--t1);animation:net .36s ease}
+@keyframes net{
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-4px)}
+  75%{transform:translateX(4px)}}
+.vh-p::placeholder{color:var(--t3)}
+.vh-kn{display:inline-flex;align-items:center;gap:9px;height:38px;padding:0 22px;
+background:var(--tmn);color:#fff;font-size:13px;border:0;border-radius:999px;
+font-family:inherit;transition:opacity .14s;
+cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='6'%3E%3Ccircle cx='3' cy='3' r='3' fill='%231a1815'/%3E%3C/svg%3E") 3 3, pointer}
+.vh-kn:hover{opacity:.82}
+                                                               
+                                          
+.vh-m{font-size:11.5px;color:var(--t3);margin:0 0 20px;
+opacity:0;animation:vverh .6s 1.35s forwards}
+.vh-osh{font-size:11.5px;color:var(--t2);margin-top:12px;min-height:16px}
+@media (max-width:900px){
+  .vh{grid-template-columns:1fr;gap:34px;padding:40px 24px;max-width:460px}
+  .vh-l{order:2;max-width:300px;margin:0 auto}
+  .vh-t{order:1;max-width:none}
+  .vh-h{font-size:21px}
+}
+                                                                   
+@media (prefers-reduced-motion:reduce){
+  .krt-f,.krt-t,.krt-p,.vh-z,.vh-h,.vh-o,.vh-f,.krt-tochki,.vh-m{
+    animation:none;opacity:1;transform:none}
+  .krt-l{animation:none;stroke-dashoffset:0}
+}
+</style></head><body>
+<div class="vh">
+  <div class="vh-l" id="karta"></div>
+  <div class="vh-t">
+    <div id="znak"></div>
+        <div class="vh-h">Фокус на&nbsp;важном</div>
+    <div class="vh-o">через общую карту с&nbsp;задачами, людьми, целями
+      и&nbsp;динамикой по&nbsp;их&nbsp;достижению</div>
+    <div class="vh-m">Пароль не&nbsp;помнишь – напиши в&nbsp;рабочий чат</div>
+    <form class="vh-f" id="forma" novalidate>
+      <input class="vh-p" id="login" type="text" placeholder="логин"
+             autocomplete="username" autocapitalize="off">
+      <input class="vh-p" id="parol" type="password" placeholder="пароль"
+             autocomplete="current-password">
+      <button class="vh-kn" type="submit">Войти</button>
+      <div class="vh-osh" id="osh"></div>
+    </form>
+  </div>
+</div>
+<script src="/js/nedeli.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/karta.js"></script>
+<script>
+(async function () {
+                                                                   
+                                                              
+  let napr = [];
+  try {
+    const o = await API.spisok('napravlenija', { na_stranice: 20 });
+    napr = (o.spisok || []).filter((n) => !n.arhiv);
+  } catch (e) {                                          }
+
+                                                                 
+                                                                
+                                                           
+                                                                 
+                                                                  
+                                                                  
+  const PALITRA = ['color-mix(in srgb, var(--pal-1) 78%, #0F3B27)',
+                   'var(--pal-3)', 'var(--pal-4)', 'var(--t1)', 'var(--t1)'];
+  const slovo = document.getElementById('znak');
+  slovo.className = 'lg';
+  'Locus'.split('').forEach((bukva, i) => {
+    const el = document.createElement('i');
+    el.textContent = bukva;
+    el.style.color = PALITRA[i];
+    el.style.setProperty('--b', String(i));
+    slovo.appendChild(el);
+  });
+  const tochka = document.createElement('span');
+  tochka.className = 'lg-t';
+  slovo.appendChild(tochka);
+
+  if (napr.length) {
+    document.getElementById('karta').appendChild(KARTA.karta(napr));
+                                                                  
+                                                                  
+                                                      
+    document.querySelectorAll('#karta .krt-jadro').forEach((c, i) =>
+      c.setAttribute('fill', `var(--pal-${(i % 5) + 1})`));
+                                                      
+    document.querySelectorAll('.krt-l').forEach((l) => {
+      const d = l.getTotalLength();
+      l.style.strokeDasharray = d; l.style.strokeDashoffset = d;
+    });
+  }
+
+                                                            
+                                            
+  document.body.dataset.gotovo = '1';
+
+  document.getElementById('forma')?.addEventListener('submit', async (ev) => {
+    ev.preventDefault();
+    const login = document.getElementById('login').value.trim();
+    const parol = document.getElementById('parol').value;
+    const osh = document.getElementById('osh');
+    const knopka = ev.target.querySelector('.vh-kn');
+    osh.textContent = '';
+                                                                 
+                                                                   
+    if (!login || !parol) {
+      const pole = document.getElementById(login ? 'parol' : 'login');
+      pole.classList.add('pusto');
+      osh.style.color = 'var(--t2)';
+      osh.textContent = login ? 'Не хватает твоего пароля'
+                              : 'Не хватает твоего логина';
+      pole.focus();
+      setTimeout(() => pole.classList.remove('pusto'), 1400);
+      return;
+    }
+    knopka.disabled = true;
+    try {
+      const o = await API.dejstvie('/vhod/parol', { login, parol });
+                                                            
+      try { localStorage.removeItem('locus-sessija'); } catch {                      }
+      if (o.chelovek && o.chelovek.id) {
+        try { localStorage.setItem('locus-ja', String(o.chelovek.id)); } catch {       }
+      }
+      let kuda = o.startovyj_ekran || '/prostranstvo.html';
+      const next = new URLSearchParams(location.search).get('next');
+      if (next) {
+        try {
+          const adres = new URL(next, location.origin);
+          if (adres.origin === location.origin && !/^\/(login|vhod(?:\.html)?)(?:\/|$)/.test(adres.pathname)) {
+            kuda = adres.pathname + adres.search + adres.hash;
+          }
+        } catch {                                               }
+      }
+      location.href = kuda;
+    } catch (e) {
+      knopka.disabled = false;
+      osh.style.color = 'var(--t2)';
+                                                                 
+                                                                 
+                                             
+      osh.textContent = /не подошли|401/.test(e.message)
+        ? 'Кажется, неверный пароль. Напиши в чат, чтобы восстановить доступ'
+        : e.message;
+      document.getElementById('parol').value = '';
+    }
+  });
+  document.body.dataset.tochek = String(document.querySelectorAll('.krt-t').length);
+})();
+</script>
+</body></html>

@@ -1,0 +1,7 @@
+.task-focus{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-0);font-size:var(--text-meta);line-height:var(--line-body);color:var(--t2);overflow-wrap:anywhere}
+.task-focus p{margin:var(--space-0)}
+.focus-task-context{max-width:var(--layout-intro);margin:var(--space-3) auto;font-size:var(--text-body);line-height:var(--line-body);color:var(--t2);overflow-wrap:anywhere}
+.focus-task-context p{margin:var(--space-1) var(--space-0)}
+.focus-task-context .kn{margin:var(--space-1)}
+.focus-task-caption{font-size:var(--text-meta);color:var(--t2)}
+@media(max-width:760px){.task-focus .kn,.focus-task-context .kn{min-height:var(--control-height-mobile)}}

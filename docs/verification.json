@@ -1,0 +1,45 @@
+{
+  "base_working_revision": "d47fa51a554ed052e843ef2f3be91625eac3954c",
+  "review_edition_tested": true,
+  "review_tests": {
+    "node": 1508,
+    "api": 447,
+    "ops": 44,
+    "collector": 20,
+    "design": 2,
+    "failed": 0,
+    "platform": "Mac"
+  },
+  "review_browser_scenarios": [
+    {
+      "scenario": "focus-task-ui",
+      "widths": [
+        1440,
+        1024,
+        768,
+        390,
+        320
+      ],
+      "passed": true,
+      "production_writes": 0
+    },
+    {
+      "scenario": "insights-ui",
+      "widths": [
+        1440,
+        1024,
+        768,
+        390,
+        320
+      ],
+      "passed": true,
+      "production_writes": 0
+    }
+  ],
+  "base_revision_also_verified_on_isolated_linux": true,
+  "base_native_groups": 53,
+  "criteria_ids_preserved": 1717,
+  "accepted_criteria": 232,
+  "product_goal_complete": false,
+  "test_data": "synthetic only"
+}

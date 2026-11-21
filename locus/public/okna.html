@@ -1,0 +1,742 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Окна Locus</title>
+<link rel="icon" href="/api/favicon?v=L" type="image/svg+xml">
+<link rel="stylesheet" href="/css/obschij.css">
+<style>
+                                                                 
+                                                                
+                                                                  
+                                                                      
+.vt{max-width:760px;margin:0 auto;padding-top:10px}
+.vt-z{font-size:21px;font-weight:500;letter-spacing:-.015em;padding:6px 0 2px}
+.vt-p{font-size:13px;color:var(--t3);padding-bottom:10px;max-width:56ch}
+.vt-g{font-size:10px;letter-spacing:.11em;text-transform:uppercase;
+color:var(--t3);padding:22px 0 4px}
+.vt-s{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:12px;
+align-items:center;padding:11px 0;border-bottom:1px solid var(--lin)}
+.vt-n{font-family:'Geist Mono',ui-monospace,monospace;font-size:10.5px;color:var(--t3)}
+.vt-im{font-size:13px}
+.vt-im .p{font-size:11.5px;color:var(--t3);margin-top:2px}
+.vt-kn{font-size:12px;color:var(--t2);border:1px solid var(--lin);
+border-radius:999px;padding:6px 13px;white-space:nowrap;cursor:pointer}
+.vt-kn:hover{background:var(--tmn);color:#fff;border-color:var(--tmn)}
+.vt-ssyl{font-size:11px;color:var(--t3);margin-left:8px}
+#vt-sozd-mesto{max-width:760px;margin:18px auto 0}
+#vt-sozd-mesto:empty{display:none}
+                                                         
+                                                        
+.vyb-z-pole{width:100%;border:0;border-bottom:1px solid var(--lin);
+background:transparent;font-family:inherit;font-size:13px;padding:7px 0;
+color:var(--t1);margin-bottom:6px}
+.vyb-z-pole:focus{outline:none;border-bottom-color:var(--t1)}
+.vyb-z-sp{max-height:320px;overflow-y:auto}
+.vyb-z-s{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;
+align-items:center;padding:9px 2px;font-size:12px;
+border-top:1px solid var(--lin);transition:background .12s}
+.vyb-z-s:hover{background:var(--pole)}
+.vyb-z-s .im{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vyb-z-s .np{font-size:10.5px;color:var(--t3);white-space:nowrap}
+.pl-sr-s{display:grid;grid-template-columns:1fr 90px 90px;gap:8px;
+padding:5px 0;font-size:13px;border-top:1px solid var(--lin)}
+.pl-sr-s b{font-weight:500;font-variant-numeric:tabular-nums}
+.pl-sr-sh{border-top:0;color:var(--t3);font-size:11.5px}
+                                                                  
+                                                                  
+                                                             
+                                                                
+                                                              
+                                                             
+                                    
+body .vyb .sozd-vvod{display:block;width:100%;box-sizing:border-box;
+font-family:inherit;font-size:21px !important;font-weight:500;color:var(--t1);
+border:0 !important;border-bottom:1px solid var(--t1) !important;
+border-radius:0 !important;background:transparent !important;
+padding:8px 2px 10px !important;margin:0 0 2px !important;outline:none}
+body .vyb .sozd-vvod::placeholder{color:var(--t3);font-weight:400}
+body .vyb .sozd-lbl{display:block;font-size:11.5px;color:var(--t3);
+padding:10px 2px 4px;margin:0 0 3px;white-space:nowrap;overflow:hidden;
+text-overflow:ellipsis}
+body .vyb .sozd-p{display:block;min-width:0}
+body .vyb .sozd-pole{display:flex;align-items:center;box-sizing:border-box;
+width:100%;min-height:32px;font-size:13px;color:var(--t1);
+border:0 !important;border-bottom:1px solid var(--lin) !important;
+border-radius:0 !important;background:transparent !important;
+padding:7px 24px 7px 2px !important;position:relative;cursor:var(--kursor), pointer}
+body .vyb label.sozd-pole{padding-right:2px !important;cursor:text}
+body .vyb .sozd-pole input{border:0;background:transparent;font:inherit;
+color:var(--t1);width:100%;min-width:0;padding:0;outline:none}
+body .vyb .sozd-pole .sozd-t{min-width:0;overflow:hidden;text-overflow:ellipsis;
+white-space:nowrap}
+body .vyb .sozd-pole .str{position:absolute;right:4px;top:50%;
+transform:translateY(-50%)}
+body .vyb .vyp.otkryt .sozd-pole,body .vyb .sozd-pole:focus-within{
+border-bottom-color:var(--t1) !important}
+body .vyb .sozd-opis{display:block;width:100%;box-sizing:border-box;
+font-family:inherit;font-size:13px;color:var(--t1);resize:none;min-height:32px;
+border:0 !important;border-bottom:1px solid var(--lin) !important;
+border-radius:0 !important;background:transparent !important;
+padding:6px 2px !important;outline:none}
+body .vyb .sozd-opis:focus{border-bottom-color:var(--t1) !important}
+body .vyb .sozd-polja{display:grid !important;
+grid-template-columns:repeat(3,minmax(0,1fr)) !important;gap:4px 18px !important;
+margin:0 !important}
+body .vyb .sozd-polja.dve{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+body .vyb .sozd-polja.odna{grid-template-columns:minmax(0,1fr) !important}
+body .vyb .k-poyasn{font-size:11.5px;color:var(--t3);line-height:1.5;
+padding:8px 2px 0}
+                                                                  
+body .vyb .k-varianty{display:flex;flex-direction:column;gap:2px;padding-top:2px}
+body .vyb .k-var{display:flex;align-items:center;gap:10px;padding:9px 2px;
+font-size:13px;color:var(--t1);border-bottom:1px solid var(--lin);cursor:var(--kursor), pointer}
+body .vyb .k-var i{width:15px;height:15px;border-radius:50%;flex:none;
+border:1.5px solid #c9c9cf;box-sizing:border-box;transition:border-color .14s}
+body .vyb .k-var.on i{border:4.5px solid var(--tmn)}
+body .vyb .k-pz{counter-reset:pz}
+body .vyb .k-pz-s{display:grid;grid-template-columns:20px minmax(0,1fr);
+gap:8px;align-items:center;padding:7px 2px;font-size:13px;
+border-bottom:1px solid var(--lin)}
+body .vyb .k-pz-s::before{counter-increment:pz;content:counter(pz);
+font-family:'Geist Mono',ui-monospace,monospace;font-size:11.5px;color:var(--t3)}
+body .vyb .k-dob{display:inline-block;font-size:12px;color:var(--t2);
+padding:9px 2px 2px;cursor:var(--kursor), pointer}
+body .vyb .k-dob:hover{color:var(--t1)}
+body .vyb .k-skryt{position:absolute;opacity:0;width:0;height:0;pointer-events:none}
+body .vyb .k-poisk{margin-bottom:6px}
+                                                             
+.vyb .pr-k{display:grid;grid-template-columns:minmax(0,1fr) 96px 80px;gap:12px;
+align-items:center;padding:11px 0;border-bottom:1px solid var(--lin);font-size:13px}
+.vyb .pr-k .st,.vyb .pr-k .dt{font-size:11.5px;color:var(--t3);white-space:nowrap;
+overflow:hidden;text-overflow:ellipsis}
+.vyb .pr-rjad{flex-wrap:wrap !important;gap:10px !important}
+.vyb .pr-psk-o{flex:1 1 160px;min-width:0}
+@media (max-width:760px){
+  body .vyb .sozd-polja{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+  body .vyb .sozd-polja.odna{grid-template-columns:minmax(0,1fr) !important}
+  body .vyb .sozd-vvod{font-size:17px !important}
+}
+                                                                
+</style></head><body>
+<div id="menju"></div>
+<div class="wrap"><div class="vt">
+  <div class="vt-z">Окна Locus</div>
+  <div class="vt-p">Каждый сценарий открывается живым окном, один
+    в один как в системе, на вебе и на телефоне. Сохранение здесь
+    выключено: жми смело. У каждого окна своя ссылка – её можно
+    переслать с вердиктом</div>
+  <div id="spisok"></div>
+  <div id="vt-sozd-mesto"></div>
+</div></div>
+<script src="/js/nedeli.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/obschij.js"></script>
+<script>
+(function () {
+'use strict';
+
+                                                      
+['sozdat', 'pravit', 'dejstvie', 'udalit'].forEach((m) => {
+  API[m] = async () => {
+    O.tost('Это витрина: сохранение выключено');
+    throw new Error('витрина');
+  };
+});
+
+const GRUPPY = [
+  ['Задачи', [
+    ['sozdanie', 'Карточка создания задачи', 'сегменты подзадач, поля с подписями, низ со скрепкой и шаблонами'],
+    ['podzadacha', 'Подзадача вкладкой', 'та же карточка, добавлена вкладка подзадачи'],
+  ]],
+  ['Люди', [
+    ['istochniki', 'По источникам', 'аналитика: лиды, клиенты и деньги по каждому источнику'],
+    ['v-rassylku', 'Сделать рассылкой', 'отбор фильтрами становится рассылкой, волна задачей'],
+    ['chelovek', 'Новый человек', 'настоящая форма: все поля, плюс-кругляш за карточкой'],
+    ['napr-chel', 'Направление человека', 'направление и роль из списков'],
+    ['kontakt', 'Новый контакт', 'значение и вид, маска телефона на виде «телефон»'],
+    ['svjaz', 'Новая связь', 'с кем и тип связи, заметка на будущее'],
+    ['material', 'Новый материал', 'название, ссылка, файл скрепкой'],
+    ['dokument', 'Новый документ', 'вид, номер, дата, ссылка или файл'],
+    ['kasanie', 'Следующее касание', 'завтра, послезавтра или своя дата'],
+    ['kas-data', 'Своя дата касания', 'второй шаг: календарь'],
+    ['stadija', 'Своя стадия', 'название, тумблер общего набора, область'],
+  ]],
+  ['Проекты и деньги', [
+    ['proekt', 'Новый проект', 'название линией, направление, клиент, ведущий, стоимость'],
+    ['proekty-okno', 'Окно проектов', 'срезы с ведущим и без, поиск, список из Пространства'],
+    ['oplata', 'Пришла оплата', 'сумма и дата, развилка частичной оплаты'],
+    ['zavershit', 'Завершить проект', 'хвосты числами, судьба открытых задач'],
+    ['arhiv', 'Проект в архив', 'что изменится, два выхода словами'],
+    ['vernut-arhiv', 'Вернуть проект из архива', 'обратная сторона архива, два выхода словами'],
+  ]],
+  ['Направления', [
+    ['usluga', 'Услуга направления', 'название, описание, цена, ссылка'],
+    ['rassylka', 'Новая рассылка', 'название и выбор базы сегментами'],
+    ['rassylka-ljudi', 'Рассылка из отбора людей', 'название и направление, состав с экрана'],
+    ['komu-pisat', 'Кому писать', 'срезы базы рассылки с числами, волна задачей'],
+    ['cel-tezis', 'Цель из тезиса стратегии', 'тезис перед глазами, название цели'],
+  ]],
+  ['Планёрка', [
+    ['sravnit-nedeli', 'Сравнить недели', 'два спринта рядом: задачи, лиды, деньги, публикации'],
+  ]],
+  ['ОКР', [
+    ['rezultat', 'Результат цели', 'что меряем, сейчас и хотим'],
+    ['zamer', 'Замер результата', 'число и откуда оно'],
+    ['kvartaly', 'Разбить по кварталам', 'план по кварталам со сверкой суммы'],
+    ['prikrepit', 'Прикрепить задачу к цели', 'поиск по свободным задачам, клик прикрепляет'],
+    ['udalit-cel', 'Удалить цель', 'что уйдёт вместе с ней, отказ словами'],
+  ]],
+  ['Полезное', [
+    ['shablon-prosmotr', 'Просмотр шаблона', 'поля шаблона и чего он не хранит'],
+    ['shablon-novyj', 'Новый шаблон', 'чипы типов, сроков и факта, описание, подзадачи'],
+  ]],
+];
+
+function spisok() {
+  let i = 0;
+  document.getElementById('spisok').innerHTML = GRUPPY.map(([g, sc]) =>
+    `<div class="vt-g">${g}</div>` + sc.map(([kod, imja, p]) => {
+      i += 1;
+      return `<div class="vt-s">
+        <span class="vt-n">${String(i).padStart(2, '0')}</span>
+        <span class="vt-im">${imja}<div class="p">${p}</div></span>
+        <span style="white-space:nowrap"><a class="vt-kn" data-okno="${kod}">открыть</a><a
+          class="vt-ssyl" href="?okno=${kod}">ссылка</a></span>
+      </div>`;
+    }).join('')).join('');
+  document.querySelectorAll('[data-okno]').forEach((e) =>
+    e.addEventListener('click', () => otkryt(e.dataset.okno)));
+}
+
+                                                                  
+function zhivojSpisok(id, punkty, tekuschij) {
+  const b = document.getElementById(id);
+  if (!b) return;
+  O.vypadajuschij(b, punkty, tekuschij || '').addEventListener('click', (ev) => {
+    const pnt = ev.target.closest('.vyp-p'); if (!pnt) return;
+    const v = punkty.find((x) => String(x.kod) === String(pnt.dataset.kod));
+    const tt = b.querySelector('.sozd-t');
+    if (tt && v) { tt.textContent = v.imja; b.classList.add('vybrano'); }
+  });
+}
+
+function segmenty(id) {
+  document.getElementById(id)?.addEventListener('click', (ev) => {
+    const e = ev.target.closest('.vid-e'); if (!e) return;
+    document.querySelectorAll(`#${id} .vid-e`).forEach((x) => x.classList.remove('on'));
+    e.classList.add('on');
+  });
+}
+
+let SPRAV = { napravlenija: [], ljudi: [] };
+const dirs = () => SPRAV.napravlenija.map((n) => ({ kod: n.kod, imja: n.imja }));
+const lica = () => SPRAV.ljudi.map((l) => ({ kod: String(l.id), imja: l.imja }));
+
+                                                              
+                                                                
+                                                         
+const K = {
+  vyp: (id, podpis, ob) => `<span class="sozd-p vyp"><span class="sozd-lbl">${podpis}${
+    ob ? '<i class="sozd-ob" title="обязательное">*</i>' : ''}</span>
+    <a class="sozd-pole" id="${id}"><span class="sozd-t"></span><span class="str"></span></a></span>`,
+  vvod: (id, podpis, { tip = 'text', znach = '', im = '', ob = false } = {}) =>
+    `<span class="sozd-p"><span class="sozd-lbl">${podpis}${
+      ob ? '<i class="sozd-ob" title="обязательное">*</i>' : ''}</span>
+    <label class="sozd-pole${tip === 'date' ? ' pole-daty' : ''}"><input id="${id}" type="${tip}"${
+      znach !== '' ? ` value="${znach}"` : ''}${im ? ` inputmode="${im}"` : ''}${
+      tip === 'date' && znach === '' ? ' class="pusto"' : ''} autocomplete="off"></label></span>`,
+  opis: (id, podpis) => `<span class="sozd-lbl">${podpis}</span>
+    <textarea class="sozd-opis" id="${id}" rows="1"></textarea>`,
+  polja: (vnutri, kl = '') => `<div class="sozd-polja ${kl}">${vnutri}</div>`,
+  imja: (id, mesto, znach = '') => `<input class="sozd-vvod" id="${id}" placeholder="${mesto}"${
+    znach ? ` value="${znach}"` : ''} autocomplete="off">`,
+  varianty: (id, spisok) => `<div class="k-varianty" id="${id}">${spisok.map(([k, i]) =>
+    `<a class="k-var" data-kv="${k}"><i></i>${i}</a>`).join('')}</div>`,
+  pojasn: (tekst, id = '') => `<div class="k-poyasn"${id ? ` id="${id}"` : ''}>${tekst}</div>`,
+};
+                                                              
+                                                      
+function vkljuchitVarianty(id, posle) {
+  document.getElementById(id)?.addEventListener('click', (ev) => {
+    const v = ev.target.closest('.k-var'); if (!v) return;
+    const byl = v.classList.contains('on');
+    document.querySelectorAll(`#${id} .k-var`).forEach((x) => x.classList.remove('on'));
+    if (!byl) v.classList.add('on');
+    if (posle) posle(byl ? null : v.dataset.kv);
+  });
+}
+                                                               
+function vkljuchitDaty() {
+  document.querySelectorAll('.vyb .pole-daty input').forEach((i) =>
+    i.addEventListener('change', () => i.classList.toggle('pusto', !i.value)));
+}
+const GOTOVO = (podskazka, znak) => ({ gotovo: async () => {}, podskazka, ...(znak ? { znak } : {}) });
+
+const OKNA = {
+
+  sozdanie() { kartaSozd(); },
+  podzadacha() {
+    kartaSozd();
+    setTimeout(() => {
+      const im = document.getElementById('sozd-imja');
+      if (im) { im.value = 'Правки КП Технопродукту'; im.dispatchEvent(new Event('input')); }
+                                                                
+                                             
+      document.getElementById('sozd-napr')?.click();
+      setTimeout(() => {
+        document.querySelector('#sozd-napr')?.parentElement
+          .querySelector('.vyp-p[data-kod="synapt"], .vyp-p:not([data-snjat])')?.click();
+        document.querySelector('[data-sgm-dob]')?.click();
+      }, 120);
+    }, 150);
+  },
+
+  chelovek() {
+                                                                
+                                                            
+    O.modalka('Новый человек', `<div class="okno-kanon">
+      ${K.imja('ch-imja', 'Имя')}
+      ${K.polja(K.vyp('ch-napr', 'направление') + K.vyp('ch-rol', 'роль') + K.vyp('ch-otkuda', 'откуда'))}
+      ${K.polja(K.vvod('ch-tg', 'телеграм') + K.vvod('ch-pochta', 'почта', { tip: 'email' })
+        + K.vvod('ch-tel', 'телефон', { tip: 'tel' }))}
+      ${K.polja(K.vvod('ch-gorod', 'город') + K.vvod('ch-nisha', 'ниша') + K.vyp('ch-kto', 'кто привёл'))}
+      ${K.opis('ch-zam', 'заметка')}</div>`, null, GOTOVO('добавить человека', '+'));
+    zhivojSpisok('ch-napr', dirs(), '');
+    zhivojSpisok('ch-rol', [['lid', 'лид'], ['klient', 'клиент'], ['podrjadchik', 'подрядчик'],
+      ['partner', 'партнёр']].map(([k, i]) => ({ kod: k, imja: i })), '');
+    zhivojSpisok('ch-otkuda', [['rekomendacija', 'рекомендация'], ['rassylka', 'рассылка'],
+      ['meroprijatie', 'мероприятие'], ['sajt', 'сайт'], ['socseti', 'соцсети']]
+      .map(([k, i]) => ({ kod: k, imja: i })), '');
+    zhivojSpisok('ch-kto', lica(), '');
+  },
+
+  'napr-chel'() {
+    const roli = [{ kod: 'lid', imja: 'лид' }, { kod: 'klient', imja: 'клиент' },
+      { kod: 'podrjadchik', imja: 'подрядчик' }, { kod: 'partner', imja: 'партнёр' }];
+    O.modalka('Направление человека', `<div class="okno-kanon">
+      ${K.polja(K.vyp('s-napr', 'направление', true) + K.vyp('s-rol', 'роль', true), 'dve')}
+      <div class="fch-niz"><span class="fch-osh" id="s-osh"></span></div></div>`,
+      null, GOTOVO('добавить направление', '+'));
+    zhivojSpisok('s-napr', dirs(), '');
+    zhivojSpisok('s-rol', roli, '');
+  },
+
+  kontakt() {
+    O.modalka('Новый контакт', `<div class="okno-kanon">
+      ${K.polja(K.vyp('k-vid', 'вид', true) + K.vvod('k-znach', 'значение', { ob: true }), 'dve')}
+      ${K.pojasn('телефон хранится как +79161234567, показывается с маской; код страны распознаётся из вставки', 'k-maska')}
+      </div>`, null, GOTOVO('добавить контакт', '+'));
+    document.getElementById('k-maska').hidden = true;
+    zhivojSpisok('k-vid', [
+      { kod: 'telegram', imja: 'телеграм' }, { kod: 'telefon', imja: 'телефон' },
+      { kod: 'pochta', imja: 'почта' }, { kod: 'drugoe', imja: 'другое' },
+    ], '');
+    document.getElementById('k-vid')?.parentElement.addEventListener('click', (ev) => {
+      const p = ev.target.closest('.vyp-p'); if (!p) return;
+      document.getElementById('k-maska').hidden = p.dataset.kod !== 'telefon';
+    });
+  },
+
+  svjaz() {
+    O.modalka('Новая связь', `<div class="okno-kanon">
+      ${K.pojasn('кто и как связан с Виктором: знакомство, рекомендация или совместная работа')}
+      ${K.polja(K.vyp('sv-kto', 'с кем', true) + K.vyp('sv-tip', 'как связаны', true), 'dve')}
+      ${K.opis('sv-zam', 'заметка')}</div>`, null, GOTOVO('добавить связь', '+'));
+    zhivojSpisok('sv-kto', lica(), '');
+    zhivojSpisok('sv-tip', [['znaet', 'знает'], ['rekomendoval', 'рекомендовал'],
+      ['rabotal', 'работал вместе'], ['privjol', 'привёл']]
+      .map(([k, i]) => ({ kod: k, imja: i })), '');
+  },
+
+  material() {
+    O.modalka('Новый материал', `<div class="okno-kanon">
+      ${K.imja('m-nazv', 'Материал')}
+      ${K.polja(K.vvod('m-ssyl', 'ссылка', { tip: 'url' }), 'odna')}
+      <div class="fch-niz"><a class="kon-dob" id="m-fajl">📎 прикрепить файл</a>
+        <span class="fch-osh" id="m-osh"></span></div></div>`,
+      null, GOTOVO('добавить материал', '+'));
+  },
+
+  dokument() {
+    O.modalka('Новый документ', `<div class="okno-kanon">
+      ${K.imja('d-nazv', 'Документ')}
+      ${K.polja(K.vyp('d-tip', 'вид') + K.vvod('d-nomer', 'номер') + K.vvod('d-data', 'дата', { tip: 'date' }))}
+      ${K.polja(K.vvod('d-ssyl', 'ссылка', { tip: 'url' }), 'odna')}
+      <div class="fch-niz"><a class="kon-dob" id="d-fajl">📎 прикрепить файл</a>
+        <span class="fch-osh" id="d-osh"></span></div></div>`,
+      null, GOTOVO('добавить документ', '+'));
+    zhivojSpisok('d-tip', [['dogovor', 'договор'], ['akt', 'акт'],
+      ['schet', 'счёт'], ['drugoe', 'другое']].map(([k, i]) => ({ kod: k, imja: i })), '');
+    vkljuchitDaty();
+  },
+
+  kasanie() {
+    O.modalka('Запланировать следующее касание?', `
+      <div class="kas-sh">
+        <a class="kn" data-srok="1">завтра</a>
+        <a class="kn" data-srok="2">послезавтра</a>
+        <a class="kn" data-srok="svoja">своя дата</a>
+      </div>
+      <div class="kas-ne"><a class="svernut" data-srok="">не нужно</a></div>`);
+  },
+
+  'kas-data'() {
+    O.modalka('Когда следующее касание', `<div class="okno-kanon">
+      ${K.polja(K.vvod('kas-d', 'дата', { tip: 'date' }), 'odna')}</div>`,
+      null, GOTOVO('поставить касание'));
+    vkljuchitDaty();
+  },
+
+  stadija() {
+    O.modalka('Своя стадия', `<div class="okno-kanon">
+      ${K.imja('ss-imja', 'Стадия')}
+      <label class="ss-gal sozd-tumbler">
+        <span>добавить в общий набор стадий</span>
+        <input type="checkbox" id="ss-nabor" class="k-skryt">
+        <span class="pere"><span class="pere-b"></span></span></label>
+      <div id="ss-oblast" hidden>${K.varianty('ss-obl',
+        [['napravlenie', 'только для Synapt'], ['vse', 'для всех направлений']])}</div>
+      </div>`, null, GOTOVO('сохранить стадию'));
+    document.getElementById('ss-nabor')?.addEventListener('change', (ev) => {
+      document.getElementById('ss-oblast').hidden = !ev.target.checked;
+    });
+    vkljuchitVarianty('ss-obl');
+  },
+
+  proekt() {
+    O.modalka('Новый проект', `<div class="okno-kanon">
+      ${K.imja('pj-imja', 'Проект')}
+      ${K.polja(K.vyp('pj-napr', 'направление', true) + K.vyp('pj-kl', 'клиент', true)
+        + K.vyp('pj-ved', 'кто ведёт') + K.vvod('pj-cena', 'стоимость, ₽', { im: 'numeric' }))}
+      <div class="sozd-osh" id="pj-osh" hidden></div></div>`,
+      null, GOTOVO('создать проект', '+'));
+    zhivojSpisok('pj-napr', dirs(), '');
+    zhivojSpisok('pj-kl', lica(), '');
+    zhivojSpisok('pj-ved', lica(), '');
+  },
+
+  oplata() {
+    const bylo_summa = 100000;
+    O.modalka('Пришла оплата', `<div class="okno-kanon">
+      ${K.pojasn('аванс по договору, ждём 100 000 ₽')}
+      ${K.polja(K.vvod('opl-summa', 'сумма, ₽', { im: 'numeric', znach: String(bylo_summa) })
+        + K.vvod('opl-data', 'дата', { tip: 'date', znach: SPR.segodnja() }), 'dve')}
+      <div id="opl-razvilka" hidden>
+        ${K.pojasn('пришло меньше, чем ждали: что с остатком <b id="opl-ost-summa"></b> ₽')}
+        ${K.varianty('opl-ost', [['otdelno', 'ждём отдельной строкой'], ['spisat', 'это всё, остаток списать']])}
+      </div></div>`, null, GOTOVO('отметить оплату'));
+    const summa_pole = document.getElementById('opl-summa');
+    summa_pole?.addEventListener('input', () => {
+      const v = Number(summa_pole.value) || 0;
+      const menshe = v > 0 && v < bylo_summa;
+      document.getElementById('opl-razvilka').hidden = !menshe;
+      const o = document.getElementById('opl-ost-summa');
+      if (o && menshe) o.textContent = (bylo_summa - v).toLocaleString('ru-RU');
+    });
+    vkljuchitVarianty('opl-ost');
+    vkljuchitDaty();
+  },
+
+  zavershit() {
+    O.modalka('Завершить проект Платформа благодарности', `<div class="okno-kanon">
+      <div class="zv-ch">
+        <div class="zv-s"><span>открытых задач</span><b>2</b></div>
+        <div class="zv-s"><span>платежей не пришло</span><b>1 на 40 000 ₽</b></div>
+      </div>
+      <span class="sozd-lbl">что сделать с открытыми задачами</span>
+      ${K.varianty('zv-var', [['zakryt', 'закрыть как сделанные'],
+        ['otvjazat', 'оставить открытыми, отвяжутся от проекта'],
+        ['perenesti', 'перенести в другой проект']])}
+      <div id="zv-kuda" hidden>${K.polja(K.vyp('zv-kuda-b', 'в какой проект', true), 'odna')}</div>
+      </div>`, null, GOTOVO('завершить проект'));
+    vkljuchitVarianty('zv-var', (kod) => {
+      document.getElementById('zv-kuda').hidden = kod !== 'perenesti';
+    });
+    zhivojSpisok('zv-kuda-b', [{ kod: '1', imja: 'Тендерный агент' }, { kod: '2', imja: 'Оптовый сайт' }], '');
+  },
+
+  arhiv() {
+    O.modalka('Убрать проект в архив', `
+      <div class="zv-ch"><div class="zv-net">Проект уйдёт из рабочих
+        списков и из выручки, по ссылке будет открываться с пометкой
+        «в архиве». Стадия не меняется</div></div>
+      <div class="mod-niz"><a class="fil-b" id="ar-net">оставить как есть</a>
+        <a class="kn" id="ar-da">Убрать в архив</a></div>`);
+  },
+
+  usluga() {
+    O.modalka('Услуга направления', `<div class="okno-kanon">
+      ${K.imja('u-naz', 'Услуга', 'AI-чекап процессов')}
+      ${K.opis('u-opi', 'описание')}
+      ${K.polja(K.vvod('u-cen', 'цена, ₽', { im: 'numeric', znach: '59000' })
+        + K.vvod('u-ssy', 'ссылка', { tip: 'url' }), 'dve')}
+      </div>`, null, GOTOVO('сохранить услугу'));
+  },
+
+  rassylka() {
+    O.modalka('Новая рассылка', `<div class="okno-kanon">
+      ${K.imja('nr-im', 'Рассылка')}
+      <span class="sozd-lbl">кого положить в базу сразу</span>
+      ${K.varianty('nr-baza', [['lid', 'лидов Synapt'], ['klient', 'клиентов Synapt'],
+        ['vseh', 'всех из Synapt']])}
+      ${K.pojasn('не выбрано: база пустая, людей добавишь на странице рассылки и из раздела Люди')}
+      </div>`, null, GOTOVO('создать рассылку', '+'));
+    vkljuchitVarianty('nr-baza');
+  },
+
+  'rassylka-ljudi'() {
+    O.modalka('Создать рассылку', `<div class="okno-kanon">
+      ${K.imja('r-im', 'Рассылка')}
+      ${K.polja(K.vyp('r-napr', 'направление', true), 'odna')}
+      ${K.pojasn('в состав попадут 14 человек с этого экрана, как они сейчас отобраны, фильтры учтены')}
+      </div>`, null, GOTOVO('создать рассылку', '+'));
+    zhivojSpisok('r-napr', dirs(), '');
+  },
+
+  'cel-tezis'() {
+    O.modalka('Цель из тезиса стратегии', `<div class="okno-kanon">
+      ${K.pojasn('тезис: выйти на регулярный поток заявок из двух каналов, не зависящих от личных сетей')}
+      ${K.imja('c-naz', 'Цель')}
+      </div>`, null, GOTOVO('поставить цель', '+'));
+  },
+
+  rezultat() {
+    O.modalka('Результат цели «Регулярный спрос»', `<div class="okno-kanon">
+      ${K.imja('r-imja', 'Что меряем')}
+      ${K.polja(K.vvod('r-baza', 'сейчас', { im: 'numeric' }) + K.vvod('r-plan', 'хотим', { im: 'numeric' }), 'dve')}
+      ${K.pojasn('доля считается от «сейчас» к «хотим»: пока факт равен началу, результат на нуле, при плане сто процентов. Факт потом меняется замером')}
+      </div>`, null, GOTOVO('добавить результат', '+'));
+  },
+
+  zamer() {
+    O.modalka('Замер: проведённых чекапов', `<div class="okno-kanon">
+      ${K.polja(K.vvod('zam-ch', 'число', { im: 'numeric' }) + K.vvod('zam-o', 'откуда оно'), 'dve')}
+      </div>`, null, GOTOVO('записать замер'));
+  },
+
+  kvartaly() {
+                                                                 
+                                                    
+    O.modalka('Разбить по кварталам', `<div class="okno-kanon">
+      ${K.pojasn('проведённых чекапов, план на год 12')}
+      <div class="sozd-polja" style="grid-template-columns:repeat(4,minmax(0,1fr)) !important">
+        ${[1, 2, 3, 4].map((k) => K.vvod(`kv-${k}`, `${k} квартал`, { im: 'numeric' })).join('')}
+      </div>
+      ${K.pojasn('разложено 0 из 12', 'kv-sverka')}</div>`, null, GOTOVO('разбить по кварталам'));
+    const sverit = () => {
+      const summa = [1, 2, 3, 4].reduce((a, k) =>
+        a + (Number(document.getElementById(`kv-${k}`)?.value) || 0), 0);
+      const st = document.getElementById('kv-sverka');
+      st.textContent = summa === 12 ? 'разложено 12 из 12'
+        : `разложено ${summa} из 12, ${summa < 12 ? 'не хватает ' + (12 - summa) : 'сверх плана ' + (summa - 12)}`;
+      st.style.color = summa > 12 ? 'var(--kr)' : '';
+    };
+    [1, 2, 3, 4].forEach((k) => document.getElementById(`kv-${k}`)?.addEventListener('input', sverit));
+  },
+
+  istochniki() {
+    O.modalka('По источникам', `
+      <div class="ist-sh"><span>источник</span><b>лиды</b><b>клиенты</b><b>деньги</b></div>
+      <div class="ist-s"><span>рекомендация</span><b>6</b><b>4</b><b>540 000 ₽</b></div>
+      <div class="ist-s"><span>рассылка</span><b>11</b><b>2</b><b>118 000 ₽</b></div>
+      <div class="ist-s"><span>мероприятие</span><b>3</b><b>1</b><b>59 000 ₽</b></div>
+      <div class="ist-s"><span>сайт</span><b>5</b><b>0</b><b>—</b></div>
+      <div class="ist-s"><span>не указан</span><b>7</b><b>1</b><b>36 000 ₽</b></div>`);
+  },
+
+  'v-rassylku'() {
+    O.modalka('Сделать рассылкой', `<div class="okno-kanon">
+      ${K.imja('rs-im', 'Рассылка')}
+      ${K.polja(K.vyp('rs-cel', 'к какой цели'), 'odna')}
+      ${K.pojasn('в рассылку попадут люди, как они сейчас отобраны фильтрами, и появится первая волна задачей')}
+      </div>`, null, GOTOVO('создать рассылку', '+'));
+    zhivojSpisok('rs-cel', [{ kod: '', imja: 'без цели' }, { kod: '1', imja: 'Регулярный спрос' },
+      { kod: '2', imja: 'Выручка Synapt за квартал' }], '');
+  },
+
+  'proekty-okno'() {
+    const PRJ = [
+      ['Платформа благодарности', 'Администратор', 'Физтех'],
+      ['КП Технопродукт', 'Никита', 'Synapt'],
+      ['AI-чекап ЛК школы', 'Егор', 'Synapt'],
+    ];
+    O.modalka('Проекты', `
+      <div class="pr-okno">
+        <div class="pr-rjad">
+          <span class="vid km-vid pr-per" id="vt-pr-per">
+            <a class="vid-e on" data-prs="s_veduschim">с ведущим<span
+              class="ld-ch-n">3</span></a>
+            <a class="vid-e" data-prs="bez_veduschego">без ведущего<span
+              class="ld-ch-n">1</span></a></span>
+          <label class="pr-psk-o">
+            <svg class="ld-psk-l" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <circle cx="7" cy="7" r="4.6" stroke="currentColor" stroke-width="1.3"/>
+              <path d="M10.4 10.4 14 14" stroke="currentColor" stroke-width="1.3"
+                stroke-linecap="round"/></svg>
+            <input class="ld-psk" id="vt-pr-psk" placeholder="название проекта"
+              autocomplete="off"></label>
+        </div>
+        <div id="vt-pr-spisok">${PRJ.map(([im, ved, napr]) =>
+          `<div class="pr-k"><span class="im">${im}</span>
+            <span class="st">${ved}</span><span class="dt">${napr}</span></div>`).join('')}
+        </div>
+      </div>`, null,
+      { gotovo: async () => {}, znak: '+', podskazka: 'новый проект' });
+    segmenty('vt-pr-per');
+  },
+
+  'vernut-arhiv'() {
+    O.modalka('Вернуть проект из архива', `
+      <div class="zv-ch"><div class="zv-net">Проект вернётся в рабочие
+        списки и в выручку</div></div>
+      <div class="mod-niz"><a class="fil-b" id="va-net">оставить в архиве</a>
+        <a class="kn" id="va-da">Вернуть</a></div>`);
+  },
+
+  'komu-pisat'() {
+    O.modalka('Кому писать', `<div class="mod-vyb">
+      <a data-komu="vsja_baza">всем<span class="n">48</span></a>
+      <a data-komu="ne_pisali">кому ещё не писали<span class="n">31</span></a>
+      <a data-komu="otvetili">кто отвечал<span class="n">9</span></a>
+      <a data-komu="svoja">своя выборка</a></div>`);
+  },
+
+  'sravnit-nedeli'() {
+    O.modalka('Сравнить недели', `<div class="okno-kanon">
+      ${K.polja(K.vyp('vt-sr-a', 'эта неделя') + K.vyp('vt-sr-b', 'сравнить со спринтом'), 'dve')}
+      <div id="vt-sr-telo"></div></div>`, null,
+      { pojasnenie: 'два спринта рядом: задачи, лиды, деньги и публикации' });
+    const SP = Array.from({ length: 8 }, (_, i) => ({ kod: String(44 - i), imja: `спринт ${44 - i}` }));
+    zhivojSpisok('vt-sr-a', SP, '');
+    zhivojSpisok('vt-sr-b', SP, '');
+    const telo = () => {
+      const a = document.querySelector('#vt-sr-a .sozd-t')?.textContent.replace('спринт ', '');
+      const b = document.querySelector('#vt-sr-b .sozd-t')?.textContent.replace('спринт ', '');
+      document.getElementById('vt-sr-telo').innerHTML = a && b ? `
+        <div class="pl-sr-s pl-sr-sh" style="margin-top:14px"><span></span><b>нед ${a}</b><b>нед ${b}</b></div>
+        <div class="pl-sr-s"><span>закрыто задач</span><b>17</b><b>12</b></div>
+        <div class="pl-sr-s"><span>открыто</span><b>23</b><b>28</b></div>
+        <div class="pl-sr-s"><span>просрочено</span><b>2</b><b>5</b></div>
+        <div class="pl-sr-s"><span>лиды новые</span><b>6</b><b>3</b></div>
+        <div class="pl-sr-s"><span>пришло денег</span><b>159 000 ₽</b><b>59 000 ₽</b></div>
+        <div class="pl-sr-s"><span>публикаций</span><b>4</b><b>4</b></div>` : '';
+    };
+    document.querySelectorAll('.vyb .sozd-polja').forEach((e) => e.addEventListener('click', () => setTimeout(telo, 0)));
+  },
+
+  prikrepit() {
+    const ZAD = [
+      ['Написать 20 школам из базы', 'Synapt'],
+      ['Собрать кейсы для рассылки', 'Медиа'],
+      ['Обновить лендинг чекапа', 'Synapt'],
+      ['Прозвон тёплых лидов', 'Synapt'],
+    ];
+    O.modalka('Прикрепить задачу к цели «Регулярный спрос»', `
+      <label class="sozd-pole k-poisk"><input id="vt-vz-poisk" placeholder="найти задачу" autocomplete="off" autofocus></label>
+      <div class="vyb-z-sp" id="vt-vz-sp">${ZAD.map(([im, napr]) =>
+        `<a class="vyb-z-s"><span class="im">${im}</span>
+          <span class="np">${napr}</span></a>`).join('')}</div>`);
+    const poisk = document.getElementById('vt-vz-poisk');
+    poisk?.addEventListener('input', () => {
+      const q = poisk.value.trim().toLowerCase();
+      const vidno = q ? ZAD.filter(([im]) => im.toLowerCase().includes(q)) : ZAD;
+      document.getElementById('vt-vz-sp').innerHTML = vidno.length
+        ? vidno.map(([im, napr]) => `<a class="vyb-z-s"><span class="im">${im}</span>
+            <span class="np">${napr}</span></a>`).join('')
+        : '<div class="zad-net">По этому слову ничего</div>';
+    });
+  },
+
+  'shablon-prosmotr'() {
+    O.modalka('Собрать смету проекта', `
+      <div class="pol">
+        <div class="pol-s"><span class="pol-n">тип задачи</span>
+          <span class="pol-z">бизнесовая</span></div>
+        <div class="pol-s"><span class="pol-n">срок по умолчанию</span>
+          <span class="pol-z">конец недели</span></div>
+        <div class="pol-s"><span class="pol-n">описание</span>
+          <span class="pol-z">смета по шаблону из Базы знаний, согласование с Егором</span></div>
+        <div class="pol-s"><span class="pol-n">подзадачи</span>
+          <span class="pol-z">запросить вводные, посчитать часы, свести в таблицу</span></div>
+        <div class="pol-s"><span class="pol-n">чей</span>
+          <span class="pol-z">мой, открыт команде</span></div>
+      </div>
+      <div class="zv-net">Человека, проект и ответственного шаблон
+        не хранит: они выбираются при создании задачи</div>`);
+  },
+
+  'shablon-novyj'() {
+                                                                
+                                                                
+                                                                
+    O.modalka('Новый шаблон', `<div class="okno-kanon">
+      ${K.imja('vt-shb-imja', 'Название задачи')}
+      ${K.polja(K.vyp('vt-shb-tip', 'тип задачи') + K.vyp('vt-shb-srok', 'срок по умолчанию')
+        + K.vyp('vt-shb-fakt', 'что считать фактом') + K.vyp('vt-shb-vidit', 'кто видит'), 'dve')}
+      ${K.opis('vt-shb-opis', 'описание')}
+      <span class="sozd-lbl">подзадачи</span>
+      <div class="k-pz" id="vt-shb-pz"></div>
+      <a class="k-dob" id="vt-shb-pz-dob">+ подзадача</a>
+      </div>`, null, GOTOVO('сохранить шаблон'));
+    zhivojSpisok('vt-shb-tip', [['biznesovaja', 'бизнесовая'], ['vnutrennjaja', 'внутренняя'],
+      ['klientskaja', 'клиентская'], ['produktovaja', 'продуктовая']].map(([k, i]) => ({ kod: k, imja: i })), '');
+    zhivojSpisok('vt-shb-srok', [['segodnja', 'сегодня'], ['zavtra', 'завтра'],
+      ['konec_nedeli', 'конец недели'], ['bez_sroka', 'без срока']].map(([k, i]) => ({ kod: k, imja: i })), '');
+    zhivojSpisok('vt-shb-fakt', [['net', 'ничего не считать'], ['kontakty_bazy', 'контакты базы'],
+      ['otpravleno', 'сколько отправлено']].map(([k, i]) => ({ kod: k, imja: i })), '');
+    zhivojSpisok('vt-shb-vidit', [['vse', 'вся команда'], ['ja', 'только я']]
+      .map(([k, i]) => ({ kod: k, imja: i })), '');
+    document.getElementById('vt-shb-pz-dob')?.addEventListener('click', () => {
+      const sp = document.getElementById('vt-shb-pz');
+      const s = document.createElement('div');
+      s.className = 'k-pz-s';
+      s.innerHTML = '<label class="sozd-pole"><input autocomplete="off" aria-label="подзадача"></label>';
+      sp.appendChild(s);
+      s.querySelector('input').focus();
+    });
+  },
+
+  'udalit-cel'() {
+    O.modalka('Удалить цель «Регулярный спрос»', `
+      <div class="zak-p">вместе с ней уйдут результаты и все их замеры</div>
+      <div class="zak-r"><span></span>
+        <span>проведённых чекапов</span><span class="zak-c">4 из 12</span></div>
+      <div class="zak-r"><span></span>
+        <span>заявок с рассылок</span><span class="zak-c">7 из 20</span></div>
+      <div class="fch-niz"><a class="svernut">оставить как есть</a></div>`,
+      null, { gotovo: async () => {}, podskazka: 'удалить цель' });
+  },
+};
+
+function kartaSozd() {
+  const mesto = document.getElementById('vt-sozd-mesto');
+  if (!mesto.querySelector('.sozd')) {
+    mesto.innerHTML = O.kartaSozdanija();
+    O.vkljuchitFormuZadachi(() => {});
+  }
+  mesto.querySelector('.sozd')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  setTimeout(() => document.getElementById('sozd-imja')?.focus(), 350);
+}
+
+function otkryt(kod) {
+  history.replaceState(null, '', '?okno=' + kod);
+  if (kod !== 'sozdanie' && kod !== 'podzadacha') {
+    const m = document.getElementById('vt-sozd-mesto');
+    if (m) m.innerHTML = '';
+  }
+  (OKNA[kod] || (() => O.tost('Такого окна в витрине нет')))();
+}
+
+(async function start() {
+  SPRAV = await SPR.zagruzit();
+  window.DANNYE = { napravlenija: SPRAV.napravlenija, ljudi: SPRAV.ljudi,
+                    statusy: SPRAV.statusy, tipy: SPRAV.tipy, zadachi: [],
+                    shablony: [], celi: [], klienty: [], proekty: [] };
+  document.getElementById('menju').innerHTML = O.menju('okna');
+  spisok();
+  O.vkljuchitSkvoznoe();
+  const srazu = new URLSearchParams(location.search).get('okno');
+  if (srazu) setTimeout(() => otkryt(srazu), 300);
+})();
+})();
+</script>
+</body></html>

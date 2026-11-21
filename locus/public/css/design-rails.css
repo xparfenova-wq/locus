@@ -1,0 +1,41 @@
+.men-mobile-period{display:none}
+                                                                                
+.men-r1-obj #kolokol>.kolokol-n{top:0;right:0}
+@media(max-width:760px){
+  .men-mobile-period{display:grid;gap:var(--space-2);padding:var(--space-2) var(--space-4) 0}
+  .men-mobile-period>.ned-sprint{display:flex;position:static;transform:none;justify-self:start;
+    margin:0;padding:0;gap:var(--space-1);min-height:var(--control-height-mobile);max-width:100%}
+  .men-mobile-period .ned .str{display:grid;place-items:center;flex:none;
+    width:var(--control-height-mobile);height:var(--control-height-mobile);
+    background:none;clip-path:none;mask:none;-webkit-mask:none;transform:none}
+  .men-mobile-period .ned .str.l,.men-mobile-period .ned .str.r{transform:none}
+  .men-mobile-period .ned .str::after{display:none}
+  .men-mobile-period .ned .str::before{content:"";width:10px;height:10px;background:var(--t3);
+    mask:var(--shevron) center/10px 10px no-repeat;-webkit-mask:var(--shevron) center/10px 10px no-repeat;
+    transform:rotate(-90deg)}
+  .men-mobile-period .ned .str.l::before{transform:rotate(90deg)}
+  .men-mobile-period-kind{min-width:0;justify-self:start;max-width:100%}
+  .men-mobile-period-kind .vid{display:flex;max-width:100%}
+  .men-mobile-period-kind .vid-e{min-height:var(--control-height-mobile);display:flex;align-items:center}
+}
+
+                                                                                    
+@media(max-width:760px){
+  .locus-tasks .fil-r{position:relative;overflow-x:auto;overflow-y:hidden;
+    min-height:var(--control-height-mobile);align-items:center;flex-wrap:nowrap}
+                                                                            
+  .locus-tasks .fil-r>*{flex:0 0 auto}
+  .locus-tasks .fil-r>[data-chip]{display:block;flex:0 0 auto;min-width:max-content}
+  .locus-tasks .fil-r>[data-chip]>.fil-b{width:auto;max-width:none;justify-content:flex-start}
+  .locus-tasks .svod{position:relative;display:flex}
+  .locus-tasks .svod-r{flex:none}
+  .l-scroll-rail::before,.l-scroll-rail::after{
+    content:"";position:sticky;flex:0 0 var(--space-4);align-self:stretch;
+    pointer-events:none;z-index:1;opacity:0;
+  }
+  .l-scroll-rail::before{left:0;margin-right:calc(-1 * var(--space-4));order:-1;
+    background:linear-gradient(to right,var(--bg),transparent)}
+  .l-scroll-rail::after{right:0;margin-left:calc(-1 * var(--space-4));order:99;
+    background:linear-gradient(to left,var(--bg),transparent)}
+  .l-scroll-rail[data-scroll-start]::before,.l-scroll-rail[data-scroll-more]::after{opacity:1}
+}

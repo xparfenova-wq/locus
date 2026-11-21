@@ -1,0 +1,17 @@
+**/.DS_Store
+**/__pycache__/
+**/node_modules/
+**/.env
+**/.env.*
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+*.session
+*.session-*
+*.pem
+*.key
+*.log
+*.jsonl
+*.zip
+/._*

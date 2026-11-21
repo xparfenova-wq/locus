@@ -1,0 +1,1121 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Планёрка</title>
+<link rel="icon" href="/api/favicon?v=L" type="image/svg+xml">
+<link rel="stylesheet" href="/css/obschij.css">
+<link rel="stylesheet" href="/css/weekly-goals.css">
+<link rel="stylesheet" href="/css/weekly-snapshots.css">
+<link rel="stylesheet" href="/css/insights.css">
+<style>
+                                                            
+                                                                
+                                                          
+                                                  
+                                                                
+                                                            
+                                             
+.wrap{max-width:1680px}
+.wrap>.kol{max-width:none;width:100%;min-width:0}
+
+                                                        
+                                                                 
+                                                                  
+                                                   
+.plt{display:grid;grid-template-columns:repeat(4,1fr);
+border-top:1px solid var(--lin);border-bottom:1px solid var(--lin);
+margin-bottom:22px}
+.plt-k{padding:22px 26px;border-left:1px solid var(--lin);min-width:0}
+.plt-k:first-child{border-left:0;padding-left:0}
+.plt-l{font-size:10.5px;color:var(--t3);letter-spacing:.1em;
+text-transform:uppercase;margin-bottom:12px}
+.plt-c{font-size:46px;font-weight:500;letter-spacing:-.045em;line-height:.95;
+font-family:'Geist Mono',ui-monospace,monospace;font-feature-settings:"tnum";
+white-space:nowrap;display:flex;align-items:baseline;gap:8px}
+.plt-c.kr{color:var(--kr)}
+.plt-c .iz{font-size:13px;color:var(--t3);font-style:normal;letter-spacing:0;
+font-weight:400}
+.plt-d{font-size:11.5px;color:var(--t3);margin-top:11px;line-height:1.35}
+@media (max-width:1100px){.plt-c{font-size:36px}.plt-k{padding:18px 20px}}
+
+                                                                  
+                                                             
+                                                              
+                                                        
+.setka{position:relative;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+gap:0 30px;align-items:start}
+.stlb{min-width:0}
+.blk{margin-bottom:26px;min-width:0}
+                                                               
+                                                                
+                                                         
+                                                            
+.setka::before{content:"";position:absolute;top:0;bottom:0;left:50%;
+width:1px;background:var(--lin);pointer-events:none}
+@media (max-width:980px){
+  .setka{grid-template-columns:minmax(0,1fr);gap:0}
+  .setka::before{display:none}}
+#karta{padding:6px 0 14px}
+.plr-krt{width:100%;height:44px;display:block;overflow:visible}
+                                                               
+                                                     
+.blk-z{display:flex;align-items:baseline;gap:0;font-size:13px;color:var(--t1);
+padding:0 0 7px;letter-spacing:-.01em;text-transform:none;font-weight:500}
+                                                         
+                       
+.zametki{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.zam{background:var(--pole);border-radius:8px;padding:13px 15px;min-width:0}
+.zam-t{font-size:13px;line-height:1.45;color:var(--t1)}
+.zam-n{font-size:10.5px;color:var(--t3);margin-top:9px}
+.soc-d{font-style:normal;font-size:10.5px;color:var(--t3);margin-left:3px}
+.blk-z .n{font-family:'Geist Mono',ui-monospace,monospace;font-size:11.5px;
+color:var(--t3);letter-spacing:0;font-weight:400}
+                                                                 
+                                                           
+                                                                  
+                                    
+.ins-s{display:flex;align-items:center;gap:10px;padding:8px 2px;
+border-top:1px solid var(--lin);font-size:13px;color:var(--t1);
+transition:background .12s}
+.ins-s:hover{background:var(--pole)}
+.ins-t{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dno{display:grid;grid-template-columns:minmax(0,1fr) 70px;
+gap:2px 12px;align-items:baseline;padding:11px 0;
+border-bottom:1px solid var(--lin);font-size:13px}
+.dno .im{grid-column:1;grid-row:1}
+.dno .ks{grid-column:1;grid-row:2;text-align:left;
+white-space:normal;font-size:11.5px;color:var(--t3);margin-top:2px}
+.dno .ks:empty{display:none}
+.dno .dn{grid-column:2;grid-row:1/3;align-self:center}
+                                                                
+                                                
+.dno:not(:has(.ks:not(:empty))){grid-template-rows:auto}
+.dno .im,.sost-s .im{display:flex;align-items:center;gap:8px;min-width:0}
+.dno .dn{font-family:'Geist Mono',ui-monospace,monospace;font-size:11.5px;text-align:right}
+.dno .dn.kr{color:var(--kr)}
+.dno .ks{font-size:11.5px;color:var(--t3);text-align:right;white-space:nowrap}
+                                                                
+                                                                
+                                                              
+                                                                 
+                                                        
+                                                              
+.cel-s{border-bottom:1px solid var(--lin);
+display:grid;grid-template-columns:56px minmax(0,1fr);
+gap:0 14px;padding:11px 0;align-items:center;color:var(--t1);
+transition:background .12s}
+a.cel-s:hover{background:var(--pole)}
+.cel-s > span.pr{grid-column:1;grid-row:1;text-align:left;
+font-family:'Geist Mono',ui-monospace,monospace;font-size:21px;color:var(--t1)}
+.cel-s > span.pr i{font-size:10px;color:var(--t3);font-style:normal;margin-left:1px}
+.cel-s > span:not(.pr){grid-column:2;grid-row:1;min-width:0;
+align-self:center;font-size:13px}
+                                                               
+                                                   
+.blk-str{font-size:13px;color:var(--t3);line-height:1;margin-left:9px;
+width:22px;height:22px;display:grid;place-items:center;
+transition:color .14s,transform .14s}
+.blk-str:hover{color:var(--t1);transform:translate(1px,-1px)}
+@media (max-width:760px){
+  .blk-str{width:44px;height:44px;margin-left:3px}
+}
+@media (prefers-reduced-motion:reduce){.blk-str{transition:color .14s}}
+
+                                                                 
+                                            
+.sost-s{display:grid;grid-template-columns:minmax(0,150px) minmax(0,1fr) 30px 30px;
+gap:11px;align-items:center;padding:9px 0;border-bottom:1px solid var(--lin);
+font-size:13px}
+.sost-s:last-of-type{border-bottom:0}
+.sost-z{font-size:11.5px;color:var(--t3);min-width:0;
+overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sost-ch{font-family:'Geist Mono',ui-monospace,monospace;font-size:12px;
+text-align:right;font-feature-settings:"tnum"}
+.sost-sr{font-size:11.5px;color:var(--t3);padding-top:11px}
+@media (max-width:760px){
+  .sost-s{grid-template-columns:minmax(0,1fr) 28px 28px;gap:8px}
+  .sost-z{grid-column:1/-1;white-space:normal;margin-top:-4px}
+}
+.net{font-size:11.5px;color:var(--t3);padding:14px 0}
+                                                               
+                                                                  
+                                                                
+                              
+.esche{font-size:11.5px;color:var(--t3);padding:11px 0 0;display:block;
+transition:color .14s}
+.esche:hover{color:var(--t1)}
+@media (max-width:760px){.plt{grid-template-columns:repeat(2,1fr)}
+.plt-k:nth-child(3){border-left:0;padding-left:0}
+.plt-k:nth-child(n+3){border-top:1px solid var(--lin)}
+.plt-c{font-size:32px}.plt-k{padding:16px 14px}}
+                                                             
+                                                                 
+.rs-str{padding:12px 0;border-bottom:1px solid var(--lin)}
+.rs-sh{display:flex;align-items:baseline;gap:9px;padding-bottom:9px}
+.rs-im{font-size:13px;transition:color .14s}
+.rs-im:hover{color:var(--t1)}
+.rs-z{font-size:10.5px;color:var(--t3);font-family:'Geist Mono',ui-monospace,monospace}
+.rs-ot{font-size:11.5px;color:var(--t2);white-space:nowrap}
+.rs-vor{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.rs-st{display:flex;flex-direction:column;gap:4px;min-width:0}
+.rs-pol{height:4px;background:var(--pole);position:relative;overflow:hidden}
+.rs-pol i{position:absolute;left:0;top:0;height:100%;background:var(--t1);
+transition:width .4s cubic-bezier(.2,.7,.3,1)}
+.rs-n{font-size:13px;font-family:'Geist Mono',ui-monospace,monospace;
+font-feature-settings:"tnum";display:flex;align-items:baseline;gap:5px}
+.rs-n.tiho{color:var(--t3)}
+.rs-d{font-size:10.5px;color:var(--t3)}
+.rs-l{font-size:10.5px;color:var(--t3)}
+@media (max-width:760px){.rs-l,.rs-d,.rs-z{font-size:11.5px}}
+.rs-ned{font-size:11.5px;color:var(--t2);padding-top:8px}
+.rs-ned.tiho{color:var(--t3)}
+@media (max-width:620px){.rs-vor{grid-template-columns:repeat(2,1fr);gap:8px}}
+
+                                                                
+                                                         
+                                       
+.rs-sv{display:flex;flex-direction:column;gap:5px;padding-top:2px}
+.rs-sv-s{display:grid;grid-template-columns:116px minmax(0,1fr) 34px 38px;
+align-items:center;gap:9px}
+.rs-sv-l{font-size:11.5px;color:var(--t2);white-space:nowrap;
+overflow:hidden;text-overflow:ellipsis}
+.rs-sv-p{height:5px;background:var(--pole);position:relative;overflow:hidden}
+.rs-sv-p i{position:absolute;left:0;top:0;height:100%;background:var(--t1)}
+.rs-sv-n{font-size:12px;color:var(--t1);text-align:right;
+font-family:'Geist Mono',ui-monospace,monospace;font-feature-settings:"tnum"}
+.rs-sv-d{font-size:10.5px;color:var(--t3);text-align:right;
+font-family:'Geist Mono',ui-monospace,monospace}
+.rs-sv-ot{font-size:11.5px;color:var(--t3);padding-top:3px}
+@media (max-width:620px){
+.rs-sv-s{grid-template-columns:88px minmax(0,1fr) 28px 30px;gap:6px}
+.rs-sv{padding-right:56px}}
+                                                             
+                                                  
+
+                                                          
+                                                            
+                                        
+                                                             
+@media (max-width:760px){
+                                                         
+                                                              
+                                                     
+.plt-k,.plt-k:first-child,.plt-k:nth-child(3){padding:15px 13px}
+.plt-k:nth-child(2n+1){border-left:0}
+.plt-k:nth-child(n+3){border-top:1px solid var(--lin)}
+.plt-c{font-size:29px}
+.plt-l{font-size:10.5px;letter-spacing:.07em;line-height:1.25}
+.plt-d{font-size:10.5px;line-height:1.3}
+
+                                                           
+                                                       
+.rs-sh{flex-wrap:wrap;gap:6px 9px;padding-bottom:10px;
+align-items:center}
+.rs-im{font-size:13px;min-height:44px;display:inline-flex;
+align-items:center}
+.rs-ot{margin-left:auto;white-space:nowrap}
+                                                             
+.rs-vor{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 10px}
+.rs-st{min-width:0}
+.rs-n{font-size:13px}
+.rs-l,.rs-d,.rs-z{font-size:11.5px}
+.rs-str{padding:13px 0}
+
+                                                          
+.sost-s{min-height:48px;padding:11px 0}
+
+                                                        
+.esche{min-height:44px;display:flex;align-items:center;padding:8px 0 0}
+                                                           
+.blk-z{align-items:center}
+.blk{margin-bottom:20px}
+}
+.rs-ned.stop{color:#c2410c}
+.pl-dejstvija{display:flex;gap:8px;margin:10px 0 2px}
+.pl-kod{background:var(--pole);border-radius:10px;padding:14px;font-size:13px;
+  line-height:1.55;white-space:pre-wrap;max-height:50vh;overflow:auto;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.pl-sr-vybor{display:flex;align-items:center;gap:8px;font-size:13px;padding-bottom:10px}
+.pl-sr-s{display:grid;grid-template-columns:1fr 90px 90px;gap:8px;
+  padding:5px 0;font-size:13px;border-top:1px solid var(--lin)}
+.pl-sr-s b{font-weight:500;font-variant-numeric:tabular-nums}
+.pl-sr-sh{border-top:0;color:var(--t3);font-size:11.5px}
+
+                                                      
+                                                              
+                                                                
+                                                                  
+#levo .blk + .blk,#pravo .blk + .blk{border-top:0 !important;padding-top:0 !important;
+margin-top:0 !important}
+#levo .blk,#pravo .blk{margin-bottom:38px}
+#levo .zs,#pravo .zs,.cel-s,.rs-str,.dno,.ins-s,.sost-s{border-top:0 !important;
+border-bottom:0 !important}
+.blk-z i{background:transparent !important;border:0 !important}
+#levo .zs,#pravo .zs{border-radius:8px}
+#levo .zs:hover,#pravo .zs:hover{background:var(--pole)}
+.blk-z{margin-bottom:8px}
+                                                            
+                                                         
+.pl-segi{display:flex;flex-direction:column;align-items:flex-start;gap:7px;margin:2px 0 12px}
+.pl-seg{max-width:100%;overflow-x:auto;scrollbar-width:none;flex-wrap:nowrap}
+.pl-seg::-webkit-scrollbar{display:none}
+.pl-seg .vid-e{white-space:nowrap}
+.blk-z .pl-seg{margin-right:8px}
+                                                                            
+.pl-dej{flex:none;display:inline-flex;align-items:center;height:24px;padding:0 10px;
+border:1px solid var(--lin);border-radius:999px;font-size:11.5px;color:var(--t2);
+background:#fff;cursor:var(--kursor), pointer;white-space:nowrap;transition:all .14s}
+.pl-dej:hover{background:var(--tmn);border-color:var(--tmn);color:#fff}
+                                   
+.pl-raskryt{display:inline-flex;align-items:center;gap:6px;margin-top:10px;
+font-size:12px;color:var(--t2);cursor:var(--kursor), pointer}
+.pl-raskryt:hover{color:var(--t1)}
+.pl-raskryt svg.vverh{transform:rotate(180deg)}
+.pl-seg .ld-ch-n{margin-left:5px}
+.pl-prochee{margin-top:6px}
+                                                    
+.pl-kl{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) auto auto;
+gap:10px;align-items:center;padding:7px 6px;border-radius:8px;font-size:13px}
+.pl-kl:hover{background:var(--pole)}
+.pl-kl-im{display:flex;align-items:center;gap:8px;min-width:0;color:var(--t1)}
+.pl-kl-im span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pl-kl-im:hover span{text-decoration:underline;text-underline-offset:3px}
+.pl-kl-pod{font-size:11.5px;color:var(--t3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pl-kl-pr{font-size:11.5px;color:var(--t2);white-space:nowrap}
+.pl-kl-pr .kr{color:var(--pal-3,#ff7036);font-weight:500}
+                                                                 
+                                 
+.pl-dn{padding:9px 6px 10px;border-radius:8px}
+.pl-dn:hover{background:var(--pole)}
+.pl-dn-sh{display:flex;align-items:baseline;gap:8px;font-size:13px;min-width:0}
+.pl-dn-sh i{flex:1}
+.pl-dn-im{color:var(--t1)}
+.pl-dn-kl{color:var(--t3);font-size:12px}
+.pl-dn-im:hover,.pl-dn-kl:hover{text-decoration:underline;text-underline-offset:3px}
+.pl-dn-s{font-family:'Geist Mono',ui-monospace,monospace;font-size:12px;white-space:nowrap}
+.pl-dn-pod{font-size:11.5px;color:var(--t3);margin-top:3px}
+.pl-dn-zh{display:flex;align-items:center;gap:8px;margin-top:6px;font-size:12px;color:var(--t2)}
+.pl-dn-zh span{flex:1;min-width:0}
+.pl-dn-zh .kr{font-size:11.5px;color:var(--pal-3,#ff7036);font-weight:500}
+                                                        
+.pl-cel{padding:2px 0 6px}
+.pl-zam{display:flex;align-items:center;gap:8px;margin:2px 0 6px 40px;font-size:12px;color:var(--t3)}
+.pl-zam-t{flex:1;min-width:0}
+.pl-zam-v{width:74px;border:0;border-bottom:1px solid var(--lin);background:transparent;
+font:inherit;font-size:12px;padding:3px 2px;color:var(--t1)}
+.pl-zam-v:focus{outline:none;border-bottom-color:var(--t1)}
+                                                          
+@keyframes pl-mig{0%,100%{background:transparent}25%,75%{background:var(--pole)}50%{background:#ededf0}}
+.blk.migaet{animation:pl-mig 1.8s ease;border-radius:12px}
+                                                                   
+                                   
+.os-karty{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.os-k{background:var(--pole);border-radius:12px;padding:13px 15px 14px;min-width:0}
+.os-k-sh{display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:8px}
+.os-k-sh b{font-weight:500}
+.os-k-sh i{flex:1}
+.os-tok{font-size:11.5px;color:var(--t2);background:#fff;border-radius:999px;padding:3px 9px;white-space:nowrap}
+.os-z{display:flex;flex-direction:column;gap:2px;font-size:13px;line-height:1.45;margin-top:8px}
+.os-g{font-size:11.5px;color:var(--t3)}
+.os-net{color:var(--t3);font-size:12px}
+.os-pag{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:12px}
+.os-str{display:grid;place-content:center;width:26px;height:26px;border-radius:50%;
+border:1px solid var(--lin);color:var(--t2);cursor:var(--kursor), pointer;background:#fff}
+.os-str:hover{background:var(--pole);color:var(--t1)}
+.os-str[data-vykl]{opacity:.3;pointer-events:none}
+.os-tochki{display:flex;gap:6px}
+.os-t{width:6px;height:6px;border-radius:50%;background:var(--lin);cursor:var(--kursor), pointer;position:relative}
+.os-t::after{content:"";position:absolute;inset:-8px}
+.os-t.on{background:var(--t1)}
+@media (max-width:760px){.os-karty{grid-template-columns:1fr}
+  .pl-kl{grid-template-columns:minmax(0,1fr) auto auto}
+  .pl-kl-pod{display:none}
+  .pl-kl-problem .pl-kl-pod{display:block;grid-column:1 / -1;grid-row:2;
+    font-size:12px;white-space:normal}}
+                                                                        
+.vyb-ob.sr-ob{max-width:min(640px,calc(100vw - 40px)) !important}
+.sr-sh{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:4px 0 18px}
+.sr-k{background:var(--pole);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.sr-l{font-size:11.5px;color:var(--t3)}
+.sr-k b{font-size:17px;font-weight:500;letter-spacing:-.01em}
+.sr-d{font-size:12px;color:var(--t2)}
+.sr-per{display:flex;align-items:center;gap:8px}
+.sr-str{display:grid;place-content:center;width:24px;height:24px;border-radius:50%;
+background:#fff;color:var(--t2);cursor:var(--kursor), pointer}
+.sr-str:hover{color:var(--t1)}
+.sr-s{display:grid;grid-template-columns:minmax(0,1.4fr) 1fr 1fr 90px;gap:10px;align-items:baseline;
+padding:11px 2px;font-size:13px}
+.sr-s b{font-family:'Geist Mono',ui-monospace,monospace;font-size:19px;font-weight:400;letter-spacing:-.02em}
+.sr-s .sr-b{color:var(--t2)}
+.sr-s-sh{font-size:11.5px;color:var(--t3);padding-bottom:4px}
+.sr-im{color:var(--t2)}
+.sr-r{font-family:'Geist Mono',ui-monospace,monospace;font-size:12px;color:var(--t3);text-align:right}
+.sr-r.plus{color:#2f8f4e}
+.sr-r.minus{color:var(--pal-3,#ff7036)}
+@media (max-width:760px){.sr-sh{grid-template-columns:1fr}
+  .sr-s{grid-template-columns:minmax(0,1fr) 64px 64px 56px}
+  .sr-s b{font-size:15px}}
+</style></head><body>
+<div id="menju"></div>
+<div class="wrap"><div class="kol">
+  <div id="weekly-report-state" class="week-goal-note" role="status" aria-live="polite"></div>
+  <div id="weekly-report-actions" class="weekly-pending"></div>
+  <div id="plitki"></div>
+  <div class="setka"><div class="stlb" id="levo"></div><div class="stlb" id="pravo"></div></div>
+</div></div>
+<script src="/js/karta.js"></script>
+<script src="/js/nedeli.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/obschij.js"></script>
+<script src="/js/kalendar.js"></script>
+<script src="/js/decimal-plan.js"></script>
+<script src="/js/weekly-snapshot-state.js"></script>
+<script src="/js/weekly-snapshot-form.js"></script>
+<script src="/js/insights.js"></script>
+<script>
+(function () {
+let SPRAV = null, P = null, SOSTOJANIJA = null, INSAJTY = [], SOCSETI = [];
+                                                           
+                                                              
+let gruppa_zadach = 'produkt';
+let napr = new URLSearchParams(location.search).get('napravlenie') || 'synapt';
+let nedelja = new URLSearchParams(location.search).get('nedelja') || null;
+let god = new URLSearchParams(location.search).get('god') || null;
+const kljuchNedeli = () => {const w=SPR.kalendar.razobrat_nedelju(nedelja,god);return SPR.kalendar.kljuch_nedeli(w.god,w.nomer);};
+const sledNedelja = () => SPR.kalendar.sdvinut_nedelju(P.god,P.nedelja,1);
+const kljuchSled = () => { const w=sledNedelja(); return SPR.kalendar.kljuch_nedeli(w.god,w.nomer); };
+
+                                                                 
+const STATUS_PROEKTA = { idet: 'идёт', zavershen: 'завершён',
+                         pauza: 'пауза', otmenen: 'отменён' };
+const TIP_ZAPISI = { ideja: 'идея', gipoteza: 'гипотеза',
+                     obratnaja_svjaz: 'обратная связь', refleksija: 'рефлексия',
+                     princip: 'принцип', novoe: 'новое' };
+
+                                                          
+                                                              
+function skl(n, odna, dve, pjat) {
+  const d = n % 10, s = n % 100;
+  if (s >= 11 && s <= 14) return pjat;
+  if (d === 1) return odna;
+  if (d >= 2 && d <= 4) return dve;
+  return pjat;
+}
+
+const dengi = (n) => n == null ? '—'
+  : n >= 1000000 ? (n / 1000000).toFixed(2).replace('.', ',').replace(',00', '') + ' млн ₽'
+  : n >= 1000 ? Math.round(n / 1000) + ' тыс. ₽' : n + ' ₽';
+
+                                                                 
+                                                               
+                                                         
+function stroka_rassylki(r) {
+  const v = r.voronka || {};
+  const nedelja = v.za_nedelju || {};
+  const dolja = (n) => v.v_baze ? Math.round((n / v.v_baze) * 100) : 0;
+
+  return `<div class="rs-str">
+    <div class="rs-sh">
+      <a class="rs-im" href="/rassylka.html?id=${r.id}">${O.ekranirovat(r.nazvanie)}</a>
+      ${r.zadacha ? `<span class="rs-z">задача ${r.zadacha.nomer}</span>` : ''}
+      <i></i>
+      <span class="rs-ot">${v.otklik_procent != null
+        ? v.otklik_procent + '% отклик' : ''}</span>
+    </div>
+    ${(r.zadachi_kampanii||[]).length?'<div class="pending-command-actions">'+r.zadachi_kampanii.map(task=>'<a class="kn" href="/zadachi.html?nomer='+task.nomer+'">'+O.ekranirovat(task.nazvanie)+(task.fakt_nepolnyj?' · факт подтверждён частично':task.plan_chislo?' · '+(task.fakt??0)+' / '+task.plan_chislo:'')+'</a>').join('')+'</div>':''}
+    ${v.stupeni && v.stupeni.length ? `<div class="rs-sv">
+      ${v.stupeni.map((s) => `<div class="rs-sv-s">
+        <span class="rs-sv-l">${O.ekranirovat(s.nazvanie)}</span>
+        <span class="rs-sv-p"><i style="width:${
+          Math.max(2, s.procent_ot_bazy)}%"></i></span>
+        <span class="rs-sv-n">${s.doshlo}</span>
+        <span class="rs-sv-d">${s.procent_ot_predyduschej != null
+          ? s.procent_ot_predyduschej + '%' : ''}</span>
+      </div>`).join('')}
+      ${v.otkazy ? `<div class="rs-sv-ot">отказались ${v.otkazy}</div>` : ''}
+    </div>` : `<div class="rs-vor">
+      ${[['в базе', v.v_baze], ['отправлено', v.otpravleno],
+         ['ответили', v.otvetili], ['отказы', v.otkazy]].map(([imja, n], i) =>
+        `<span class="rs-st">
+          <span class="rs-pol"><i style="width:${
+            i === 0 ? 100 : Math.max(2, dolja(n || 0))}%"></i></span>
+          <span class="rs-n${i === 0 ? ' tiho' : ''}">${n ?? 0}${
+            i > 0 && v.v_baze ? `<span class="rs-d">${dolja(n || 0)}%</span>` : ''}</span>
+          <span class="rs-l">${imja}</span>
+        </span>`).join('')}
+    </div>`}
+    ${nedelja.otpravleno || nedelja.otvetili
+      ? `<div class="rs-ned">за эту неделю: отправлено ${nedelja.otpravleno || 0}${
+          nedelja.otvetili ? ', ответили ' + nedelja.otvetili : ''}</div>`
+      : '<div class="rs-ned stop">на этой неделе без движения</div>'}
+  </div>`;
+}
+
+                                                            
+                                                               
+                                                         
+                                                 
+async function smenit_napravlenie(kod) {
+  if (!kod || kod === napr) return;
+  napr = kod;
+  document.querySelectorAll('[data-napr]').forEach((x) =>
+    x.classList.toggle('on', x.dataset.napr === napr));
+                                                                 
+                                   
+  history.replaceState(null, '',
+    `?napravlenie=${napr}${nedelja ? '&nedelja=' + kljuchNedeli() : ''}`);
+  try { if(await zagruzit())narisovat(); }
+  catch (err) { O.tost('Не получилось: ' + err.message); }
+}
+
+                                                                
+                                                                  
+                                                                 
+                                         
+
+                           
+                                                              
+                                                 
+let zad_tip = 'vse', zad_status = 'vse', zad_sprint = 'tek', prochee_otkryto = false;
+let SLED_ZADACHI = null;
+let kl_seg = 'v_rabote';
+let os_gran = null, os_str = 0;
+let PLATEZHI = [], TOKENY = new Map(), ZAPISI_OS = [], weeklyRequest=0;
+const weeklyCommands=LocusWeeklySnapshot.create({API,O,onSaved:async()=>{if(await zagruzit())narisovat();}});
+
+const snimokTolkoChitat=()=>P?.istochnik_otcheta?.tolko_chtenie===true;
+function zakrytSravnenie(){document.getElementById('sr')?.closest('.vyb-fon')?.querySelector('.vyb-x')?.click();}
+function podpisOtcheta(report){
+ const source=report?.istochnik_otcheta;if(!source)return 'Источник отчёта не подтверждён';
+ if(source.vid==='snimok'){
+  const raw=source.pereschitan||source.sozdano,normalized=raw?.replace(' ','T'),date=normalized?new Date(normalized+(/(?:Z|[+-]\d\d:\d\d)$/.test(normalized)?'':'Z')):null;
+  const when=date&&Number.isFinite(date.getTime())?new Intl.DateTimeFormat('ru-RU',{timeZone:'Europe/Moscow',day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}).format(date):'дата не подтверждена';
+  return 'Период закрыт · '+(source.pereschitan?'Пересчитано ':'Числа сохранены ')+when+' · только просмотр';
+ }
+ return (source.vid==='ne_zafiksirovano'?'Неделя не зафиксирована · показана реконструкция по доступным данным':source.vid==='srez_na_datu'?'Срез на выбранную дату · не сохранённый снимок':source.vid==='buduschaja'?'Будущая неделя · факты появятся по мере выполнения':'Текущая неделя · данные обновляются')+(source.tolko_chtenie?' · только просмотр':'');
+}
+async function zagruzit() {
+ const sequence=++weeklyRequest;
+ const report=await API.ekran('planerka',nedelja?{napravlenie:napr,nedelja:kljuchNedeli()}:{napravlenie:napr});
+ if(sequence!==weeklyRequest)return false;
+ if(P&&P.dengi?.skryto!==report.dengi?.skryto)zakrytSravnenie();
+ P=report;
+ nedelja=P.nedelja;god=P.god;if(window.DANNYE)window.DANNYE.nedelja={god,nomer:nedelja};SLED_ZADACHI=null;
+ const bundle=P.dopolnenija;
+ INSAJTY=bundle?.insajty||[];PLATEZHI=bundle?.platezhi||[];SOCSETI=bundle?.socseti||[];
+ TOKENY=new Map((bundle?.tokeny||[]).map(x=>[x.chelovek_id,x]));
+ if(snimokTolkoChitat())zad_sprint='tek';
+ return true;
+}
+
+                                                            
+                                  
+function dengi_para(n) {
+  if (n == null) return ['—', ''];
+  if (n >= 1000000) {
+    return [(n / 1000000).toFixed(2).replace('.', ',').replace(',00', ''), 'млн ₽'];
+  }
+  if (n >= 1000) return [String(Math.round(n / 1000)), 'тыс. ₽'];
+  return [String(n), '₽'];
+}
+
+                                                                 
+                                                                  
+                                                                
+                                                      
+function plitka(podpis, chislo, edinica, pojasnenie, krasnoe, kuda) {
+  return `<a class="plt-k plt-ssylka" data-pl-kuda="${kuda}" title="показать">
+    <div class="plt-l">${podpis}</div>
+    <div class="plt-c${krasnoe ? ' kr' : ''}">${chislo}${
+      edinica ? `<i class="iz">${edinica}</i>` : ''}</div>
+    <div class="plt-d">${pojasnenie}</div></a>`;
+}
+
+function plitki() {
+  const s = P.svodka, sc = P.schetchiki, d = P.dengi;
+  const [summa, ed] = d.skryto ? ['—', ''] : dengi_para(d.prishlo_za_nedelju);
+  const [vp, vp_ed] = d.skryto ? ['', ''] : dengi_para(d.v_proektah);
+  document.getElementById('plitki').innerHTML = `<div class="plt">
+    ${plitka('пришло денег', summa, ed,
+      d.skryto ? 'нет доступа к деньгам' : `в проектах ${vp} ${vp_ed}`, false, 'dengi')}
+    ${plitka('закрыто задач', s.zakryto, `из ${s.vsego_zadach}`,
+      `открыто ${s.otkryto}`, false, 'sdelano')}
+    ${plitka('цели', s.procent_celej ?? '—', s.procent_celej == null ? '' : '%',
+      `${s.celi.length} ${skl(s.celi.length, 'цель', 'цели', 'целей')} в работе`, false, 'celi')}
+    ${plitka('просрочено', s.prosrocheno, '',
+      `клиентов в работе ${sc.klientov_v_rabote}`, s.prosrocheno > 0, 'prosrocheno')}
+  </div>`;
+}
+
+                                   
+const KUDA = {
+  'цели и результаты': () => `/napravlenija.html?napravlenie=${napr}&vkladka=okr`,
+  'задачи спринта': () => `/zadachi.html?napravlenie=${napr}&sprint=${
+    zad_sprint === 'sled' ? kljuchSled() : kljuchNedeli()}&otvetstvennyj=`,
+  клиенты: () => `/ljudi.html?napravlenie=${napr}`,
+  'деньги в проектах': () => `/napravlenija.html?napravlenie=${napr}&vkladka=proekty`,
+};
+
+                                                                
+function zagolovok(imja, skolko, sprava = '') {
+  const kuda = KUDA[imja];
+  return `<div class="blk-z">${imja}` +
+    (skolko === '' || skolko == null ? '' : `<span class="n">, ${skolko}</span>`) +
+    '<i></i>' + sprava +
+    (kuda ? `<a class="blk-str" href="${kuda()}"
+       aria-label="перейти в раздел «${imja}»" title="открыть целиком">↗</a>` : '') +
+    '</div>';
+}
+
+                                                              
+                                                               
+const POTOLOK = 7;
+
+                                                          
+function segmenty(kljuch, punkty, tek) {
+  return `<span class="vid km-vid pl-seg">${punkty.map(([kod, imja, n]) =>
+    `<a class="vid-e${kod === tek ? ' on' : ''}" data-${kljuch}="${kod}">${imja}${
+      n != null ? `<span class="ld-ch-n">${n}</span>` : ''}</a>`).join('')}</span>`;
+}
+
+                         
+const TIP_GRUPPA = (z) => z.publikacija ? 'kontent'
+  : (z.tip === 'klientskaja' || z.tip === 'kasanie') ? 'klientskie'
+  : z.tip === 'produktovaja' ? 'produktovye'
+  : z.tip === 'biznesovaja' ? 'biznesovye' : 'prochee';
+const TIPY_SEG = [['vse', 'все'], ['kljuchevye', 'ключевые'], ['klientskie', 'клиентские'],
+  ['biznesovye', 'бизнесовые'], ['produktovye', 'продуктовые'], ['kontent', 'контент']];
+const STATUSY_SEG = [['vse', 'все'], ['v_processe', 'в работе'], ['v_plane', 'в плане'],
+  ['na_soglasovanii', 'на согласовании'], ['prosrocheno', 'просрочено'], ['sdelano', 'сделано']];
+
+const prosrochena = (z) => z.srok && String(z.srok) < String(P.den)
+  && !['sdelano', 'kogda_nibud'].includes(z.status);
+const status_zadachi = (z) => (prosrochena(z) ? 'prosrocheno' : z.status);
+
+function vse_zadachi_sprinta() {
+  if (zad_sprint === 'sled') return SLED_ZADACHI || [];
+  const bz = P.biznes || {};
+  const vse = [...(P.klienty || []), ...(P.produkt || []), ...(bz.zadachi || []),
+    ...(P.kontent || []), ...(P.prochee || []), ...(P.na_soglasovanii || [])];
+  const vidno = new Set();
+  return vse.filter((z) => (vidno.has(z.nomer) ? false : vidno.add(z.nomer)));
+}
+
+function zadachaPlanerki(z){
+ const view=SPR.dlja_ekrana(z);if(!snimokTolkoChitat())return view;
+ const day=z.den_vybora||P.den||P.istochnik_otcheta.konec;
+ return {...view,den_vybora:day,prosrocheno:typeof z.prosrocheno==='boolean'?z.prosrocheno:z.povtorjaetsja?!!(z.podsvetka||Number(z.dnej_bez_otmetki)>0):!!(z.srok&&String(z.srok).slice(0,10)<String(day)&&!['sdelano','kogda_nibud'].includes(z.status))};
+}
+
+function blokZadach() {
+  const vse = vse_zadachi_sprinta();
+  const osnovnye = vse.filter((z) => TIP_GRUPPA(z) !== 'prochee');
+  const prochee = vse.filter((z) => TIP_GRUPPA(z) === 'prochee');
+  const po_tipu = (kod) => (kod === 'vse' ? osnovnye
+    : kod === 'kljuchevye' ? vse.filter((z) => z.kljuchevaja)
+      : vse.filter((z) => TIP_GRUPPA(z) === kod));
+  const tip_spisok = po_tipu(zad_tip);
+  const po_statusu = (sp, kod) => (kod === 'vse' ? sp
+    : sp.filter((z) => status_zadachi(z) === kod));
+  const vidno = po_statusu(tip_spisok, zad_status);
+  const prochee_vidno = zad_tip === 'vse' ? po_statusu(prochee, zad_status) : [];
+  const sled_n = sledNedelja().nomer;
+
+  const stroki = (sp) => O.sPodzadachami(sp).map((z) =>
+    O.strokaZadachi(zadachaPlanerki(z), { bezNapravlenija: true })).join('');
+  const pervye = vidno.slice(0, POTOLOK);
+  const ostalos = vidno.length - pervye.length;
+  const ssylka_vse = `/zadachi.html?napravlenie=${napr}&sprint=${
+    zad_sprint === 'sled' ? kljuchSled() : kljuchNedeli()}&otvetstvennyj=${
+    zad_status !== 'vse' && zad_status !== 'prosrocheno' ? '&status=' + zad_status : ''}${
+    zad_status === 'prosrocheno' ? '&prosrochennye=1' : ''}`;
+
+  return `<div class="blk pl-zad" id="blk-zadachi">
+    ${zagolovok('задачи спринта', vse.length,
+      segmenty('zsp', [['tek', `спринт ${nedelja}`], ['sled', `план на ${sled_n}`]], zad_sprint))}
+    <div class="pl-segi">
+      ${segmenty('ztip', TIPY_SEG.map(([k, im]) => [k, im, po_tipu(k).length])
+        .filter(([k, , n]) => k === 'vse' || k === 'kljuchevye' || n || k === zad_tip), zad_tip)}
+      ${segmenty('zst', STATUSY_SEG.map(([k, im]) => [k, im, po_statusu(tip_spisok, k).length])
+        .filter(([k, , n]) => k === 'vse' || n || k === zad_status), zad_status)}
+    </div>
+    ${zad_sprint === 'sled' && SLED_ZADACHI === null
+      ? '<div class="net">загружаю план</div>'
+      : (pervye.length ? stroki(pervye)
+        : `<div class="net">${zad_sprint === 'sled'
+          ? `на спринт ${sled_n} задач пока нет` : 'под этим выбором задач нет'}</div>`)}
+    ${ostalos ? `<a class="esche" href="${ssylka_vse}">ещё ${ostalos} ${
+      skl(ostalos, 'задача', 'задачи', 'задач')}</a>` : ''}
+    ${prochee_vidno.length ? `<a class="pl-raskryt" data-pl-prochee="1">${
+      prochee_otkryto ? 'свернуть' : 'раскрыть'} прочее ${prochee_vidno.length}
+      <svg class="${prochee_otkryto ? 'vverh' : ''}" viewBox="0 0 16 16" width="11" height="11" fill="none">
+        <path d="M3.5 6l4.5 4.5L12.5 6" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      ${prochee_otkryto ? `<div class="pl-prochee">${stroki(prochee_vidno)}</div>` : ''}` : ''}
+  </div>`;
+}
+
+                                                          
+function blokKlientov() {
+  const vse_z = vse_zadachi_sprinta();
+  const unique=rows=>[...new Map(rows.map(row=>[row.chelovek_id,row])).values()];
+  const v_rabote = unique((P.aktivnye || []).filter((a) => a.rol === 'klient'));
+  const archived=unique([...(P.arhiv_za_period||[]),...(P.arhiv_do||[])].filter(row=>row.rol==='klient'));
+  const bez = P.bez_zadach || [];
+  const davno = P.davno_ne_obschalis || [];
+  const SEG = [['v_rabote', 'в работе', v_rabote.length], ['bez_zadach', 'без задач', bez.length],
+    ['davno', 'давно не общались', davno.length],['arhiv','ушли в архив',archived.length]];
+  const avatar = (id) => {
+    const chel = snimokTolkoChitat()?[...(P.aktivnye||[]),...(P.arhiv_za_period||[]),...(P.arhiv_do||[])].find(l=>l.chelovek_id===id):(SPRAV.ljudi_vse || SPRAV.ljudi || []).find((l) => l.id === id);
+    return chel && chel.foto ? O.avatar(chel, 20) : '';
+  };
+  const stroka = (id, imja, pod, sprava, dej, problem=false) => `<div class="pl-kl${problem?' pl-kl-problem':''}">
+    <a class="pl-kl-im" href="/klient.html?id=${id}">${avatar(id)}<span>${O.ekranirovat(imja)}</span></a>
+    <span class="pl-kl-pod">${O.ekranirovat(pod)}</span>
+    <span class="pl-kl-pr">${sprava}</span>
+    ${dej}</div>`;
+  const dej = (id, tip, slovo) =>
+    `<a class="pl-dej" data-pl-zad="${id}" data-tip="${tip}">${slovo}</a>`;
+  let telo = '';
+  if (kl_seg === 'v_rabote') {
+    telo = v_rabote.length ? v_rabote.map((a) => {
+      const n = vse_z.filter((z) => z.klient_id === a.chelovek_id
+        && !['sdelano', 'kogda_nibud'].includes(z.status)).length;
+      return stroka(a.chelovek_id, a.imja, STADII_K[a.stadija] || (a.stadija || '').replace(/_/g, ' '),
+        n ? `${n} ${skl(n, 'задача', 'задачи', 'задач')}` : 'задач нет',
+        dej(a.chelovek_id, 'klientskaja', '+ задача'));
+    }).join('') : '<div class="net">клиентов в работе нет</div>';
+  } else if (kl_seg === 'arhiv') {
+    telo=archived.length?archived.map(row=>stroka(row.chelovek_id,row.imja,'в архиве',row.arhiv_s?'с '+SPR.data(row.arhiv_s):'дата неизвестна',dej(row.chelovek_id,'klientskaja','+ задача'))).join(''):'<div class="net">архивных клиентов в этом периоде нет</div>';
+  } else if (kl_seg === 'bez_zadach') {
+    telo = bez.length ? bez.map((c) => stroka(c.chelovek_id, c.imja,
+      c.zadach_ne_bylo ? 'задач ещё не было' : 'на этот спринт задач нет', '',
+      dej(c.chelovek_id, 'klientskaja', '+ задача'))).join('')
+      : '<div class="net">у всех клиентов есть задачи</div>';
+  } else {
+    telo = davno.length ? davno.map((c) => stroka(c.chelovek_id, c.imja,
+      c.neizvestnaja_data_obschenija||c.buduschaja_data_obschenija?'дату нужно проверить':c.poslednee_obshenie ? 'последний раз ' + SPR.data(c.poslednee_obshenie) : 'общение не отмечено',
+      c.nikogda_ne_obschalis||c.neizvestnaja_data_obschenija||c.buduschaja_data_obschenija ? '' : `<b class="${c.dnej_bez_obschenija > c.norma ? 'kr' : ''}">${
+        c.dnej_bez_obschenija} дн</b>`,
+      dej(c.chelovek_id, 'kasanie', '+ касание'),c.neizvestnaja_data_obschenija||c.buduschaja_data_obschenija)).join('')
+      : '<div class="net">со всеми на связи</div>';
+  }
+  return `<div class="blk" id="blk-klienty">
+    ${zagolovok('клиенты', v_rabote.length)}
+    <div class="pl-segi">${segmenty('kls', SEG, kl_seg)}</div>
+    ${telo}</div>`;
+}
+
+                                                          
+function blokDeneg() {
+  const pr = (P.biznes || {}).proekty || [];
+  const skryto = P.dengi.skryto;
+  if(snimokTolkoChitat()&&!P.dopolnenija?.platezhi)return `<div class="blk" id="blk-dengi">${zagolovok('деньги в проектах',pr.length)}<p class="week-goal-note">Детализация платежей в этом снимке не сохранена. В сводке выше показаны сохранённые суммы</p></div>`;
+  return `<div class="blk" id="blk-dengi">${zagolovok('деньги в проектах', pr.length)}` +
+    (pr.length ? pr.map((p) => {
+      const pl = PLATEZHI.filter((x) => x.proekt_id === p.id);
+      const prishlo = pl.filter((x) => x.oplachen_at).reduce((a, x) => a + (x.summa || 0), 0);
+      const zhdem = pl.filter((x) => !x.oplachen_at)
+        .sort((a, b) => String(a.zhdem_do || '').localeCompare(String(b.zhdem_do || '')));
+      return `<div class="pl-dn">
+        <div class="pl-dn-sh">
+          <a class="pl-dn-im" href="/proekt.html?id=${p.id}">${p.nazvanie}</a>
+          ${p.klient_imja ? `<a class="pl-dn-kl" href="/klient.html?id=${p.klient_id}">${p.klient_imja}</a>` : ''}
+          <i></i>
+          <span class="pl-dn-s">${skryto ? '—' : dengi(p.stoimost)}</span>
+        </div>
+        ${skryto ? '' : `<div class="pl-dn-pod">пришло ${dengi(prishlo)}${
+          p.status && p.status !== 'idet' ? ', ' + (STATUS_PROEKTA[p.status] || p.status) : ''}</div>
+        ${zhdem.map((x) => {
+          const pozdno = x.zhdem_do && String(x.zhdem_do) < String(P.den);
+          return `<div class="pl-dn-zh">
+            <span>ждём ${dengi(x.summa)}${x.zhdem_do ? ' до ' + SPR.data(x.zhdem_do) : ''}${
+              x.naznachenie ? `, ${O.ekranirovat(x.naznachenie)}` : ''}</span>
+            ${pozdno ? '<b class="kr">просрочен</b>' : ''}
+            <a class="pl-dej" data-opl="${x.id}" data-proekt="${p.id}">пришла</a></div>`;
+        }).join('')}`}
+      </div>`;
+    }).join('') : '<div class="net">проектов с деньгами нет</div>') + '</div>';
+}
+
+                                                                       
+function goalPeriodName(value){
+ const id=String(value??''),months=['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'];
+ if(/^\d{4}$/.test(id))return id+' год';const q=id.match(/^(\d{4})-Q([1-4])$/);if(q)return q[2]+' квартал '+q[1];const m=id.match(/^(\d{4})-(0[1-9]|1[0-2])$/);return m?months[Number(m[2])-1]+' '+m[1]:id||'период не указан';
+}
+function weeklyGoalResult(goal,row){
+ const esc=O.ekranirovat,known=v=>typeof v==='number'&&Number.isFinite(v),fmt=v=>known(v)?LocusDecimalPlan.format(v):'нет данных',signed=v=>known(v)?(v>0?'+':'')+fmt(v):'нет данных';
+ if(row.skryto?.includes('dengi'))return '<div class="week-goal-note">Денежный результат скрыт по правам доступа</div>';
+ const views=row.razrezy;if(!views)return `<div class="week-goal-result"><div class="week-goal-title">${esc(row.nazvanie)}</div><div>${esc(fmt(row.fakt))} / ${row.plan==null?'план не задан':esc(fmt(row.plan))}</div><small class="week-goal-meta">Периодные срезы в этом отчёте не сохранены</small></div>`;
+ const cells=[['nedelja','За неделю'],['mesjac','Месяц'],['kvartal','Квартал'],['god','Год']].map(([key,label])=>{
+  const v=views[key];if(!v)return `<div class="week-goal-cell"><span class="week-goal-label">${label}</span><span class="week-goal-value">нет данных</span></div>`;
+  const movement=!!v.plan_perioda,value=movement?v.dvizhenie_perioda:v.fakt,isWeek=key==='nedelja';
+  let text=isWeek?signed(v.dvizhenie_perioda):row.tip==='veha'?(v.fakt==null?'нет данных':v.fakt?'закрыта':'не закрыта'):fmt(value)+(v.plan==null?'':' / '+fmt(v.plan));
+  let note=isWeek?(v.dvizhenie_perioda==null?v.pochemu_net_dvizhenija||v.pochemu_net_fakta||'Нет подтверждённых данных':'движение за неделю'):(value==null?v.pochemu_net_dvizhenija||v.pochemu_net_fakta||'Нет подтверждённых данных':(v.progress_pct==null?'':v.progress_pct+'% · ')+(movement?'движение':row.tip==='veha'?'состояние':'значение')+(v.plan==null?' · план не задан':''));
+  const tag=isWeek?'div':'a',href=isWeek?'':` href="/okr/${goal.id}?${esc(new URLSearchParams({okno:v.period,den:v.na_datu}).toString())}"`;
+  return `<${tag} class="week-goal-cell" data-week-scope="${key}"${href}><span class="week-goal-label">${label}</span><span class="week-goal-period">${esc(isWeek?'спринт '+P.nedelja:goalPeriodName(v.period))}</span><span class="week-goal-value">${esc(text)}</span><small class="week-goal-meta">${esc(note)}</small></${tag}>`;
+ }).join('');
+ const source=row.istochnik_fakta==='baza'?'исходная база · замеров пока нет':row.tip==='veha'?'состояние':row.istochnik==='formula'?'по формуле':row.istochnik==='akkaunt'?'из аккаунта':'ручной замер';
+ return `<div class="week-goal-result" data-week-result="${row.id}"><div class="week-goal-title">${esc(row.nazvanie)}<small class="week-goal-source">${source} · ${row.na_datu?'срез на '+esc(SPR.data(row.na_datu)):'дата не подтверждена'}</small></div><div class="week-goal-grid">${cells}</div></div>`;
+}
+function blokCelej(){
+ const celi=P.svodka.celi||[],ustar=P.ustarevshie_zamery||[],invalid=P.svodka.celi_bez_perioda||[];
+ return `<div class="blk" id="blk-celi">${zagolovok('цели и результаты',celi.length)}`+(celi.length?celi.map(c=>{
+  const zam=ustar.filter(u=>u.cel_id===c.id);
+  return `<div class="pl-cel" data-week-goal="${c.id}"><a class="cel-s" href="/okr/${c.id}"><span class="pr">${c.skryto?.includes('dengi')||c.procent==null?'—':c.procent+'<i class="slovo">%</i>'}</span><span>${O.ekranirovat(c.nazvanie)}<small class="week-goal-period">${O.ekranirovat(goalPeriodName(c.period_id))}${c.period_zakryt?' · период закрыт':''}</small></span></a>${(c.rezultaty||[]).map(r=>weeklyGoalResult(c,r)).join('')}${c.period_zakryt||snimokTolkoChitat()||P.istochnik_otcheta?.vid==='buduschaja'?'':zam.map(u=>`<div class="pl-zam week-goal-measure-row l-form"><label class="l-field"><span class="l-label">${O.ekranirovat(u.nazvanie)}: ${u.nikogda_ne_zamerjali?'ещё не замеряли':'замер '+u.dnej+' дн назад'}</span><input class="pl-zam-v week-goal-input" type="text" inputmode="decimal" placeholder="число" data-zam-rez="${u.rezultat_id}" aria-label="Новый замер: ${O.ekranirovat(u.nazvanie)}"></label><button type="button" class="kn week-goal-measure" data-zam-ok="${u.rezultat_id}">вписать</button></div>`).join('')}</div>`;
+ }).join(''):'<div class="net">В этой неделе нет целей с подходящим периодом</div>')+(P.svodka.celi_skryty?'<p class="week-goal-note">Некоторые цели в этом снимке недоступны по текущим правам. Общий процент скрыт</p>':'')+(invalid.length?'<p class="week-goal-note">Для части целей период не подтверждён: '+invalid.map(c=>O.ekranirovat(c.nazvanie)).join(', ')+'. Их недельный срез не рассчитан</p>':'')+'</div>';
+}
+
+                                                      
+                                                                   
+                                                              
+                                                                
+                                                  
+const GRANI_OS = [['poluchilos', 'получилось', 'Что получилось: '],
+  ['zastrjalo', 'застряло', 'Что застряло: '],
+  ['obsuzhdaem', 'обсуждаем', 'Обсуждаем: '],
+  ['predlagaju', 'предлагаю', 'Предлагаю: ']];
+const granOS = (t) => GRANI_OS.find(([, , pr]) => String(t || '').startsWith(pr));
+
+function blokOS() {
+  const zapisi = (P.obratnaja_svjaz || []).filter((z) => Number(z.sprint) === Number(P.nedelja) && Number(z.god_sprinta) === Number(P.god)
+    && z.tip === 'refleksija');
+  const po_granji = os_gran ? zapisi.filter((z) => (granOS(z.tekst) || [])[0] === os_gran) : zapisi;
+                                                 
+  const ids = [...new Set([...po_granji.map((z) => z.chelovek_id),
+    ...(os_gran ? [] : [...TOKENY.keys()])])];
+  const ljudi = ids.map((id) => {
+    const chel = (SPRAV.ljudi || []).find((l) => l.id === id) || {};
+    const z = po_granji.filter((x) => x.chelovek_id === id);
+    return { id, chel, imja: (snimokTolkoChitat()?(z[0]?.avtor_imja||TOKENY.get(id)?.imja):null)||chel.imja||(z[0]&&z[0].avtor_imja)||'кто-то',
+             zapisi: z, tokeny: TOKENY.get(id)?.resurs ?? null };
+  }).filter((x) => x.zapisi.length || x.tokeny != null)
+    .sort((a, b) => b.zapisi.length - a.zapisi.length);
+  const NA_STR = 2;
+  const stranic = Math.max(1, Math.ceil(ljudi.length / NA_STR));
+  if (os_str >= stranic) os_str = stranic - 1;
+  const vidno = ljudi.slice(os_str * NA_STR, os_str * NA_STR + NA_STR);
+  const skolko = (kod) => zapisi.filter((z) => (granOS(z.tekst) || [])[0] === kod).length;
+
+  const kartochka = (x) => `<div class="os-k">
+    <div class="os-k-sh">${x.chel.foto ? O.avatar(x.chel, 26) : ''}
+      <b>${O.ekranirovat(x.imja)}</b><i></i>
+      ${x.tokeny != null ? `<span class="os-tok" title="токены за спринт">токены ${x.tokeny}%</span>` : ''}</div>
+    ${x.zapisi.length ? x.zapisi.map((z) => {
+      const g = granOS(z.tekst);
+      const t = g ? String(z.tekst).slice(g[2].length) : z.tekst;
+      return `<div class="os-z">${g ? `<span class="os-g">${g[1]}</span>` : ''}
+        <span>${O.ekranirovat(String(t).charAt(0).toUpperCase() + String(t).slice(1))}</span></div>`;
+    }).join('') : '<div class="os-z os-net">рефлексию пока не писал</div>'}
+  </div>`;
+
+  return `<div class="blk" id="blk-os">${zagolovok('обратная связь', zapisi.length)}
+    <div class="pl-segi">${segmenty('osg', [['', 'все', zapisi.length],
+      ...GRANI_OS.map(([k, im]) => [k, im, skolko(k)]).filter(([, , n]) => n)], os_gran || '')}</div>
+    ${ljudi.length ? `<div class="os-karty">${vidno.map(kartochka).join('')}</div>
+      ${stranic > 1 ? `<div class="os-pag">
+        <a class="os-str" data-os-str="-1" aria-label="назад"${os_str === 0 ? ' data-vykl="1"' : ''}>
+          <svg viewBox="0 0 16 16" width="12" height="12" fill="none"><path d="M10 3.5 5.5 8l4.5 4.5"
+            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <span class="os-tochki">${Array.from({ length: stranic }, (_, i) =>
+          `<a class="os-t${i === os_str ? ' on' : ''}" data-os-t="${i}" aria-label="страница ${i + 1}"></a>`).join('')}</span>
+        <a class="os-str" data-os-str="1" aria-label="вперёд"${os_str >= stranic - 1 ? ' data-vykl="1"' : ''}>
+          <svg viewBox="0 0 16 16" width="12" height="12" fill="none"><path d="M6 3.5 10.5 8 6 12.5"
+            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>` : ''}`
+      : '<div class="net">за этот спринт рефлексией пока не делились</div>'}
+  </div>`;
+}
+
+function bloki() {
+                                                             
+                                                           
+                                                            
+                                                             
+  const bz = P.biznes || {};
+  const rs = bz.rassylki || [];
+  const L = [], R = [];
+  L.push(blokCelej());
+  L.push(`<div class="blk" id="blk-lidy">${zagolovok('лиды спринта',null)}
+    <div class="pol">
+      <div class="pol-s"><span class="pol-n">новые</span><span class="pol-z" data-leads-new>${P.lidy?.novyh??0}</span></div>
+      <div class="pol-s"><span class="pol-n">прежние, с кем работали</span><span class="pol-z" data-leads-previous>${P.lidy?.prezhnih??0}</span></div>
+    </div>${P.lidy?.polnota_dannyh&&!P.lidy.polnota_dannyh.polnaja?`<div class="net">Учтены подтверждённые переходы. Без полной истории: ${P.lidy.polnota_dannyh.bez_istorii}</div>`:''}
+  </div>`);
+  L.push(`<div class="blk">${zagolovok('рассылка спринта', rs.length)}` +
+    (rs.length ? rs.map((r) => stroka_rassylki(r)).join('')
+      : '<div class="net">рассылок на этот спринт нет</div>') + '</div>');
+  L.push(blokDeneg());
+  if (INSAJTY.length) L.push('<section class="blk" id="blk-insajty"><div data-insights-host></div></section>');
+  R.push(blokZadach());
+  R.push(blokKlientov());
+  if (SOCSETI && SOCSETI.length) {
+    R.push(`<div class="blk">${zagolovok('соцсети за неделю', SOCSETI.length)}` +
+      SOCSETI.map((a) => `<div class="dno"><span class="im">${a.nazvanie}</span>
+        <span class="ks">${a.ploshadka || ''}</span>
+        <span class="dn">${a.podpischikov != null ? a.podpischikov : '—'}${
+          a.delta ? ` <i class="soc-d">${a.delta > 0 ? '+' : ''}${a.delta}</i>` : ''}</span>
+      </div>`).join('') + '</div>');
+  }
+  R.push(blokOS());
+  document.getElementById('levo').innerHTML = L.join('');
+  document.getElementById('pravo').innerHTML = R.join('');
+}
+
+                                                                    
+function kBloku(id, migat = true) {
+  const b = document.getElementById(id);
+  if (!b) return;
+  b.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (!migat) return;
+  b.classList.remove('migaet');
+  void b.offsetWidth;
+  b.classList.add('migaet');
+  setTimeout(() => b.classList.remove('migaet'), 1900);
+}
+
+async function pokazatSled() {
+  if (SLED_ZADACHI !== null) return;
+  try {
+    const o = await API.spisok('zadachi', { napravlenie: napr, sprint: kljuchSled(), na_stranice: 300 });
+    SLED_ZADACHI = (o.spisok || []).filter((z) => !z.udaleno);
+  } catch { SLED_ZADACHI = []; }
+}
+
+const STADII_K = { v_rabote: 'в работе', zhdem_oplatu: 'ждём оплату',
+  ne_pisali: 'не писали', napisali: 'написали', otkliknulsja: 'откликнулся',
+  peregovory: 'переговоры', pauza: 'пауза' };
+
+function narisovat() {
+  plitki(); bloki(); O.ponumerovat();
+  LocusInsights.mount({host:document.querySelector('[data-insights-host]'),rows:INSAJTY,editable:P.istochnik_otcheta?.vid==='tekuschaja',scope:[API.ja,napr,P.god,P.nedelja,P.istochnik_otcheta?.vid].join(':')});
+  weeklyCommands.mount(document.getElementById('weekly-report-actions'),P);
+  document.getElementById('weekly-report-state').textContent=podpisOtcheta(P)+(snimokTolkoChitat()&&!P.dopolnenija?' · дополнительные сведения об оплатах, ресурсах и соцсетях в этом снимке не сохранены':'');
+  for(const selected of document.querySelectorAll('.pl-seg .vid-e.on')){
+    const rail=selected.closest('.pl-seg'),bounds=rail.getBoundingClientRect(),item=selected.getBoundingClientRect();
+    if(item.left<bounds.left)rail.scrollLeft-=bounds.left-item.left;
+    else if(item.right>bounds.right)rail.scrollLeft+=item.right-bounds.right;
+  }
+  const pere = () => narisovat();
+                                
+  document.querySelectorAll('[data-pl-kuda]').forEach((e) =>
+    e.addEventListener('click', (ev) => {
+      ev.preventDefault();
+      const k = e.dataset.plKuda;
+      if (k === 'dengi') return kBloku('blk-dengi');
+      if (k === 'celi') return kBloku('blk-celi');
+                                                                     
+      zad_sprint = 'tek'; zad_tip = 'vse'; zad_status = k;
+      pere();
+      kBloku('blk-zadachi');
+    }));
+  const seg = (atr, f) => document.querySelectorAll(`[data-${atr}]`).forEach((e) =>
+    e.addEventListener('click', async () => { await f(e.dataset[atr.replace(/-./g, (m) => m[1].toUpperCase())]); pere(); }));
+  seg('zsp', async (v) => { zad_sprint = v; zad_status = 'vse'; if (v === 'sled') await pokazatSled(); });
+  seg('ztip', (v) => { zad_tip = v; });
+  seg('zst', (v) => { zad_status = v; });
+  seg('kls', (v) => { kl_seg = v; });
+  seg('osg', (v) => { os_gran = v || null; os_str = 0; });
+  document.querySelector('[data-pl-prochee]')?.addEventListener('click', () => {
+    prochee_otkryto = !prochee_otkryto; pere();
+  });
+                                              
+  document.querySelectorAll('[data-os-str]').forEach((e) =>
+    e.addEventListener('click', () => {
+      if (e.dataset.vykl) return;
+      os_str += Number(e.dataset.osStr); pere();
+    }));
+  document.querySelectorAll('[data-os-t]').forEach((e) =>
+    e.addEventListener('click', () => { os_str = Number(e.dataset.osT); pere(); }));
+  if(snimokTolkoChitat()){
+   document.querySelectorAll('[data-pl-zad],[data-opl],[data-zam-ok],.pl-zam,[data-zsp="sled"]').forEach(n=>n.hidden=true);
+   document.querySelectorAll('#levo .gal-b,#pravo .gal-b').forEach(n=>{n.setAttribute('aria-disabled','true');n.setAttribute('title','Состояние задачи в сохранённом снимке');n.tabIndex=-1;n.addEventListener('click',e=>{e.preventDefault();e.stopImmediatePropagation();});});
+   return;
+  }
+                                                                     
+  document.querySelectorAll('[data-pl-zad]').forEach((e) =>
+    e.addEventListener('click', () => O.formaZadachiModalka({
+      klient_id: Number(e.dataset.plZad), napravlenie: napr, tip: e.dataset.tip,
+    })));
+                                                             
+  document.querySelectorAll('[data-opl]').forEach((e) =>
+    e.addEventListener('click', () => O.otmetitOplatu(Number(e.dataset.opl), {
+      proekt_id: Number(e.dataset.proekt),
+      posle: async () => { if(await zagruzit())narisovat(); },
+    })));
+                                                                 
+  document.querySelectorAll('[data-zam-ok]').forEach((e) =>
+    e.addEventListener('click', async () => {
+      const rez = Number(e.dataset.zamOk);
+      const pole = document.querySelector(`[data-zam-rez="${rez}"]`);
+      const v = pole?.value.trim().replace(',', '.');
+      if (!pole || !v || !Number.isFinite(Number(v))) {
+        O.tost('Впиши число'); pole?.focus(); return;
+      }
+      const original=(P.svodka.celi||[]).flatMap(c=>c.rezultaty||[]).find(r=>r.id===rez);
+      O.zamer({rez:{id:rez,nazvanie:original?.nazvanie||'результат планёрки'},znachenie:v,onChanged:async()=>{if(await zagruzit())narisovat();}});
+    }));
+                                              
+  document.querySelectorAll('#levo .gal-b, #pravo .gal-b').forEach((g) =>
+    g.addEventListener('click', async (ev) => {
+      ev.stopPropagation(); ev.preventDefault();
+      const uzel = g.closest('[data-nomer]');
+      const nomer = Number(uzel?.dataset.nomer);
+      if (!nomer) return;
+      await O.zakrytZadachu(nomer, uzel,
+        async () => { if(await zagruzit())narisovat(); });
+    }));
+  O.vkljuchitStatusy((stroka, status) => O.smenitStatusZadachi(stroka, status,
+    async () => { if(await zagruzit())narisovat(); }));
+}
+
+                                                                 
+                                                                    
+                                                                   
+function privjazatDejstvijaNedeli() {
+  if (document.getElementById('pl-sravnit')) return;
+  const shapka = document.querySelector('.men-r1-obj');
+  if (!shapka) return;
+  shapka.insertAdjacentHTML('beforeend',
+    '<a class="fil-b sravnit-verh" id="pl-sravnit">сравнить недели</a>');
+  const mesto_mob = document.getElementById('plitki');
+  if (mesto_mob && !document.getElementById('pl-sravnit-mob')) {
+    mesto_mob.insertAdjacentHTML('beforebegin',
+      '<a class="fil-b sravnit-mob" id="pl-sravnit-mob">сравнить недели</a>');
+    document.getElementById('pl-sravnit-mob')?.addEventListener('click',
+      () => document.getElementById('pl-sravnit')?.click());
+  }
+  document.getElementById('pl-sravnit')?.addEventListener('click', () => {
+    let vtoroj = SPR.kalendar.sdvinut_nedelju(P.god,P.nedelja,-1);
+    const podpisVtorogo=()=>`${vtoroj.nomer} / ${vtoroj.god}`;
+    O.modalka('Сравнить недели', `<div class="sr" id="sr">
+      <div class="sr-sh">
+        <div class="sr-k"><span class="sr-l">этот спринт</span>
+          <b>спринт ${P.nedelja} / ${P.god}</b><span class="sr-d">${SPR.period(P.nachalo,P.konec)} · ${O.ekranirovat(podpisOtcheta(P))}</span></div>
+        <div class="sr-k sr-k2"><span class="sr-l">сравниваем с</span>
+          <span class="sr-per"><a class="sr-str" data-sr="-1" aria-label="раньше">
+            <svg viewBox="0 0 16 16" width="12" height="12" fill="none"><path d="M10 3.5 5.5 8l4.5 4.5"
+              stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <b id="sr-n">спринт ${podpisVtorogo()}</b>
+            <a class="sr-str" data-sr="1" aria-label="позже">
+            <svg viewBox="0 0 16 16" width="12" height="12" fill="none"><path d="M6 3.5 10.5 8 6 12.5"
+              stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></span>
+          <span class="sr-d" id="sr-d"></span></div>
+      </div>
+      <div class="sr-telo" id="sr-telo"><div class="net">считаю</div></div>
+    </div>`, null, { pojasnenie: 'два спринта рядом: задачи, лиды, деньги и публикации' });
+    const okno = document.getElementById('sr');
+    okno?.closest('.vyb-ob')?.classList.add('sr-ob');
+    let srRequest=0;
+    const schitat = async () => {
+      const sequence=++srRequest;
+      document.getElementById('sr-n').textContent = `спринт ${podpisVtorogo()}`;
+      const telo = document.getElementById('sr-telo');
+      telo.innerHTML='<div class="net">Читаем выбранную неделю</div>';
+      document.getElementById('sr-d').textContent='';
+      try {
+        const B = await API.ekran('planerka', { napravlenie: napr, nedelja: SPR.kalendar.kljuch_nedeli(vtoroj.god,vtoroj.nomer) });
+        if(sequence!==srRequest||!okno?.isConnected)return;
+        document.getElementById('sr-d').textContent = SPR.period(B.nachalo,B.konec)+' · '+podpisOtcheta(B);
+        const den = (x) => (x?.skryto ? null : x?.prishlo_za_nedelju ?? 0);
+        const STROKI = [
+          ['закрыто задач', P.svodka.zakryto, B.svodka.zakryto, true],
+          ['открыто', P.svodka.otkryto, B.svodka.otkryto, null],
+          ['просрочено', P.svodka.prosrocheno, B.svodka.prosrocheno, false],
+          ['новые лиды', P.lidy?.novyh, B.lidy?.novyh, true, false, true],
+          ['прежние лиды', P.lidy?.prezhnih, B.lidy?.prezhnih, null, false, true],
+          ['пришло денег', den(P.dengi), den(B.dengi), true, true],
+          ['публикаций', P.svodka.publikacij, B.svodka.publikacij, true],
+        ];
+        telo.innerHTML = `<div class="sr-s sr-s-sh"><span></span>
+            <span>спринт ${P.nedelja} / ${P.god}</span><span>спринт ${podpisVtorogo()}</span><span>разница</span></div>` +
+          STROKI.map(([imja, a, b, luchshe_bolshe, dengi_li, lead]) => {
+            const partialA=lead&&P.lidy?.polnota_dannyh&&!P.lidy.polnota_dannyh.polnaja;
+            const partialB=lead&&B.lidy?.polnota_dannyh&&!B.lidy.polnota_dannyh.polnaja;
+            const fa = dengi_li ? (a == null ? '—' : dengi_para(a).join(' ')) : (partialA?'≥ ':'')+(a ?? 0);
+            const fb = dengi_li ? (b == null ? '—' : dengi_para(b).join(' ')) : (partialB?'≥ ':'')+(b ?? 0);
+            const r = (a ?? 0) - (b ?? 0);
+            const klass = partialA||partialB||!r || luchshe_bolshe == null ? '' : ((r > 0) === luchshe_bolshe ? ' plus' : ' minus');
+            const fr = partialA||partialB?'—':!r ? '0' : (r > 0 ? '+' : '−') + (dengi_li ? dengi_para(Math.abs(r)).join(' ') : Math.abs(r));
+            return `<div class="sr-s"><span class="sr-im">${imja}</span>
+              <b>${fa}</b><b class="sr-b">${fb}</b><span class="sr-r${klass}">${fr}</span></div>`;
+          }).join('');
+      } catch (er) { if(sequence===srRequest&&okno?.isConnected)telo.innerHTML = `<div class="net">Не получилось прочитать неделю: ${O.ekranirovat(er.message)}</div>`; }
+    };
+    okno?.querySelectorAll('[data-sr]').forEach((e) => e.addEventListener('click', () => {
+      const n = SPR.kalendar.sdvinut_nedelju(vtoroj.god,vtoroj.nomer,Number(e.dataset.sr));
+      if (n.nomer === P.nedelja && n.god === P.god) return;
+      vtoroj = n; schitat();
+    }));
+    schitat();
+  });
+}
+
+function tekstFolloaupa() {
+  const im = (P.napravlenie_nazvanie || napr).split(/[,(]/)[0].trim();
+  const stroki = [`#фоллоуап ${im}, спринт ${P.nedelja}`, ''];
+  const celi = (P.svodka.celi || []).slice(0, 5);
+  if (celi.length) {
+    stroki.push('цели:');
+    celi.forEach((c) => stroki.push(`– ${c.nazvanie}: ${c.skryto?.includes('dengi') ? 'денежный блок скрыт' : c.procent==null?'нет замера':c.procent + '%'}`));
+    stroki.push('');
+  }
+  stroki.push(`задачи: закрыто ${P.svodka.zakryto}, открыто ${
+    P.svodka.otkryto}, просрочено ${P.svodka.prosrocheno}`);
+  if (P.lidy) {stroki.push(`лиды: новых ${P.lidy.novyh}, прежних ${P.lidy.prezhnih}`);if(P.lidy.polnota_dannyh&&!P.lidy.polnota_dannyh.polnaja)stroki.push(`учтены подтверждённые переходы, без полной истории: ${P.lidy.polnota_dannyh.bez_istorii}`);}
+  if (P.dengi && !P.dengi.skryto) {
+    stroki.push(`деньги: пришло за неделю ${dengi_para(P.dengi.prishlo_za_nedelju).join(' ')
+      }, не оплачено ${dengi_para(P.dengi.vystavleno_ne_oplacheno).join(' ')}`);
+  }
+  if (P.svodka.publikacij) stroki.push(`контент: публикаций ${P.svodka.publikacij}`);
+  const klienty = (P.klienty || []).slice(0, 6);
+  if (klienty.length) {
+    stroki.push('', 'клиенты:');
+    klienty.forEach((k) => stroki.push(`– ${k.imja || k.klient_imja || ''}${
+      k.chto_sdelali ? ': ' + k.chto_sdelali : ''}`));
+  }
+  return stroki.join('\n');
+}
+
+(async function start() {
+  try {
+    SPRAV = await SPR.zagruzit();
+    window.DANNYE = { napravlenija: SPRAV.napravlenija, ljudi: SPRAV.ljudi,
+                      statusy: SPRAV.statusy, tipy: SPRAV.tipy, zadachi: [] };
+    await zagruzit();
+    document.getElementById('menju').innerHTML = O.menju('Планёрка', {
+                                                                 
+                                                                 
+                                                 
+      napravlenija: true, chisla: P.po_napravlenijam, bez_vseh: true,
+      period: [`спринт ${P.nedelja} / ${P.god}`, SPR.period(P.nachalo, P.konec)],
+    });
+                                                                        
+    document.querySelectorAll('[data-napr]').forEach((e) => {
+      e.classList.toggle('on', e.dataset.napr === napr);
+      e.addEventListener('click', () => smenit_napravlenie(e.dataset.napr));
+    });
+    window.OPROS = async () => {try{if(await zagruzit()){narisovat();privjazatDejstvijaNedeli();}}catch(error){if([401,403].includes(error.kod)){zakrytSravnenie();weeklyCommands.invalidate();document.getElementById('weekly-report-actions').replaceChildren();document.getElementById('levo').replaceChildren();document.getElementById('pravo').replaceChildren();document.getElementById('plitki').replaceChildren();}document.getElementById('weekly-report-state').textContent=(P?podpisOtcheta(P)+' · ':'')+'Не удалось обновить чтение. Повтори загрузку';throw error;}};
+    narisovat();
+    privjazatDejstvijaNedeli();
+    O.vkljuchitSkvoznoe();
+                                                                 
+    O.vkljuchitPeriod(async (shag) => {
+      const next=SPR.kalendar.sdvinut_nedelju(P.god,P.nedelja,shag);
+      nedelja=next.nomer; god=next.god;
+      history.replaceState(null, '', `?napravlenie=${napr}&nedelja=${kljuchNedeli()}`);
+      try {
+        if(!await zagruzit())return; narisovat();
+        document.querySelector('.ned b').textContent = `спринт ${P.nedelja} / ${P.god}`;
+        document.querySelector('.ned .nd').textContent =
+          SPR.period(P.nachalo, P.konec);
+      } catch (e) { O.tost('Не получилось: ' + e.message); }
+    });
+    document.body.dataset.gotovo = String(P.svodka.vsego_zadach);
+  } catch (e) {
+    document.getElementById('levo').innerHTML =
+      `<div class="pusto"><div class="pusto-z">Не получилось загрузить</div>
+       <div class="pusto-p">${O.ekranirovat(e.message)}</div></div>`;
+    document.body.dataset.oshibka = e.message;
+  }
+})();
+})();
+</script></body></html>

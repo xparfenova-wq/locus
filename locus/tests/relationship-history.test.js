@@ -1,0 +1,62 @@
+const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),os=require('node:os'),{DatabaseSync}=require('node:sqlite'),{execFileSync}=require('node:child_process');
+const {chitat}=require('../api/istorija-cheloveka.js'),{snimok}=require('../api/kontekst-sobytija.js'),{proveritIzmenenie}=require('../api/kontekst-sotrudnichestva.js');
+test('relationship history keeps proven work, event context and visible pagination',async t=>{
+ const folder=fs.mkdtempSync(path.join(os.tmpdir(),'locus-history-')),file=path.join(folder,'history.db');let db,nextPerson=760010,nextTask=760100,nextRole=760100;
+ try{
+  execFileSync(process.execPath,['db/migrate.js'],{cwd:path.resolve(__dirname,'..'),env:{...process.env,LOCUS_BAZA:file,NODE_ENV:'test'},stdio:'pipe'});db=new DatabaseSync(file);db.exec('PRAGMA foreign_keys=ON');
+  db.prepare("INSERT INTO ljudi(id,imja,dostup) VALUES(760001,'History author','polnyj'),(760002,'Limited author','bez_deneg')").run();
+  const person=()=>{const id=++nextPerson;db.prepare('INSERT INTO ljudi(id,imja) VALUES(?,?)').run(id,'Person '+id);return id;};
+  const role=(owner,rol='klient',napravlenie='synapt')=>{const id=++nextRole;db.prepare('INSERT INTO sotrudnichestva(id,chelovek_id,napravlenie,rol) VALUES(?,?,?,?)').run(id,owner,napravlenie,rol);return id;};
+  const task=(owner,s=null,status='v_plane')=>{const id=++nextTask;db.prepare("INSERT INTO zadachi(id,nomer,nazvanie,napravlenie,tip,klient_id,sotrudnichestvo_id,status,otvetstvennyj,srok) VALUES(?,?,?,'synapt','klientskaja',?,?,?,?, '2027-12-31')").run(id,id,'Task '+id,owner,s,status,760001);return id;};
+  const journal=(obekt,id,pole,bylo,stalo,srez=null,kogda='2026-01-01 12:00:00')=>Number(db.prepare('INSERT INTO zhurnal(obekt,obekt_id,pole,bylo,stalo,kto,kogda,srez) VALUES(?,?,?,?,?,760001,?,?)').run(obekt,id,pole,bylo,stalo,kogda,srez===null?null:JSON.stringify(srez)).lastInsertRowid);
+  const read=(owner,query={},actor=760001)=>chitat(db,owner,query,actor),ctx=(owner,s,id)=>snimok(db,'zadachi',id,'status','v_plane','sdelano');
+  await t.test('twelve confirmed task closures and seven journal changes make exactly nineteen events',()=>{
+   const owner=person(),s=role(owner);for(let i=0;i<12;i++){const id=task(owner,s,'sdelano');journal('zadacha',id,'status','v_plane','sdelano',ctx(owner,s,id));}for(let i=0;i<7;i++)journal('sotrudnichestvo',s,'stadija','a','b');
+   const result=read(owner);assert.equal(result.vsego,19);assert.equal(result.spisok.filter(e=>e.tip==='zadachi').length,12);assert.equal(result.spisok.filter(e=>e.tip==='izmenenie').length,7);assert.equal(result.po_roljam[s].vsego,19);assert.equal(read(owner,{sotrudnichestvo_id:s}).vsego,19);assert.ok(result.spisok.every(e=>e.kto===760001&&e.kto_imja==='History author'));
+  });
+  await t.test('completed communication annotation is not a duplicate; same-second reopen and reclose are real events',()=>{
+   const owner=person(),s=role(owner),id=task(owner,s,'sdelano'),c=ctx(owner,s,id);journal('zadacha',id,'status','v_plane','sdelano',c);journal('zadacha',id,'kasanie',null,'отмечено',c);journal('zadacha',id,'status','sdelano','v_plane',c);journal('zadacha',id,'status','v_plane','sdelano',c);journal('zadacha',id,'kasanie',null,'отмечено',c);const result=read(owner);assert.equal(result.spisok.filter(e=>e.tip==='zadachi').length,2);assert.equal(result.vsego,3);db.prepare('UPDATE zadachi SET status=\'v_plane\',udaleno=1 WHERE id=?').run(id);assert.equal(read(owner).spisok.filter(e=>e.tip==='zadachi').length,2);
+  });
+  await t.test('missing closure evidence stays undated and never uses the deadline, creation time or reopener',()=>{
+   const owner=person(),id=task(owner,null,'sdelano');let result=read(owner);assert.equal(result.vsego,1);assert.equal(result.spisok[0].kogda,null);assert.equal(result.spisok[0].kto,null);assert.equal(result.spisok[0].data_neizvestna,true);
+   db.prepare("UPDATE zadachi SET status='v_plane' WHERE id=?").run(id);journal('zadacha',id,'status','sdelano','v_plane',ctx(owner,null,id));result=read(owner);const closed=result.spisok.filter(e=>e.tip==='zadachi');assert.equal(closed.length,1);assert.equal(closed[0].kogda,null);assert.equal(closed[0].kto,null);assert.ok(closed[0].kljuch.startsWith('gap:'));
+  });
+  await t.test('financial journal fields are excluded before totals, role previews and cursor slicing',()=>{
+   const owner=person(),s=role(owner);for(const pole of ['procent','procent_shkala','vyplacheno','nalog'])journal('sotrudnichestvo',s,pole,'0','984737');for(let i=0;i<4;i++)journal('sotrudnichestvo',s,'stadija','a','b');const full=read(owner),limited=read(owner,{skolko:2},760002);assert.equal(full.vsego,8);assert.equal(limited.vsego,4);assert.equal(limited.po_roljam[s].vsego,4);assert.ok(!JSON.stringify(limited).includes('984737'));const next=read(owner,{skolko:2,prodolzhit:limited.prodolzhit},760002);assert.equal(next.spisok.length,2);assert.equal(next.prodolzhit,null);assert.throws(()=>read(owner,{prodolzhit:limited.prodolzhit}),e=>e.kod===409);
+  });
+  await t.test('new and backdated events and newly closed tasks do not enter a running snapshot',()=>{
+   const owner=person(),s=role(owner),id=task(owner,s);for(let i=0;i<6;i++)journal('sotrudnichestvo',s,'stadija','a','b');const initial=read(owner),first=read(owner,{skolko:2});journal('sotrudnichestvo',s,'stadija','x','y',null,'2020-01-01');db.prepare("UPDATE zadachi SET status='sdelano' WHERE id=?").run(id);journal('zadacha',id,'status','v_plane','sdelano',ctx(owner,s,id));const created=task(owner,s,'sdelano');journal('zadacha',created,'status','v_plane','sdelano',ctx(owner,s,created));let token=first.prodolzhit,list=[...first.spisok];while(token){const page=read(owner,{skolko:2,prodolzhit:token});assert.equal(page.vsego,initial.vsego);list.push(...page.spisok);token=page.prodolzhit;}assert.deepEqual(list.map(e=>e.kljuch),initial.spisok.map(e=>e.kljuch));assert.equal(read(owner).vsego,9);
+  });
+  await t.test('role histories are isolated and tasks without a role are visible only in the person feed',()=>{
+   const owner=person(),one=role(owner),two=role(owner,'referal');for(const s of [one,two,null]){const id=task(owner,s,'sdelano');journal('zadacha',id,'status','v_plane','sdelano',ctx(owner,s,id));}assert.equal(read(owner).vsego,3);assert.equal(read(owner,{sotrudnichestvo_id:one}).vsego,1);assert.equal(read(owner,{sotrudnichestvo_id:two}).vsego,1);assert.throws(()=>read(owner,{sotrudnichestvo_id:role(person())}),e=>e.kod===404);
+  });
+  await t.test('event owner and title survive subsequent transfer, rename and physical deletion',()=>{
+   const owner=person(),other=person(),s=role(owner),id=task(owner,s,'sdelano'),c=ctx(owner,s,id);journal('zadacha',id,'status','v_plane','sdelano',c);db.prepare("UPDATE zadachi SET klient_id=?,sotrudnichestvo_id=NULL,nazvanie='<img src=x onerror=alert(1)>' WHERE id=?").run(other,id);assert.equal(read(owner).spisok.find(e=>e.tip==='zadachi').nazvanie,'Task '+id);assert.equal(read(other).spisok.filter(e=>e.tip==='zadachi').length,0);db.prepare('DELETE FROM zadachi WHERE id=?').run(id);const event=read(owner).spisok[0];assert.equal(event.id,id);assert.equal(event.nomer,id);assert.equal(event.nazvanie,'Task '+id);assert.equal(event.udaleno,true);
+  });
+  await t.test('closure cycles remain distinct across another owner and role',()=>{
+   const owner=person(),other=person(),s=role(owner),id=task(owner,s,'sdelano'),c=ctx(owner,s,id),foreign={...c,chelovek_id:other,sotrudnichestvo_id:null,rol:null};journal('zadacha',id,'status','v_plane','sdelano',c);journal('zadacha',id,'status','sdelano','v_plane',foreign);journal('zadacha',id,'status','v_plane','sdelano',foreign);journal('zadacha',id,'status','sdelano','v_plane',c);journal('zadacha',id,'status','v_plane','sdelano',c);assert.equal(read(owner).spisok.filter(e=>e.tip==='zadachi').length,2);assert.equal(read(other).spisok.filter(e=>e.tip==='zadachi').length,1);
+  });
+  await t.test('a whole-patch transfer is visible in both histories with each side own role context',()=>{
+   const owner=person(),other=person(),one=role(owner),two=role(other),id=task(owner,one),before=db.prepare('SELECT * FROM zadachi WHERE id=?').get(id);db.prepare('UPDATE zadachi SET klient_id=?,sotrudnichestvo_id=? WHERE id=?').run(other,two,id);const saved=snimok(db,'zadachi',id,'klient_id',owner,other,before);journal('zadacha',id,'klient_id',String(owner),String(other),saved);assert.equal(saved.chelovek_id_do,owner);assert.equal(read(owner).spisok[0].sotrudnichestvo_id,one);assert.equal(read(other).spisok[0].sotrudnichestvo_id,two);
+  });
+  await t.test('known legacy identity changes are flagged instead of claiming current context is historical truth',()=>{
+   const owner=person(),other=person(),s=role(owner),id=task(owner,s,'sdelano');journal('zadacha',id,'status','v_plane','sdelano');db.prepare('UPDATE sotrudnichestva SET chelovek_id=? WHERE id=?').run(other,s);const event=read(owner).spisok.find(e=>e.tip==='zadachi');assert.equal(event.svjaz_ne_podtverzhdena,true);assert.equal(event.sotrudnichestvo_id,null);assert.equal(read(other).spisok.filter(e=>e.tip==='zadachi').length,0);
+  });
+  await t.test('malformed and future event dates remain unknown, with no invented event time',()=>{
+   const owner=person();for(const kogda of ['2026-02-30','2100-01-01','2026-01-01'])journal('chelovek',owner,'imja','a','b',null,kogda);const result=read(owner);assert.equal(result.spisok.filter(e=>e.kogda===null).length,2);assert.equal(result.spisok.find(e=>e.kogda==='2026-01-01').vremja_neizvestno,true);
+  });
+  await t.test('invalid cursor, size, person and actor scopes are rejected',()=>{
+   const owner=person(),other=person();for(let i=0;i<3;i++)journal('chelovek',owner,'imja','a','b');const page=read(owner,{skolko:1});assert.throws(()=>read(other,{prodolzhit:page.prodolzhit}),e=>e.kod===409);assert.throws(()=>read(owner,{prodolzhit:'!!!'}),e=>e.kod===400);assert.throws(()=>read(owner,{skolko:'2x'}),e=>e.kod===400);assert.throws(()=>read(owner,{skolko:501}),e=>e.kod===400);assert.throws(()=>read(99999999),e=>e.kod===404);
+  });
+  await t.test('an association change between pages explicitly requests refresh rather than dropping legacy events',()=>{
+   const owner=person(),other=person(),s=role(owner),id=task(owner,s,'sdelano');journal('zadacha',id,'status','v_plane','sdelano');for(let i=0;i<4;i++)journal('chelovek',owner,'imja','a','b');const page=read(owner,{skolko:1});db.prepare('UPDATE zadachi SET klient_id=?,sotrudnichestvo_id=NULL WHERE id=?').run(other,id);assert.throws(()=>read(owner,{prodolzhit:page.prodolzhit}),e=>e.kod===409&&e.dannye.istorija_obnovit);
+  });
+  await t.test('context snapshots copy only whitelisted facts and preserve a deleted contact owner',()=>{
+   const owner=person(),s=role(owner);db.prepare("UPDATE sotrudnichestva SET osobennosti='PRIVATE NOTE',procent=97,kontekst='PRIVATE CONTEXT' WHERE id=?").run(s);const saved=snimok(db,'sotrudnichestva',s,'kasanie',null,'2026-01-01 (bot)');assert.deepEqual(saved.obschenie,{kogda:'2026-01-01',istochnik:'bot'});assert.ok(!JSON.stringify(saved).includes('PRIVATE'));assert.ok(!JSON.stringify(saved).includes('procent'));const contact=snimok(db,'kontakty',9999999,'udaleno','нет','да',{id:9999999,chelovek_id:owner,tip:'pochta',znachenie:'PRIVATE EMAIL',versija:3});assert.equal(contact.chelovek_id,owner);assert.equal(contact.tip_kontakta,'pochta');assert.ok(!JSON.stringify(contact).includes('PRIVATE'));
+  });
+  await t.test('used relationships cannot move; fresh roles and ordinary role changes remain legal',()=>{
+   const owner=person(),other=person(),s=role(owner),row=()=>db.prepare('SELECT * FROM sotrudnichestva WHERE id=?').get(s);assert.doesNotThrow(()=>proveritIzmenenie(db,row(),{chelovek_id:other}));assert.doesNotThrow(()=>proveritIzmenenie(db,row(),{rol:'referal'}));const id=task(owner,s);db.prepare('UPDATE zadachi SET udaleno=1 WHERE id=?').run(id);assert.throws(()=>proveritIzmenenie(db,row(),{chelovek_id:other}),e=>e.kod===409&&e.dannye.identity_change_blocked);assert.throws(()=>proveritIzmenenie(db,row(),{napravlenie:'media'}),e=>e.kod===409);assert.doesNotThrow(()=>proveritIzmenenie(db,row(),{chelovek_id:owner,stadija:'pauza'}));
+  });
+  assert.equal(db.prepare('PRAGMA integrity_check').get().integrity_check,'ok');assert.deepEqual(db.prepare('PRAGMA foreign_key_check').all(),[]);
+ }finally{db?.close();fs.rmSync(folder,{recursive:true,force:true});}
+});

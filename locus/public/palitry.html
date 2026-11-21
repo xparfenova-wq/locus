@@ -1,0 +1,252 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Палитры Locus</title>
+<link rel="icon" href="/api/favicon?v=L" type="image/svg+xml">
+<link rel="stylesheet" href="/shrifty/shrifty.css">
+<style>
+:root{--bg:#fff;--kart:#fff;--t1:#1a1815;--t2:#5c5c66;--t3:#9a9aa3;
+--lin:#ececed;--pole:#fafafa}
+:root[data-tema="tjomnaja"]{--bg:#0f1011;--kart:#17181a;--t1:#f0f0f2;
+--t2:#b4b4bd;--t3:#7c7c87;--lin:#26272a;--pole:#1c1d20}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--t1);
+font-family:Geist,system-ui,sans-serif;font-size:14px;line-height:1.5;
+transition:background .2s,color .2s}
+.wrap{max-width:1180px;margin:0 auto;padding:40px 36px 80px}
+.sh{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;
+padding-bottom:10px}
+h1{font-size:30px;font-weight:500;letter-spacing:-.03em}
+.sh p{color:var(--t2);font-size:13.5px;flex:1;min-width:260px}
+.pereklu{display:inline-flex;gap:2px;background:var(--pole);
+border-radius:999px;padding:3px;margin-left:auto}
+.pereklu button{font:inherit;font-size:12px;color:var(--t2);
+padding:6px 15px;border:0;background:none;border-radius:999px;cursor:pointer;
+transition:all .14s}
+.pereklu button.on{background:var(--kart);color:var(--t1);font-weight:500;
+box-shadow:none}
+.pal{padding:34px 0;border-top:1px solid var(--lin)}
+.pal-sh h2{font-size:19px;font-weight:500;letter-spacing:-.02em;
+margin-bottom:6px}
+.pal-sh p{color:var(--t2);font-size:13px;max-width:620px;margin-bottom:22px}
+.cveta{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:12px;margin-bottom:26px}
+.cv-k{height:60px;border-radius:7px;margin-bottom:8px}
+.cv-t b{display:block;font-size:12.5px;font-weight:500}
+.cv-t span{font-size:11px;color:var(--t3);
+font-family:'Geist Mono',ui-monospace,monospace}
+.proba{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:22px}
+.proba-b{background:var(--kart);border:1px solid var(--lin);
+border-radius:9px;padding:17px 19px}
+.proba-z{font-size:10.5px;color:var(--t3);letter-spacing:.1em;
+text-transform:uppercase;margin-bottom:13px}
+.plashki{display:flex;gap:6px;flex-wrap:wrap}
+.pl{font-size:11px;padding:3px 10px;border-radius:999px;border:1px solid;
+white-space:nowrap}
+.stroki{display:flex;flex-direction:column}
+.str{display:flex;align-items:center;gap:9px;padding:8px 0;
+border-bottom:1px solid var(--lin);font-size:12.5px}
+.str:last-child{border-bottom:0}
+.str i{width:7px;height:7px;border-radius:50%;flex:none}
+.str-n{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;
+white-space:nowrap}
+.str-d{font-size:11px;color:var(--t3);
+font-family:'Geist Mono',ui-monospace,monospace}
+.kalendar{display:flex;gap:7px;flex-wrap:wrap}
+.kd{width:34px;height:34px;display:grid;place-items:center;font-size:12px;
+border-radius:7px;background:color-mix(in srgb,var(--c) 14%,transparent);
+color:var(--c);font-family:'Geist Mono',ui-monospace,monospace;
+border:1px solid color-mix(in srgb,var(--c) 26%,transparent)}
+.vyvod{margin-top:40px;padding:24px 26px;background:var(--pole);
+border-radius:11px}
+.vyvod h3{font-size:14px;font-weight:500;margin-bottom:10px}
+.vyvod p{color:var(--t2);font-size:13px;margin-bottom:8px}
+.vyvod b{color:var(--t1)}
+@media (max-width:760px){.wrap{padding:26px 16px 60px}h1{font-size:23px}}
+</style></head><body>
+<div class="wrap">
+  <div class="sh">
+    <h1>Палитры Locus</h1>
+    <p>Четыре варианта на настоящих элементах: плашки статуса, строки задач,
+      календарь. Основа везде чёрно-белая, цвет только акцентами</p>
+    <div class="pereklu">
+      <button class="on" data-tema="svetlaja">светлая</button>
+      <button data-tema="tjomnaja">тёмная</button>
+    </div>
+  </div>
+<section class="pal" id="pal-A">
+  <header class="pal-sh">
+    <h2>A · ПРИЗМА</h2>
+    <p>Характер: собранная радуга. Обход круга по шести секторам – индиго, охра, маджента, изумруд, графит, кармин – со специально разведённой светлотой, чтобы пары не ложились друг на друга при дальтонизме</p>
+  </header>
+  <div class="cveta"><div class="cv">
+      <div class="cv-k" style="background:#5b5bd6"></div>
+      <div class="cv-t"><b>в плане</b><span>#5b5bd6</span></div>
+    </div><div class="cv">
+      <div class="cv-k" style="background:#ffc53d"></div>
+      <div class="cv-t"><b>в процессе</b><span>#ffc53d</span></div>
+    </div><div class="cv">
+      <div class="cv-k" style="background:#d6409f"></div>
+      <div class="cv-t"><b>на согласовании</b><span>#d6409f</span></div>
+    </div><div class="cv">
+      <div class="cv-k" style="background:#29a383"></div>
+      <div class="cv-t"><b>сделано</b><span>#29a383</span></div>
+    </div><div class="cv">
+      <div class="cv-k" style="background:#8b8d98"></div>
+      <div class="cv-t"><b>когда-нибудь</b><span>#8b8d98</span></div>
+    </div><div class="cv">
+      <div class="cv-k" style="background:#e5484d"></div>
+      <div class="cv-t"><b>просрочено</b><span>#e5484d</span></div>
+    </div></div>
+  <div class="proba">
+    <div class="proba-b">
+      <div class="proba-z">плашки статуса</div>
+      <div class="plashki"><span class="pl" style="color:#5b5bd6;border-color:#5b5bd633;background:#5b5bd60f">в плане</span><span class="pl" style="color:#ffc53d;border-color:#ffc53d33;background:#ffc53d0f">в процессе</span><span class="pl" style="color:#d6409f;border-color:#d6409f33;background:#d6409f0f">на согласовании</span><span class="pl" style="color:#29a383;border-color:#29a38333;background:#29a3830f">сделано</span><span class="pl" style="color:#8b8d98;border-color:#8b8d9833;background:#8b8d980f">когда-нибудь</span></div>
+    </div>
+    <div class="proba-b">
+      <div class="proba-z">строки задач</div>
+      <div class="stroki"><span class="str"><i style="background:#5b5bd6"></i><span class="str-n">Правки КП Технопродукту</span><span class="str-d">25.10</span></span><span class="str"><i style="background:#ffc53d"></i><span class="str-n">Правки КП Технопродукту</span><span class="str-d">25.10</span></span><span class="str"><i style="background:#d6409f"></i><span class="str-n">Правки КП Технопродукту</span><span class="str-d">25.10</span></span><span class="str"><i style="background:#29a383"></i><span class="str-n">Правки КП Технопродукту</span><span class="str-d">25.10</span></span></div>
+    </div>
+    <div class="proba-b">
+      <div class="proba-z">календарь</div>
+      <div class="kalendar"><span class="kd" style="--c:#5b5bd6">20</span><span class="kd" style="--c:#ffc53d">21</span><span class="kd" style="--c:#d6409f">22</span><span class="kd" style="--c:#29a383">23</span><span class="kd" style="--c:#8b8d98">24</span><span class="kd" style="--c:#e5484d">25</span></div>
+    </div>
+  </div>
+</section>
+<section class="pal" id="pal-B">
+  <header class="pal-sh">
+    <h2>B · СПЕКТР</h2>
+    <p>Характер: сдержанный спектр без мадженты. Ближе к Linear – одна холодная доминанта плюс тёплые сигналы</p>
+  </header>
+  <div class="cveta"><div class="cv">
+      <div class="cv-k" style="background:#5b5bd6"></div>
+      <div class="cv-t"><b>в плане</b><span>#5b5bd6</span></div>
+    </div><div class="cv">
+      <div class="cv-k" style="background:#0090ff"></div>
+      <div class="cv-t"><b>в процессе</b><span>#0090ff</span></div>
+    </div><div class="cv">
+      <div class="cv-k" style="background:#ffc53d"></div>
+      <div class="cv-t"><b>на согласовании</b><span>#ffc53d</span></div>
+    </div><div class="cv">
+      <div class="cv-k" style="background:#5c7c2f"></div>
+      <div class="cv-t"><b>сделано</b><span>#5c7c2f</span></div>
+    </div><div class="cv">
+      <div class="cv-k" style="background:#8b8d98"></div>
+      <div class="cv-t"><b>когда-нибудь</b><span>#8b8d98</span></div>
+    </div><div class="cv">
+      <div class="cv-k" style="background:#e5484d"></div>
+      <div class="cv-t"><b>просрочено</b><span>#e5484d</span></div>
+    </div></div>
+  <div class="proba">
+    <div class="proba-b">
+      <div class="proba-z">плашки статуса</div>
+      <div class="plashki"><span class="pl" style="color:#5b5bd6;border-color:#5b5bd633;background:#5b5bd60f">в плане</span><span class="pl" style="color:#0090ff;border-color:#0090ff33;background:#0090ff0f">в процессе</span><span class="pl" style="color:#ffc53d;border-color:#ffc53d33;background:#ffc53d0f">на согласовании</span><span class="pl" style="color:#5c7c2f;border-color:#5c7c2f33;background:#5c7c2f0f">сделано</span><span class="pl" style="color:#8b8d98;border-color:#8b8d9833;background:#8b8d980f">когда-нибудь</span></div>
+    </div>
+    <div class="proba-b">
+      <div class="proba-z">строки задач</div>
+      <div class="stroki"><span class="str"><i style="background:#5b5bd6"></i><span class="str-n">Правки КП Технопродукту</span><span class="str-d">25.10</span></span><span class="str"><i style="background:#0090ff"></i><span class="str-n">Правки КП Технопродукту</span><span class="str-d">25.10</span></span><span class="str"><i style="background:#ffc53d"></i><span class="str-n">Правки КП Технопродукту</span><span class="str-d">25.10</span></span><span class="str"><i style="background:#5c7c2f"></i><span class="str-n">Правки КП Технопродукту</span><span class="str-d">25.10</span></span></div>
+    </div>
+    <div class="proba-b">
+      <div class="proba-z">календарь</div>
+      <div class="kalendar"><span class="kd" style="--c:#5b5bd6">20</span><span class="kd" style="--c:#0090ff">21</span><span class="kd" style="--c:#ffc53d">22</span><span class="kd" style="--c:#5c7c2f">23</span><span class="kd" style="--c:#8b8d98">24</span><span class="kd" style="--c:#e5484d">25</span></div>
+    </div>
+  </div>
+</section>
+<section class="pal" id="pal-C">
+  <header class="pal-sh">
+    <h2>C · ЯГОДНАЯ</h2>
+    <p>Характер: тёплая и плотная, бордо с фиолетовым и хвоей. Меньше похожа на трекер, больше на редакторский инструмент</p>
+  </header>
+  <div class="cveta"><div class="cv">
+      <div class="cv-k" style="background:#00a2c7"></div>
+      <div class="cv-t"><b>в плане</b><span>#00a2c7</span></div>
+    </div><div class="cv">
+      <div class="cv-k" style="background:#e54666"></div>
+      <div class="cv-t"><b>в процессе</b><span>#e54666</span></div>
+    </div><div class="cv">
+      <div class="cv-k" style="background:#8e4ec6"></div>
+      <div class="cv-t"><b>на согласовании</b><span>#8e4ec6</span></div>
+    </div><div class="cv">
+      <div class="cv-k" style="background:#bdee63"></div>
+      <div class="cv-t"><b>сделано</b><span>#bdee63</span></div>
+    </div><div class="cv">
+      <div class="cv-k" style="background:#8b8d98"></div>
+      <div class="cv-t"><b>когда-нибудь</b><span>#8b8d98</span></div>
+    </div><div class="cv">
+      <div class="cv-k" style="background:#f76b15"></div>
+      <div class="cv-t"><b>просрочено</b><span>#f76b15</span></div>
+    </div></div>
+  <div class="proba">
+    <div class="proba-b">
+      <div class="proba-z">плашки статуса</div>
+      <div class="plashki"><span class="pl" style="color:#00a2c7;border-color:#00a2c733;background:#00a2c70f">в плане</span><span class="pl" style="color:#e54666;border-color:#e5466633;background:#e546660f">в процессе</span><span class="pl" style="color:#8e4ec6;border-color:#8e4ec633;background:#8e4ec60f">на согласовании</span><span class="pl" style="color:#bdee63;border-color:#bdee6333;background:#bdee630f">сделано</span><span class="pl" style="color:#8b8d98;border-color:#8b8d9833;background:#8b8d980f">когда-нибудь</span></div>
+    </div>
+    <div class="proba-b">
+      <div class="proba-z">строки задач</div>
+      <div class="stroki"><span class="str"><i style="background:#00a2c7"></i><span class="str-n">Правки КП Технопродукту</span><span class="str-d">25.10</span></span><span class="str"><i style="background:#e54666"></i><span class="str-n">Правки КП Технопродукту</span><span class="str-d">25.10</span></span><span class="str"><i style="background:#8e4ec6"></i><span class="str-n">Правки КП Технопродукту</span><span class="str-d">25.10</span></span><span class="str"><i style="background:#bdee63"></i><span class="str-n">Правки КП Технопродукту</span><span class="str-d">25.10</span></span></div>
+    </div>
+    <div class="proba-b">
+      <div class="proba-z">календарь</div>
+      <div class="kalendar"><span class="kd" style="--c:#00a2c7">20</span><span class="kd" style="--c:#e54666">21</span><span class="kd" style="--c:#8e4ec6">22</span><span class="kd" style="--c:#bdee63">23</span><span class="kd" style="--c:#8b8d98">24</span><span class="kd" style="--c:#f76b15">25</span></div>
+    </div>
+  </div>
+</section>
+<section class="pal" id="pal-D">
+  <header class="pal-sh">
+    <h2>D · ВИТРАЖ</h2>
+    <p>Характер: холодный к тёплому по порядку движения задачи. Цвет кодирует не только статус, но и прогресс – от фиолетового к зелёному</p>
+  </header>
+  <div class="cveta"><div class="cv">
+      <div class="cv-k" style="background:#5b5bd6"></div>
+      <div class="cv-t"><b>в плане</b><span>#5b5bd6</span></div>
+    </div><div class="cv">
+      <div class="cv-k" style="background:#0090ff"></div>
+      <div class="cv-t"><b>в процессе</b><span>#0090ff</span></div>
+    </div><div class="cv">
+      <div class="cv-k" style="background:#ffc53d"></div>
+      <div class="cv-t"><b>на согласовании</b><span>#ffc53d</span></div>
+    </div><div class="cv">
+      <div class="cv-k" style="background:#29a383"></div>
+      <div class="cv-t"><b>сделано</b><span>#29a383</span></div>
+    </div><div class="cv">
+      <div class="cv-k" style="background:#8b8d98"></div>
+      <div class="cv-t"><b>когда-нибудь</b><span>#8b8d98</span></div>
+    </div><div class="cv">
+      <div class="cv-k" style="background:#e54666"></div>
+      <div class="cv-t"><b>просрочено</b><span>#e54666</span></div>
+    </div></div>
+  <div class="proba">
+    <div class="proba-b">
+      <div class="proba-z">плашки статуса</div>
+      <div class="plashki"><span class="pl" style="color:#5b5bd6;border-color:#5b5bd633;background:#5b5bd60f">в плане</span><span class="pl" style="color:#0090ff;border-color:#0090ff33;background:#0090ff0f">в процессе</span><span class="pl" style="color:#ffc53d;border-color:#ffc53d33;background:#ffc53d0f">на согласовании</span><span class="pl" style="color:#29a383;border-color:#29a38333;background:#29a3830f">сделано</span><span class="pl" style="color:#8b8d98;border-color:#8b8d9833;background:#8b8d980f">когда-нибудь</span></div>
+    </div>
+    <div class="proba-b">
+      <div class="proba-z">строки задач</div>
+      <div class="stroki"><span class="str"><i style="background:#5b5bd6"></i><span class="str-n">Правки КП Технопродукту</span><span class="str-d">25.10</span></span><span class="str"><i style="background:#0090ff"></i><span class="str-n">Правки КП Технопродукту</span><span class="str-d">25.10</span></span><span class="str"><i style="background:#ffc53d"></i><span class="str-n">Правки КП Технопродукту</span><span class="str-d">25.10</span></span><span class="str"><i style="background:#29a383"></i><span class="str-n">Правки КП Технопродукту</span><span class="str-d">25.10</span></span></div>
+    </div>
+    <div class="proba-b">
+      <div class="proba-z">календарь</div>
+      <div class="kalendar"><span class="kd" style="--c:#5b5bd6">20</span><span class="kd" style="--c:#0090ff">21</span><span class="kd" style="--c:#ffc53d">22</span><span class="kd" style="--c:#29a383">23</span><span class="kd" style="--c:#8b8d98">24</span><span class="kd" style="--c:#e54666">25</span></div>
+    </div>
+  </div>
+</section>
+  <div class="vyvod">
+    <h3>Что рекомендую</h3>
+    <p><b>ПРИЗМА.</b> Это единственная из четырёх, где нет пары
+      «сделано и просрочено», которую сливает дальтонизм: срыв срока
+      не выглядит как нормальная работа</p>
+    <p>Все шесть цветов читаются как текст на белом: контраст от 4.30 до 8.56
+      при норме 4.5. У нынешней палитры «когда-нибудь» даёт 2.79 и физически
+      плохо читается</p>
+    <p>Одна развилка: маджента занята направлением Медиа. Либо статус
+      «на согласовании» уходит в аметист, либо Медиа в рубин</p>
+  </div>
+</div>
+<script>
+const knopki = document.querySelectorAll('[data-tema]');
+knopki.forEach((k) => k.addEventListener('click', () => {
+  document.documentElement.dataset.tema = k.dataset.tema;
+  knopki.forEach((x) => x.classList.toggle('on', x === k));
+}));
+</script>
+</body></html>

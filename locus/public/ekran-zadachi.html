@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Задачи</title>
+<link rel="icon" href="/api/favicon?v=L" type="image/svg+xml">
+<link rel="stylesheet" href="/css/tokens.css">
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/components.css">
+<link rel="stylesheet" href="/css/varianty.css">
+<link rel="stylesheet" href="/css/znak.css">
+<style>
+  .rjad { display: flex; align-items: center; gap: var(--s2); flex-wrap: wrap; }
+  body { background: var(--n1); }
+                                                                    
+                                                                
+  .knopka-v-shapke { margin-left: auto; height: 28px; }
+  @media (max-width: 720px) { .knopka-v-shapke { height: 44px; } }
+  .polotno { padding: var(--s5) 0 var(--s8); }
+</style>
+</head>
+<body>
+
+<div class="shapka">
+  <div class="rjad" style="width:100%;padding:0 var(--s7);gap:var(--s3)">
+    <span class="znak" id="znak-shapka"></span>
+    <strong style="font-size:var(--t3)">Locus</strong>
+    <nav class="rjad" style="margin-left:var(--s5)">
+      <a class="razdel" href="#">Моё пространство</a>
+      <a class="razdel" href="#" aria-current="page">Задачи</a>
+      <a class="razdel" href="#">Люди</a>
+      <a class="razdel" href="#">Планёрка</a>
+      <a class="razdel" href="#">Деньги</a>
+      <a class="razdel" href="#">Полезное</a>
+    </nav>
+    <button class="knopka knopka-v-shapke">Добавить задачу</button>
+  </div>
+</div>
+
+<div class="shapka-rjad">
+  <div class="rjad" style="width:100%;padding:0 var(--s7)">
+    <button class="chip" aria-pressed="true">все <span class="schetchik">12</span></button>
+    <button class="chip">на сегодня <span class="schetchik">4</span></button>
+    <button class="chip">просроченные <span class="schetchik">3</span></button>
+    <button class="chip">участвую <span class="schetchik">2</span></button>
+    <span style="margin-left:auto" class="tihij">спринт 43 · 19-25 октября</span>
+  </div>
+</div>
+
+<div class="polotno">
+  <div class="v-zadachi-kolonka">
+
+    <div class="v-napr-serij">
+      <div class="v-napr-serij-shapka">
+        <span class="napr napr-synapt"></span><strong>Synapt</strong>
+        <span style="background:var(--n4);padding:0 6px;border-radius:var(--r-pill);font-size:var(--t5);color:var(--n11)">5</span>
+        <button class="v-svernut" style="margin-left:auto">скрыть подзадачи</button>
+      </div>
+      <div class="stroka"><input class="galochka" type="checkbox"><span class="napr napr-synapt"></span><span class="stroka-nazvanie">Правки КП Технопродукту по тендерному агенту</span><span class="stroka-meta"><span class="plashka plashka-work">в процессе</span><span class="plashka plashka-late">просрочено</span></span><span class="stroka-data">20.10</span><span class="avatar">НК</span><span class="stroka-menju">···</span></div>
+      <div class="stroka v-podzadacha"><input class="galochka" type="checkbox"><span class="napr"></span><span class="stroka-nazvanie">Собрать вопросы к созвону</span><span class="stroka-meta"></span><span class="stroka-data">24.10</span><span class="avatar">КП</span><span class="stroka-menju">···</span></div>
+      <div class="stroka v-podzadacha"><input class="galochka" type="checkbox" checked><span class="napr"></span><span class="stroka-nazvanie">Уточнить сроки у Егора</span><span class="stroka-meta"></span><span class="stroka-data">22.10</span><span class="avatar">НК</span><span class="stroka-menju">···</span></div>
+      <div class="stroka"><input class="galochka" type="checkbox"><span class="napr napr-synapt"></span><span class="stroka-nazvanie">Отправить смету на второй этап</span><span class="stroka-meta"><span class="plashka plashka-plan">в плане</span></span><span class="stroka-data">25.10</span><span class="avatar">ЕГ</span><span class="stroka-menju">···</span></div>
+      <div class="stroka"><input class="galochka" type="checkbox"><span class="napr napr-synapt"></span><span class="stroka-nazvanie">AI-чекап для Курило</span><span class="stroka-meta"><span class="plashka plashka-review">на согласовании</span></span><span class="stroka-data">25.10</span><span class="avatar">НК</span><span class="stroka-menju">···</span></div>
+      <div class="v-plashka-napr-niz" style="border-top:0;padding-left:var(--s3)">
+        <button class="v-dobavit">+ добавить задачу</button>
+      </div>
+    </div>
+
+    <div class="v-napr-serij">
+      <div class="v-napr-serij-shapka">
+        <span class="napr napr-media"></span><strong>Медиа</strong>
+        <span style="background:var(--n4);padding:0 6px;border-radius:var(--r-pill);font-size:var(--t5);color:var(--n11)">3</span>
+      </div>
+      <div class="stroka"><input class="galochka" type="checkbox"><span class="napr napr-media"></span><span class="stroka-nazvanie">Смонтировать ролик с Наумовой</span><span class="stroka-meta"><span class="plashka plashka-work">в процессе</span></span><span class="stroka-data">24.10</span><span class="avatar">ВМ</span><span class="stroka-menju">···</span></div>
+      <div class="stroka"><input class="galochka" type="checkbox"><span class="napr napr-media"></span><span class="stroka-nazvanie">Пост про AI-чекап</span><span class="stroka-meta"><span class="plashka plashka-plan">в плане</span></span><span class="stroka-data">24.10</span><span class="avatar">ВМ</span><span class="stroka-menju">···</span></div>
+      <div class="stroka stroka-sdelano"><input class="galochka" type="checkbox" checked><span class="napr napr-media"></span><span class="stroka-nazvanie">Выгрузить контакты по школам</span><span class="stroka-meta"><span class="plashka plashka-done">сделано</span></span><span class="stroka-data">23.10</span><span class="avatar">КП</span><span class="stroka-menju">···</span></div>
+      <div class="v-plashka-napr-niz" style="border-top:0;padding-left:var(--s3)">
+        <button class="v-dobavit">+ добавить задачу</button>
+      </div>
+    </div>
+
+    <div class="v-napr-serij">
+      <div class="v-napr-serij-shapka">
+        <span class="napr napr-platform"></span><strong>Платформа благодарности</strong>
+        <span style="background:var(--n4);padding:0 6px;border-radius:var(--r-pill);font-size:var(--t5);color:var(--n11)">2</span>
+      </div>
+      <div class="stroka"><input class="galochka" type="checkbox"><span class="napr napr-platform"></span><span class="stroka-nazvanie">Доступ в админку для Антона</span><span class="stroka-meta"><span class="plashka plashka-work">в процессе</span></span><span class="stroka-data">25.10</span><span class="avatar">ЕГ</span><span class="stroka-menju">···</span></div>
+      <div class="stroka"><input class="galochka" type="checkbox"><span class="napr napr-platform"></span><span class="stroka-nazvanie">Проверить выплаты за октябрь</span><span class="stroka-meta"><span class="plashka plashka-plan">в плане</span></span><span class="stroka-data">26.10</span><span class="avatar">КП</span><span class="stroka-menju">···</span></div>
+      <div class="v-plashka-napr-niz" style="border-top:0;padding-left:var(--s3)">
+        <button class="v-dobavit">+ добавить задачу</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="/js/znak.js"></script>
+<script>
+  window.ZnakLokusa.vstavit(document.getElementById('znak-shapka'),
+    { razmer: 24, radius: 2.6, setka: false });
+</script>
+</body>
+</html>

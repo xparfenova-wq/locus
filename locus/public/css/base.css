@@ -1,0 +1,67 @@
+                                                             
+
+@font-face {
+  font-family: 'Geist';
+  src: local('Geist'), local('Geist Regular');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: local('Geist Bold'), local('Geist SemiBold');
+  font-weight: 700;
+  font-display: swap;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+               'Helvetica Neue', Arial, sans-serif;
+  font-size: var(--t4);
+  line-height: var(--lh-base);
+  color: var(--n12);
+  background: var(--n2);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+                                               
+table, .chislo, .data, .schetchik { font-variant-numeric: tabular-nums; }
+
+h1, h2, h3, h4 { margin: 0; font-weight: 700; line-height: var(--lh-tight); }
+h1 { font-size: var(--t1); }
+h2 { font-size: var(--t2); }
+h3 { font-size: var(--t3); }
+
+p { margin: 0 0 var(--s3); }
+ul, ol { margin: 0; padding-left: var(--s5); }
+
+a { color: var(--n12); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+
+                                                                     
+.kolonka       { max-width: var(--w-work); margin: 0 auto; padding: 0 var(--s7); }
+.kolonka-tekst { max-width: var(--w-text); margin: 0 auto; padding: 0 var(--s5); }
+
+                                                 
+.tekst { max-width: 640px; line-height: var(--lh-text); }
+
+.kiker {
+  font-size: var(--t5);
+  letter-spacing: var(--track-kicker);
+  text-transform: uppercase;
+  color: var(--n8);
+}
+
+.vtoroj { color: var(--n11); }
+.tihij  { color: var(--n8); }
+
+@media (max-width: 720px) {
+  .kolonka, .kolonka-tekst { padding: 0 var(--s4); }
+}

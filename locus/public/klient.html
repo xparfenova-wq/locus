@@ -1,0 +1,2196 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Карточка человека</title>
+<link rel="icon" href="/api/favicon?v=L" type="image/svg+xml">
+<link rel="stylesheet" href="/css/obschij.css">
+<link rel="stylesheet" href="/css/archive-actions.css">
+<style>
+                                                              
+                                                        
+.kl-sh{display:flex;align-items:center;gap:13px;padding:0 0 18px;min-width:0;
+flex-wrap:wrap}
+.kl-foto{width:52px;height:52px;overflow:hidden;flex:none}
+.kl-foto img{width:100%;height:100%;object-fit:cover;display:block}
+.kl-sh-t{min-width:0;flex:1}
+.kl-im{font-size:21px;font-weight:500;letter-spacing:-.025em;line-height:1.2}
+.kl-pod{font-size:11.5px;color:var(--t3);margin-top:3px}
+                                                            
+                                                             
+                                                                  
+                                                           
+                                                            
+                                                          
+                                                         
+.wrap>.kol{max-width:none;width:100%;min-width:0}
+
+                                                              
+                                                               
+                                                               
+                                                 
+.setka{display:grid;grid-template-columns:268px minmax(0,1fr) 296px;
+gap:11px;align-items:start}
+.stlb{min-width:0;display:flex;flex-direction:column;gap:11px}
+                                                                 
+                                                                   
+                                                                    
+.centr .zs{grid-template-columns:15px minmax(0,1fr) 116px 46px;gap:9px}
+.centr .zs .av{display:none}
+.centr .zs>.dt{grid-column:4}
+.b{padding:17px 19px;border:1px solid var(--lin);background:var(--kart);
+min-width:0}
+                                                              
+                                                              
+                                                             
+.b,.b *{min-width:0;overflow-wrap:break-word}
+.kon>span:not(.kon-t):not(.kon-k){overflow-wrap:anywhere}
+.b a[href^="http"],.b .ssyl,.b .mat-ss{overflow-wrap:anywhere}
+.b-l{font-size:10.5px;color:var(--t3);letter-spacing:.1em;
+text-transform:uppercase;margin-bottom:13px}
+                                                            
+.sotr-sh{display:flex;align-items:baseline;gap:9px;margin-bottom:12px;flex-wrap:wrap}
+.sotr-n{font-size:13px}
+.sotr-r{font-size:11.5px;color:var(--t3)}
+.kon{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;
+align-items:baseline;padding:9px 0;border-bottom:1px solid var(--lin);font-size:13px}
+                                                              
+                                        
+.kon-t{grid-column:1/-1;order:-1}
+.kon:last-child{border-bottom:0}
+.kon-t{font-size:10.5px;color:var(--t3);letter-spacing:.06em}
+                                                              
+                                                                 
+                                                                    
+.kon-k{color:var(--t3);transition:color .14s,opacity .14s;opacity:0;
+display:inline-flex;align-items:center;cursor:var(--kursor), pointer}
+.kon:hover .kon-k,.kon-k:focus{opacity:1}
+.kon-k:hover{color:var(--t1)}
+.kon-k svg{width:14px;height:14px;display:block}
+.kon-k.gotovo{color:var(--t1);opacity:1}
+@media (hover:none){.kon-k{opacity:1}}
+.prj{display:grid;grid-template-columns:minmax(0,1fr) 96px;gap:11px;
+align-items:center;padding:10px 0;border-bottom:1px solid var(--lin);font-size:13px}
+.prj:last-child{border-bottom:0}
+.prj-p{font-size:11.5px;color:var(--t3);margin-top:2px}
+.prj-c{font-family:'Geist Mono',ui-monospace,monospace;font-size:11.5px;
+text-align:right;font-feature-settings:"tnum"}
+.plat{display:flex;gap:3px;margin-top:9px}
+.plat i{flex:1;height:4px;background:var(--lin)}
+.plat i.est{background:var(--tmn)}
+.ch{font-size:21px;font-weight:500;letter-spacing:-.04em;line-height:1;
+font-family:'Geist Mono',ui-monospace,monospace;font-feature-settings:"tnum";
+white-space:nowrap}
+                                                           
+                                                   
+.dva{flex-wrap:wrap;row-gap:16px}
+.dva>*{min-width:0}
+.ch.kr{color:var(--kr)}
+.ch i{font-size:13px;color:var(--t3);font-style:normal}
+.ch-p{font-size:11.5px;color:var(--t3);margin-top:6px}
+.dva{display:flex;gap:26px}
+.zh{display:grid;grid-template-columns:minmax(0,1fr) 72px;gap:10px;
+align-items:baseline;padding:8px 0;border-bottom:1px solid var(--lin);font-size:11.5px}
+.zh:last-child{border-bottom:0}
+.zh-d{font-size:10.5px;color:var(--t3);text-align:right;
+font-family:'Geist Mono',ui-monospace,monospace;white-space:nowrap}
+.svernut{font-size:11.5px;color:var(--t3);transition:color .14s;display:inline-block;
+padding-top:11px}
+.svernut:hover{color:var(--t1)}
+.net{font-size:11.5px;color:var(--t3);padding:10px 0}
+
+                                                                
+                                                                 
+@media (max-width:1180px){
+  .setka{grid-template-columns:252px minmax(0,1fr)}
+  .stlb.pravo{grid-column:1/-1;flex-direction:row;flex-wrap:wrap}
+  .stlb.pravo>.b{flex:1 1 236px}
+}
+@media (max-width:860px){.setka{grid-template-columns:1fr}
+                                                         
+                                                          
+  .stlb.centr{order:1}.stlb.levo{order:2}.stlb.pravo{order:3;flex-direction:column}
+  .stlb.pravo>.b{flex:none}
+                                                           
+.centr .zs{grid-template-columns:15px minmax(0,1fr) 46px;gap:8px}
+.centr .zs>.dt{grid-column:3}
+}
+
+                                                         
+                                                     
+@media (max-width:760px){
+  .kon-k,.svernut,.b-l a,.kl-b a{min-height:44px;display:inline-flex;
+    align-items:center;padding:0 6px}
+}
+                                                              
+                                                               
+.kas{display:flex;align-items:center;gap:11px;flex:none}
+.kas .kas-action{min-height:44px;align-items:center;justify-content:center;display:inline-flex}
+.kas-n{display:inline-flex;align-items:baseline;gap:5px;font-size:21px;
+font-weight:500;letter-spacing:-.02em;
+font-family:'Geist Mono',ui-monospace,monospace;font-feature-settings:"tnum"}
+.kas-n i{font-size:11.5px;color:var(--t3);font-style:normal;
+font-family:var(--shrift)}
+.kas-sl{font-size:11.5px;color:var(--t3);white-space:nowrap}
+.kas-sh{display:flex;gap:7px;flex-wrap:wrap;padding-top:4px}
+.kas-sh .kn{min-height:var(--control-height-mobile)}
+.kas-ne{padding-top:11px}
+.kas-data{padding:4px 0 13px}
+@media (max-width:760px){
+                                                       
+                                                                    
+  .kas-sl{white-space:nowrap}
+  .kas .vyp,.kas .fil-b{flex:none}
+}
+
+                                     
+                                                             
+                                                                
+.kon-z{border-bottom:1px dashed transparent;transition:border-color .14s}
+.kon-z:hover{border-bottom-color:var(--t3)}
+.kon-z:focus-visible{outline:none;border-bottom-color:var(--t1)}
+.kon-vvod{border:0;border-bottom:1px solid var(--t1);background:none;
+font:inherit;font-size:inherit;color:var(--t1);padding:0;width:100%;
+min-width:0}
+.kon-vvod:focus{outline:none}
+.pol-net{font-style:normal;color:var(--t3)}
+.kon-dob{display:inline-block;margin-top:9px;font-size:11.5px;
+color:var(--t3);transition:color .14s}
+.kon-dob:hover{color:var(--t1)}
+@media (max-width:760px){
+.kon-z{display:inline-flex;align-items:center;min-height:44px}
+.kon-dob{min-height:44px;display:inline-flex;align-items:center;
+font-size:13px;margin-top:4px}
+.kon-vvod{min-height:44px;font-size:16px}
+}
+
+                                                         
+                                                          
+                                                            
+                                                         
+@media (max-width:760px){
+                                                                
+                                                               
+  #nazad{display:none}
+  #menju>.men{display:none}
+                                                            
+                                                  
+  .kl-sh{display:block}
+  .kl-im{font-size:21px}
+  .kl-pod{margin-top:2px}
+  .kas{margin-top:12px}
+                                                              
+                                                               
+  .b{margin-left:-16px;margin-right:-16px;border-left:0;
+    border-right:0;border-radius:0;
+    padding-left:16px;padding-right:16px}
+                                                               
+  .kas{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:7px;
+    scrollbar-width:none;margin:0 -16px;padding:2px 16px 4px}
+  .kas::-webkit-scrollbar{display:none}
+  .kas .fil-b,.kas .mob-dej{flex:none}
+                                                             
+                           
+  .kas > *{flex:none}
+  .kas .mob-dej{display:inline-flex}
+                                                          
+                                            
+  #sotr-dob,#zad-dob{display:none}
+  .b:has(#sotr-dob){display:none}
+}
+.mob-dej{display:none}
+.pol-z{min-width:0;white-space:normal;overflow-wrap:anywhere}
+.okno-kanon .sozd-vvod{margin-bottom:6px}
+.okno-pod{font-size:12px;color:var(--t2);line-height:1.5;margin:2px 0 10px}
+.okno-kanon .fch-niz{margin-top:16px}
+.opl-vvod{border:0;background:transparent;font:inherit;font-size:13px;
+  width:100%;padding:0}
+.opl-vvod:focus{outline:none}
+.kon-x{display:none;align-items:center;color:var(--t3);flex:none;
+  width:22px;height:22px;justify-content:center;border-radius:50%}
+.kon:hover .kon-x{display:inline-flex}
+.kon-x:hover{color:var(--t1);background:var(--pole)}
+.kon:focus-within .kon-x{display:inline-flex}
+.kon-delete-mobile{display:none}
+.kon-x.proverka-udalenija svg{display:none}
+.kon-x.proverka-udalenija::after{content:'?';font-size:14px}
+@media (max-width:760px){
+  .kon{position:relative;grid-template-columns:minmax(0,1fr);touch-action:pan-y}
+  .kon-x{display:none!important}
+  .kon.swipe-open{padding-right:96px}
+  .kon.swipe-open .kon-delete-mobile{display:inline-flex;align-items:center;justify-content:center;position:absolute;right:0;bottom:9px;
+    min-width:84px;min-height:var(--control-height-mobile);padding:8px 12px;border:0;border-radius:var(--radius-field);
+    color:#fff;background:var(--kr);font:inherit;cursor:pointer}
+  .kon.swipe-open .kon-delete-mobile.proverka-udalenija{background:var(--kart);color:var(--t1);border:1px solid var(--lin)}
+}
+                                                             
+                                                           
+                                                               
+                                                               
+.kl-razdely{display:none}
+@media (max-width:760px){
+  .kl-razdely{display:flex;justify-content:center;position:sticky;top:0;
+  z-index:20;background:var(--bg);padding:8px 0 10px;margin:0 0 4px}
+  body[data-kl-r] .setka .b[data-r]{display:none}
+  body[data-kl-r="rabota"] .setka .b[data-r="rabota"],
+  body[data-kl-r="kontakty"] .setka .b[data-r="kontakty"],
+  body[data-kl-r="dengi"] .setka .b[data-r="dengi"],
+  body[data-kl-r="svjazi"] .setka .b[data-r="svjazi"]{display:block}
+}
+.prj-zh{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--t2);margin-top:6px}
+.prj-opl{display:inline-flex;align-items:center;height:22px;padding:0 9px;border:1px solid var(--lin);
+border-radius:999px;font-size:11.5px;color:var(--t2);background:#fff;cursor:var(--kursor), pointer}
+.prj-opl:hover{background:var(--tmn);border-color:var(--tmn);color:#fff}
+.history-root{min-width:0}
+.history-root .zh{grid-template-columns:minmax(0,1fr);gap:5px;padding:10px 0}
+.history-root .zh-d{text-align:left;white-space:normal;font-size:11.5px}
+.history-text,.history-context{overflow-wrap:anywhere}
+.history-context{color:var(--t3);font-size:11.5px;margin-top:5px;line-height:1.5}
+.history-warning{color:var(--kr)}
+.history-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:7px}
+.history-action{min-height:44px;padding:8px 12px;white-space:normal;text-align:left}
+.history-task{min-height:44px;display:flex;align-items:center;overflow-wrap:anywhere}
+.history-error{font-size:12px;line-height:1.5;overflow-wrap:anywhere}
+.kon-head .kon-t{flex:1 1 90px;min-width:72px;order:0}
+.kon-drag{touch-action:none;cursor:grab;flex:0 0 44px;width:44px;height:44px}
+.kon-drag svg{width:18px;height:18px}
+.kon-drag-source{opacity:.25}
+.kon-drag-active{user-select:none}
+.kon-drag-slot{position:relative;z-index:1201;height:4px;margin:4px 0;background:var(--t1);border-radius:2px;pointer-events:none}
+.kon-drag-ghost{position:fixed!important;z-index:1200;pointer-events:none;background:var(--kart);padding:10px 12px;box-sizing:border-box;box-shadow:0 8px 32px rgb(0 0 0 / .1);border:1px solid var(--lin);border-radius:12px;opacity:.96}
+.kon-drag-status{font-size:12px;line-height:1.5;margin-top:8px;overflow-wrap:anywhere}
+.kon-drag-status:empty{display:none}
+.kon-drag-status .kn{min-height:44px;margin-top:6px}
+</style></head><body>
+<div id="menju"></div>
+<div class="wrap"><div class="kol">
+  <div id="nazad"></div>
+  <div id="shapka"></div>
+  <div class="kl-razdely"><span class="vid km-vid" id="kl-razdely">
+    <a class="vid-e on" data-klr="rabota">работа</a>
+    <a class="vid-e" data-klr="kontakty">контакты</a>
+    <a class="vid-e" data-klr="dengi">деньги</a>
+    <a class="vid-e" data-klr="svjazi">связи</a>
+  </span></div>
+  <div class="setka">
+    <div class="stlb levo" id="levo"></div>
+    <div class="stlb centr" id="centr"></div>
+    <div class="stlb pravo" id="pravo"></div>
+  </div>
+</div></div>
+<script src="/js/nedeli.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/obschij.js"></script>
+<script src="/js/kalendar.js"></script>
+<script src="/js/telefony.js"></script>
+<script src="/js/validacija-kontakta.js"></script>
+<script src="/js/telefon-input.js"></script>
+<script src="/js/kontakt-drag.js"></script>
+<script src="/js/archive-view.js"></script>
+<script src="/js/archive-state.js"></script>
+<script src="/js/archive-actions.js"></script>
+<script>
+(function () {
+let SPRAV = null, ROLI = [], STADII = [];
+let C = null, SOTR = [], ISTORIJA = [], PLATEZHI = {}, DOKUMENTY = [], PRIVEDENO = {}, REFERRAL_ERRORS = {};
+let referralReadSerial = 0;
+let REFERRAL_CONTRACTS = {};
+                                               
+let KAS = null, ACCOUNTS = null;
+const historyStates=new Map();
+const deletingContacts=new Set(),unknownContactDeletes=new Map(),busyContactKinds=new Set(),unknownPrimaryChoices=new Map(),unknownContactValues=new Map();
+let busyContactOrder=false;
+let stopContactDrag=null,unknownDragOrder=null,dragOrderMessage='';
+let unknownCommunication=null,communicationBusy=false;
+let taskIntent=null,taskCommandBusy=false,taskStatusText='',lastTaskCommandStart=0,lastTaskCommandKind='';
+function kljuchUdalenija(){
+  return API.kljuchZaprosa();
+}
+
+const id = Number(window.LocusTaskRoute.query(location.href).get('id'));
+const Archive=LocusArchiveActions.create({API,O,onSaved:async result=>{if(result.chelovek_id!==id)return;if(document.querySelector('[data-pravim="1"]')){O.tost('Действие сохранено. Заверши текущую правку и обнови карточку');return;}await zagruzit();narisovat();}});
+taskIntent=prochitatNamerenieZadachi();
+
+                                                           
+                                                                     
+const dengi = (n) => n == null ? '—'
+  : n >= 1000000 ? String((n / 1000000).toFixed(2)).replace('.', ',').replace(',00', '') + ' млн ₽'
+  : n >= 1000 ? Math.round(n / 1000) + ' тыс. ₽' : n + ' ₽';
+
+const dengiReferala=n=>{
+  if(n==null)return '—';
+  const text=String(n),parts=/^(-?)(\d+)(?:\.(\d{1,2}))?$/.exec(text);
+  if(!parts)return O.ekranirovat(text);
+  const whole=parts[2].replace(/\B(?=(\d{3})+(?!\d))/g,'\u00a0'),fraction=(parts[3]||'').replace(/0+$/,'');
+  return parts[1]+whole+(fraction?','+fraction:'')+' ₽';
+};
+const referralReasons={neproverennaja_oplata:'Проверь сумму и дату отмеченных оплат',vyplacheno_ne_ukazano:'Выплаченная сумма не указана или требует проверки',ruchnaja_shkala:'Сумму по шкале считает человек',procent_ne_ukazan:'Процент не согласован',stavka_naloga_neverna:'Проверь ставку налога в настройках',nalog_ne_ukazan:'Условие налога не указано'};
+async function readReferralSummary(key){const value=await API.odna('sotrudnichestva',key+'/privedeno');if(!value||value.sotrudnichestvo_id!==key||!Number.isSafeInteger(value.privedeno)||value.privedeno<0||!Array.isArray(value.spisok)||value.privedeno!==value.spisok.length)throw new Error('Сервер вернул неполный расчёт. Повтори загрузку');return value;}
+const nazvanieKontakta=x=>x.tip_nazvanie||'Другой контакт';
+const pokazKontakta=x=>x.pokaz??x.znachenie;
+const STATUS_PROEKTA = { idet: 'идёт', zavershen: 'завершён',
+                         pauza: 'пауза', otmenen: 'отменён' };
+const POLJA = { stadija: 'стадия', rol: 'роль', sozdano: 'завели',
+                kontekst: 'контекст', arhiv: 'архив', arhiv_s:'дата архива',vozvrat_s:'дата возврата', poslednee_obshenie: 'общение',osnovnoj:'основной контакт',osnovnoj_vybran:'выбран основной контакт',porjadok:'порядок контакта' };
+                                             
+const ISTOCHNIK = { rekomendacija: 'рекомендация', sajt: 'сайт', rassylka: 'рассылка',
+                    meroprijatie: 'мероприятие', soceti: 'соцсети', sami: 'пришли сами' };
+
+                                                              
+                                                       
+const imja_spr = (x, zapas) => (x && (x.imja || x.nazvanie)) || zapas;
+
+function slovo(pole, znach) {
+  if(['arhiv_s','vozvrat_s'].includes(pole))return znach?LocusArchiveView.day(znach)||'дата требует проверки: '+znach:'не указана';
+  if(pole==='osnovnoj')return znach===true||znach===1||znach==='1'?'основной':'дополнительный';
+  if (['arhiv','udaleno','privodit_klientov'].includes(pole)) {
+    if (['1',1,true,'true'].includes(znach)) return 'да';
+    if (['0',0,false,'false'].includes(znach)) return 'нет';
+    const human=typeof znach==='string'&&/^(да|нет)(:\s*.+)?$/i.exec(znach);
+    return human?human[1].toLowerCase()+(human[2]||''):(znach??'—');
+  }
+  if (!znach) return '—';
+  if (pole === 'rol') return imja_spr(ROLI.find((r) => r.kod === znach), znach);
+  if (pole === 'stadija') return imja_spr(STADII.find((s) => s.kod === znach), znach);
+  if (pole === 'status') return imja_spr((SPRAV.statusy||[]).find(s=>s.kod===znach),znach);
+  if (pole === 'napravlenie') return O.naprPoKodu(znach).imja;
+  if(pole==='nalog')return {do_vycheta:'до вычета налога',posle_vycheta:'после вычета налога'}[znach]||znach;
+  if(pole==='dogovor_id')return DOKUMENTY.find(row=>row.id===Number(znach))?.nazvanie||Object.values(REFERRAL_CONTRACTS).find(info=>info.doc?.id===Number(znach))?.doc.nazvanie||'документ недоступен';
+  if (pole === 'istochnik') return ISTOCHNIK[znach] || znach;
+  return znach;
+}
+
+async function zagruzit() {
+  const [celikom, ist, sotr, kas, accounts] = await Promise.all([
+    API.odna('ljudi', id + '/celikom'),
+    API.odna('ljudi', id + '/istorija'),
+    API.spisok('sotrudnichestva', { chelovek_id: id, arhiv: 1, na_stranice: 50 }),
+    API.odna('ljudi', id + '/kasanija').catch(() => null),
+    API.odna('ljudi', id + '/akkaunty').catch(error=>({oshibka:error.message})),
+  ]);
+  C = celikom; KAS = kas; ACCOUNTS = accounts;
+  prinjatIstoriju(ist);
+                                                            
+                                                                    
+  SOTR = (sotr.spisok || []).length ? sotr.spisok : (C.sotrudnichestva || []);
+
+                                                                      
+                                                                   
+  const proekty = C.proekty || [];
+  const [plat, dok] = await Promise.all([
+    Promise.all(proekty.map((p) =>
+      API.spisok('platezhi', { proekt_id: p.id, na_stranice: 50 })
+        .catch(() => ({ spisok: [] })))),
+    API.spisok('dokumenty', { chelovek_id: id, na_stranice: 50 })
+      .catch(() => ({ spisok: [] })),
+  ]);
+  PLATEZHI = Object.fromEntries(proekty.map((p, i) => [p.id, plat[i].spisok || []]));
+  DOKUMENTY = dok.spisok || [];
+  const contracts=SOTR.filter(s=>(s.rol==='referal'||s.privodit_klientov)&&s.dogovor_id);
+  REFERRAL_CONTRACTS=Object.fromEntries(await Promise.all(contracts.map(async role=>[role.id,await readReferralContract(role)])));
+
+
+                                                                   
+                                                             
+                                                                      
+                                                                 
+  const referaly = SOTR.filter((s) => s.rol === 'referal' || s.privodit_klientov);
+  const readSerial=++referralReadSerial;
+  const svodki=await Promise.all(referaly.map(async s=>{
+    try{return {value:await readReferralSummary(s.id)};}
+    catch(error){return {error:error.message||'Не удалось загрузить расчёт'};}
+  }));
+  if(readSerial===referralReadSerial){
+    const previous=PRIVEDENO;PRIVEDENO={};REFERRAL_ERRORS={};
+    referaly.forEach((s,i)=>{const result=svodki[i];if(result.error){if(previous[s.id])PRIVEDENO[s.id]=previous[s.id];REFERRAL_ERRORS[s.id]=result.error;}else PRIVEDENO[s.id]=result.value;});
+  }
+}
+
+async function readReferralContract(role,fresh=false){
+ try{
+  if(!Number.isSafeInteger(role.dogovor_id)||role.dogovor_id<1)throw new Error('Привязку договора нужно проверить');
+  const doc=(!fresh&&DOKUMENTY.find(row=>row.id===role.dogovor_id))||await API.odna('dokumenty',role.dogovor_id);
+  if(doc.chelovek_id!==id){
+   if(doc.chelovek_id!=null||!doc.proekt_id)throw new Error('Договор привязан к другому человеку');
+   const project=(C.proekty||[]).find(p=>p.id===doc.proekt_id)||await API.odna('proekty',doc.proekt_id);
+   if(project.klient_id!==id)throw new Error('Договор привязан к другому человеку');
+  }
+  return {doc};
+ }catch(error){return {error:error.kod===404?'Договор не найден':error.message||'Договор не загрузился'};}
+}
+function referralContract(role){
+ const info=REFERRAL_CONTRACTS[role.id];if(!role.dogovor_id)return '';
+ const link=info?.doc?O.materialLink(info.doc,'dokument'):'';
+ const message=info?.error||(!/<a\b/.test(link)?info?.doc?.fajl_dostupen===false?'Исходник договора пока недоступен':'Ссылку договора нужно проверить':'');
+ return link+(message?`<span role="status">${O.ekranirovat(message)}</span><button type="button" class="kn" data-referral-contract-retry="${role.id}">проверить договор</button>`:'');
+}
+
+function dnejBez(s) {
+  return C.chelovek.dnej_bez_svjazi??null;
+}
+
+                       
+                                                              
+                                                          
+                                                            
+                                                              
+  
+                                                              
+                                                               
+                                                             
+                                                            
+                                              
+function nazad() {
+  const uzel = document.getElementById('nazad');
+  if (!uzel) return;
+                                                           
+  const iznutri = document.referrer &&
+    new URL(document.referrer, location.href).origin === location.origin;
+  uzel.innerHTML = `<a class="kart-nazad" id="kn-nazad">
+    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M10 3 5 8l5 5" stroke="currentColor" stroke-width="1.5"
+        stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>${iznutri ? 'назад' : 'к людям'}</a>`;
+  document.getElementById('kn-nazad').addEventListener('click', () => {
+    if (iznutri && history.length > 1) history.back();
+    else location.href = '/ljudi.html';
+  });
+}
+
+function shapka() {
+  const c = C.chelovek;
+                                                          
+  if (c && c.imja) O.kroshkiPodpis?.(c.imja);
+                                                                   
+  const podpis = SOTR.map((s) => {
+    const n = O.naprPoKodu(s.napravlenie);
+    return `<span>${O.ekranirovat(n.imja)}</span>, ${slovo('rol', s.rol)}`;
+  }).join(', ');
+  document.getElementById('shapka').innerHTML = `<div class="kl-sh">
+    ${c.foto ? `<div class="kl-foto"><img src="${c.foto}" alt=""></div>` : ''}
+    <div class="kl-sh-t"><div class="entity-title-row"><div class="kl-im" id="kl-im" title="дважды — править имя">${O.ekranirovat(c.imja)}</div>${O.entityCopyLink("/ljudi/"+id)}</div>
+      <div class="kl-pod">${c.rol_v_baze==='kontaktnoe_lico'?'контактное лицо':podpis || 'сотрудничеств нет'}${
+        c.jurlico ? ', юрлицо' : ''}${
+        c.komanda ? ', команда' : ''}</div>${LocusArchiveView.html(c,O.ekranirovat,{tablica:'ljudi',id})}${(C.kontakty_napravlenij||[]).map(link=>`<div class="kl-pod">контакт по направлению ${O.ekranirovat(O.naprPoKodu(link.napravlenie).imja)} у <a href="/klient.html?id=${link.chelovek_id}">${O.ekranirovat(link.imja)}</a></div>`).join('')}</div>
+    <div class="kas">
+      <span class="kas-n" title="прямых общений с клиентом">${
+        KAS ? KAS.vsego : 0}<i class="slovo">${O.skolko(KAS ? KAS.vsego : 0,
+          'касание', 'касания', 'касаний')}</i></span>
+      ${KAS && KAS.zaplanirovano
+        ? `<span class="kas-sl">следующее ${SPR.data(KAS.zaplanirovano.srok)}</span>`
+        : ''}
+      <a class="fil-b kas-action" id="kasanie" role="button" tabindex="0">${taskIntent?taskIntent.phase==='not_found'?'повторить создание':'проверить задачу':'Отметить касание'}</a>
+      <span class="vyp"><a class="fil-b kas-action" id="kas-plan" role="button" tabindex="0">Следующее касание</a></span>
+      <a class="fil-b mob-dej" data-prx="zad-dob">+ задача</a>
+      <button type="button" class="fil-b" data-person-archive="${id}" data-archive-person="${id}">${c.arhiv?'вернуть из архива':'в архив'}</button>
+      ${c.rol_v_baze==='kontaktnoe_lico'?'<a class="fil-b" id="kontakt-v-lidy" role="button" tabindex="0">сделать собственным</a>':'<a class="fil-b mob-dej" data-prx="sotr-dob">+ направление</a>'}
+    </div>
+  </div><p class="phone-mask-hint" id="task-command-status" role="status" aria-live="polite"${taskStatusText||taskIntent?'':' hidden'}>${O.ekranirovat(taskStatusText||(taskIntent?'Результат создания нужно проверить.':''))}</p>`;
+
+                                                            
+                                                               
+                                                         
+  document.getElementById('kasanie')?.addEventListener('click', async () => {
+    await vypolnitZadachu({sostojalos:true});
+  });
+  for(const button of [document.getElementById('kasanie'),document.getElementById('kas-plan')])button?.addEventListener('pointerdown',event=>{if(document.querySelector('[data-pravim="1"]'))event.preventDefault();});
+  obnovitKnopkiZadachi();
+
+                                                          
+  const plan = document.getElementById('kas-plan');
+  if (plan) {
+    plan.addEventListener('click',event=>{if(taskCommandBusy||taskIntent||document.querySelector('[data-pravim="1"]')){event.preventDefault();event.stopImmediatePropagation();if(!taskCommandBusy&&!taskIntent)O.tost('Сначала заверши правку карточки');}},true);
+    const cherez = (dnej) => {
+      return SPR.kalendar.sdvinut_den(SPR.segodnja(),dnej);
+    };
+    O.vypadajuschij(plan, [
+      { kod: cherez(1), imja: 'завтра' },
+      { kod: cherez(2), imja: 'послезавтра' },
+      { kod: 'svoja', imja: 'своя дата' },
+    ]).addEventListener('click', async (ev) => {
+      if(taskCommandBusy||taskIntent)return;
+      const v = ev.target.closest('.vyp-p'); if (!v) return;
+      let srok = v.dataset.kod;
+      if (srok === 'svoja') {
+        srok = await sprosit_datu();
+        if (!srok) return;
+      }
+      await vypolnitZadachu({srok});
+    });
+  }
+}
+
+                                                                 
+                                                                 
+function sprosit_pro_sledujuschee(napravlenie) {
+  const cherez = (dnej) => {
+    return SPR.kalendar.sdvinut_den(SPR.segodnja(),dnej);
+  };
+  const zakryt = O.modalka('Запланировать следующее касание?', `
+    <div class="kas-sh">
+      <a class="kn" data-srok="${cherez(1)}">завтра</a>
+      <a class="kn" data-srok="${cherez(2)}">послезавтра</a>
+      <a class="kn" data-srok="svoja">своя дата</a>
+    </div>
+    <div class="kas-ne"><a class="svernut" data-srok="">не нужно</a></div>`,
+  (zakr) => {
+    document.querySelectorAll('[data-srok]').forEach((e) =>
+      e.addEventListener('click', async () => {
+        let srok = e.dataset.srok;
+        if (!srok) { zakr(); return; }
+        if (srok === 'svoja') {
+          zakr();
+          srok = await sprosit_datu();
+          if (!srok) return;
+        } else zakr();
+        await vypolnitZadachu({srok,...(napravlenie?{napravlenie}:{})});
+      }));
+  });
+  return zakryt;
+}
+
+                                                  
+function sprosit_datu() {
+  return new Promise((gotovo) => {
+    const zakryt = O.modalka('Когда следующее касание', `
+      <div class="kas-data"><input type="date" class="pl" id="kas-d"
+        min="${SPR.segodnja()}"></div>`,
+    null, {
+      gotovo: async () => {
+        gotovo(document.getElementById('kas-d')?.value || null);
+      },
+      podskazka: 'поставить касание',
+      priZakrytii:()=>gotovo(null),
+    });
+    setTimeout(() => document.getElementById('kas-d')?.focus(), 60);
+    return zakryt;
+  });
+}
+
+function prochitatNamerenieZadachi(){
+  try{const value=JSON.parse(sessionStorage.getItem('locus-task-intent:'+API.ja+':'+id));
+    if(value?.person===id&&value.actor===API.ja&&['unknown','not_found'].includes(value.phase)&&value.body&&typeof value.body==='object'&&!Array.isArray(value.body)&&typeof value.body.napravlenie==='string'&&/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value.body.zapros_kljuch))return value;
+  }catch{}return null;
+}
+function zapomnitNamerenieZadachi(){
+  try{const key='locus-task-intent:'+API.ja+':'+id;if(taskIntent)sessionStorage.setItem(key,JSON.stringify(taskIntent));else sessionStorage.removeItem(key);}catch{}
+}
+function statusZadachi(text){taskStatusText=text;const node=document.getElementById('task-command-status');if(node){node.textContent=text;node.hidden=!text;}}
+function obnovitKnopkiZadachi(){
+  const mark=document.getElementById('kasanie'),plan=document.getElementById('kas-plan');
+  if(mark){mark.textContent=taskCommandBusy?'проверяем…':taskIntent?taskIntent.phase==='not_found'?'повторить создание':'проверить задачу':'Отметить касание';mark.setAttribute('aria-disabled',String(taskCommandBusy));if(taskCommandBusy)mark.setAttribute('aria-busy','true');else mark.removeAttribute('aria-busy');}
+  if(plan)plan.setAttribute('aria-disabled',String(taskCommandBusy||Boolean(taskIntent)));
+}
+async function zaprosZadachi(method,path,body){
+  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),15000);
+  try{return await API.zapros(method,path,body,{signal:controller.signal});}finally{clearTimeout(timer);}
+}
+function vybratNapravlenieZadachi(){
+  const active=SOTR.filter(row=>!row.arhiv),roles=active.length?active:SOTR,codes=[...new Set(roles.map(row=>row.napravlenie))];
+  if(codes.length===1)return Promise.resolve(codes[0]);
+  const options=(SPRAV.napravlenija||[]).filter(row=>!codes.length||codes.includes(row.kod));
+  return new Promise(resolve=>{
+    O.modalka('Направление задачи','<div class="kas-sh">'+options.map(row=>`<button type="button" class="kn" data-task-direction="${O.ekranirovat(row.kod)}">${O.ekranirovat(row.imja)}</button>`).join('')+'</div>',close=>{
+      document.querySelectorAll('[data-task-direction]').forEach(button=>button.addEventListener('click',()=>{resolve(button.dataset.taskDirection);close();}));
+    },{priZakrytii:()=>resolve(null)});
+  });
+}
+function proveritOtvetZadachi(result,intent){
+  const body=intent.body,completed=body.sostojalos===true;
+  if(!Number.isSafeInteger(result?.id)||result.id<1||!Number.isSafeInteger(result.nomer)||result.nomer<1||result.klient_id!==id||result.napravlenie!==body.napravlenie||result.tip!=='kasanie'||result.status!==(completed?'sdelano':'v_plane')||result.sprosit_pro_sledujuschee!==completed||body.sotrudnichestvo_id!==undefined&&result.sotrudnichestvo_id!==body.sotrudnichestvo_id||!completed&&result.srok!==body.srok)throw Object.assign(new Error('Не подтверждён результат создания задачи'),{kod:502});
+  return result;
+}
+function obnovitSchetchikZadach(){
+  const count=document.querySelector('.kas-n');if(count)count.innerHTML=KAS.vsego+'<i class="slovo">'+O.skolko(KAS.vsego,'касание','касания','касаний')+'</i>';
+  let next=document.querySelector('.kas-sl');if(KAS.zaplanirovano){if(!next){next=document.createElement('span');next.className='kas-sl';count?.after(next);}next.textContent='следующее '+SPR.data(KAS.zaplanirovano.srok);}else next?.remove();
+}
+async function vypolnitZadachu(input){
+  if(taskCommandBusy)return;
+  const checking=taskIntent?.phase==='unknown';
+  if(!checking&&document.querySelector('[data-pravim="1"]')){O.tost('Сначала заверши правку карточки');return;}
+  const kind=input.sostojalos?'mark':'plan:'+input.srok;
+  if(!taskIntent&&kind===lastTaskCommandKind&&Date.now()-lastTaskCommandStart<500)return;
+  taskCommandBusy=true;obnovitKnopkiZadachi();let offer=null;
+  try{
+    if(!taskIntent){
+      if(input.sostojalos&&!SOTR.length)throw Object.assign(new Error('Сначала добавь человеку направление, чтобы отметить общение'),{kod:400});
+      const direction=input.napravlenie||await vybratNapravlenieZadachi();if(!direction)return;
+      const role=SOTR.filter(row=>row.napravlenie===direction).sort((a,b)=>(a.arhiv?1:0)-(b.arhiv?1:0)||(a.rol==='klient'?0:a.rol==='lid'?1:2)-(b.rol==='klient'?0:b.rol==='lid'?1:2)||a.id-b.id)[0];
+      const body={...input,napravlenie:direction,zapros_kljuch:API.kljuchZaprosa(),...(role?{sotrudnichestvo_id:role.id,versija_sotrudnichestva:role.versija}:{})};
+      taskIntent={actor:API.ja,person:id,phase:'unknown',body};zapomnitNamerenieZadachi();lastTaskCommandStart=Date.now();lastTaskCommandKind=kind;
+    }
+    const intent=taskIntent;let result=null;
+    if(!checking){
+      intent.phase='unknown';zapomnitNamerenieZadachi();
+      try{result=proveritOtvetZadachi(await zaprosZadachi('POST','/ljudi/'+id+'/kasanija',intent.body),intent);}
+      catch(error){if(error.kod!==undefined&&error.kod<500){taskIntent=null;zapomnitNamerenieZadachi();throw error;}}
+    }
+    if(!result){
+      const check=await zaprosZadachi('GET','/ljudi/'+id+'/kasanija?zapros_kljuch='+encodeURIComponent(intent.body.zapros_kljuch));
+      if(typeof check?.podtverzhdeno!=='boolean'||check.podtverzhdeno===false&&check.rezultat!==null)throw new Error('Не подтверждён ответ проверки');
+      if(!check.podtverzhdeno){intent.phase='not_found';zapomnitNamerenieZadachi();statusZadachi('Запрос не найден. Повторить создание можно отдельным нажатием; новой задачи при проверке не создавалось.');return;}
+      result=proveritOtvetZadachi(check.rezultat,intent);
+    }
+    let whole,summary;
+    try{
+      [whole,summary]=await Promise.all([zaprosZadachi('GET','/ljudi/'+id+'/celikom'),zaprosZadachi('GET','/ljudi/'+id+'/kasanija')]);
+      if(whole?.chelovek?.id!==id||!Array.isArray(whole.zadachi)||summary?.chelovek_id!==id||!Number.isSafeInteger(summary.vsego)||summary.vsego<0||!Object.hasOwn(summary,'zaplanirovano'))throw new Error('Не подтверждено состояние задач');
+      obnovitObschenie(whole.chelovek);
+    }catch(error){statusZadachi('Задача №'+result.nomer+' создана. Не удалось обновить карточку; проверь результат.');return;}
+    C.zadachi=whole.zadachi;KAS=summary;
+                                                                                  
+    try{prinjatIstoriju(await zaprosZadachi('GET','/ljudi/'+id+'/istorija'));}
+    catch{const state=historyStates.get('all');if(state)state.error='Задача сохранена. Историю не удалось обновить.';}
+    obnovitIstorijuDOM();
+    if(result.vernulsja_iz_arhiva&&typeof whole.chelovek.arhiv==='boolean')C.chelovek.arhiv=whole.chelovek.arhiv;
+    taskIntent=null;zapomnitNamerenieZadachi();statusZadachi('');
+    if(!document.querySelector('[data-pravim="1"],.vyb-fon')){narisovat();offer=result.sprosit_pro_sledujuschee?intent.body.napravlenie:null;}
+    else obnovitSchetchikZadach();
+    O.tost('Задача №'+result.nomer+' создана'+(result.vernulsja_iz_arhiva?.tost?'. '+O.ekranirovat(result.vernulsja_iz_arhiva.tost):''));
+  }catch(error){if(!error.telo?.sessija_izmenilas)statusZadachi(taskIntent?'Результат создания не подтверждён. Нажми «проверить задачу».':error.kod?error.message:'Не удалось связаться с Локусом. Попробуй позже.');}
+  finally{taskCommandBusy=false;obnovitKnopkiZadachi();}
+  if(offer)sprosit_pro_sledujuschee(offer);
+}
+
+function strokaKontakta(x) {
+  const unknown=unknownContactDeletes.has(x.id);
+  const pendingValue=unknownContactValues.get(x.id);
+  const checking=unknownPrimaryChoices.get(x.tip)?.record.id===x.id;
+  const label=O.ekranirovat(nazvanieKontakta(x)),href=x.deeplink||x.url;
+  const canOpen=x.dejstvija?.includes('otkryt')&&typeof href==='string'&&/^(https?:\/\/|tel:\+|mailto:)/.test(href);
+  const action=x.tip==='telefon'?'Позвонить':x.tip==='pochta'?'Написать':'Открыть';
+  return `<div class="kon kon-with-actions" data-kontakt-row="${x.id}"><div class="kon-head"><button type="button" class="contact-icon kon-drag" data-contact-drag="${x.id}" aria-label="Переместить ${label}" title="Перетащи контакт; на телефоне сначала удерживай"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><circle cx="7" cy="5" r="1.2"/><circle cx="13" cy="5" r="1.2"/><circle cx="7" cy="10" r="1.2"/><circle cx="13" cy="10" r="1.2"/><circle cx="7" cy="15" r="1.2"/><circle cx="13" cy="15" r="1.2"/></svg></button><span class="kon-t">${label}${
+        x.osnovnoj ? ', основной' : ''}</span>${!x.osnovnoj&&!checking?`<button type="button" class="kn kon-primary" data-kon-primary="${x.id}">сделать основным</button>`:''}</div>
+        <!-- Клик копирует, двойной правит: её слова 27 октября —
+             «когда я навожу, я вижу знак копировать… чтобы я могла
+             просто вот так кликнуть, и у меня появляется подпись
+             скопировано. Если я прям кликаю дважды, чтобы я
+             как раз-таки редактировала это» -->
+        <span class="kon-z" data-kop="${O.ekranirovat(x.pokaz??x.znachenie)}"
+          data-pravka-kontakta="${x.id}"${pendingValue?' data-pravim="1"':''} title="нажми скопировать, дважды править"
+          tabindex="0" role="button">${pendingValue?`<input class="kon-vvod" readonly data-kon-pending-input="${x.id}" aria-describedby="kontakt-nepodtverzhden-${x.id}" value="${O.ekranirovat(pendingValue.draft)}">`:O.ekranirovat(x.pokaz??x.znachenie)}</span>
+        <div class="kon-toolbar"><button type="button" class="contact-icon" data-kon-copy="${x.id}" aria-label="Копировать ${label}" title="Копировать ${label}">${O.ikonkaKontakta('kopirovat')}</button>${canOpen?`<a class="contact-icon" data-kon-open="${x.id}" href="${O.ekranirovat(href)}"${href.startsWith('http')?' target="_blank" rel="noopener noreferrer"':''} aria-label="${action}: ${label}" title="${action}: ${label}">${O.ikonkaKontakta('otkryt')}</a>`:''}<a class="kon-x${unknown?' proverka-udalenija':''}" data-kon-x="${x.id}" title="${unknown?'проверить удаление':'убрать контакт'}">
+          <svg viewBox="0 0 12 12" width="10" height="10" fill="none">
+            <path d="M3 3l6 6M9 3l-6 6" stroke="currentColor"
+              stroke-width="1.4" stroke-linecap="round"/></svg></a><button type="button" class="kon-delete-mobile${unknown?' proverka-udalenija':''}" data-kon-x="${x.id}" aria-label="${unknown?'проверить удаление':'Удалить'}">${unknown?'проверить':'Удалить'}</button></div>${checking?`<button type="button" class="kn kon-check-inline" data-kon-primary-check="${x.id}">проверить основной контакт</button>`:''}${pendingValue?`<div class="contact-inline-validation"><span class="phone-mask-hint contact-inline-error" role="status" aria-live="polite" id="kontakt-nepodtverzhden-${x.id}" data-kon-value-status="${x.id}">Сохранение не подтверждено. Ввод сохранён в поле.</span><button type="button" class="kn kon-check-inline" data-kon-value-check="${x.id}">проверить сохранение</button></div>`:''}</div>`;
+}
+
+function otmetitOsnovnoj(tip,id){
+  for(const contact of C.kontakty||[]){
+    if(contact.tip!==tip)continue;contact.osnovnoj=contact.id===id;
+    const label=document.querySelector('[data-kontakt-row="'+contact.id+'"] .kon-t');
+    if(label)label.textContent=nazvanieKontakta(contact)+(contact.osnovnoj?', основной':'');
+  }
+}
+function obnovitSchjotchikKontaktov(){const count=(C.kontakty||[]).length,counter=document.getElementById('kontakty-schet');if(counter)counter.textContent=String(count);const order=document.getElementById('kon-order');if(order)order.hidden=count<2;}
+function obnovitKontakt(contact){
+  if(contact.osnovnaja_gruppa){primenitGruppuKontaktov(contact.osnovnaja_gruppa);return;}
+  const index=(C.kontakty||[]).findIndex(row=>row.id===contact.id);if(index<0)return;C.kontakty[index]=contact;
+  const old=document.querySelector('[data-kontakt-row="'+contact.id+'"]');if(!old)return;
+  const template=document.createElement('template');template.innerHTML=strokaKontakta(contact);const row=template.content.firstElementChild;old.replaceWith(row);privjazatKontakty(row);
+  if(contact.osnovnoj)otmetitOsnovnoj(contact.tip,contact.id);
+}
+function dobavitKontakt(contact){
+  if((C.kontakty||[]).some(row=>row.id===contact.id))return;
+  (C.kontakty||=[]).push(contact);
+  C.kontakty.sort((a,b)=>{const x=a.porjadok??-Infinity,y=b.porjadok??-Infinity;return x===y?a.id-b.id:x-y;});
+  const list=document.getElementById('kontakty-spisok');
+  if(list){
+    const template=document.createElement('template');template.innerHTML=strokaKontakta(contact);
+    const row=template.content.firstElementChild,index=C.kontakty.findIndex(x=>x.id===contact.id);
+    const next=C.kontakty.slice(index+1).map(x=>list.querySelector('[data-kontakt-row="'+x.id+'"]')).find(Boolean);
+    list.insertBefore(row,next||null);privjazatKontakty(row);
+  }
+  if(contact.osnovnoj)otmetitOsnovnoj(contact.tip,contact.id);obnovitSchjotchikKontaktov();
+}
+
+function kontaktMozhnoMenjat(kind,editingID){
+  if(busyContactOrder||unknownDragOrder||busyContactKinds.has(kind)||unknownPrimaryChoices.has(kind)
+    ||[...unknownContactValues.values()].some(x=>x.record.tip===kind)
+    ||(C.kontakty||[]).some(x=>x.tip===kind&&unknownContactDeletes.has(x.id)))return false;
+  return !(C.kontakty||[]).some(x=>x.tip===kind&&x.id!==editingID
+    &&document.querySelector('[data-pravka-kontakta="'+x.id+'"] input'));
+}
+function primenitGruppuKontaktov(group){
+  API.proveritGruppuKontaktov(group,id,group?.tip);
+  const previous=(C.kontakty||[]).filter(x=>x.tip===group.tip);
+  C.kontakty=(C.kontakty||[]).filter(x=>x.tip!==group.tip).concat(group.spisok)
+    .sort((a,b)=>(a.porjadok??-Infinity)-(b.porjadok??-Infinity)||a.id-b.id);
+  for(const row of previous)document.querySelector('[data-kontakt-row="'+row.id+'"]')?.remove();
+  const list=document.getElementById('kontakty-spisok');
+  if(list)for(const contact of C.kontakty.filter(x=>x.tip===group.tip)){
+    const template=document.createElement('template');template.innerHTML=strokaKontakta(contact);
+    const row=template.content.firstElementChild,index=C.kontakty.findIndex(x=>x.id===contact.id);
+    const next=C.kontakty.slice(index+1).map(x=>list.querySelector('[data-kontakt-row="'+x.id+'"]')).find(Boolean);
+    list.insertBefore(row,next||null);privjazatKontakty(row);
+  }
+  obnovitSchjotchikKontaktov();
+}
+function opisanieGruppyKontaktov(group){return group.spisok.map(x=>(x.osnovnoj?'Основной: ':'Дополнительный: ')+pokazKontakta(x)).join('\n')||'Контактов этого вида больше нет';}
+async function vybratOsnovnojKontakt(record){
+  const kind=record.tip;
+  if(!kontaktMozhnoMenjat(kind)){O.tost('Сначала заверши правку или проверку контактов этого вида');return;}
+  busyContactKinds.add(kind);
+  const showResult=result=>{
+    unknownPrimaryChoices.delete(kind);primenitGruppuKontaktov(result.gruppa);
+    O.tost(result.podtverzhdeno?'Основной контакт подтверждён':'Проверено: выбранный контакт сейчас не основной. Проверь сохранённый выбор.');
+  };
+  const check=async()=>{
+    if(busyContactKinds.has(kind))return;busyContactKinds.add(kind);
+    try{const gruppa=await API.gruppaKontaktov(id,kind);showResult({gruppa,podtverzhdeno:gruppa.spisok.some(x=>x.id===record.id&&x.osnovnoj)});}
+    catch(error){if(!error.telo?.sessija_izmenilas)O.tost('Проверка не завершена: '+error.message,check,{label:'проверить основной контакт',ms:7000});}
+    finally{busyContactKinds.delete(kind);}
+  };
+  try{
+    for(;;){
+      try{showResult(await API.vybratOsnovnojKontakt(record));return;}
+      catch(error){
+        if(error.primaryUnknown){
+          unknownPrimaryChoices.set(kind,{record,check});obnovitKontakt(record);
+          O.tost(error.message,check,{label:'проверить основной контакт',ms:7000});return;
+        }
+        if(error.kod!==409||error.telo?.scope_changed||error.telo?.sessija_izmenilas)throw error;
+        const group=API.proveritGruppuKontaktov(error.telo.osnovnaja_gruppa||error.telo.tekuschee?.osnovnaja_gruppa,id,kind);
+        const current=group.spisok.find(x=>x.id===record.id);
+        const valueChanged=!current||current.znachenie!==record.znachenie||error.telo.izmenennye_polja?.includes('znachenie');
+        const choice=await O.razreshitKonflikt(error,{heading:'Основной контакт изменился',label:'основной контакт',
+          local:'Выбрать основным: '+pokazKontakta(record),current:opisanieGruppyKontaktov(group),
+          intro:valueChanged?'Значение выбранного контакта тоже изменилось. Сначала проверь его в карточке.':'Проверь контакты перед новым выбором.',
+          ownLabel:'выбрать этот контакт основным',loadLabel:'загрузить контакты',allowOwn:!valueChanged});
+        if(choice!=='load'&&choice!=='own')return;
+        primenitGruppuKontaktov(group);
+        if(choice==='load')return;record=current;
+      }
+    }
+  }catch(error){if(!error.telo?.sessija_izmenilas)O.tost('Не получилось: '+error.message);}
+  finally{busyContactKinds.delete(kind);}
+}
+
+function kontaktPorjadokDostupen(){return !busyContactOrder&&!unknownDragOrder&&!busyContactKinds.size&&!unknownContactDeletes.size&&!unknownPrimaryChoices.size&&!unknownContactValues.size&&!document.querySelector('#kontakty-spisok input');}
+function pokazatStatusPeretaskivanija(message=dragOrderMessage){
+  dragOrderMessage=message;let root=document.getElementById('kon-drag-status');const list=document.getElementById('kontakty-spisok');
+  if(!root&&list){root=document.createElement('div');root.id='kon-drag-status';root.className='kon-drag-status';root.setAttribute('role','status');root.setAttribute('aria-live','polite');list.after(root);}
+  if(!root)return;root.replaceChildren(document.createTextNode(message));
+  if(unknownDragOrder){const button=document.createElement('button');button.type='button';button.className='kn';button.textContent='проверить порядок';button.dataset.dragOrderCheck='1';button.disabled=busyContactOrder;button.onclick=proveritPeretaskivanie;root.append(document.createElement('br'),button);}
+}
+function privjazatPeretaskivanie(){
+  stopContactDrag?.();stopContactDrag=null;const root=document.getElementById('kontakty-spisok');if(!root)return;
+  stopContactDrag=KontaktDrag.privjazat(root,{canStart:()=>kontaktPorjadokDostupen()&&!document.querySelector('[data-pravim="1"],.vyb-fon'),snapshot:()=>API.snimokPorjadkaPoStrokam(id,C.kontakty||[]),drop:sohranitPeretaskivanie,message:pokazatStatusPeretaskivanija,openOrder:()=>porjadokKontaktov(document.getElementById('kon-order'))});
+  pokazatStatusPeretaskivanija();
+}
+function prinjatPeretaskivanie(result){
+  unknownDragOrder=null;primenitPorjadokKontaktov(result.snimok);pokazatStatusPeretaskivanija(result.podtverzhdeno?'Порядок контактов сохранён.':'Проверено: сейчас сохранён другой порядок. Перетащи снова, если хочешь его изменить.');
+}
+async function proveritPeretaskivanie(){
+  const pending=unknownDragOrder;if(!pending||busyContactOrder)return;busyContactOrder=true;pokazatStatusPeretaskivanija();
+  try{const snapshot=await API.porjadokKontaktov(id,{srokom:true});prinjatPeretaskivanie({snimok:snapshot,podtverzhdeno:snapshot.spisok.map(x=>x.id).join(',')===pending.ids.join(',')});}
+  catch(error){if(!error.telo?.sessija_izmenilas)pokazatStatusPeretaskivanija('Проверка не завершена. Уже показанные контакты сохранены.');}
+  finally{busyContactOrder=false;pokazatStatusPeretaskivanija();}
+}
+async function sohranitPeretaskivanie(snapshot,ids){
+  if(busyContactOrder||unknownDragOrder)return;busyContactOrder=true;const list=document.getElementById('kontakty-spisok');if(list)list.inert=true;pokazatStatusPeretaskivanija('Сохраняется порядок контактов…');
+  try{prinjatPeretaskivanie(await API.sohranitPorjadokKontaktov(snapshot,ids,{poCheloveku:true}));}
+  catch(error){
+    if(error.orderUnknown){unknownDragOrder={snapshot,ids};pokazatStatusPeretaskivanija('Сохранение не подтверждено. Следующее действие только проверит порядок.');}
+    else if(error.kod===409&&error.telo?.tekuschij_porjadok){
+      const current=API.proveritPorjadokKontaktov(error.telo.tekuschij_porjadok,id),choice=await O.razreshitKonflikt(error,{heading:'Контакты изменились',label:'порядок контактов',local:ids.map(n=>snapshot.spisok.find(x=>x.id===n)).map(pokazKontakta).join('\n'),current:current.spisok.map(pokazKontakta).join('\n'),intro:'Сначала посмотри актуальные контакты. Повторный перенос будет отдельным действием.',loadLabel:'загрузить контакты',allowOwn:false});
+      if(choice==='load'){primenitPorjadokKontaktov(current);pokazatStatusPeretaskivanija('Актуальные контакты загружены. Теперь можно перенести строку.');}else pokazatStatusPeretaskivanija('Перенос не сохранён: контакты изменились.');
+    }else if(!error.telo?.sessija_izmenilas)pokazatStatusPeretaskivanija('Перенос не сохранён. '+error.message);
+  }finally{busyContactOrder=false;if(list?.isConnected)list.inert=false;pokazatStatusPeretaskivanija();}
+}
+function primenitPorjadokKontaktov(snapshot){
+  API.proveritPorjadokKontaktov(snapshot,id);C.kontakty=snapshot.spisok;
+  const list=document.getElementById('kontakty-spisok');if(list){list.innerHTML=C.kontakty.map(strokaKontakta).join('');privjazatKontakty(list);}
+  obnovitSchjotchikKontaktov();
+}
+async function vygruzitKartochkuCheloveka(button){
+  if(!kontaktPorjadokDostupen()||document.querySelector('[data-pravim="1"]')){O.tost('Сначала заверши правку или проверку карточки');return;}
+  if(button.disabled)return;button.disabled=true;
+  try{
+    const data=await API.odna('ljudi',id+'/celikom');
+    if(data?.chelovek?.id!==id||!Array.isArray(data.kontakty)||data.kontakty.some(row=>row.chelovek_id!==id))throw new Error('Не удалось подтвердить карточку человека');
+    const content={format:'locus-person-card-v1',schema:{chelovek:'ljudi',kontakty:'kontakty',sotrudnichestva:'sotrudnichestva',zadachi:'zadachi',proekty:'proekty',svjazi:'svjazi',materialy:'materialy'},data};
+    const url=URL.createObjectURL(new Blob([JSON.stringify(content,null,2)+'\n'],{type:'application/json;charset=utf-8'}));
+    const link=document.createElement('a');link.href=url;link.download='locus-chelovek-'+id+'.json';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);O.tost('Файл карточки подготовлен');
+  }catch(error){if(!error.telo?.sessija_izmenilas)O.tost('Не удалось подготовить файл: '+error.message);}
+  finally{button.disabled=false;}
+}
+async function porjadokKontaktov(button){
+  if(!kontaktPorjadokDostupen()){O.tost('Сначала заверши правку или проверку контактов');return;}
+  if(button.dataset.loading)return;button.dataset.loading='1';let snapshot;
+  try{snapshot=await API.porjadokKontaktov(id);if(!button.isConnected)return;}
+  catch(error){if(!error.telo?.sessija_izmenilas)O.tost('Не загрузился порядок: '+error.message);return;}
+  finally{delete button.dataset.loading;}
+  if(!kontaktPorjadokDostupen()){O.tost('Сначала заверши правку или проверку контактов');return;}
+  let ids=snapshot.spisok.map(x=>x.id),unknown=false,pending=false;
+  const describe=(state,order=state.spisok.map(x=>x.id))=>order.map((n,i)=>{const row=state.spisok.find(x=>x.id===n);return (i+1)+'. '+nazvanieKontakta(row)+': '+pokazKontakta(row);}).join('\n');
+  const close=O.modalka('Порядок контактов','<p class="kon-order-help">Кнопки вверх и вниз или Alt + ↑ / ↓ меняют порядок. Основная метка сохраняется.</p><div id="kon-order-list" class="kon-order-list" role="list"></div><div id="kon-order-status" class="fch-osh" role="status" aria-live="polite"></div>',null,{podskazka:'сохранить порядок',gotovo:()=>submit()});
+  const list=document.getElementById('kon-order-list'),status=document.getElementById('kon-order-status');
+  const move=(number,step)=>{
+    if(pending||unknown)return;const at=ids.indexOf(number),next=at+step;if(at<0||next<0||next>=ids.length)return;
+    [ids[at],ids[next]]=[ids[next],ids[at]];render();list.querySelector('[data-order-row="'+number+'"]')?.focus({preventScroll:true});
+  };
+  const render=()=>{
+    const action=list.closest('.vyb-fon')?.querySelector('.vyb-g');if(action){const label=unknown?'проверить порядок':'сохранить порядок';action.setAttribute('aria-label',label);action.title=label;}
+    list.innerHTML=ids.map((n,i)=>{const row=snapshot.spisok.find(x=>x.id===n);return `<div class="kon-order-row" role="listitem" tabindex="0" data-order-row="${n}" aria-label="${i+1}. ${O.ekranirovat(nazvanieKontakta(row))}: ${O.ekranirovat(pokazKontakta(row))}"><span class="kon-order-value"><span class="l-label">${i+1}. ${O.ekranirovat(nazvanieKontakta(row))}${row.osnovnoj?', основной':''}</span>${O.ekranirovat(pokazKontakta(row))}</span><button type="button" class="kn" data-order-up="${n}" aria-label="Поднять контакт ${i+1}"${i===0||unknown?' disabled':''}>↑</button><button type="button" class="kn" data-order-down="${n}" aria-label="Опустить контакт ${i+1}"${i===ids.length-1||unknown?' disabled':''}>↓</button></div>`;}).join('');
+    list.querySelectorAll('[data-order-up]').forEach(x=>x.onclick=()=>move(Number(x.dataset.orderUp),-1));
+    list.querySelectorAll('[data-order-down]').forEach(x=>x.onclick=()=>move(Number(x.dataset.orderDown),1));
+    list.querySelectorAll('[data-order-row]').forEach(x=>x.addEventListener('keydown',event=>{
+      if(!event.altKey||!['ArrowUp','ArrowDown'].includes(event.key))return;event.preventDefault();move(Number(x.dataset.orderRow),event.key==='ArrowUp'?-1:1);
+    }));
+    status.replaceChildren();
+    if(unknown){status.append(document.createTextNode('Сохранение не подтверждено. Следующее действие только проверит порядок. '));const check=document.createElement('button');check.type='button';check.className='kn';check.dataset.orderCheck='1';check.textContent='проверить порядок';check.onclick=async()=>{if(await submit())close();};status.append(check);}
+  };
+  const accept=result=>{
+    unknown=false;snapshot=result.snimok;ids=snapshot.spisok.map(x=>x.id);primenitPorjadokKontaktov(snapshot);
+    O.tost(result.podtverzhdeno?'Порядок контактов подтверждён':'Проверено: сейчас сохранён другой порядок. Проверь контакты перед перестановкой.');
+    if(!result.podtverzhdeno)render();return result.podtverzhdeno;
+  };
+  const submit=async()=>{
+    if(pending)return false;
+    if(!kontaktPorjadokDostupen()){status.textContent='Сначала заверши правку или проверку контактов';return false;}
+    pending=true;busyContactOrder=true;list.inert=true;
+    try{
+      if(unknown){const snimok=await API.porjadokKontaktov(id);return accept({snimok,podtverzhdeno:snimok.spisok.map(x=>x.id).join(',')===ids.join(',')});}
+      for(;;){
+        try{return accept(await API.sohranitPorjadokKontaktov(snapshot,ids));}
+        catch(error){
+          if(error.orderUnknown){unknown=true;render();return false;}
+          if(error.kod!==409||!error.telo?.tekuschij_porjadok)throw error;
+          const current=API.proveritPorjadokKontaktov(error.telo.tekuschij_porjadok,id);
+          const sameMembers=current.spisok.length===ids.length&&current.spisok.every(x=>ids.includes(x.id));
+          const choice=await O.razreshitKonflikt(error,{heading:'Контакты изменились',label:'порядок контактов',local:describe(snapshot,ids),current:describe(current),
+            intro:sameMembers?'Проверь актуальные значения перед сохранением порядка.':'Состав контактов изменился. Сначала загрузи текущий список.',ownLabel:'сохранить мой порядок',loadLabel:'загрузить контакты',allowOwn:sameMembers});
+          if(choice!=='load'&&choice!=='own')return false;
+          snapshot=current;
+          if(choice==='load'){ids=snapshot.spisok.map(x=>x.id);primenitPorjadokKontaktov(snapshot);render();return false;}
+          render();
+        }
+      }
+    }catch(error){if(!error.telo?.sessija_izmenilas){render();status.prepend(document.createTextNode('Проверка или сохранение не завершены: '+error.message+' '));}return false;}
+    finally{pending=false;busyContactOrder=false;list.inert=false;}
+  };
+  render();
+}
+
+function tekstyObschenija(){
+  const person=C.chelovek,problem=person.neizvestnaja_data_obschenija||person.buduschaja_data_obschenija;
+  return {date:problem?'дату нужно проверить':person.poslednee_obshenie_obshee?SPR.data(person.poslednee_obshenie_obshee):'не отмечено',
+    days:problem?'дату нужно проверить':person.dnej_bez_svjazi===null||person.dnej_bez_svjazi===undefined?'—':person.dnej_bez_svjazi+' дн',
+    task:person.poslednjaja_zadacha?SPR.data(person.poslednjaja_zadacha):'не отмечено'};
+}
+function blokObschenija(){
+  const text=tekstyObschenija();
+  return `<div class="b"><div class="b-l">работа и общение</div><div class="pol">
+    <div class="pol-s"><span class="pol-n">последняя задача</span><span class="pol-z" data-obschenie-field="task">${O.ekranirovat(text.task)}</span></div>
+    <div class="pol-s"><span class="pol-n">последнее общение</span><span class="pol-z" data-obschenie-field="date">${O.ekranirovat(text.date)}</span></div>
+    <div class="pol-s"><span class="pol-n">без общения</span><span class="pol-z" data-obschenie-field="days">${O.ekranirovat(text.days)}</span></div>
+    </div>${SOTR.length||unknownCommunication?`<div class="kon-actions"><button type="button" class="kn kon-order" id="obschenie-mark"${communicationBusy?' disabled aria-busy="true"':''}>${unknownCommunication?'проверить дату':'отметить общение'}</button></div>`:''}
+    <p class="phone-mask-hint" id="obschenie-status" role="status" aria-live="polite">${unknownCommunication?'Отметка не подтверждена. Проверь сохранённую дату.':''}</p></div>`;
+}
+function obnovitObschenie(person){
+  if(person?.id!==id)throw new Error('Не удалось подтвердить человека');
+  const validDay=value=>{if(value===null)return true;try{SPR.kalendar.data(value);return true;}catch{return false;}};
+  const fields=['poslednee_obshenie_obshee','poslednee_obshenie_den','poslednee_obshenie','dnej_bez_svjazi','poslednjaja_zadacha','neizvestnaja_data_obschenija','buduschaja_data_obschenija'];
+  if(fields.some(key=>!Object.hasOwn(person,key))||typeof person.neizvestnaja_data_obschenija!=='boolean'||typeof person.buduschaja_data_obschenija!=='boolean'
+    ||person.dnej_bez_svjazi!==null&&(!Number.isSafeInteger(person.dnej_bez_svjazi)||person.dnej_bez_svjazi<0)
+    ||!validDay(person.poslednee_obshenie_den)||!validDay(person.poslednjaja_zadacha)
+    ||person.poslednee_obshenie===null&&(person.poslednee_obshenie_obshee!==null||person.poslednee_obshenie_den!==null||person.dnej_bez_svjazi!==null)
+    ||person.poslednee_obshenie!==null&&(typeof person.poslednee_obshenie!=='object'||Array.isArray(person.poslednee_obshenie)||typeof person.poslednee_obshenie_obshee!=='string'||person.poslednee_obshenie.kogda!==person.poslednee_obshenie_obshee||!['ruchnaja','bot',null].includes(person.poslednee_obshenie.istochnik)))throw new Error('Не удалось подтвердить полные данные общения');
+  if(person.poslednee_obshenie!==null){
+    const raw=person.poslednee_obshenie_obshee;let day=null;
+    if(/^\d{4}-\d{2}-\d{2}$/.test(raw)){if(validDay(raw))day=raw;}
+    else if(/^\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}(?::\d{2}(?:\.\d{1,6})?)?(?:Z|[+-]\d{2}:\d{2})?$/.test(raw)&&validDay(raw.slice(0,10))){const parsed=SPR.vremja(raw);if(parsed)day=SPR.kalendar.den_moskvy(parsed);}
+    const difference=day?SPR.kalendar.raznica_dnej(day,SPR.segodnja()):null;
+    if(day!==person.poslednee_obshenie_den||day===null||person.buduschaja_data_obschenija!==(difference<0)||person.dnej_bez_svjazi!==(difference<0?null:difference))throw new Error('Не удалось подтвердить дату общения');
+  }
+  for(const key of ['poslednee_obshenie_obshee','poslednee_obshenie_den','poslednee_obshenie','dnej_bez_svjazi','poslednjaja_zadacha','neizvestnaja_data_obschenija','buduschaja_data_obschenija'])C.chelovek[key]=person[key];
+  const text=tekstyObschenija();document.querySelectorAll('[data-obschenie-field]').forEach(element=>element.textContent=text[element.dataset.obschenieField]);
+  document.querySelectorAll('[data-obschenie-summary]').forEach(element=>{
+    const days=C.chelovek.dnej_bez_svjazi,problem=C.chelovek.neizvestnaja_data_obschenija||C.chelovek.buduschaja_data_obschenija,role=SOTR.find(row=>row.id===Number(element.dataset.obschenieSummary));
+    element.textContent=problem?'дату нужно проверить':days===null||days===undefined?'общение не отмечено':days+' дн, '+text.date;
+    const limit=(SPRAV.napravlenija||[]).find(row=>row.kod===role?.napravlenie)?.norma_dnej||14;element.style.color=!problem&&days>limit?'var(--kr)':'';
+  });
+}
+async function otmetitObschenie(){
+  if(communicationBusy)return;communicationBusy=true;
+  ubratProshlyjStatusKontakta();
+  const button=document.getElementById('obschenie-mark'),setStatus=text=>{const status=document.getElementById('obschenie-status');if(status)status.textContent=text;},checking=Boolean(unknownCommunication);
+  button.disabled=true;button.setAttribute('aria-busy','true');
+  try{
+    if(!checking){
+      const role=SOTR.find(row=>!row.arhiv)||SOTR[0];if(!role)throw new Error('Обнови карточку перед отметкой общения');
+      unknownCommunication={role,day:SPR.segodnja()};
+      try{const saved=await API.dejstvie('/sotrudnichestva/'+role.id+'/kasanie',{chelovek_id:id,versija:role.versija,kogda:unknownCommunication.day,otkuda:'ruchnaja'});
+        if(!Number.isSafeInteger(saved?.id)||!Number.isSafeInteger(saved?.chelovek_id))throw Object.assign(new Error('Не удалось прочитать результат отметки'),{kod:502});
+        if(saved.id!==role.id||saved.chelovek_id!==id)throw Object.assign(new Error('Сотрудничество изменилось. Обнови карточку.'),{kod:409});
+      }catch(error){if(error.kod!==undefined&&error.kod<500){unknownCommunication=null;throw error;}}
+    }
+    const person=await API.odna('ljudi',id);obnovitObschenie(person);
+    const valid=!person.neizvestnaja_data_obschenija&&!person.buduschaja_data_obschenija&&typeof person.poslednee_obshenie_den==='string';
+    if(valid&&person.poslednee_obshenie_den>=unknownCommunication.day){unknownCommunication=null;setStatus(checking?'Проверили сохранённую дату общения':'Дата общения подтверждена');}
+    else if(checking){unknownCommunication=null;setStatus('Сейчас показана сохранённая дата. Чтобы отметить общение, нажми ещё раз.');}
+    else setStatus('Отметка не подтверждена. Проверь сохранённую дату.');
+  }catch(error){if(!error.telo?.sessija_izmenilas)setStatus(unknownCommunication?'Не удалось проверить сохранённую дату. Нажми «проверить дату».':error.kod?error.message:'Не удалось связаться с Локусом. Попробуй позже.');}
+  finally{communicationBusy=false;const current=document.getElementById('obschenie-mark');if(current){current.disabled=false;current.removeAttribute('aria-busy');current.textContent=unknownCommunication?'проверить дату':'отметить общение';}}
+}
+function kontakty() {
+  const k = C.kontakty || [];
+  return `<div class="b"><div class="b-l">контакты <span class="n" id="kontakty-schet" aria-live="polite">${k.length}</span></div>
+    <div id="kontakty-spisok">${k.map(strokaKontakta).join('')}</div>
+    <div class="kon-actions"><a class="kon-dob" id="kon-dob">+ контакт</a><button type="button" class="kn kon-order" id="kon-order"${k.length<2?' hidden':''}>порядок</button><button type="button" class="kn kon-order" id="kon-export">выгрузить JSON</button></div></div>
+  ${blokObschenija()}
+  <div class="b"><div class="b-l">о человеке</div>
+    <div class="pol">
+      <div class="pol-s"><span class="pol-n">город</span>
+        <span class="pol-z pravimoe" data-pravka="ljudi:${C.chelovek.id}:gorod"
+          tabindex="0" role="button">${O.ekranirovat(C.chelovek.gorod)
+            || '<i class="pol-net">дописать</i>'}</span></div>
+      <div class="pol-s"><span class="pol-n">ниша</span>
+        <span class="pol-z pravimoe" data-pravka="ljudi:${C.chelovek.id}:nisha"
+          tabindex="0" role="button">${O.ekranirovat(C.chelovek.nisha)
+            || '<i class="pol-net">дописать</i>'}</span></div>
+      <div class="pol-s"><span class="pol-n">заметка</span>
+        <span class="pol-z pravimoe" data-pravka="ljudi:${C.chelovek.id}:zametka"
+          tabindex="0" role="button">${O.ekranirovat(C.chelovek.zametka)
+            || '<i class="pol-net">дописать</i>'}</span></div>
+    </div></div>`;
+}
+
+function sotrudnichestvo(s) {
+  const n = O.naprPoKodu(s.napravlenie);
+  const dnej = dnejBez(s);
+  const zadachi = (C.zadachi || []).filter((z) => z.sotrudnichestvo_id === s.id && (z.klient_id==null||z.klient_id===id));
+  const proekty = (C.proekty || []).filter((p) => s.rol === 'klient' && p.napravlenie === s.napravlenie);
+
+                                                                     
+                                                                    
+                                                                       
+                                                                         
+  const sv = PRIVEDENO[s.id];
+  const est_privodit = s.rol === 'referal' || s.privodit_klientov;
+                                                                        
+                                                                      
+  const referralPercent=sv?sv.procent:s.procent,referralScale=sv?sv.procent_shkala:s.procent_shkala,referralTax=sv?sv.nalog:s.nalog;
+  const shkala = sv?.dengi?.rezhim==='chislo' ? null : referralScale || (typeof referralPercent === 'string' ? referralPercent : null);
+  const amount=key=>sv?.dengi&&!sv.dengi.skryto?sv.dengi[key]:sv?.[key];
+  const reasons=(sv?.dengi?.prichiny||[]).map(key=>referralReasons[key]).filter(Boolean);
+  const referralError=REFERRAL_ERRORS[s.id];
+  const nalogom = referralTax === 'do_vycheta' ? ', до вычета налога'
+                : referralTax === 'posle_vycheta' ? ', после вычета налога'+(sv?.stavka_naloga!=null?' '+O.ekranirovat(sv.stavka_naloga)+' %':'') : '';
+  const referralMoneyHidden = s.skryto?.includes('dengi') || sv?.skryto?.includes('dengi');
+  const referal = est_privodit ? `
+    <section data-referral-summary="${s.id}">
+    ${referralError?`<div class="referral-summary-error" role="status"><p>${sv?'Показаны последние полученные данные. ':''}Расчёт не обновился: ${O.ekranirovat(referralError)}</p><button type="button" class="kn" data-referral-retry="${s.id}">повторить загрузку</button></div>`:''}
+    <div class="pol" style="margin-top:12px">
+      <div class="pol-s"><span class="pol-n">приведено</span>
+        <span class="pol-z referral-money">${sv ? sv.privedeno + ' ' + sklChel(sv.privedeno) : '—'}</span></div>
+      ${referralMoneyHidden ? '<div class="pol-s" data-referral-money-hidden>блок скрыт</div>' : `
+      <div class="pol-s"><span class="pol-n">заработано</span>
+        <span class="pol-z referral-money">${dengiReferala(amount('zarabotano'))}</span></div>
+      <div class="pol-s"><span class="pol-n">процент</span>
+        <span class="pol-z referral-money">${shkala ? O.ekranirovat(shkala) : referralPercent != null ? O.ekranirovat(referralPercent) + '%' : '—'}${
+          nalogom}${shkala ? ', считается руками' : ''}${!shkala&&referralScale?`<small class="referral-scale-note">шкала: ${O.ekranirovat(referralScale)}</small>`:''}</span></div>
+      <div class="pol-s"><span class="pol-n">начислено</span>
+        <span class="pol-z referral-money">${dengiReferala(amount('nachisleno'))}</span></div>
+      <div class="pol-s"><span class="pol-n">выплачено</span>
+        <span class="pol-z referral-money">${dengiReferala(amount('vyplacheno'))}</span></div>
+      <div class="pol-s"><span class="pol-n">к выплате</span>
+        <span class="pol-z referral-money">${dengiReferala(amount('k_vyplate'))}</span></div>
+      <div class="pol-s"><span class="pol-n">последняя выплата</span><span class="pol-z referral-money">${sv?.poslednjaja_vyplata ? SPR.data(sv.poslednjaja_vyplata) : 'дата не указана'}</span></div>
+      ${reasons.length?`<p class="referral-summary-reasons">${reasons.map(O.ekranirovat).join('. ')}</p>`:''}
+      <div class="pol-s referral-pay-action"><button type="button" class="kn referral-pay-button" data-referral-pay="${s.id}">отметить выплату</button><button type="button" class="kn referral-terms-button" data-referral-terms="${s.id}">условия</button><button type="button" class="kn" data-referral-tasks="${s.id}">акт и выплата</button></div>
+      `}
+      <div class="pol-s"><span class="pol-n">договор</span>
+        <span class="pol-z referral-money">${O.ekranirovat(s.dogovor_nomer || '—')}<span class="referral-contract" data-referral-contract="${s.id}">${referralContract(s)}</span></span></div>
+    </div>
+    ${sv && sv.spisok.length ? `<div style="margin-top:13px">
+      <div class="b-l">кого привёл</div>${sv.spisok.map((k) =>
+        `<a class="prj" href="/klient.html?id=${k.chelovek_id}">
+          <span>${O.ekranirovat(k.imja)}<div class="prj-p">${O.naprPoKodu(k.napravlenie).imja}, ${
+            O.ekranirovat(slovo('stadija', k.stadija))}</div></span>
+          <span class="prj-c"></span></a>`).join('')}</div>` : ''}</section>` : '';
+
+                                                                
+                                                                  
+                                                             
+                                                               
+                                            
+  const shapka_sotr = `<div class="sotr-sh">
+      <span class="sotr-n">${n.imja}</span>
+      <span class="vyp"><a class="sotr-r sotr-kl" data-sotr-rol="${s.id}">${
+        slovo('rol', s.rol)}<span class="str"></span></a></span>
+      <span class="vyp"><a class="pill sotr-kl" data-sotr-stadija="${s.id}"
+        data-rol="${s.rol}">${s.svoja_stadija || slovo('stadija', s.stadija)
+          || 'стадия'}<span class="str"></span></a></span>
+      ${LocusArchiveView.html(s,O.ekranirovat,{tablica:'sotrudnichestva',id:s.id})}
+      <button type="button" class="fil-b" data-role-archive="${s.id}" data-archive-person="${id}" aria-label="${O.ekranirovat((s.arhiv?'Вернуть сотрудничество: ':'Архивировать сотрудничество: ')+n.imja)}">${s.arhiv?'вернуть из архива':'в архив'}</button>
+    </div>`;
+
+                                                                 
+                                                             
+  return {
+    polja: `<div class="b">
+      ${shapka_sotr}
+      <div class="pol">
+        <div class="pol-s"><span class="pol-n">контакт по направлению</span>
+          <span class="pol-z pravimoe" data-sotr-kontakt="${s.id}" tabindex="0" role="button">${
+            s.kontakt_id ? O.ekranirovat(s.kontakt_imja || 'выбранный человек') : 'сам ' + O.ekranirovat(C.chelovek.imja)}</span></div>
+        <div class="pol-s"><span class="pol-n">без общения</span>
+          <span class="pol-z" data-obschenie-summary="${s.id}"${dnej !== null && dnej > ((SPRAV.napravlenija || [])
+            .find((x) => x.kod === s.napravlenie)?.norma_dnej || 14)
+            ? ' style="color:var(--kr)"' : ''}>${
+            C.chelovek.neizvestnaja_data_obschenija||C.chelovek.buduschaja_data_obschenija?'дату нужно проверить':dnej === null ? 'общение не отмечено' : dnej + ' дн, ' +
+            SPR.data(C.chelovek.poslednee_obshenie_obshee)}</span></div>
+        <div class="pol-s" data-sotr-source="${s.id}" tabindex="0" role="button"><span class="pol-n">откуда</span>
+          <span class="pol-z">${O.ekranirovat([
+              slovo('istochnik',s.istochnik),s.istochnik==='rekomendacija'?s.rekomendoval_imja:s.istochnik==='rassylka'?s.rassylka_nazvanie:s.istochnik_tekst
+            ].filter(Boolean).join(': '))
+              || '<i class="pol-net">дописать</i>'}</span></div>
+        <div class="pol-s"><span class="pol-n">контекст</span>
+          <span class="pol-z kon-z" data-pravka-konteksta="${s.napravlenie}"
+            tabindex="0" role="button">${s.kontekst
+              || '<i class="pol-net">дописать</i>'}</span></div>
+        <div class="pol-s"><span class="pol-n">особенности</span>
+          <span class="pol-z pravimoe" data-pravka="sotrudnichestva:${s.id}:osobennosti"
+            tabindex="0" role="button">${s.osobennosti
+              || '<i class="pol-net">дописать</i>'}</span></div>
+      </div>
+      ${referal}
+    </div>`,
+    rabota: `<div class="b">
+      <div class="b-l">${O.ekranirovat(n.imja)}, ${O.ekranirovat(slovo('rol',s.rol))}</div>
+      ${proekty.length ? `<div style="margin-top:4px">
+        <div class="b-l">проекты</div>${proekty.map(proekt).join('')}</div>` : ''}
+      <div style="margin-top:${proekty.length ? '15px' : '4px'}">
+        <div class="b-l">открытые задачи</div>
+        ${zadachi.length
+          ? zadachi.map((z) => O.strokaZadachi(SPR.dlja_ekrana(z),
+              { bezNapravlenija: true })).join('')
+          : '<div class="net">открытых задач по этой роли нет</div>'}
+      </div>
+      <div style="margin-top:15px"><div class="b-l">история роли</div>${istorijaBlok(String(s.id))}</div>
+    </div>`,
+  };
+}
+
+function drugieZadachi(){
+  const own=new Set(SOTR.map(row=>row.id)),rows=(C.zadachi||[]).filter(row=>!own.has(row.sotrudnichestvo_id)||(row.klient_id!=null&&row.klient_id!==id));
+  return rows.length?'<div class="b"><div class="b-l">другие задачи человека</div>'+rows.map(row=>O.strokaZadachi(SPR.dlja_ekrana(row))).join('')+'</div>':'';
+}
+function proekt(p) {
+  const plat = PLATEZHI[p.id] || [];
+  const oplacheno = plat.filter((x) => x.oplachen_at)
+    .reduce((a, x) => a + (x.summa || 0), 0);
+  const vedet = (SPRAV.ljudi || []).find((l) => l.id === p.kto_vedet);
+  const podpis = [STATUS_PROEKTA[p.status] || p.status, p.arhiv?'в архиве':null, vedet && vedet.imja]
+    .filter(Boolean).join(', ');
+                                                                   
+                                                                   
+                                     
+  const zhdem = plat.filter((x) => !x.oplachen_at);
+  return `<div class="prj" data-client-project="${p.id}"><span><a href="/proekt.html?id=${p.id}">${O.ekranirovat(p.nazvanie)}</a><div class="prj-p">${O.ekranirovat(podpis)}</div>
+    ${plat.length ? `<div class="plat">${plat.map((x) =>
+      `<i class="${x.oplachen_at ? 'est' : ''}"></i>`).join('')}</div>` : ''}
+    ${zhdem.map((x) => `<div class="prj-zh">ждём ${dengi(x.summa)}${
+      x.zhdem_do ? ' до ' + SPR.data(x.zhdem_do) : ''}
+      <a class="prj-opl" data-opl="${x.id}" data-proekt="${p.id}">пришла</a></div>`).join('')}</span>
+    <span class="prj-c">${dengi(p.stoimost)}${p.stoimost && plat.length
+      ? `<div class="prj-p">оплачено ${dengi(oplacheno)}</div>` : ''}</span></div>`;
+}
+
+function dengi_blok() {
+  const proekty = C.proekty || [];
+  const vsego = proekty.reduce((a, p) => a + (p.stoimost || 0), 0);
+  const vse_plat = proekty.flatMap((p) => PLATEZHI[p.id] || []);
+  const oplacheno = vse_plat.filter((x) => x.oplachen_at)
+    .reduce((a, x) => a + (x.summa || 0), 0);
+  const zhdem = vse_plat.filter((x) => !x.oplachen_at)
+    .reduce((a, x) => a + (x.summa || 0), 0);
+  if (!proekty.length) {
+    return `<div class="b"><div class="b-l">деньги</div>
+      <div class="net">проектов нет, считать нечего</div></div>`;
+  }
+  return `<div class="b"><div class="b-l">деньги</div>
+    <div class="ch">${dengi(vsego)}</div>
+    <div class="ch-p">в проектах, ${proekty.length} ${sklProekt(proekty.length)}</div>
+    <div class="dva" style="margin-top:15px">
+      <div><div class="ch" style="font-size:16px">${dengi(oplacheno)}</div>
+        <div class="ch-p">оплачено</div></div>
+      <div><div class="ch${zhdem ? ' kr' : ''}" style="font-size:16px">${dengi(zhdem)}</div>
+        <div class="ch-p">ждём</div></div>
+    </div></div>`;
+}
+
+function sklChel(n) {
+  const o = n % 10, st = n % 100;
+  if (o === 1 && st !== 11) return 'человек';
+  if (o >= 2 && o <= 4 && (st < 12 || st > 14)) return 'человека';
+  return 'человек';
+}
+
+function sklProekt(n) {
+  const o = n % 10, s = n % 100;
+  if (o === 1 && s !== 11) return 'проект';
+  if (o >= 2 && o <= 4 && (s < 12 || s > 14)) return 'проекта';
+  return 'проектов';
+}
+
+                                                                     
+                                                                      
+                                                   
+function svjazi_blok() {
+  const TIP = { rekomendoval: 'рекомендовал', referal: 'реферал',
+                reshaet: 'решает', kollega: 'коллега' };
+  const sv = C.svjazi || [];
+  return `<div class="b"><div class="b-l">связи</div>
+    ${sv.length ? sv.map((s) => {
+                                                                       
+                                                                                 
+      const ot_nas = s.ot_cheloveka === id;
+      const kto = ot_nas ? s.k_cheloveku : s.ot_cheloveka;
+      const imja = ot_nas ? s.k_imja : s.ot_imja;
+      return `<a class="prj" href="/klient.html?id=${kto}">
+        <span>${imja || '—'}<div class="prj-p">${
+          (ot_nas ? '' : 'это он ') + (TIP[s.tip] || s.tip || '')}${
+          s.zametka ? ', ' + s.zametka : ''}</div></span>
+        <span class="prj-c"></span></a>`;
+    }).join('') : '<div class="net">связей не записано</div>'}
+    <a class="kon-dob" id="sv-dob">+ связь</a></div>`;
+}
+
+function materialy_blok() {return '<div class="b"><div id="person-materials" data-material-add-id="mat-dob"></div></div>';}
+function dokumenty_blok() {return '<div class="b"><div id="person-documents" data-material-add-id="dok-dob"></div></div>';}
+
+                                                         
+                                                                  
+                                                                    
+                                                                      
+function proveritIstoriju(value){
+  const rowsOk=rows=>Array.isArray(rows)&&rows.every(row=>row&&['zadachi','izmenenie'].includes(row.tip)&&typeof row.kljuch==='string'&&(row.kogda===null||typeof row.kogda==='string'&&Number.isFinite(row.moment)));
+  if(!value||!rowsOk(value.spisok)||!Number.isSafeInteger(value.vsego)||value.vsego<value.spisok.length||!(value.prodolzhit===null||typeof value.prodolzhit==='string')||!value.po_roljam||typeof value.po_roljam!=='object'||Object.entries(value.po_roljam).some(([key,group])=>!/^\d+$/.test(key)||!group||!rowsOk(group.spisok)||!Number.isSafeInteger(group.vsego)||group.vsego<group.spisok.length))throw new Error('Не подтверждена история');
+  return value;
+}
+function prinjatIstoriju(value){
+  const data=proveritIstoriju(value),opened=historyStates.get('all')?.expanded||false;
+  ISTORIJA=data.spisok;historyStates.clear();historyStates.set('all',{rows:data.spisok,total:data.vsego,cursor:data.prodolzhit,expanded:opened,firstLoaded:true,busy:false,error:''});
+  for(const [key,group] of Object.entries(data.po_roljam))if(/^\d+$/.test(key)&&Array.isArray(group.spisok)&&Number.isSafeInteger(group.vsego))historyStates.set(key,{rows:group.spisok,total:group.vsego,cursor:null,expanded:false,firstLoaded:false,busy:false,error:''});
+}
+function strokaIstorii(row){
+  const esc=O.ekranirovat,labels={...POLJA,imja:'имя',nazvanie:'название',status:'статус',otvetstvennyj:'ответственный',kto_vedet:'ведущий',srok:'срок',sprint:'спринт',god_sprinta:'год спринта',napravlenie:'направление',klient_id:'человек',chelovek_id:'человек',sotrudnichestvo_id:'сотрудничество',proekt_id:'проект',udaleno:'удаление',kasanie:'общение',poslednjaja_zadacha:'последняя задача',stoimost:'стоимость',procent:'процент',procent_shkala:'шкала процентов',vyplacheno:'выплачено',nalog:'налог',dogovor_nomer:'номер договора',dogovor_id:'документ договора',kontakt_id:'контакт по направлению',rekomendoval_id:'кто рекомендовал',rassylka_id:'рассылка',istochnik:'источник',istochnik_tekst:'уточнение источника',privodit_klientov:'приводит клиентов',usluga_id:'услуга',aktiven:'активность',rol_v_baze:'тип записи',dostup:'доступ'};
+  const archiveTitle=LocusArchiveView.transition(row);
+  const title=row.tip==='zadachi'?(row.nomer?'Закрыта задача №'+row.nomer:'Закрыта задача'):[row.chto,archiveTitle||labels[row.pole]||row.pole].filter(Boolean).join(': ');
+  const name=row.tip==='zadachi'?row.nazvanie:null;
+  const main=name?(row.nomer&&!row.udaleno?`<a class="history-task" href="/zadachi.html?nomer=${Number(row.nomer)}" data-history-task="${Number(row.nomer)}">${esc(title+': '+name)}</a>`:`<span class="history-text">${esc(title+': '+name)}</span>`):`<span class="history-text">${esc(title)}${!archiveTitle&&(row.bylo||row.stalo)?': '+esc(slovo(row.pole,row.bylo))+' → '+esc(slovo(row.pole,row.stalo)):''}</span>`;
+  const context=[row.napravlenie?O.naprPoKodu(row.napravlenie).imja:null,row.rol?slovo('rol',row.rol):null].filter(Boolean).join(', ');
+  const date=row.kogda?(row.vremja_neizvestno?SPR.data(row.kogda)+', время неизвестно':new Intl.DateTimeFormat('ru-RU',{timeZone:'Europe/Moscow',day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}).format(new Date(row.moment))+' МСК'):'дата неизвестна';
+  return `<div class="zh" data-history-event="${esc(row.kljuch)}">${main}<span class="zh-d">${esc(date)}, ${esc(row.kto_imja||'автор неизвестен')}</span>${context?`<div class="history-context">${esc(context)}</div>`:''}${row.udaleno?'<div class="history-context">задача удалена, событие сохранено</div>':''}${row.kontekst_ne_podtverzhden?'<div class="history-context history-warning">Прежняя роль и направление не подтверждены; показана текущая связь.</div>':''}${row.svjaz_ne_podtverzhdena?'<div class="history-context history-warning">Связь с сотрудничеством нужно проверить.</div>':''}</div>`;
+}
+function soderzhimoeIstorii(key){
+  const state=historyStates.get(key)||{rows:[],total:0},rows=state.expanded?state.rows:state.rows.slice(0,3),esc=O.ekranirovat;
+  const button=(action,text,extra='')=>`<button type="button" class="kn history-action" data-history-action="${action}" data-history-key="${key}"${extra}${state.busy?' disabled':''}>${text}</button>`;
+  return (rows.length?rows.map(strokaIstorii).join(''):'<div class="net">событий не записано</div>')+`<div class="history-actions">${state.total>3?button('toggle',state.expanded?'свернуть':`вся история, ${state.total} ${sklZapis(state.total)}`,key==='all'?' id="zh-tog"':''):''}${state.expanded&&(state.cursor||!state.firstLoaded)?button('more',state.busy?'загружается…':'показать ещё'):''}${state.error?button('refresh','обновить историю'):''}</div>`+(state.error?`<div class="history-error" role="status">${esc(state.error)}</div>`:'');
+}
+function istorijaBlok(key){return `<div class="history-root" data-history-scope="${key}">${soderzhimoeIstorii(key)}</div>`;}
+function obnovitIstorijuDOM(){document.querySelectorAll('[data-history-scope]').forEach(root=>{root.innerHTML=soderzhimoeIstorii(root.dataset.historyScope);});}
+async function dejstvieIstorii(key,action){
+  const state=historyStates.get(key);if(!state||state.busy)return;
+  if(action==='toggle'){state.expanded=!state.expanded;obnovitIstorijuDOM();if(!state.expanded||state.firstLoaded)return;}
+  state.busy=true;state.error='';obnovitIstorijuDOM();
+  try{
+    const q=new URLSearchParams();if(key!=='all')q.set('sotrudnichestvo_id',key);
+    if(action==='more'&&state.firstLoaded&&state.cursor)q.set('prodolzhit',state.cursor);
+    const data=proveritIstoriju(await zaprosZadachi('GET','/ljudi/'+id+'/istorija?'+q));
+                                                                                  
+    if(historyStates.get(key)!==state)return;
+    const append=action==='more'&&state.firstLoaded&&state.cursor;
+    state.rows=append?[...new Map([...state.rows,...data.spisok].map(row=>[row.kljuch,row])).values()]:data.spisok;
+    state.total=data.vsego;state.cursor=data.prodolzhit;state.firstLoaded=true;
+  }catch(error){if(historyStates.get(key)===state)state.error=error.kod===409?'История изменилась. Обнови её.':'Не удалось загрузить историю. Уже показанные события сохранены.';}
+  finally{state.busy=false;obnovitIstorijuDOM();}
+}
+document.addEventListener('pointerdown',event=>{if(event.target.closest('[data-history-action]'))event.preventDefault();});
+document.addEventListener('click',event=>{
+  const control=event.target.closest('[data-history-action]');if(control){event.preventDefault();dejstvieIstorii(control.dataset.historyKey,control.dataset.historyAction);return;}
+  const task=event.target.closest('[data-history-task]');if(task&&!event.ctrlKey&&!event.metaKey&&!event.shiftKey&&!event.altKey&&event.button===0){event.preventDefault();O.otkrytZadachu(Number(task.dataset.historyTask));}
+});
+function zhurnal_blok(){return '<div class="b"><div class="b-l">история человека</div>'+istorijaBlok('all')+'</div>';}
+
+function sklZapis(n) {
+  const o = n % 10, s = n % 100;
+  if (o === 1 && s !== 11) return 'запись';
+  if (o >= 2 && o <= 4 && (s < 12 || s > 14)) return 'записи';
+  return 'записей';
+}
+
+function accountBlock(){
+ const platforms={telegram:'Telegram',instagram:'Instagram',vk:'ВКонтакте',youtube:'YouTube',dzen:'Дзен',tiktok:'TikTok'},rows=ACCOUNTS?.spisok||[],managed=ACCOUNTS?.vedet||[];
+ const row=(a,scope)=>'<div class="account-card-row" data-account-id="'+a.id+'" data-account-owner-scope="'+scope+'"><a href="/akkaunt.html?id='+a.id+'">'+O.ekranirovat(a.nazvanie||platforms[a.ploshadka]||'Аккаунт')+'</a><span class="account-card-title">'+O.ekranirovat(a.zagolovok||a.nazvanie||'')+'</span><span class="account-card-title">'+O.ekranirovat(platforms[a.ploshadka]||'площадка не указана')+(a.udalen?' · удалён':!a.aktiven?' · сбор остановлен':'')+'</span>'+(a.proekt_id?'<a class="account-card-title" href="/proekt.html?id='+a.proekt_id+'">'+O.ekranirovat(a.proekt_nazvanie||'открыть проект')+'</a>':'')+'</div>';
+ return '<div class="b" id="client-accounts"><div class="b-l">аккаунты клиента</div>'+(ACCOUNTS?.oshibka?'<div class="net">Не удалось загрузить аккаунты. <button class="kn" type="button" data-account-load-retry>повторить загрузку</button></div>':(rows.map(a=>row(a,'client')).join('')||'<div class="net">аккаунтов пока нет</div>')+(managed.length?'<div class="b-l">ведёт аккаунты</div>'+managed.map(a=>row(a,'manager')).join(''):''))+'<div id="client-account-create"></div></div>';
+}
+async function refreshAccounts(){
+ ACCOUNTS=await API.odna('ljudi',id+'/akkaunty');const old=document.getElementById('client-accounts');if(!old)return;const fragment=document.createElement('div');fragment.innerHTML=accountBlock();old.replaceWith(fragment.firstElementChild);await mountClientAccountCreate();
+}
+async function mountClientAccountCreate(){
+ const host=document.getElementById('client-account-create');if(!host)return;
+ const retry=document.querySelector('[data-account-load-retry]');retry?.addEventListener('click',()=>{retry.disabled=true;refreshAccounts().catch(()=>{retry.disabled=false;O.tost('Аккаунты не загрузились. Попробуй ещё раз.');});});
+ if(ACCOUNTS?.oshibka)return;
+ try{const module=await O.accountCreate();if(!host.isConnected)return;const address=new URL(location.href),open=address.searchParams.get('dobavit_akkaunt')==='1';module.mount({host,scope:'client:'+id,context:{klient_id:id,napravlenie:address.searchParams.get('napravlenie')},projects:C.proekty||[],people:SPRAV.ljudi,knownIds:(ACCOUNTS.spisok||[]).map(a=>a.id),platform:address.searchParams.get('ploshadka'),open,onCreated:async()=>{O.tost('Аккаунт создан');await refreshAccounts();},onAddCooperation:document.getElementById('sotr-dob')?()=>document.getElementById('sotr-dob').click():null});if(open){address.searchParams.delete('dobavit_akkaunt');history.replaceState(history.state,'',address);host.scrollIntoView({block:'start'});}}
+ catch(error){if(host.isConnected)host.textContent=error.message;}
+}
+
+function narisovat() {
+  stopContactDrag?.();stopContactDrag=null;
+  shapka();
+                                                         
+                                             
+  document.querySelectorAll('[data-prx]').forEach((e) => {
+    if (e.dataset.gotov) return;
+    e.dataset.gotov = '1';
+    e.addEventListener('click', () =>
+      document.getElementById(e.dataset.prx)?.click());
+  });
+                                                                 
+                                                             
+  const sotr = SOTR.map(sotrudnichestvo);
+  document.getElementById('levo').innerHTML =
+    kontakty() + (sotr.length ? sotr.map((x) => x.polja).join('') : '');
+                                                                     
+                                                               
+                                                               
+  document.getElementById('centr').innerHTML =
+    (sotr.length ? sotr.map((x) => x.rabota).join('')
+      : '<div class="b"><div class="net">сотрудничеств нет</div></div>') +
+                                                         
+    '<div class="b">' + (C.chelovek.rol_v_baze==='kontaktnoe_lico' ? '' : '<a class="kon-dob" id="sotr-dob">+ направление</a>') +
+    '<a class="kon-dob" id="zad-dob" style="margin-left:16px">+ задача</a></div>' +
+    drugieZadachi() + accountBlock() + dokumenty_blok() + materialy_blok();
+  document.getElementById('pravo').innerHTML =
+    dengi_blok() + svjazi_blok() + zhurnal_blok();
+
+  mountClientAccountCreate();
+  document.querySelector('[data-person-archive]')?.addEventListener('click',()=>Archive.open({tablica:'ljudi',id},id));
+  document.querySelectorAll('[data-role-archive]').forEach(button=>button.addEventListener('click',()=>Archive.open({tablica:'sotrudnichestva',id:Number(button.dataset.roleArchive)},id)));
+  Archive.mount();
+
+                                                             
+  document.querySelectorAll('[data-opl]').forEach((e) =>
+    e.addEventListener('click', () => O.otmetitOplatu(Number(e.dataset.opl), {
+      proekt_id: Number(e.dataset.proekt),
+      posle: async () => { await zagruzit(); narisovat(); },
+    })));
+                                                                   
+  privjazatKontakty();
+  privjazatPeretaskivanie();
+
+                                                              
+  document.getElementById('kl-im')?.addEventListener('dblclick', (ev) => {
+    const e = ev.currentTarget;
+    const person=C.chelovek;
+    pole_vvoda(e, person.imja, async (novoe) => {
+      if (!novoe.trim()) throw new Error('имя пустым не бывает');
+      return pravit_uvidennoe('ljudi',person,{imja:novoe.trim()},true);
+    });
+  });
+
+  O.vkljuchitDejstvijaZadach(document, async () => { await zagruzit(); narisovat(); });
+  vkljuchitPravku();
+  O.ponumerovat();
+}
+
+function privjazatKontakty(root=document) {
+  root.querySelectorAll('[data-kon-value-check]').forEach(button=>button.addEventListener('click',event=>{
+    event.stopPropagation();unknownContactValues.get(Number(button.dataset.konValueCheck))?.check();
+  }));
+  root.querySelectorAll('[data-kon-pending-input]').forEach(input=>input.addEventListener('keydown',event=>{
+    if(event.key==='Enter'){event.preventDefault();unknownContactValues.get(Number(input.dataset.konPendingInput))?.check();}
+    if(event.key==='Escape')event.preventDefault();
+  }));
+  root.querySelectorAll('[data-kon-primary]').forEach(button=>button.addEventListener('click',event=>{
+    event.stopPropagation();const row=(C.kontakty||[]).find(x=>x.id===Number(button.dataset.konPrimary));if(row)vybratOsnovnojKontakt(row);
+  }));
+  root.querySelectorAll('[data-kon-primary-check]').forEach(button=>button.addEventListener('click',event=>{
+    event.stopPropagation();const row=(C.kontakty||[]).find(x=>x.id===Number(button.dataset.konPrimaryCheck));if(row)unknownPrimaryChoices.get(row.tip)?.check();
+  }));
+  const rows=root.matches?.('.kon')?[root]:Array.from(root.querySelectorAll('.kon'));
+  for(const row of rows){
+    if(row.dataset.swipeReady)continue;row.dataset.swipeReady='1';let start=null,moved=false;
+    const mobile=()=>matchMedia('(max-width:760px)').matches;
+    const open=()=>{document.querySelectorAll('.kon.swipe-open').forEach(other=>{if(other!==row)other.classList.remove('swipe-open');});row.classList.add('swipe-open');};
+    row.addEventListener('pointerdown',event=>{
+      moved=false;start=null;
+      if(!mobile()||event.pointerType==='mouse'||!event.isPrimary||event.target.closest('input,textarea,button,[data-kon-x]'))return;
+      start={id:event.pointerId,x:event.clientX,y:event.clientY};
+    });
+    row.addEventListener('pointerup',event=>{
+      if(!start||start.id!==event.pointerId)return;
+      const dx=event.clientX-start.x,dy=event.clientY-start.y;start=null;
+      if(Math.abs(dx)<48||Math.abs(dx)<=Math.abs(dy)*1.4)return;
+      moved=true;if(dx<0)open();else row.classList.remove('swipe-open');
+    });
+    row.addEventListener('pointercancel',()=>{start=null;});
+    row.addEventListener('click',event=>{if(moved&&!event.target.closest('[data-kon-x]')){moved=false;event.preventDefault();event.stopImmediatePropagation();}},true);
+    row.addEventListener('keydown',event=>{
+      if(!mobile())return;
+      if(event.key==='Escape'&&row.classList.contains('swipe-open')){event.preventDefault();event.stopPropagation();row.classList.remove('swipe-open');row.querySelector('.kon-z')?.focus({preventScroll:true});return;}
+      if(!event.target.matches('.kon-z')||event.target.dataset.pravim==='1')return;
+      if(event.key==='ArrowLeft'){event.preventDefault();event.stopPropagation();open();row.querySelector('.kon-delete-mobile')?.focus();}
+      else if(event.key==='ArrowRight'||event.key==='Escape'){event.preventDefault();event.stopPropagation();row.classList.remove('swipe-open');}
+    });
+  }
+                                                        
+                                                     
+  root.querySelectorAll('[data-pravka-kontakta]').forEach((e) => {
+    let zhdjom = null,poslednijTap=0;
+    e.addEventListener('click', (event) => {
+      if(e.dataset.pravim==='1'){poslednijTap=0;return;}
+      const touch=event.pointerType==='touch'||event.sourceCapabilities?.firesTouchEvents;
+      if(touch&&poslednijTap&&event.timeStamp-poslednijTap<350){
+        event.preventDefault();clearTimeout(zhdjom);zhdjom=null;poslednijTap=0;
+        if(e.dataset.pravkaKontakta)pravka_kontakta(e);return;
+      }
+      poslednijTap=touch?event.timeStamp:0;
+      if(zhdjom)return;
+      zhdjom = setTimeout(async () => {
+        zhdjom = null;
+        if(!e.isConnected)return;
+        const contact=(C.kontakty||[]).find(x=>x.id===Number(e.dataset.pravkaKontakta));if(!contact)return;
+        const result=await O.kopirovat(contact.pokaz??contact.znachenie);
+        if(result==='ruchnoj'||!e.isConnected)return;
+        e.classList.add('gotovo');
+        setTimeout(() => e.classList.remove('gotovo'), 1200);
+      }, touch?350:240);
+    });
+    e.addEventListener('dblclick', (ev) => {
+      ev.preventDefault();
+      clearTimeout(zhdjom); zhdjom = null;poslednijTap=0;
+      if (e.dataset.pravkaKontakta) pravka_kontakta(e);
+    });
+  });
+  root.querySelectorAll('.kon-toolbar').forEach(toolbar=>O.zaschititVneshnieSsylki(toolbar));
+  root.querySelectorAll('[data-kon-copy]').forEach(button=>button.addEventListener('click',async event=>{
+    event.stopPropagation();const contact=(C.kontakty||[]).find(x=>x.id===Number(button.dataset.konCopy));
+    if(contact)await O.kopirovat(contact.pokaz??contact.znachenie);
+  }));
+  root.querySelectorAll('[data-kon-x]').forEach(e=>e.addEventListener('click',async event=>{
+    event.stopPropagation();const k=(C.kontakty||[]).find(row=>row.id===Number(e.dataset.konX));
+    if(k)await udalitKontakt(k);
+  }));
+}
+
+                                                                        
+async function udalitKontakt(k){
+  const nomer=k.id;
+  if(deletingContacts.has(nomer))return false;
+  if(unknownContactDeletes.has(nomer))return unknownContactDeletes.get(nomer)();
+  if(!kontaktMozhnoMenjat(k.tip,nomer)){O.tost('Сначала заверши правку или проверку контактов этого вида');return false;}
+  let options;try{options={zapros_kljuch:kljuchUdalenija(),versija:k.versija,chelovek_id:k.chelovek_id,tip:k.tip};}
+  catch{O.tost('Не удалось подготовить удаление. Обнови страницу.');return false;}
+  const resetUnknown=()=>{
+    unknownContactDeletes.delete(nomer);
+    const row=document.querySelector('[data-kontakt-row="'+nomer+'"]');row?.querySelector('.kon-check-inline')?.remove();
+    const input=row?.querySelector('input.kon-vvod');if(input)input.readOnly=false;
+    document.querySelectorAll('[data-kon-x="'+nomer+'"]').forEach(button=>{button.classList.remove('proverka-udalenija');button.title='убрать контакт';button.setAttribute('aria-label',button.classList.contains('kon-delete-mobile')?'Удалить':'убрать контакт');if(button.classList.contains('kon-delete-mobile'))button.textContent='Удалить';});
+  };
+  const apply=removed=>{
+    resetUnknown();
+    if(!removed.deleted){O.tost(removed.scope_changed?'Контакт изменился. Обнови карточку перед удалением.':'Контакт остался в базе. Можно повторить удаление.');return false;}
+    primenitGruppuKontaktov(removed.osnovnaja_gruppa);
+    if(!removed.token_otmeny){O.tost('Контакта уже нет в базе. Окно возврата недоступно.');return true;}
+    const vernut=async()=>{
+      if(!kontaktMozhnoMenjat(k.tip)){O.tost('Сначала заверши правку или проверку контактов этого вида');return;}
+      busyContactKinds.add(k.tip);
+      try{const restored=await API.dejstvie('/kontakty/otmena',{token_otmeny:removed.token_otmeny});primenitGruppuKontaktov(restored.osnovnaja_gruppa);}
+      catch(error){
+        if(error.telo?.sessija_izmenilas)return;
+        const unknown=error.kod===undefined||error.kod>=500||error.kod===401;
+        O.tost(unknown?'Возврат не подтверждён. Можно проверить его тем же действием.':'Не удалось выполнить отмену: '+error.message,
+          unknown?vernut:undefined,{label:'проверить возврат',ms:7000});return;
+      }
+      finally{busyContactKinds.delete(k.tip);}
+      O.tost('Контакт возвращён');
+    };
+    O.tost('Удалено',vernut,{label:'Вернуть',ms:7000});return true;
+  };
+  const markUnknown=()=>{
+    unknownContactDeletes.set(nomer,check);
+    const row=document.querySelector('[data-kontakt-row="'+nomer+'"]'),input=row?.querySelector('input.kon-vvod');
+    if(input){
+      input.readOnly=true;
+      if(!row.querySelector('.kon-check-inline')){const button=document.createElement('button');button.type='button';button.className='kn kon-check-inline';button.textContent='проверить удаление';button.addEventListener('click',event=>{event.stopPropagation();if(unknownContactDeletes.has(nomer))check();});row.appendChild(button);}
+    }
+    document.querySelectorAll('[data-kon-x="'+nomer+'"]').forEach(button=>{button.classList.add('proverka-udalenija');button.title='проверить удаление';button.setAttribute('aria-label','проверить удаление');if(button.classList.contains('kon-delete-mobile'))button.textContent='проверить';});
+    O.tost('Удаление не подтверждено. Можно проверить результат без нового удаления.',check,{label:'проверить удаление',ms:7000});
+  };
+  const check=async()=>{
+    if(deletingContacts.has(nomer)||busyContactKinds.has(k.tip))return false;deletingContacts.add(nomer);busyContactKinds.add(k.tip);
+    try{return apply(await API.udalit('kontakty',nomer,{...options,proverit:true}));}
+    catch(error){if(!error.telo?.sessija_izmenilas)markUnknown();return false;}
+    finally{deletingContacts.delete(nomer);busyContactKinds.delete(k.tip);}
+  };
+  deletingContacts.add(nomer);busyContactKinds.add(k.tip);
+  try{
+    const removed=await pravit_uvidennoe('kontakty',k,{znachenie:''},false,true,options);
+    if(!removed)return false;return apply(removed);
+  }catch(error){
+    if(error.telo?.sessija_izmenilas)return false;
+    if(error.kod===undefined||error.kod>=500)markUnknown();else O.tost('Не получилось: '+error.message);return false;
+  }finally{deletingContacts.delete(nomer);busyContactKinds.delete(k.tip);}
+}
+
+                                  
+                                                                
+                                                         
+                                                                
+                                                         
+                                           
+async function pravit_uvidennoe(table,record,fields,typed=false,remove=false,extra={}){
+  if(!record || !Number.isSafeInteger(Number(record.versija)))throw new Error('Обнови карточку перед правкой');
+  const key=record.id,field=Object.keys(fields)[0];let version=record.versija;
+  const labels={imja:'имя',gorod:'город',nisha:'ниша',zametka:'заметка',kontekst:'контекст',
+    osobennosti:'особенности',istochnik:'источник прихода',istochnik_tekst:'источник',rol:'роль',stadija:'стадия',svoja_stadija:'своя стадия',znachenie:'контакт'};
+  for(;;){
+    try{if(remove)extra.versija=version;return remove ? await API.udalit(table,key,{...extra,versija:version})
+      : table==='kontakty'&&Object.keys(fields).length===1&&field==='znachenie'
+        ? await API.pravitZnachenieKontakta({...record,versija:version},fields.znachenie,extra)
+        : await API.pravit(table,key,{versija:version,...fields});}
+    catch(error){
+      if(error.kod!==409 || !error.telo?.tekuschee)throw error;
+      const live=error.telo.tekuschee;
+      if(table==='kontakty'&&(live.chelovek_id!==record.chelovek_id||live.tip!==record.tip))throw API.oshibkaKontekstaKontakta();
+      const sourceText=async row=>{
+        const code=row.istochnik;if(!code)return 'источник не указан';
+        let detail=row.istochnik_tekst;
+        if(code==='rekomendacija'&&row.rekomendoval_id){
+          const person=await API.odna('ljudi',row.rekomendoval_id).catch(()=>null);
+          detail=person?[person.imja,person.gorod,person.primary_phone_pokaz||person.primary_phone||person.primary_email].filter(Boolean).join(', '):'#'+row.rekomendoval_id;
+        }
+        if(code==='rassylka'&&row.rassylka_id){
+          const campaign=await API.odna('rassylki',row.rassylka_id).catch(()=>null);
+          detail=campaign?.nazvanie||'#'+row.rassylka_id;
+        }
+        return [slovo('istochnik',code),detail].filter(Boolean).join(': ');
+      };
+      const descriptions=field==='istochnik'?await Promise.all([sourceText({...record,...fields}),sourceText(live)]):null;
+      const choice=await O.razreshitKonflikt(error,{label:labels[field]||'поле',
+        local:remove?'убрать контакт':descriptions?.[0]??slovo(field,fields[field]),current:descriptions?.[1]??slovo(field,live[field])});
+      if(choice==='load'){if(table==='kontakty'&&remove)obnovitKontakt(live);return null;}
+      if(choice!=='own'){
+        if(typed)throw Object.assign(new Error('Правка оставлена в поле'),{locusCancelled:true});
+        return null;
+      }
+      version=live.versija;
+    }
+  }
+}
+
+function pole_vvoda(uzel, znachenie, sohranit, hint='text',nastroit) {
+  if (uzel.dataset.pravim === '1') return;
+  uzel.dataset.pravim = '1';
+  const bylo = uzel.innerHTML;
+  const vvod = document.createElement('input');
+  vvod.className = 'kon-vvod';
+  vvod.type=['text','tel','email','url'].includes(hint)?hint:'text';
+  vvod.inputMode=vvod.type==='tel'?'tel':vvod.type==='email'?'email':vvod.type==='url'?'url':'text';
+  vvod.value = znachenie || '';
+  uzel.innerHTML = '';
+  uzel.appendChild(vvod);
+  vvod.focus();
+  vvod.select();
+  const editor=nastroit?.(vvod);
+  let zakryto = false,saving=false;
+  const vernut = () => {
+    if (zakryto || saving || editor?.ozhidaetProverki?.()) return;
+    zakryto = true;
+    editor?.dispose();
+    uzel.dataset.pravim = '';
+    uzel.innerHTML = bylo;
+  };
+  const prinjat = async (focusInvalid=true) => {
+    if (zakryto || saving) return;
+    if(editor?.ozhidaetProverki?.()){if(focusInvalid)await editor.proveritRezultat();return;}
+    const novoe = vvod.value.trim();
+    if (novoe === String(znachenie || '').trim() || editor?.neIzmenilsja(novoe,znachenie)) { vernut(); return; }
+    if(editor?.proverit&&!editor.proverit()){if(focusInvalid)vvod.focus();return;}
+    saving=true;vvod.disabled=true;editor?.blokirovat(true);
+    try {
+      const result=await sohranit(novoe);
+      zakryto=true;uzel.dataset.pravim='';
+      editor?.dispose();
+      if(result?.locusPartial){if(result.locusNotice)O.tost(result.locusNotice);return;}
+      try{await zagruzit();narisovat();if(result!==null)O.tost('Записали');}
+      catch{O.tost(result!==null?'Изменение сохранено. Карточка не обновилась, обнови страницу':'Карточка не обновилась, обнови страницу');}
+    } catch (e) {
+      vvod.disabled=false;
+      if(e.contactValueUnknown&&editor?.nePodtverzhdeno)editor.nePodtverzhdeno(e);
+      else if(!e.locusCancelled)O.tost('Не получилось: ' + e.message);
+      if(focusInvalid&&vvod.isConnected)vvod.focus();
+    }finally{saving=false;editor?.blokirovat(false);}
+  };
+  vvod.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Enter') { ev.preventDefault(); prinjat(); }
+    if (ev.key === 'Escape') { ev.preventDefault(); vernut(); }
+  });
+  const blur=()=>{if(!editor){if(!vvod.readOnly)prinjat(false);return;}setTimeout(()=>{if(!vvod.readOnly&&!editor.uderzhatFocus(document.activeElement))prinjat(false);},0);};
+  vvod.addEventListener('blur',blur);editor?.container?.addEventListener('focusout',blur);
+}
+
+function ubratProshlyjStatusKontakta(){
+  const notice=document.querySelector('.tost');
+  if(notice&&!notice.querySelector('a,button,[role="button"]')&&!notice.classList.contains('locus-session-restored'))notice.remove();
+}
+function pravka_kontakta(e,draftValue) {
+  const nomer = Number(e.dataset.pravkaKontakta);
+  const k = (C.kontakty || []).find((x) => x.id === nomer);
+  if (!k) return;
+  if(unknownContactValues.has(nomer)){unknownContactValues.get(nomer).check();return;}
+  if(unknownContactDeletes.has(nomer)){unknownContactDeletes.get(nomer)();return;}
+  if(!kontaktMozhnoMenjat(k.tip,nomer)){O.tost('Сначала заверши правку или проверку контактов этого вида');return;}
+  ubratProshlyjStatusKontakta();
+  let phoneEditor,inlineValidation;
+  pole_vvoda(e, k.znachenie, async (novoe) => {
+    if(!novoe||unknownContactDeletes.has(nomer)){
+      if(await udalitKontakt(k))return {locusPartial:true};
+      throw Object.assign(new Error('Удаление контакта ещё не подтверждено'),{locusCancelled:true});
+    }
+    if(!kontaktMozhnoMenjat(k.tip,nomer))throw new Error('Сначала заверши правку или проверку контактов этого вида');
+    busyContactKinds.add(k.tip);
+    try{
+      const options=phoneEditor?await phoneEditor.parametry(true):{};
+      const saved=await pravit_uvidennoe('kontakty',k,{znachenie:novoe},true,false,options);
+      if(saved)primenitGruppuKontaktov(saved.osnovnaja_gruppa);
+      else primenitGruppuKontaktov(await API.gruppaKontaktov(id,k.tip));
+      return {locusPartial:true,locusNotice:saved?'Записали':'Показали сохранённое'};
+    }catch(error){
+      const phoneError=['invalid_phone','invalid_phone_chars','phone_mask_mismatch','phone_country_mismatch','invalid_phone_options','neizvestnaja_strana'].includes(error.code);
+      if(!error.locusCancelled&&(error.kod===400||error.kod===422||error.kod===409&&error.telo?.kod==='dubl_kontakta'||phoneError)){
+        inlineValidation.pokazat(error.message);error.locusCancelled=true;
+      }
+      throw error;
+    }finally{busyContactKinds.delete(k.tip);}
+  },k.podskazka_vvoda,input=>{
+    if(draftValue!==undefined)input.value=draftValue;
+    const phone=k.tip==='telefon',container=document.createElement('div');container.className=phone?'phone-widget phone-widget-inline':'contact-inline-validation';e.closest('.kon').append(container);
+    if(phone){phoneEditor=LocusTelefonInput.podkljuchit(input,container,{existing:true});phoneEditor.setActive(true);}
+    const message=document.createElement('span');message.className='fch-osh contact-inline-error';message.id='kontakt-oshibka-'+nomer;message.setAttribute('role','status');message.setAttribute('aria-live','polite');container.prepend(message);input.setAttribute('aria-describedby',message.id);
+    const pokazat=text=>{if(message.textContent!==text)message.textContent=text;input.setAttribute('aria-invalid',String(Boolean(text)));if(!phone)container.hidden=!text;};
+    const proverit=()=>{if(!input.value.trim()){pokazat('');return true;}try{LocusValidacijaKontakta.proverit(k.tip,input.value);pokazat('');return true;}catch(error){pokazat(error.message);return false;}};
+    const waiting=()=>unknownContactValues.has(nomer);
+    const checkButton=document.createElement('button');checkButton.type='button';checkButton.className='kn kon-check-inline';checkButton.dataset.konValueCheck=String(nomer);checkButton.textContent='проверить сохранение';
+    let checking=false;
+    const checkResult=async()=>{
+      const state=unknownContactValues.get(nomer);if(!state||checking||busyContactKinds.has(k.tip))return;
+      ubratProshlyjStatusKontakta();
+      checking=true;busyContactKinds.add(k.tip);
+      document.querySelectorAll('[data-kon-value-check="'+nomer+'"]').forEach(b=>b.disabled=true);
+      try{
+        const result=await API.proveritZnachenieKontakta(state.record,state.desired);
+        const group=API.proveritGruppuKontaktov(result.kontakt.osnovnaja_gruppa,id,k.tip);
+        if(!group.spisok.some(row=>row.id===result.kontakt.id&&row.versija===result.kontakt.versija&&row.znachenie===result.kontakt.znachenie))throw new Error('Не удалось подтвердить полное состояние контакта');
+        if(!result.podtverzhdeno){
+          const choice=await O.razreshitKonflikt({telo:{tekuschee:result.kontakt}},{heading:'Проверка сохранения',lead:'Проверили сохранённое значение',label:'контакт',local:state.draft,current:pokazKontakta(result.kontakt),intro:'Сейчас сохранено другое значение. Твой ввод остался в поле.',ownLabel:'оставить мой ввод для правки',loadLabel:'показать сохранённое'});
+          if(!['own','load'].includes(choice))return;
+          unknownContactValues.delete(nomer);primenitGruppuKontaktov(group);
+          if(choice==='own'){
+            busyContactKinds.delete(k.tip);const target=document.querySelector('[data-pravka-kontakta="'+nomer+'"]');if(target)pravka_kontakta(target,state.draft);
+            O.tost('Ввод оставлен в поле. Проверь его перед сохранением.');
+          }else O.tost('Показали сохранённое');
+          return;
+        }
+        unknownContactValues.delete(nomer);primenitGruppuKontaktov(group);O.tost('Проверено: сейчас сохранено введённое значение');
+      }catch(error){
+        if(!error.telo?.sessija_izmenilas){const status=document.querySelector('[data-kon-value-status="'+nomer+'"]');if(status)status.textContent='Проверка не завершена. Ввод сохранён в поле. '+error.message;}
+      }finally{checking=false;busyContactKinds.delete(k.tip);document.querySelectorAll('[data-kon-value-check="'+nomer+'"]').forEach(b=>b.disabled=false);}
+    };
+    const nePodtverzhdeno=error=>{
+      unknownContactValues.set(nomer,{record:{...k},draft:input.value,desired:error.desiredValue,check:checkResult});
+      input.readOnly=true;input.setAttribute('aria-invalid','false');message.className='phone-mask-hint contact-inline-error';message.dataset.konValueStatus=String(nomer);message.textContent='Сохранение не подтверждено. Ввод сохранён в поле.';container.hidden=false;if(!checkButton.isConnected)container.append(checkButton);
+    };
+    checkButton.addEventListener('click',event=>{event.stopPropagation();checkResult();});
+    input.addEventListener('input',proverit);if(!phone)container.hidden=true;inlineValidation={pokazat};
+    return {container,proverit,neIzmenilsja:(value,original)=>Boolean(phoneEditor?.neIzmenilsja(value,original)),
+      ozhidaetProverki:waiting,proveritRezultat:checkResult,nePodtverzhdeno,
+      uderzhatFocus:target=>Boolean(phoneEditor?.uderzhatFocus(target)||container.contains(target)||input===target),blokirovat:value=>phoneEditor?.blokirovat(value),
+      dispose(){phoneEditor?.dispose();input.removeEventListener('input',proverit);container.remove();}};
+  });
+}
+
+
+function wireReferralPayout(root=document){
+  root.querySelectorAll('[data-referral-pay]').forEach(button=>{
+    if(button.dataset.payoutClickBound)return;button.dataset.payoutClickBound='1';
+    const sid=Number(button.dataset.referralPay),wire=()=>{const state=window.LocusReferralPayoutState;if(state&&!button.dataset.payoutBusyBound){button.dataset.payoutBusyBound='1';state.subscribe(sid,{root:button,render:()=>button.disabled=state.busy(sid)});}};wire();
+    button.addEventListener('click',async()=>{try{const module=await O.referralPayoutUi();wire();await module.open(sid,{after:async()=>{if(document.querySelector('[data-pravim="1"]')){O.tost('Отметка сохранена. Заверши текущую правку и обнови карточку');return;}await zagruzit();narisovat();}});}catch(error){O.tost(error.message);}});
+  });
+}
+
+function wireReferralTerms(root=document){
+ root.querySelectorAll('[data-referral-contract]').forEach(host=>O.zaschititVneshnieSsylki(host,{materialControls:false}));
+ root.querySelectorAll('[data-referral-terms]').forEach(button=>{
+  if(button.dataset.termsBound)return;button.dataset.termsBound='1';const sid=Number(button.dataset.referralTerms);
+  const wire=()=>{const state=window.LocusReferralTermsState;if(state&&!button.dataset.termsBusyBound){button.dataset.termsBusyBound='1';state.subscribe(sid,{root:button,render:()=>button.disabled=state.busy(sid)});}};wire();
+  button.addEventListener('click',async()=>{try{const module=await O.referralTermsUi();wire();await module.open(sid);}catch(error){O.tost(error.message);}});
+ });
+}
+
+function vkljuchitPravku() {
+  document.getElementById('obschenie-mark')?.addEventListener('pointerdown',event=>{if(document.querySelector('[data-pravim="1"]'))event.preventDefault();});
+  document.getElementById('obschenie-mark')?.addEventListener('click',otmetitObschenie);
+  document.getElementById('kon-export')?.addEventListener('pointerdown',event=>{
+    if(document.querySelector('[data-pravim="1"]'))event.preventDefault();
+  });
+  document.getElementById('kon-export')?.addEventListener('click',event=>vygruzitKartochkuCheloveka(event.currentTarget));
+  document.getElementById('kon-order')?.addEventListener('click',event=>porjadokKontaktov(event.currentTarget));
+                                                           
+                                                            
+                                                     
+
+                                                                  
+                                                                 
+                                                                       
+                                                                     
+                                                                   
+  document.querySelectorAll('[data-pravka]').forEach((e) =>
+    e.addEventListener('click', () => {
+      const [tablica, id, pole] = e.dataset.pravka.split(':');
+      const record=tablica==='ljudi'?C.chelovek:SOTR.find(s=>s.id===Number(id));
+      const bylo = e.querySelector('.pol-net') ? '' : e.textContent.trim();
+      pole_vvoda(e, bylo, async (novoe) => {
+        return pravit_uvidennoe(tablica,record,{[pole]:novoe},true);
+      });
+    }));
+
+                                                               
+                                           
+  document.querySelectorAll('[data-pravka-konteksta]').forEach((e) =>
+    e.addEventListener('click', () => {
+      const kod = e.dataset.pravkaKonteksta;
+      const s = SOTR.find((x) => x.napravlenie === kod);
+      if (!s) return;
+      pole_vvoda(e, s.kontekst, async (novoe) => {
+        return pravit_uvidennoe('sotrudnichestva',s,{kontekst:novoe},true);
+      });
+    }));
+
+                                                              
+                                                            
+                                                                 
+                                                    
+  const pravka_sotr = async (sid, polja, soobschenie) => {
+    const record=SOTR.find(s=>s.id===Number(sid));
+    const otvet=await pravit_uvidennoe('sotrudnichestva',record,polja);
+    if (soobschenie && otvet) O.tost(soobschenie);
+    if (otvet && otvet.plashka_kasanie && O.plashkaKasanija) {
+      O.plashkaKasanija(otvet.plashka_kasanie);
+    }
+    await zagruzit(); narisovat();
+    if(otvet&&polja.stadija==='k_vyplate'&&(otvet.rol==='referal'||otvet.privodit_klientov))try{await(await O.referralTasksUi()).open(Number(sid),{after:async()=>{await zagruzit();narisovat();}});}catch(error){O.tost(error.message);}
+  };
+
+  wireReferralPayout();wireReferralTerms();
+  document.querySelectorAll('[data-referral-tasks]').forEach(b=>{b.onclick=async()=>{try{await (await O.referralTasksUi()).open(Number(b.dataset.referralTasks),{after:async()=>{if(document.querySelector('[data-pravim="1"]')){O.tost('Задачи созданы. Заверши текущую правку и обнови карточку');return;}await zagruzit();narisovat();}});}catch(e){O.tost(e.message);}};});
+  document.querySelectorAll('[data-sotr-source]').forEach(button=>button.addEventListener('click',()=>{
+    const record=SOTR.find(row=>row.id===Number(button.dataset.sotrSource));
+    const source=O.istochnikPrihoda({prefix:'src',napravlenie:()=>record.napravlenie,znachenie:record});
+    O.modalka('Источник прихода',`<div class="fch" id="source-editor">${source.html}</div>`,null,{
+      podskazka:'сохранить источник',gotovo:async()=>{
+        const saved=await pravit_uvidennoe('sotrudnichestva',record,source.telo(),true);
+        try{await zagruzit();narisovat();}catch{O.tost(saved?'Источник сохранён. Обнови карточку':'Обнови карточку');}
+      },
+    });
+    source.podkljuchit(document.getElementById('source-editor'));
+  }));
+
+  document.querySelectorAll('[data-sotr-kontakt]').forEach(button=>button.addEventListener('click',()=>{
+    const record=SOTR.find(row=>row.id===Number(button.dataset.sotrKontakt));
+    let selected=record.kontakt_id||null, generation=0;
+    const close=O.modalka('Контакт по направлению', `
+      <div class="okno-kanon">
+        <input class="sozd-vvod" id="kontakt-poisk" placeholder="найти человека" aria-label="найти контактное лицо" autocomplete="off">
+        <div id="kontakt-najdeno"></div>
+        <a class="kon-dob" id="kontakt-sozdat" role="button" tabindex="0">+ новое контактное лицо</a>
+        <div class="fch-niz"><span class="fch-osh" id="kontakt-osh"></span></div>
+      </div>`,null,{gotovo:async()=>{
+        const saved=await pravit_uvidennoe('sotrudnichestva',record,{kontakt_id:selected},true);
+        try{await zagruzit();narisovat();}catch{O.tost(saved?'Контакт сохранён. Обнови карточку':'Обнови карточку');}
+      },podskazka:'сохранить контакт'});
+    const input=document.getElementById('kontakt-poisk'),results=document.getElementById('kontakt-najdeno');
+    const search=async()=>{
+      const seq=++generation;
+      try{
+        const response=await API.spisok('ljudi',{vse_roli:1,q:input.value.trim(),na_stranice:20});
+        if(seq!==generation||!results.isConnected)return;
+        results.innerHTML=`<a class="vyp-p${selected===null?' on':''}" role="button" tabindex="0" data-kontakt="">сам ${O.ekranirovat(C.chelovek.imja)}</a>`+
+          (response.spisok||[]).filter(person=>person.id!==id).map(person=>`<a class="vyp-p${selected===person.id?' on':''}" role="button" tabindex="0" data-kontakt="${person.id}">${O.ekranirovat(person.imja)}${person.rol_v_baze==='kontaktnoe_lico'?' — контактное лицо':''}</a>`).join('');
+      }catch(error){if(seq===generation)document.getElementById('kontakt-osh').textContent=error.message;}
+    };
+    let timer;input.addEventListener('input',()=>{clearTimeout(timer);timer=setTimeout(search,200);});
+    results.addEventListener('click',event=>{
+      const item=event.target.closest('[data-kontakt]');if(!item)return;
+      selected=item.dataset.kontakt?Number(item.dataset.kontakt):null;
+      results.querySelectorAll('[data-kontakt]').forEach(row=>row.classList.toggle('on',row===item));
+    });
+    document.getElementById('kontakt-sozdat').addEventListener('click',()=>{
+      close();O.formaCheloveka({kontakt_dlja:{sotrudnichestvo_id:record.id,versija:record.versija}},async()=>{await zagruzit();narisovat();});
+    });
+    search();input.focus();
+  }));
+  document.getElementById('kontakt-v-lidy')?.addEventListener('click',()=>{
+    const directions=SPRAV.napravlenija||[];
+    const linked=[...new Set((C.kontakty_napravlenij||[]).map(row=>row.napravlenie))];
+    let direction=linked.length===1?linked[0]:'';
+    O.modalka('Сделать собственным',`<div class="okno-kanon">
+      <div class="okno-pod">Человек станет лидом выбранного направления</div>
+      <span class="sozd-p vyp"><span class="sozd-lbl">направление</span>
+        <a class="sozd-pole" id="kontakt-lid-napr"><span class="sozd-t">${O.ekranirovat(directions.find(row=>row.kod===direction)?.imja||'выбрать направление')}</span><span class="str"></span></a></span>
+      <div class="fch-niz"><span class="fch-osh" id="kontakt-lid-osh"></span></div></div>`,null,{gotovo:async()=>{
+        if(!direction)throw new Error('выбери направление');
+        const saved=await pravit_uvidennoe('ljudi',C.chelovek,{rol_v_baze:'sobstvennyj',napravlenie_lida:direction},true);
+        try{await zagruzit();narisovat();}catch{O.tost(saved?'Человек стал собственным. Обнови карточку':'Обнови карточку');}
+      },podskazka:'сделать собственным'});
+    const button=document.getElementById('kontakt-lid-napr');
+    O.vypadajuschij(button,directions.map(row=>({kod:row.kod,imja:row.imja})),direction).addEventListener('click',event=>{
+      const item=event.target.closest('[data-kod]');if(!item)return;
+      direction=item.dataset.kod;button.querySelector('.sozd-t').textContent=directions.find(row=>row.kod===direction)?.imja||direction;
+    });
+  });
+
+  document.querySelectorAll('[data-sotr-rol]').forEach((e) => {
+    const sid = Number(e.dataset.sotrRol);
+    const s = SOTR.find((x) => x.id === sid);
+    if (!s) return;
+    const sp = O.vypadajuschij(e,
+      ROLI.map((r) => ({ kod: r.kod, imja: imja_spr(r, r.kod) })), s.rol);
+    sp.addEventListener('click', async (ev) => {
+      const pkt = ev.target.closest('.vyp-p');
+      if (!pkt || !pkt.dataset.kod || pkt.dataset.kod === s.rol) return;
+      try {
+        const v_klienty = pkt.dataset.kod === 'klient' && s.rol === 'lid';
+        await pravka_sotr(sid, { rol: pkt.dataset.kod });
+        if (v_klienty && O.vspyshka) O.vspyshka('теперь клиент');
+      } catch (er) { O.tost('Не получилось: ' + er.message); }
+    });
+  });
+
+  document.querySelectorAll('[data-sotr-stadija]').forEach((e) => {
+    const sid = Number(e.dataset.sotrStadija);
+    const s = SOTR.find((x) => x.id === sid);
+    if (!s) return;
+    const nabor = (STADII || [])
+      .filter((st) => st.rol === s.rol
+        && (!st.napravlenie || st.napravlenie === s.napravlenie))
+      .map((st) => ({ kod: st.kod, imja: imja_spr(st, st.kod) }));
+    nabor.push({ kod: 'svoja_stadija', imja: 'своя стадия' });
+    const sp = O.vypadajuschij(e, nabor, s.stadija);
+    sp.addEventListener('click', async (ev) => {
+      const pkt = ev.target.closest('.vyp-p');
+      if (!pkt || !pkt.dataset.kod) return;
+      if (pkt.dataset.kod === 'svoja_stadija') { svojaStadija(s); return; }
+      if (pkt.dataset.kod === s.stadija) return;
+      try { await pravka_sotr(sid, { stadija: pkt.dataset.kod, svoja_stadija: null }); }
+      catch (er) { O.tost('Не получилось: ' + er.message); }
+    });
+  });
+
+                                                          
+                                                              
+  function svojaStadija(s) {
+                                                         
+                                                       
+                                                               
+    const n_imja = (O.naprPoKodu(s.napravlenie).imja || s.napravlenie || '')
+      .split(/[,(]/)[0].trim();
+    const zakryt = O.modalka('Своя стадия', `
+      <div class="okno-kanon">
+        <input class="sozd-vvod" id="ss-imja" placeholder="как назвать стадию"
+          autocomplete="off">
+        <label class="ss-gal sozd-tumbler">
+          <span>добавить в общий набор стадий</span>
+          <input type="checkbox" id="ss-nabor">
+          <span class="pere"><span class="pere-b"></span></span></label>
+        <div class="ss-oblast" id="ss-oblast" hidden>
+          <span class="vid km-vid" id="ss-obl">
+            <a class="vid-e on" data-obl="napravlenie">для ${n_imja || 'направления'}</a>
+            <a class="vid-e" data-obl="vse">для всех направлений</a>
+          </span></div>
+        <div class="fch-niz">
+          <span class="fch-osh" id="ss-osh"></span></div>
+      </div>`, null, {
+      gotovo: async () => {
+        const osh = document.getElementById('ss-osh');
+        const imja = (document.getElementById('ss-imja')?.value || '').trim();
+        if (!imja) {
+          if (osh) osh.textContent = 'Как назвать стадию?';
+          throw new Error('нужно название стадии');
+        }
+        const v_nabor = document.getElementById('ss-nabor')?.checked;
+        try {
+          if (v_nabor) {
+            const oblast = document.querySelector('#ss-obl .vid-e.on')?.dataset.obl
+              || 'napravlenie';
+            const novaja = await API.dejstvie('/spravochniki/stadii', {
+              nazvanie: imja, rol: s.rol, oblast,
+              ...(oblast === 'napravlenie' ? { napravlenie: s.napravlenie } : {}),
+            });
+            await pravka_sotr(s.id, { stadija: novaja.kod, svoja_stadija: null },
+              `Стадия «${imja}» добавлена в набор`);
+          } else {
+            await pravka_sotr(s.id, { svoja_stadija: imja, stadija: null },
+              `Стадия «${imja}» только в этой карточке`);
+          }
+        } catch (er) {
+          if (osh) osh.textContent = 'Не вышло: ' + er.message;
+          throw er;
+        }
+      },
+      podskazka: 'сохранить стадию',
+    });
+    setTimeout(() => document.getElementById('ss-imja')?.focus(), 40);
+    document.getElementById('ss-nabor')?.addEventListener('change', (ev) => {
+      document.getElementById('ss-oblast').hidden = !ev.target.checked;
+    });
+    document.getElementById('ss-obl')?.addEventListener('click', (ev) => {
+      const e = ev.target.closest('.vid-e');
+      if (!e) return;
+      document.querySelectorAll('#ss-obl .vid-e').forEach((x) =>
+        x.classList.remove('on'));
+      e.classList.add('on');
+    });
+  }
+
+                                                             
+                                                             
+                                                                     
+    
+                                                                   
+                                                                     
+                                                          
+                                                                 
+                                                            
+
+  document.getElementById('kon-dob')?.addEventListener('click', async event => {
+    const button=event.currentTarget;if(button.dataset.loading)return;button.dataset.loading='1';
+    let vidy;
+    try{vidy=await API.vidyKontaktov();if(!button.isConnected)return;}
+    catch(error){if(!error.telo?.sessija_izmenilas)O.tost('Не загрузились виды контактов: '+error.message);return;}
+    finally{delete button.dataset.loading;}
+    ubratProshlyjStatusKontakta();
+    let vybran = vidy[0]?.kod || 'telefon',duplicateSequence=0,phoneEditor=null;
+    const zakryt = O.modalka('новый контакт', `
+      <div class="okno-kanon">
+        <input class="sozd-vvod" id="k-znach"
+          placeholder="телеграм, почта или телефон" autocomplete="off" aria-describedby="k-osh">
+        <div class="phone-widget" id="k-phone" hidden></div>
+        <div class="sozd-polja" style="grid-template-columns:minmax(0,220px) !important">
+          <span class="sozd-p vyp"><a class="sozd-pole" id="k-vid">
+            <span class="sozd-t">${vidy[0]?.imja || 'вид'}</span>
+            <span class="str"></span></a></span>
+        </div>
+        <div class="fch-niz">
+          <span class="fch-osh" id="k-osh" role="status" aria-live="polite"></span></div>
+      </div>`, null, {
+      podskazka:'добавить',znak:'+',priZakrytii:()=>phoneEditor?.dispose(),
+      gotovo:async()=>{
+        duplicateSequence++;if(!proveritFormu())return false;
+        const kind=vybran;
+        if(!kontaktMozhnoMenjat(kind)){osh.textContent='Сначала заверши правку или проверку контактов этого вида';return false;}
+        busyContactKinds.add(kind);
+        try{
+          const phoneOptions=kind==='telefon'?await phoneEditor.parametry():{},znach=input.value.trim();
+          if(!input.isConnected)return false;
+          const result=await API.sozdatKontakt({chelovek_id:id,tip:kind,znachenie:znach,...phoneOptions});
+          primenitGruppuKontaktov(result.gruppa);
+          if(result.predvaritelnoByl){pokazatSvojDubl();return false;}
+          O.tost(result.uzheByl?'Контакт уже есть в карточке':'Контакт добавлен');
+        }catch(error){
+          if(error.telo?.sessija_izmenilas)return false;
+          if(O.preduprezhdenieKontakta(osh,error.telo,vybran))return false;
+          osh.textContent=error.kod===undefined||error.kod>=500
+            ?'Сохранение не подтверждено. Текст сохранён в форме; повторное нажатие сначала проверит контакт.'
+            :'Не вышло: '+error.message;
+          return false;
+        }finally{busyContactKinds.delete(kind);}
+      },
+    });
+    const input=document.getElementById('k-znach'),osh=document.getElementById('k-osh'),submit=document.querySelector('.vyb-fon:not([hidden]) .vyb-g');
+    phoneEditor=LocusTelefonInput.podkljuchit(input,document.getElementById('k-phone'));
+    const sostojanieFormy=(disabled,message='',invalid=false)=>{
+      submit?.setAttribute('aria-disabled',String(disabled));input.setAttribute('aria-invalid',String(invalid));
+      if(osh.textContent!==message||osh.children.length)osh.textContent=message;
+    };
+    const proveritFormu=()=>{
+      const value=input.value.trim();if(!value){sostojanieFormy(true);return false;}
+      try{LocusValidacijaKontakta.proverit(vybran,value);}catch(error){sostojanieFormy(true,error.message,true);return false;}
+      if(vybran==='telefon'&&!phoneEditor.estNomer()){sostojanieFormy(true);return false;}
+      sostojanieFormy(false);return true;
+    };
+    const pokazatSvojDubl=()=>sostojanieFormy(true,LocusValidacijaKontakta.tekstDublya(vybran),true);
+    const checkDuplicates=async()=>{
+      const sequence=++duplicateSequence,kind=vybran;let value=input.value.trim();
+      if(!proveritFormu())return;
+      try{
+        const phoneOptions=kind==='telefon'?await phoneEditor.parametry():{};value=input.value.trim();
+        if(sequence!==duplicateSequence||!input.isConnected||input.value.trim()!==value||vybran!==kind)return;
+        if(!value||(kind==='telefon'&&!phoneEditor.estNomer())){osh.replaceChildren();return;}
+        const result=await API.spisok('kontakty/duplikaty',{tip:kind,znachenie:value,chelovek_id:id,...phoneOptions});
+        if(sequence!==duplicateSequence||!input.isConnected||input.value.trim()!==value||vybran!==kind)return;
+        if(result.svoi?.length){pokazatSvojDubl();return;}
+        O.preduprezhdenieKontakta(osh,result,kind);
+      }catch(error){
+        if(sequence!==duplicateSequence||!input.isConnected||input.value.trim()!==value||vybran!==kind)return;
+        if(error.kod===400||error.kod===422)sostojanieFormy(true,error.message,true);
+      }
+    };
+    input.addEventListener('blur',checkDuplicates);
+    input.addEventListener('input',()=>{duplicateSequence++;proveritFormu();});
+    setTimeout(() => {if(input.isConnected)input.focus();}, 40);
+                                                           
+                                             
+    const vkljuchitMasku = () => {
+      const vvod = input;
+      const telefon = vybran === 'telefon';
+      const hint=vidy.find(x=>x.kod===vybran)?.podskazka_vvoda||'text';
+      vvod.type=hint;vvod.inputMode=hint==='tel'?'tel':hint==='email'?'email':hint==='url'?'url':'text';
+      if (vvod) vvod.placeholder = telefon ? '+7 (999) 123-45-67'
+        : hint==='email'?'name@example.ru':hint==='url'?'https://…':'ник или контакт';
+      phoneEditor.setActive(telefon);
+      proveritFormu();
+    };
+    {
+      const b = document.getElementById('k-vid');
+      O.vypadajuschij(b, vidy, vybran).addEventListener('click', (ev) => {
+        const pnt = ev.target.closest('.vyp-p'); if (!pnt) return;
+        vybran = pnt.dataset.kod || vybran;
+        const v = vidy.find((x) => x.kod === vybran);
+        const tt = b.querySelector('.sozd-t');
+        if (tt && v) { tt.textContent = v.imja; b.classList.add('vybrano'); }
+        vkljuchitMasku();checkDuplicates();
+      });
+      vkljuchitMasku();
+    }
+
+  });
+
+                                                              
+                                                                
+                       
+  document.getElementById('sv-dob')?.addEventListener('click', async () => {
+                                                             
+                                                                    
+                                                              
+                                     
+    let vse_ljudi = [];
+    try {
+      const o = await API.spisok('ljudi', { na_stranice: 500, vse_roli: 1 });
+      vse_ljudi = (o.spisok || []).filter((l) => l.id !== id);
+    } catch { vse_ljudi = (SPRAV.ljudi || []).filter((l) => l.id !== id); }
+    const tipy = [['znaet', 'знает'], ['rekomendoval', 'рекомендовал'],
+                  ['rabotali', 'работали вместе'], ['rodstvennik', 'родственник']];
+    let sv_kto = null;
+    let sv_tip = 'znaet';
+    const zakryt = O.modalka('новая связь', `
+      <div class="okno-kanon">
+        <div class="okno-pod">кто и как связан с ${C.imja}: знакомство,
+          рекомендация или совместная работа — подсказка себе на будущее</div>
+        <div class="sozd-polja" style="grid-template-columns:1fr 1fr !important">
+          <span class="sozd-p vyp"><a class="sozd-pole" id="sv-kto">
+            <span class="sozd-t">с кем</span><span class="str"></span></a></span>
+          <span class="sozd-p vyp"><a class="sozd-pole" id="sv-tip">
+            <span class="sozd-t">знает</span><span class="str"></span></a></span>
+        </div>
+        <label class="sozd-pole sozd-ssyl"><input id="sv-zam"
+          placeholder="заметка, если нужно" autocomplete="off"></label>
+        <div class="fch-niz">
+          <span class="fch-osh" id="sv-osh"></span>
+          <a class="kn tmn" id="sv-ok">Добавить</a></div>
+      </div>`);
+    const podpisat = (knopka, tekst) => {
+      const tt = knopka.querySelector('.sozd-t');
+      if (tt) { tt.textContent = tekst; knopka.classList.add('vybrano'); }
+    };
+    {
+      const b = document.getElementById('sv-kto');
+      O.vypadajuschij(b, vse_ljudi.map((l) =>
+        ({ kod: String(l.id), imja: l.imja })), '')
+        .addEventListener('click', (ev) => {
+          const pnt = ev.target.closest('.vyp-p'); if (!pnt) return;
+          sv_kto = Number(pnt.dataset.kod);
+          podpisat(b, (vse_ljudi.find((l) => l.id === sv_kto) || {}).imja || 'с кем');
+        });
+      const bt = document.getElementById('sv-tip');
+      O.vypadajuschij(bt, tipy.map(([k, i]) => ({ kod: k, imja: i })), sv_tip)
+        .addEventListener('click', (ev) => {
+          const pnt = ev.target.closest('.vyp-p'); if (!pnt) return;
+          sv_tip = pnt.dataset.kod || sv_tip;
+          podpisat(bt, (tipy.find(([k]) => k === sv_tip) || [])[1] || 'знает');
+        });
+    }
+    document.getElementById('sv-ok')?.addEventListener('click', async () => {
+      const osh = document.getElementById('sv-osh');
+      if (!sv_kto) { if (osh) osh.textContent = 'С кем связь?'; return; }
+      try {
+        await API.sozdat('svjazi', {
+          ot_cheloveka: id,
+          k_cheloveku: sv_kto,
+          tip: sv_tip,
+          ...(document.getElementById('sv-zam').value.trim()
+            ? { zametka: document.getElementById('sv-zam').value.trim() } : {}),
+        });
+        zakryt();
+        await zagruzit(); narisovat();
+        O.tost('Связь записана');
+      } catch (er) { if (osh) osh.textContent = 'Не вышло: ' + er.message; }
+    });
+  });
+
+                                                                   
+                                                             
+  document.getElementById('zad-dob')?.addEventListener('click', () => {
+    O.formaZadachiModalka
+      ? O.formaZadachiModalka({ klient_id: id })
+      : (location.href = `/zadachi.html?sozdat=1&klient=${id}`);
+  });
+
+                                                                
+                                                         
+                                                       
+  document.getElementById('sotr-dob')?.addEventListener('click', () => {
+    const napr = (SPRAV.napravlenija || []);
+    const roli = [{ kod: 'lid', imja: 'лид' }, { kod: 'klient', imja: 'клиент' },
+                  { kod: 'referal', imja: 'реферал' }];
+                                                            
+    let nd_napr = (napr[0] || {}).kod || '';
+    let nd_rol = (roli[0] || {}).kod || 'lid';
+    O.modalka('направление человека', `
+      <div class="okno-kanon">
+        <div class="sozd-polja" style="grid-template-columns:1fr 1fr !important">
+          <span class="sozd-p vyp"><span class="sozd-lbl">направление</span>
+            <a class="sozd-pole" id="s-napr"><span class="sozd-t">${
+              (napr[0] || {}).imja || ''}</span><span class="str"></span></a></span>
+          <span class="sozd-p vyp"><span class="sozd-lbl">роль</span>
+            <a class="sozd-pole" id="s-rol"><span class="sozd-t">${
+              (roli[0] || {}).imja || ''}</span><span class="str"></span></a></span>
+        </div>
+        <div class="fch-niz"><span class="fch-osh" id="s-osh"></span></div>
+      </div>`, null, {
+      gotovo: async () => {
+        await API.sozdat('sotrudnichestva', {
+          chelovek_id: id, napravlenie: nd_napr, rol: nd_rol,
+        });
+        await zagruzit(); narisovat();
+        O.tost('Направление добавлено');
+      },
+      znak: '+', podskazka: 'добавить направление',
+    });
+    const podp = (kn, tekst) => {
+      const tt = kn.querySelector('.sozd-t');
+      if (tt) { tt.textContent = tekst; kn.classList.add('vybrano'); }
+    };
+    {
+      const b = document.getElementById('s-napr');
+      O.vypadajuschij(b, napr.map((n) => ({ kod: n.kod, imja: n.imja })), nd_napr)
+        .addEventListener('click', (ev) => {
+          const pnt = ev.target.closest('.vyp-p'); if (!pnt) return;
+          nd_napr = pnt.dataset.kod || nd_napr;
+          podp(b, (napr.find((n) => n.kod === nd_napr) || {}).imja || '');
+        });
+      const br2 = document.getElementById('s-rol');
+      O.vypadajuschij(br2, roli.map((r) => ({ kod: r.kod, imja: r.imja })), nd_rol)
+        .addEventListener('click', (ev) => {
+          const pnt = ev.target.closest('.vyp-p'); if (!pnt) return;
+          nd_rol = pnt.dataset.kod || nd_rol;
+          podp(br2, (roli.find((r) => r.kod === nd_rol) || {}).imja || '');
+        });
+    }
+  });
+
+  const materialRoot=document.getElementById('person-materials'),documentRoot=document.getElementById('person-documents');
+  O.materialBlocks({materialRoot,documentRoot,table:'ljudi',key:id,bindings:{chelovek_id:id},contextLabel:C.chelovek.imja});
+
+}
+
+                                                              
+                                                                   
+                                                                
+                                                     
+function razmetitRazdely() {
+  document.querySelectorAll('.setka .b').forEach((b) => {
+    const st = b.closest('.stlb');
+    const l = (b.querySelector('.b-l') || {}).textContent || '';
+    const r = st && st.id === 'levo'
+        ? (/контакты|о человеке|работа и общение/.test(l) ? 'kontakty' : 'rabota')
+      : st && st.id === 'centr' ? 'rabota'
+      : /деньги/.test(l) ? 'dengi' : 'svjazi';
+    if (b.dataset.r !== r) b.dataset.r = r;
+  });
+}
+function vkljuchitRazdely() {
+  document.body.dataset.klR = 'rabota';
+  const setka = document.querySelector('.setka');
+  if (setka) new MutationObserver(razmetitRazdely)
+    .observe(setka, { childList: true, subtree: true });
+  razmetitRazdely();
+  document.getElementById('kl-razdely')?.addEventListener('click', (e) => {
+    const k = e.target.closest('[data-klr]');
+    if (!k) return;
+    document.querySelectorAll('#kl-razdely [data-klr]')
+      .forEach((x) => x.classList.toggle('on', x === k));
+    document.body.dataset.klR = k.dataset.klr;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+document.addEventListener('pointerdown',event=>{if(event.target.closest('[data-referral-retry],[data-referral-contract-retry]')&&document.querySelector('[data-pravim="1"]'))event.preventDefault();});
+document.addEventListener('click',async event=>{
+ const button=event.target.closest('[data-referral-retry]');if(!button||button.disabled)return;
+ const key=Number(button.dataset.referralRetry),s=SOTR.find(row=>row.id===key),host=button.closest('[data-referral-summary]');
+ if(!s||!host)return;button.disabled=true;
+ try{const value=await readReferralSummary(key);if(!host.isConnected)return;PRIVEDENO[key]=value;delete REFERRAL_ERRORS[key];}
+ catch(error){if(!host.isConnected)return;REFERRAL_ERRORS[key]=error.message||'Не удалось загрузить расчёт';}
+ const template=document.createElement('template');template.innerHTML=sotrudnichestvo(s).polja;
+ const next=template.content.querySelector('[data-referral-summary]');if(next){host.replaceWith(next);wireReferralPayout(next);wireReferralTerms(next);}else button.disabled=false;
+});
+
+document.addEventListener('click',async event=>{
+ const button=event.target.closest('[data-referral-contract-retry]');if(!button||button.disabled)return;
+ const role=SOTR.find(row=>row.id===Number(button.dataset.referralContractRetry)),host=button.closest('[data-referral-contract]');if(!role||!host)return;button.disabled=true;
+ const info=await readReferralContract(role,true);if(!host.isConnected)return;REFERRAL_CONTRACTS[role.id]=info;host.innerHTML=referralContract(role);O.zaschititVneshnieSsylki(host,{materialControls:false});
+});
+
+document.addEventListener('locus:referral-terms-changed',async event=>{if(!SOTR.some(row=>row.id===event.detail?.id))return;if(document.querySelector('[data-pravim="1"]')){O.tost('Условия сохранены. Заверши текущую правку и обнови карточку');return;}try{await zagruzit();narisovat();}catch{O.tost('Условия сохранены. Не удалось обновить карточку');}});
+
+document.addEventListener('locus:referral-payout-changed',async event=>{
+  if(!SOTR.some(row=>row.id===event.detail?.id))return;
+  if(document.querySelector('[data-pravim="1"]')){O.tost('Отметка сохранена. Заверши текущую правку и обнови карточку');return;}
+  try{await zagruzit();narisovat();}catch{O.tost('Отметка сохранена. Не удалось обновить карточку');}
+});
+
+(async function start() {
+  vkljuchitRazdely();
+  try {
+    SPRAV = await SPR.zagruzit();
+    window.DANNYE = { napravlenija: SPRAV.napravlenija, ljudi: SPRAV.ljudi,
+                      statusy: SPRAV.statusy, tipy: SPRAV.tipy, zadachi: [] };
+    const spr = await API.ekran('spravochniki', {});
+    ROLI = spr.roli || []; STADII = spr.stadii || [];
+    await zagruzit();
+                                                                      
+                                                                    
+                                              
+    document.getElementById('menju').innerHTML = O.menju('Люди', {
+      napravlenija: true,
+    });
+    O.vkljuchitNapravlenija?.((kod) => {
+      location.href = '/ljudi.html' + (kod ? `?napravlenie=${kod}` : '');
+    }, null);
+    nazad();
+    narisovat();
+    O.vkljuchitSkvoznoe();
+    document.body.dataset.gotovo = String(SOTR.length);
+  } catch (e) {
+    document.getElementById('levo').innerHTML =
+      `<div class="pusto"><div class="pusto-z">Не получилось загрузить</div>
+       <div class="pusto-p">${e.message}</div></div>`;
+    document.body.dataset.oshibka = e.message;
+  }
+})();
+})();
+</script>
+</body></html>

@@ -1,0 +1,32 @@
+                                                                             
+html .dk{width:var(--calendar-width);max-width:calc(100vw - var(--space-8));z-index:var(--layer-picker);padding:var(--space-3);font-family:var(--font-ui);font-size:var(--text-body);line-height:var(--line-control);background:var(--kart);border:var(--border-width) solid var(--border-overlay);border-radius:var(--radius-overlay);box-shadow:none}
+html .dk .dk-shapka{gap:var(--space-1);margin-bottom:var(--space-2)}
+html .dk .dk-mes{font-size:var(--text-body);font-weight:var(--weight-emphasis);color:var(--t1)}
+html .dk .dk-str{width:var(--control-height);height:var(--control-height);border-radius:var(--radius-overlay)}
+html .dk .dk-str svg{width:var(--icon-size);height:var(--icon-size)}
+html .dk .dk-dni{margin-bottom:var(--space-half)}
+html .dk .dk-dn{font-size:var(--text-caption);color:var(--t2);padding:var(--space-1) 0}
+html .dk .dk-d{height:var(--control-height);min-width:0;border-radius:var(--radius-overlay);font-family:var(--font-mono);font-size:var(--text-body);font-weight:var(--weight-normal);color:var(--t1);background:transparent}
+html .dk .dk-d.chuzh{color:var(--t3)}
+html .dk .dk-d.sej{outline:var(--border-width) solid var(--t3);outline-offset:calc(-1 * var(--border-width));box-shadow:none}
+html .dk .dk-d.vyb,html .dk .dk-d.vyb.sej{color:var(--kart);background:var(--tmn)}
+html .dk .dk-d.dk-fokus{outline:var(--focus-width) solid var(--t2);outline-offset:calc(-1 * var(--focus-width))}
+html .dk .dk-niz{gap:var(--space-2);margin-top:var(--space-2);padding-top:var(--space-2);border-top:var(--border-width) solid var(--lin)}
+html .dk .dk-kn{min-height:var(--control-height);font-family:var(--font-ui);font-size:var(--text-meta);font-weight:var(--weight-normal);border-radius:var(--radius-pill);padding:0 var(--space-3)}
+html .dk button:focus-visible{outline:var(--focus-width) solid var(--t3);outline-offset:var(--focus-offset)}
+html .dk button:disabled{color:var(--t3);cursor:default}
+html .dk-fon{z-index:var(--layer-picker-backdrop);background:var(--overlay-backdrop);backdrop-filter:blur(var(--overlay-blur));-webkit-backdrop-filter:blur(var(--overlay-blur))}
+html input.dk-pole::-webkit-calendar-picker-indicator{display:none!important}
+html .l-form input.dk-pole[type=date],html .mod-pole input.dk-pole[type=date],html input.pl.dk-pole[type=date]{min-height:var(--control-height);width:100%;min-width:0;font-family:var(--font-ui);font-size:var(--text-body);font-weight:var(--weight-normal);border:var(--border-width) solid var(--lin);border-radius:var(--radius-field);padding:var(--field-pad-y) var(--field-pad-x);color:var(--t1);background:var(--kart)}
+html .l-form input.dk-pole[type=date][aria-invalid=true],html .mod-pole input.dk-pole[type=date][aria-invalid=true]{border-color:var(--kr)}
+@media(pointer:coarse){.dk{width:calc(7 * var(--control-height-mobile) + var(--space-6) + 2 * var(--border-width))}.dk .dk-d,.dk .dk-str,.dk .dk-kn{min-height:var(--control-height-mobile)}.dk .dk-str{width:var(--control-height-mobile)}}
+@media(max-width:760px){
+html .l-form input.dk-pole[type=date],html .mod-pole input.dk-pole[type=date],html input.pl.dk-pole[type=date]{min-height:var(--control-height-mobile);font-size:var(--text-input-mobile)}
+html .dk.dk-shtorka{width:100%;max-width:none;max-height:86dvh;overflow-y:auto;overscroll-behavior:contain;padding:var(--space-1h) var(--space-1h) calc(var(--space-3) + env(safe-area-inset-bottom));border:0;border-top:var(--border-width) solid var(--lin);border-radius:var(--radius-overlay) var(--radius-overlay) 0 0}
+html .dk.dk-shtorka .dk-d{height:var(--control-height-mobile);font-size:var(--text-body)}
+html .dk.dk-shtorka .dk-str{width:var(--control-height-mobile);height:var(--control-height-mobile)}
+html .dk.dk-shtorka .dk-kn{min-height:var(--control-height-mobile);font-size:var(--text-body)}
+html .dk.dk-shtorka .dk-mes{font-size:var(--text-title)}
+html .dk.dk-shtorka .dk-dn{font-size:var(--text-caption);padding:var(--space-1h) 0}
+html .dk .dk-uhvat{width:var(--space-8);height:var(--space-1);border-radius:var(--radius-micro);margin:var(--space-half) auto var(--space-2)}
+}

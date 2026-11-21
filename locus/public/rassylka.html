@@ -1,0 +1,524 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Рассылка</title>
+<link rel="icon" href="/api/favicon?v=L" type="image/svg+xml">
+<link rel="stylesheet" href="/css/obschij.css">
+<style>
+                                                               
+                                                            
+.rs-sh{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:2px 0 16px}
+.rs-im{font-size:21px;font-weight:500;letter-spacing:-.02em}
+.rs-pod{font-size:11.5px;color:var(--t3);margin-top:8px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.rs-kn{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.rs-kn .kn{height:32px;padding:0 14px;font-size:12px;display:inline-flex;align-items:center}
+.rs-stadija{height:24px;font-size:11.5px}
+.sek-z{display:flex;align-items:baseline;gap:9px;font-size:13px;font-weight:500;color:var(--t1);padding:26px 0 10px}
+.sek-z i{flex:1}
+.sek-z .n{font-family:'Geist Mono',ui-monospace,monospace;font-size:11.5px;font-weight:400;color:var(--t3)}
+.net{font-size:12px;color:var(--t3);padding:14px 2px}
+                              
+.rs-shagi{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:4px 0 6px}
+.rs-shag{display:grid;grid-template-columns:24px minmax(0,1fr);gap:10px;background:var(--pole);
+border-radius:12px;padding:13px 14px;align-items:start}
+.rs-shag .pl-dej{grid-column:2;justify-self:start;margin-top:8px}
+.rs-shag-n{width:24px;height:24px;border-radius:50%;background:#fff;display:grid;place-content:center;
+font-size:11.5px;color:var(--t2)}
+.rs-shag.gotov .rs-shag-n{background:var(--tmn);color:#fff}
+.rs-shag-t{display:flex;flex-direction:column;gap:3px;font-size:12px;color:var(--t3);line-height:1.45}
+.rs-shag-t b{font-size:13px;font-weight:500;color:var(--t1)}
+                             
+.rs-chisla{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:8px}
+.rs-ch{background:var(--pole);border-radius:12px;padding:13px 15px;display:flex;flex-direction:column;gap:3px}
+.rs-ch b{font-family:'Geist Mono',ui-monospace,monospace;font-size:22px;font-weight:400;letter-spacing:-.03em}
+.rs-ch span{font-size:11.5px;color:var(--t3)}
+.rs-ch i{font-style:normal;color:var(--t2)}
+                                                           
+.rs-volny{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.rs-v{display:flex;flex-direction:column;gap:8px;border:1px solid var(--lin);border-radius:12px;
+padding:13px 15px;cursor:var(--kursor), pointer;transition:border-color .14s;min-width:0}
+.rs-v:hover{border-color:var(--t3)}
+.rs-v.on{border-color:var(--t1)}
+.rs-v-sh{display:flex;align-items:center;gap:8px;font-size:13px;min-width:0}
+.rs-v-sh b{font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rs-v-sh i{flex:1}
+.rs-v-pol{height:4px;border-radius:2px;background:var(--pole);overflow:hidden}
+.rs-v-pol i{display:block;height:100%;background:var(--t1);border-radius:2px}
+.rs-v-ch{font-size:12px;color:var(--t2)}
+.rs-v-ned{font-size:11.5px;color:var(--t3)}
+.rs-v-ned.stop{color:var(--pal-3,#ff7036)}
+                       
+.rs-nedeli{display:flex;align-items:flex-end;gap:8px;height:92px;overflow-x:auto;max-width:100%}
+.rs-ned{display:flex;flex-direction:column;align-items:center;gap:4px;width:70px;flex:0 0 70px;height:100%;justify-content:flex-end}
+.rs-ned-b{width:14px;height:56px;display:flex;align-items:flex-end}
+.rs-ned-b i{display:block;width:100%;background:var(--t1);border-radius:3px 3px 0 0}
+.rs-ned-c{font-family:'Geist Mono',ui-monospace,monospace;font-size:11px;color:var(--t2)}
+.rs-ned-n{font-size:10.5px;color:var(--t3);order:3}
+                                                                      
+.rs-upr{display:flex;align-items:center;gap:12px;margin-bottom:8px;min-width:0}
+.rs-seg{max-width:100%;overflow-x:auto;scrollbar-width:none;flex-wrap:nowrap}
+.rs-seg::-webkit-scrollbar{display:none}
+.rs-seg .vid-e{white-space:nowrap}
+.rs-seg .ld-ch-n{margin-left:5px}
+.rs-psk{margin-left:auto;display:inline-flex;align-items:center;gap:7px;width:220px;height:28px;
+border-bottom:1px solid var(--lin);color:var(--t3);flex:none}
+.rs-psk:focus-within{border-bottom-color:var(--t1)}
+.rs-psk input{flex:1;min-width:0;border:0;background:transparent;font:inherit;font-size:13px;
+color:var(--t1);padding:0;height:26px;line-height:26px}
+.rs-psk input:focus{outline:none}
+.rs-psk-shir{width:100%;margin:6px 0 4px}
+.rs-massa{display:flex;align-items:center;gap:8px;background:var(--pole);border-radius:12px;
+padding:9px 12px;margin:4px 0 8px;font-size:12px;color:var(--t2);flex-wrap:wrap}
+.rs-massa i{flex:1}
+.rs-snjat{font-size:12px;color:var(--t3);cursor:var(--kursor), pointer}
+.rs-kuda{font-size:11.5px;color:var(--t3);margin:2px 0 8px}
+.rs-chl{display:grid;grid-template-columns:22px minmax(0,1fr) 124px 64px;gap:10px;align-items:center;
+padding:6px 6px;border-radius:8px;font-size:13px}
+.rs-chl:hover{background:var(--pole)}
+.rs-chl-sh{font-size:11.5px;color:var(--t3)}
+.rs-chl-sh:hover{background:transparent}
+.rs-chl-im{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--t1)}
+.rs-chl-im:hover{text-decoration:underline;text-underline-offset:3px}
+.rs-dt{font-size:11.5px;color:var(--t3);text-align:right;font-family:'Geist Mono',ui-monospace,monospace}
+.rs-st{cursor:var(--kursor), pointer}
+.rs-gal{width:15px;height:15px;border:1px solid #c9c9cf;border-radius:4px;display:block;
+cursor:var(--kursor), pointer;position:relative;background:#fff}
+.rs-gal.on{background:var(--tmn);border-color:var(--tmn)}
+.rs-gal.on::after{content:"";position:absolute;left:4.5px;top:1.5px;width:4px;height:8px;
+border-right:1.5px solid #fff;border-bottom:1.5px solid #fff;transform:rotate(42deg)}
+                                                 
+.rs-komu{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;margin:2px 0 6px}
+.rs-komu-v{display:flex;flex-direction:column;gap:2px;border:1px solid var(--lin);border-radius:12px;
+padding:11px 13px;cursor:var(--kursor), pointer}
+.rs-komu-v b{font-family:'Geist Mono',ui-monospace,monospace;font-size:19px;font-weight:400}
+.rs-komu-v span{font-size:12px;color:var(--t2)}
+.rs-komu-v.on{border-color:var(--t1)}
+.rs-dl{display:flex;flex-direction:column;max-height:320px;overflow:auto;margin-top:4px}
+.rs-dl-s{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 4px;
+font-size:13px;border-radius:8px}
+.rs-dl-s:hover{background:var(--pole)}
+.rs-dl-uzhe{font-size:11.5px;color:var(--t3)}
+.pl-dej{flex:none;display:inline-flex;align-items:center;height:24px;padding:0 10px;
+border:1px solid var(--lin);border-radius:999px;font-size:11.5px;color:var(--t2);
+background:#fff;cursor:var(--kursor), pointer;white-space:nowrap;transition:all .14s}
+.pl-dej:hover{background:var(--tmn);border-color:var(--tmn);color:#fff}
+@media (max-width:760px){
+  .rs-sh{flex-direction:column}
+  .rs-kn{justify-content:flex-start}
+  .rs-shagi,.rs-volny{grid-template-columns:1fr}
+  .rs-chisla{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .rs-upr{flex-wrap:wrap}
+  .rs-psk{width:100%;margin-left:0}
+  .rs-chl{grid-template-columns:22px minmax(0,1fr) 108px}
+  .rs-chl .rs-dt{display:none}
+}
+
+.rs-wave-form label{display:flex;flex-direction:column;gap:7px;font-size:12px}
+.rs-wave-form input,.rs-wave-form select{width:100%;min-height:44px;box-sizing:border-box;font:inherit}
+.rs-wave-form button,.broadcast-recovery-modal button,.rs-st,.rs-kn .kn{min-height:44px;min-width:44px}
+.rs-wave-form .rs-komu-v{font:inherit;text-align:left;background:var(--pole);cursor:pointer}
+.rs-wave-form .rs-komu{display:flex;flex-wrap:wrap}
+.rs-roster-preview{max-height:160px;overflow:auto;overflow-wrap:anywhere;font-size:12px;line-height:1.6}
+.rs-v-sh b,.rs-chl-im,.rs-im,.rs-kuda{overflow-wrap:anywhere;min-width:0}
+.rs-wave-form .fch-niz{gap:10px;flex-wrap:wrap}
+</style></head><body>
+<div id="menju"></div>
+<div class="wrap"><div class="kol">
+  <div id="shapka"></div>
+  <div id="campaign-plan"></div>
+<div id="shagi"></div>
+  <div id="voronka"></div>
+  <div id="volny"></div>
+  <div id="polosy"></div>
+  <div id="telo"></div>
+</div></div>
+<script src="/js/nedeli.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/obschij.js"></script>
+<script src="/js/kalendar.js"></script>
+<script>
+(function () {
+                                  
+                                                                   
+                                                                        
+                                                                 
+                                                              
+                                                               
+                         
+let SPRAV = null, R = null, LJUDI = [], SVODKA = null, NEDELI = [], KOMU = [];
+const id = Number(window.LocusTaskRoute.query(location.href).get('id'));
+let vid = new URLSearchParams(location.search).get('volna') || 'vse';                                                    
+let f_status = 'vse';                           
+let poisk = '';
+let vybrannye = new Set();                                                
+
+const STATUSY = {
+  neizvestno: { imja: 'нет достоверной отметки', cvet: 'var(--t3)' },
+  ne_otpravleno: { imja: 'не писали', cvet: 'var(--t3)' },
+  otpravleno:    { imja: 'отправлено', cvet: '#4b7bc4' },
+  otvetil:       { imja: 'ответил', cvet: '#1f8f4e' },
+  otkaz:         { imja: 'отказ', cvet: '#d4483b' },
+};
+const STADII = { gotovitsja: 'готовится', idet: 'идёт',
+                 pauza: 'пауза', zavershena: 'завершена' };
+const PLOSCHADKI = { pochta: 'почта', telegram: 'телеграм', instagram: 'инстаграм' };
+const skl = (n, a, b, c) => O.skolko(n, a, b, c);
+const VOLNY = () => (SVODKA && SVODKA.volny) || [];
+const volnaPoId = (zid) => VOLNY().find((v) => String(v.id) === String(zid));
+                                                                                
+const aktivnaja_volna = () => {
+  return vid !== 'vse' ? volnaPoId(vid) || null : null;
+};
+
+let readGeneration=0, nextWave=1, rosterComplete=true, BROADCAST=null, reading=false, pageActor=API.ja;
+const esc=value=>O.ekranirovat(String(value??''));
+async function zagruzit() {
+  const generation=++readGeneration,selected=vid;reading=true;
+  try{
+  const [row,svodka,ljudi,ned,komu]=await Promise.all([
+    API.odna('rassylki',id),API.odna('rassylki',`${id}/svodka`),
+    API.odna('rassylki',`${id}/ljudi${selected!=='vse'?'?zadacha_id='+encodeURIComponent(selected):''}`),
+    API.odna('rassylki',`${id}/nedeli`),API.odna('rassylki',`${id}/komu_pisat`),
+  ]);
+  if(generation!==readGeneration||selected!==vid)return false;
+  if(row?.id!==id||!Array.isArray(svodka?.volny)||!Array.isArray(ljudi?.spisok)||ljudi.vsego!==ljudi.spisok.length||typeof ljudi.sostav_polnyj!=='boolean'||ljudi.spisok.some(p=>!Number.isSafeInteger(p.chelovek_id)||typeof p.versija_otmetki!=='string')||!Array.isArray(ned?.po_nedeljam)||!Array.isArray(komu?.spisok))throw new Error('Получены неполные данные рассылки');
+  R=row;SVODKA=svodka;LJUDI=ljudi.spisok;NEDELI=ned.po_nedeljam;KOMU=komu.spisok;nextWave=komu.nomer_sledujuschej_volny||1;rosterComplete=ljudi.sostav_polnyj;
+  const url=new URL(location.href);if(vid==='vse')url.searchParams.delete('volna');else url.searchParams.set('volna',vid);history.replaceState(null,'',url);
+  document.getElementById('rs-read-error')?.remove();return true;
+  }catch(error){if(generation!==readGeneration||selected!==vid)return false;throw error;}finally{if(generation===readGeneration)reading=false;}
+}
+async function refresh(){try{if(await zagruzit())narisovat();}catch(error){let node=document.getElementById('rs-read-error');if(!node){node=document.createElement('div');node.id='rs-read-error';node.className='rs-kuda';node.setAttribute('role','alert');document.getElementById('telo').before(node);}node.replaceChildren(document.createTextNode('Не удалось обновить рассылку. Отметки временно недоступны. '));const retry=document.createElement('button');retry.type='button';retry.className='kn';retry.textContent='повторить чтение';retry.onclick=refresh;node.append(retry);document.querySelectorAll('[data-st],[data-massa]').forEach(n=>n.setAttribute('aria-disabled','true'));}}
+
+function shapka() {
+  const n = O.naprPoKodu(R.napravlenie);
+  const vedet = (SPRAV.ljudi || []).find((l) => l.id === R.kto_vedet);
+  document.getElementById('shapka').innerHTML = `<div class="rs-sh">
+    <div class="rs-sh-l"><div class="entity-title-row"><div class="rs-im">${esc(R.nazvanie)}</div>${O.entityCopyLink("/rassylki/"+id)}</div>
+      <div class="rs-pod">
+        <span class="vyp"><a class="fil-b rs-stadija" id="rs-stadija">${
+          STADII[R.status] || 'готовится'}<span class="str"></span></a></span>
+        <span>${esc(n.imja)}</span>
+        ${R.ploshadka ? `<span>${esc(PLOSCHADKI[R.ploshadka] || R.ploshadka)}</span>` : ''}
+        ${vedet ? `<span>ведёт ${esc(vedet.imja)}</span>` : ''}
+      </div></div>
+    <div class="rs-kn">
+      <a class="kn" href="/ljudi.html?rassylka=${id}">В Людях</a>
+      <button type="button" class="kn" id="rs-dob">+ люди</button>
+      <button type="button" class="kn tmn" id="rs-volna"${R.status==='zavershena'?' disabled title="Верни кампанию в работу перед новой волной"':''}>Новая волна</button>
+      ${(R.zadachi_kampanii||[]).some(t=>t.id===R.zadacha_otpravki_id&&(SVODKA?.volny||[]).some(v=>v.id===t.id)&&!t.udaleno&&!['sdelano','kogda_nibud'].includes(t.status))&&R.status!=='zavershena'?'<button type="button" class="kn" id="rs-append">Пополнить исходную отправку</button>':''}
+    </div>
+  </div>`;
+  O.vypadajuschij(document.getElementById('rs-stadija'),
+    Object.entries(STADII).map(([kod, imja]) => ({ kod, imja })), R.status)
+    .addEventListener('click', async (ev) => {
+      const p = ev.target.closest('.vyp-p'); if (!p || !p.dataset.kod) return;
+      try {
+        await API.pravit('rassylki', id, { versija: R.versija, status: p.dataset.kod });
+        await refresh();
+        O.tost('Рассылка: ' + STADII[p.dataset.kod]);
+      } catch (e) { O.tost('Не получилось: ' + e.message); }
+    });
+  document.getElementById('rs-dob')?.addEventListener('click', dobavitLjudej);
+  document.getElementById('rs-volna')?.addEventListener('click', () => novajaVolna());
+  document.getElementById('rs-append')?.addEventListener('click',dopolnitOtpravku);
+}
+
+                                                     
+function campaignPlan(){
+ const area=document.getElementById('campaign-plan');
+ area.innerHTML='<div class="rs-kuda" data-campaign-plan><b>'+(R.plan_chislo?'Общий план: '+R.plan_chislo+' человек':'Общий план не задан')+'</b><button type="button" class="kn" style="min-height:44px" data-campaign-plan-edit>'+(R.plan_chislo?'изменить план':'задать план')+'</button><div class="pending-command-actions">'+(R.zadachi_kampanii||[]).map(task=>'<a class="kn" href="/zadachi.html?nomer='+task.nomer+'">'+esc(task.nazvanie)+(task.udaleno?' · удалена':'')+'</a>').join('')+'</div></div>';
+ area.querySelector('[data-campaign-plan-edit]').onclick=async()=>{try{const ui=await O.campaignPlanUi();await ui.open({id,onSaved:refresh});}catch(error){O.tost(error.message);}};
+}
+function shagi() {
+  const v_baze = (SVODKA && SVODKA.kontaktov_v_baze) || 0;
+  const voln = VOLNY().length;
+  const otm = (SVODKA && SVODKA.otpravleno) || 0;
+  const mesto = document.getElementById('shagi');
+  if (v_baze && voln && otm) { mesto.innerHTML = ''; return; }
+  const shag = (gotov, n, z, p, kn) => `<div class="rs-shag${gotov ? ' gotov' : ''}">
+    <span class="rs-shag-n">${gotov ? '✓' : n}</span>
+    <span class="rs-shag-t"><b>${z}</b><span>${p}</span></span>${kn || ''}</div>`;
+  mesto.innerHTML = `<div class="rs-shagi">
+    ${shag(v_baze > 0, 1, 'Собрать базу', v_baze
+      ? `в базе ${v_baze} ${skl(v_baze, 'человек', 'человека', 'человек')}`
+      : 'добавь людей поиском или отбери фильтрами в Людях и нажми «сделать рассылкой»',
+      v_baze ? '' : '<a class="pl-dej" data-shag="dob">+ люди</a>')}
+    ${shag(voln > 0, 2, 'Начать волну', voln
+      ? `${voln} ${skl(voln, 'волна', 'волны', 'волн')}`
+      : 'волна это задача: кому пишем, кто пишет и сколько',
+      voln || !v_baze || R.status==='zavershena' ? '' : '<a class="pl-dej" data-shag="volna">новая волна</a>')}
+    ${shag(otm > 0, 3, 'Отмечать', otm ? `отмечено ${otm}`
+      : 'написала человеку, ставишь «отправлено», ответил, ставишь «ответил»', '')}
+  </div>`;
+  mesto.querySelector('[data-shag="dob"]')?.addEventListener('click', dobavitLjudej);
+  mesto.querySelector('[data-shag="volna"]')?.addEventListener('click', () => novajaVolna());
+}
+
+                                                         
+function voronka() {
+  const S = SVODKA || {};
+  const vsego = S.kontaktov_v_baze ?? 0;
+  const ch = (n, p, dop) => `<div class="rs-ch"><b>${n}</b><span>${p}${dop ? ` <i>${dop}</i>` : ''}</span></div>`;
+  document.getElementById('voronka').innerHTML = `<div class="rs-chisla">
+    ${ch(vsego, 'в базе')}
+    ${ch(S.otpravleno ?? 0, 'отправлено', vsego ? Math.round(((S.otpravleno || 0) / vsego) * 100) + '%' : '')}
+    ${ch(S.otvetili ?? 0, 'ответили', S.otklik_procent ? S.otklik_procent + '% отклик' : '')}
+    ${ch(S.otkazy ?? 0, 'отказ')}
+  </div>`;
+}
+
+                                                           
+function volny() {
+  const V = VOLNY();
+  const mesto = document.getElementById('volny');
+  if (!V.length) { mesto.innerHTML = ''; return; }
+  mesto.innerHTML = `<div class="sek-z">волны<i></i><span class="n">${V.length}</span></div>
+    <div class="rs-volny">${V.map((v) => {
+      const plan = v.plan || v.ljudej_v_volne || 0;
+      const proc = plan ? Math.min(100, Math.round((v.otpravleno / plan) * 100)) : 0;
+      const kto = (SPRAV.ljudi || []).find((l) => l.id === v.otvetstvennyj);
+      return `<a class="rs-v${String(vid) === String(v.id) ? ' on' : ''}" data-volna="${v.id}">
+        <div class="rs-v-sh"><b>${esc(v.nazvanie)}</b><i></i>
+          ${O.plashka ? O.plashka(v.status) : ''}</div>
+        ${!v.sostav_polnyj?'<span class="rs-v-ned">состав сохранился не полностью</span>':''}
+        ${v.sostav_polnyj?`<div class="rs-v-pol"><i style="width:${proc}%"></i></div>`:''}
+        <div class="rs-v-ch">${v.sostav_polnyj?'отправлено':'подтверждено отправок'} ${v.otpravleno}${plan ? ' из ' + plan : ''}
+         , ответили ${v.otvetili}, отказ ${v.otkazy}${kto ? ', ' + esc(kto.imja) : ''}</div>
+        <div class="rs-v-ned${v.za_nedelju ? '' : ' stop'}">${v.za_nedelju
+          ? `за эту неделю ${v.za_nedelju}` : (v.sostav_polnyj?'на этой неделе без движения':'за неделю нет подтверждённых отправок')}</div>
+      </a>`;
+    }).join('')}</div>`;
+  mesto.querySelectorAll('[data-volna]').forEach((e) => e.addEventListener('click', async (ev) => {
+    if (ev.target.closest('.pill, .vyp')) return;
+    vid = String(vid) === e.dataset.volna ? 'vse' : e.dataset.volna;
+    f_status = 'vse'; vybrannye = new Set();
+    await refresh();
+  }));
+}
+
+                                          
+function polosy() {
+  const mesto = document.getElementById('polosy');
+  if (!NEDELI.length) { mesto.innerHTML = ''; return; }
+  const max = Math.max(...NEDELI.map((w) => w.otpravleno), 1);
+  mesto.innerHTML = `<div class="sek-z">по неделям<i></i><span class="n">${NEDELI.length}</span></div>
+    <div class="rs-nedeli">${NEDELI.map((w) => `<div class="rs-ned">
+      <span class="rs-ned-n">${w.god} · ${w.nedelja}</span>
+      <span class="rs-ned-b"><i style="height:${Math.max(6, Math.round((w.otpravleno / max) * 100))}%"></i></span>
+      <span class="rs-ned-c">${w.otpravleno}</span></div>`).join('')}</div>`;
+}
+
+                                                                 
+                                              
+function ljudi() {
+  const v = aktivnaja_volna();
+  const st = (l) => (vid !== 'vse' ? (l.status_v_volne ?? 'neizvestno') : l.status);
+  const po_poisku = LJUDI.filter((l) => !poisk
+    || String(l.imja || '').toLowerCase().includes(poisk.toLowerCase()));
+  const skolko = (k) => po_poisku.filter((l) => k === 'vse' || st(l) === k).length;
+  const vidno = po_poisku.filter((l) => f_status === 'vse' || st(l) === f_status);
+  const nabory = [['vse', 'вся база', (SVODKA && SVODKA.kontaktov_v_baze) || 0],
+    ...VOLNY().map((w) => [String(w.id), `волна ${w.nomer_volny}`, w.ljudej_v_volne || w.plan || 0])];
+  const vse_otm = vidno.length && vidno.every((l) => vybrannye.has(l.chelovek_id));
+
+  document.getElementById('telo').innerHTML = `
+    <div class="sek-z">люди<i></i><span class="n">${LJUDI.length}</span></div>
+    <div class="rs-upr">
+      <span class="vid km-vid rs-seg">${nabory.map(([k, im, n]) =>
+        `<a class="vid-e${String(vid) === k ? ' on' : ''}" data-nabor="${k}">${im}<span class="ld-ch-n">${n}</span></a>`).join('')}</span>
+      <label class="rs-psk"><svg viewBox="0 0 16 16" width="14" height="14" fill="none">
+        <circle cx="7" cy="7" r="4.6" stroke="currentColor" stroke-width="1.3"/>
+        <path d="M10.4 10.4 14 14" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        <input id="rs-psk" placeholder="найти в рассылке" value="${esc(poisk)}"></label>
+    </div>
+    <div class="rs-upr">
+      <span class="vid km-vid rs-seg">${[['vse', 'все'], ...Object.entries(STATUSY).map(([k, x]) => [k, x.imja])]
+        .map(([k, im]) => `<a class="vid-e${f_status === k ? ' on' : ''}" data-fst="${k}">${im}<span class="ld-ch-n">${skolko(k)}</span></a>`).join('')}</span>
+    </div>
+    ${vybrannye.size ? `<div class="rs-massa">
+      <span>отмечено ${vybrannye.size}</span><i></i>
+      <a class="pl-dej" data-massa="otpravleno">отправлено</a>
+      <a class="pl-dej" data-massa="otvetil">ответил</a>
+      <a class="pl-dej" data-massa="otkaz">отказ</a>
+      <a class="pl-dej" data-massa="volna">волна на отмеченных</a>
+      <a class="rs-snjat" data-massa="snjat">снять</a></div>`
+      : (v ? `<div class="rs-kuda">отметки идут в «${esc(v.nazvanie)}»</div>`
+        : '<div class="rs-kuda">Общие отметки кампании. Для отметок конкретной отправки сначала выбери волну.</div>')}
+    ${vid!=='vse'&&!rosterComplete?'<p class="rs-kuda" data-roster-incomplete>Состав прежней волны сохранился не полностью. Показаны известные участники; неизвестные отметки не считаются отправками.</p>':''}
+    ${vidno.length ? `<div class="rs-chl rs-chl-sh">
+        <a class="rs-gal${vse_otm ? ' on' : ''}" data-gal-vse="1" aria-label="отметить всех"></a>
+        <span>имя</span><span>галочка</span><span class="rs-dt">когда</span></div>` +
+      vidno.map((l) => {
+        const s = st(l);
+        const x = STATUSY[s] || { imja: s, cvet: 'var(--t3)' };
+        const kogda = vid !== 'vse' ? l.kogda_v_volne : (l.otvet_at || l.otpravleno_at);
+        return `<div class="rs-chl" data-chel="${l.chelovek_id}">
+          <a class="rs-gal${vybrannye.has(l.chelovek_id) ? ' on' : ''}" data-gal="${l.chelovek_id}"
+            aria-label="отметить"></a>
+          <a class="rs-chl-im" href="/klient.html?id=${l.chelovek_id}">${esc(l.imja || 'без имени')}</a>
+          <span class="vyp"><a class="pill rs-st" data-st="${l.chelovek_id}"
+            style="color:${x.cvet};border-color:${x.cvet}">${esc(x.imja)}</a></span>
+          <span class="rs-dt">${kogda ? SPR.data(kogda) : ''}</span>
+        </div>`;
+      }).join('')
+      : `<div class="net">${LJUDI.length ? 'под этим выбором никого' : 'в базе рассылки пока никого'}</div>`}`;
+
+  const telo = document.getElementById('telo');
+  telo.querySelectorAll('[data-nabor]').forEach((e) => e.addEventListener('click', async () => {
+    vid = e.dataset.nabor; f_status = 'vse'; vybrannye = new Set();
+    await refresh();
+  }));
+  telo.querySelectorAll('[data-fst]').forEach((e) => e.addEventListener('click', () => {
+    f_status = e.dataset.fst; ljudi();
+  }));
+  const psk = document.getElementById('rs-psk');
+  psk?.addEventListener('input', () => {
+    poisk = psk.value; const poz = psk.selectionStart;
+    ljudi();
+    const n = document.getElementById('rs-psk'); n?.focus(); n?.setSelectionRange(poz, poz);
+  });
+  telo.querySelectorAll('[data-gal]').forEach((e) => e.addEventListener('click', () => {
+    const c = Number(e.dataset.gal);
+    if (vybrannye.has(c)) vybrannye.delete(c); else vybrannye.add(c);
+    ljudi();
+  }));
+  telo.querySelector('[data-gal-vse]')?.addEventListener('click', () => {
+    if (vse_otm) vidno.forEach((l) => vybrannye.delete(l.chelovek_id));
+    else vidno.forEach((l) => vybrannye.add(l.chelovek_id));
+    ljudi();
+  });
+                                             
+  telo.querySelectorAll('[data-st]').forEach((e) => {
+    const c = Number(e.dataset.st);
+    O.vypadajuschij(e, Object.entries(STATUSY).filter(([kod])=>kod!=='neizvestno').map(([kod, x]) => ({ kod, imja: x.imja })))
+      .addEventListener('click', (ev) => {
+        const p = ev.target.closest('.vyp-p'); if (!p || !p.dataset.kod) return;
+        otmetit([c], p.dataset.kod);
+      });
+  });
+  telo.querySelectorAll('[data-massa]').forEach((e) => e.addEventListener('click', () => {
+    const k = e.dataset.massa;
+    if (k === 'snjat') { vybrannye = new Set(); ljudi(); return; }
+    if (k === 'volna') { novajaVolna([...vybrannye]); return; }
+    otmetit([...vybrannye], k);
+  }));
+}
+
+async function otmetit(ids,status){
+ if(!ids.length||reading||document.getElementById('rs-read-error'))return;if(pageActor!==API.ja){O.tost('Аккаунт сменился. Переоткрой страницу перед отметкой');return;}
+ try{
+  BROADCAST ||= await O.broadcastUi();
+  const task=aktivnaja_volna(),body={chelovek_ids:ids,status,...(task?{zadacha_id:task.id}:{}),versii:Object.fromEntries(ids.map(person=>[person,LJUDI.find(p=>p.chelovek_id===person)?.versija_otmetki]))};
+  await BROADCAST.execute({actor:API.ja,id,operation:'otmetka',body},{onSaved:async()=>{vybrannye=new Set();await refresh();}});
+ }catch(error){O.tost(error.message);}
+}
+
+async function novajaVolna(svoi){
+ try{
+  if(R.status==='zavershena')throw new Error('Верни кампанию в работу перед новой волной');
+  const state=BROADCAST ||= await O.broadcastUi(),actor=API.ja;
+  if(state.pending()){state.recover(state.records()[0]);return;}
+  const draftKey=`locus-broadcast-draft:${actor}:${id}`;
+  let saved=null;try{const raw=sessionStorage.getItem(draftKey);if(raw!==null){saved=JSON.parse(raw);if(!saved||typeof saved.name!=='string'||!['vsja_baza','ne_otvetili','otvetili','svoja'].includes(saved.komu)||saved.ids!==null&&!Array.isArray(saved.ids))throw new Error();}}catch{throw new Error('Прежний черновик волны не прочитан. Он сохранён в браузере; не перезаписывай его');}
+  const own=svoi?.length?svoi:saved?.ids;
+  const variants=KOMU.filter(x=>x.kod!=='svoja').map(x=>({kod:x.kod,imja:x.nazvanie}));if(own?.length)variants.unshift({kod:'svoja',imja:'отмеченные'});
+  const team=(SPRAV.ljudi||[]).filter(p=>p.aktiven!==false&&p.arhiv!==true&&p.komanda!==false);
+  let komu=svoi?.length?'svoja':saved?.komu||variants[0]?.kod,kto=saved?.owner||R.kto_vedet||actor,selection=null,gen=0,storageError=false;
+  if(!variants.some(v=>v.kod===komu))komu=variants[0]?.kod;
+  const close=O.modalka('Новая волна',`<form class="okno-kanon rs-wave-form" data-wave-form>
+    <label>название<input class="sozd-vvod" id="nv-im" maxlength="2000" value="${esc(saved?.name??R.zadachi_kampanii?.find(t=>t.id===R.zadacha_otpravki_id&&!['sdelano','kogda_nibud'].includes(t.status)&&!(R.volny||[]).some(w=>w.id===t.id))?.nazvanie??('Волна '+nextWave+': '+R.nazvanie))}"></label>
+    <span class="sozd-lbl">кому пишем</span><div class="rs-komu">${variants.map(v=>`<button type="button" class="rs-komu-v${v.kod===komu?' on':''}" data-komu="${v.kod}">${v.imja}</button>`).join('')}</div>
+    <label>кто пишет<select id="nv-kto">${team.map(p=>`<option value="${p.id}"${p.id===kto?' selected':''}>${esc(p.imja)}</option>`).join('')}</select></label>
+    <p data-wave-preview role="status">Проверяю состав…</p><div class="rs-roster-preview" data-wave-people></div>
+    <div class="fch-niz"><span class="fch-osh" id="nv-osh" role="status"></span><button type="button" class="kn ostavit-vnutri" data-wave-pending hidden>проверить результат</button><button type="submit" class="kn tmn ostavit-vnutri" id="nv-ok" disabled>Начать волну</button></div></form>`,null,{poverh:true});
+  const form=document.querySelector('[data-wave-form]'),name=form.querySelector('#nv-im'),owner=form.querySelector('#nv-kto'),start=form.querySelector('#nv-ok'),status=form.querySelector('#nv-osh'),preview=form.querySelector('[data-wave-preview]');
+  const capture=()=>{if(actor!==API.ja)throw new Error('Аккаунт сменился. Переоткрой страницу');state.persist(draftKey,{name:name.value,komu,owner:Number(owner.value),ids:komu==='svoja'?own:null});storageError=false;};
+  function controls(){if(state.sessionChanged()||actor!==API.ja){form.querySelectorAll('input').forEach(n=>n.value='');form.inert=true;form.querySelector('[data-wave-people]').replaceChildren();preview.textContent='Аккаунт сменился. Закрой окно и переоткрой страницу';return;}const disabled=state.busy()||state.pending();const pending=form.querySelector('[data-wave-pending]');pending.hidden=!state.pending();pending.disabled=state.busy();pending.onclick=()=>state.recover(state.records()[0]);start.disabled=disabled||!selection?.plan||storageError;form.querySelectorAll('input,select,[data-komu]').forEach(n=>n.disabled=disabled);}
+  async function inspect(){const generation=++gen;selection=null;preview.textContent='Проверяю состав…';controls();try{capture();const [picked,all]=await Promise.all([API.dejstvie(`/rassylki/${id}/predprosmotr_volny`,{komu,...(komu==='svoja'?{chelovek_ids:own}:{})}),API.odna('rassylki',`${id}/ljudi`)]);if(generation!==gen||!form.isConnected)return;if(!Array.isArray(picked.chelovek_ids)||picked.plan!==picked.chelovek_ids.length||typeof picked.vybor_versija!=='string'||!Array.isArray(all.spisok))throw new Error('Состав получен не полностью');const byId=new Map(all.spisok.map(p=>[p.chelovek_id,p]));if(picked.chelovek_ids.some(p=>!byId.has(p)))throw new Error('Состав людей изменился. Повтори проверку');selection=picked;preview.textContent=(picked.planovaja_zadacha?'Запустится плановая задача №'+picked.planovaja_zadacha.nomer+' с общим планом '+picked.planovaja_zadacha.plan_chislo+'. ':'')+'В волну войдут '+picked.plan+' человек. '+(picked.planovaja_zadacha?'Новых людей в исходную отправку можно добавить отдельно, сохраняя общий план.':'Этот состав сохранится при следующих волнах.');form.querySelector('[data-wave-people]').textContent=picked.chelovek_ids.map(p=>byId.get(p).imja||'без имени').join(', ');status.textContent='';}catch(error){if(generation===gen){status.textContent=error.message;preview.textContent='Состав пока не подтверждён';const retry=document.createElement('button');retry.type='button';retry.className='kn';retry.textContent='проверить состав';retry.dataset.wavePreviewRetry='1';retry.onclick=inspect;preview.append(' ',retry);}}finally{if(generation===gen)controls();}}
+  form.querySelectorAll('[data-komu]').forEach(button=>button.onclick=()=>{komu=button.dataset.komu;form.querySelectorAll('[data-komu]').forEach(n=>n.classList.toggle('on',n===button));inspect();});
+  name.oninput=owner.onchange=()=>{try{capture();status.textContent='';}catch(error){storageError=true;status.textContent=error.message;}controls();};
+  form.onsubmit=async event=>{event.preventDefault();if(start.disabled||!selection)return;try{capture();const chosen=selection;await state.execute({actor,id,operation:'volna',body:{komu,nazvanie:name.value,otvetstvennyj:Number(owner.value),vybor_versija:chosen.vybor_versija,...(komu==='svoja'?{chelovek_ids:own}:{})}},{onSaved:async result=>{sessionStorage.removeItem(draftKey);close();vid=String(result.zadacha_id);vybrannye=new Set();await refresh();},onCancelled:async()=>{status.textContent='Попытка отменена. Проверь состав перед новым сохранением';await inspect();}});}catch(error){status.textContent=error.message;}finally{controls();}};
+  state.subscribe(()=>{if(form.isConnected)controls();});inspect();name.focus();
+ }catch(error){O.tost(error.message);}
+}
+
+async function dopolnitOtpravku(){
+ try{
+  const state=BROADCAST ||=await O.broadcastUi(),actor=API.ja,taskId=R.zadacha_otpravki_id;if(state.pending()){state.recover(state.records()[0]);return;}
+  let selected=null,generation=0;
+  const close=O.modalka('Пополнить исходную отправку','<form class="okno-kanon rs-wave-form" data-wave-append-form><p data-append-preview role="status">Проверяю новых людей…</p><div class="rs-roster-preview" data-append-people></div><p role="status" data-append-status></p><div class="pending-command-actions"><button type="button" class="kn ostavit-vnutri" data-append-refresh>проверить состав</button><button type="submit" class="kn tmn ostavit-vnutri" data-append-save disabled>Добавить в исходную отправку</button><button type="button" class="kn ostavit-vnutri" data-append-pending hidden>проверить результат</button></div></form>',null,{poverh:true}),form=document.querySelector('[data-wave-append-form]'),preview=form.querySelector('[data-append-preview]'),people=form.querySelector('[data-append-people]'),status=form.querySelector('[data-append-status]'),save=form.querySelector('[data-append-save]'),retry=form.querySelector('[data-append-refresh]'),pending=form.querySelector('[data-append-pending]');
+  function controls(){if(state.sessionChanged()||actor!==API.ja){form.inert=true;people.replaceChildren();preview.textContent='Аккаунт сменился. Открой страницу заново';return;}const locked=state.busy()||state.pending();save.disabled=locked||!selected?.dobavitsja;retry.disabled=locked;pending.hidden=!state.pending();pending.disabled=state.busy();pending.onclick=()=>state.recover(state.records()[0]);}
+  async function inspect(){if(state.busy()||state.pending())return;const gen=++generation;selected=null;people.replaceChildren();preview.textContent='Проверяю новых людей…';controls();try{const result=await API.dejstvie('/rassylki/'+id+'/predprosmotr_dopolnenija',{zadacha_id:taskId});if(gen!==generation||!form.isConnected||state.sessionChanged()||actor!==API.ja)return;if(result.zadacha_id!==taskId||!Number.isSafeInteger(result.dobavitsja)||!Array.isArray(result.spisok)||result.spisok.length!==result.dobavitsja||typeof result.vybor_versija!=='string')throw new Error('Дополнение получено не полностью');selected=result;preview.textContent='Задача №'+result.nomer+': '+result.nazvanie+'. План остаётся '+result.plan+'. Сейчас в составе '+result.uzhe_v_sostave+', добавится '+result.dobavitsja+'. Прежние отметки сохранятся.';people.textContent=result.spisok.map(p=>p.imja).join(', ');status.textContent='';}catch(error){if(gen===generation)status.textContent=error.message;}finally{controls();}}
+  retry.onclick=inspect;form.onsubmit=async event=>{event.preventDefault();if(save.disabled||!selected)return;const picked=selected;try{await state.execute({actor,id,operation:'volna',append:true,body:{zadacha_id:taskId,komu:'vsja_baza',vybor_versija:picked.vybor_versija}},{onSaved:async()=>{close();vid=String(taskId);vybrannye=new Set();await refresh();},onCancelled:async()=>{selected=null;status.textContent='Попытка отменена. Проверь новых людей перед добавлением';controls();}});}catch(error){status.textContent=error.message;}finally{controls();}};
+  state.subscribe(()=>{if(form.isConnected)controls();});await inspect();
+ }catch(error){O.tost(error.message);}
+}
+
+                                                                
+                                                
+function dobavitLjudej() {
+  O.modalka('Добавить людей', `<div class="okno-kanon">
+    <label class="rs-psk rs-psk-shir"><svg viewBox="0 0 16 16" width="14" height="14" fill="none">
+      <circle cx="7" cy="7" r="4.6" stroke="currentColor" stroke-width="1.3"/>
+      <path d="M10.4 10.4 14 14" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      <input id="dl-psk" placeholder="имя, компания, школа" autocomplete="off"></label>
+    <div class="rs-dl" id="dl-sp"><div class="net">начни печатать имя</div></div>
+    <div class="fch-niz"><a class="svernut" href="/ljudi.html?rassylka=${id}">отобрать фильтрами в Людях</a></div>
+  </div>`);
+  const est = new Set(LJUDI.map((l) => l.chelovek_id));
+  const pole = document.getElementById('dl-psk');
+  let tajmer = null;
+  const iskat = async () => {
+    const q = pole.value.trim();
+    const sp = document.getElementById('dl-sp');
+    if (q.length < 2) { sp.innerHTML = '<div class="net">начни печатать имя</div>'; return; }
+    try {
+      const o = await API.spisok('ljudi', { poisk: q, na_stranice: 20 });
+      const res = o.spisok || [];
+      sp.innerHTML = res.length ? res.map((l) => `<div class="rs-dl-s">
+        <span>${l.imja}</span>
+        ${est.has(l.id) ? '<span class="rs-dl-uzhe">уже в базе</span>'
+          : `<a class="pl-dej" data-dl="${l.id}">добавить</a>`}</div>`).join('')
+        : '<div class="net">никого не нашлось</div>';
+      sp.querySelectorAll('[data-dl]').forEach((e) => e.addEventListener('click', async () => {
+        try {
+          await API.dejstvie(`/rassylki/${id}/kontakty`, { chelovek_ids: [Number(e.dataset.dl)] });
+          est.add(Number(e.dataset.dl));
+          e.outerHTML = '<span class="rs-dl-uzhe">добавлен</span>';
+          await refresh();
+        } catch (er) { O.tost('Не получилось: ' + er.message); }
+      }));
+    } catch (er) { sp.innerHTML = `<div class="net">не вышло: ${er.message}</div>`; }
+  };
+  pole?.addEventListener('input', () => { clearTimeout(tajmer); tajmer = setTimeout(iskat, 220); });
+  setTimeout(() => pole?.focus(), 40);
+}
+
+document.addEventListener('locus:broadcast-changed',event=>{if(event.detail?.id===id)refresh();});
+function narisovat() {
+  campaignPlan();
+  shapka(); shagi(); voronka(); volny(); polosy(); ljudi(); O.ponumerovat();
+}
+
+(async function start() {
+  try {
+    SPRAV = await SPR.zagruzit();
+    window.DANNYE = { napravlenija: SPRAV.napravlenija, ljudi: SPRAV.ljudi,
+                      statusy: SPRAV.statusy, tipy: SPRAV.tipy, zadachi: [] };
+    BROADCAST=await O.broadcastUi();
+    await zagruzit();
+                                                        
+    document.getElementById('menju').innerHTML = O.menju('Направления', {});
+    narisovat();
+    O.vkljuchitSkvoznoe();
+    O.kroshkiPodpis?.(R.nazvanie);
+    document.body.dataset.gotovo = String(LJUDI.length);
+  } catch (e) {
+    document.getElementById('telo').innerHTML =
+      `<div class="pusto"><div class="pusto-z">Не получилось загрузить</div>
+       <div class="pusto-p">${esc(e.message)}</div><button type="button" class="kn" onclick="location.reload()">повторить чтение</button></div>`;
+    document.body.dataset.oshibka = e.message;
+  }
+})();
+})();
+
+</script>
+</body></html>

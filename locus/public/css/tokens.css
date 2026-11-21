@@ -1,0 +1,88 @@
+                                                                         
+                                        
+
+:root {
+                          
+  --acc:        #12a594;
+  --acc-hover:  #0d9488;
+  --acc-press:  #0b7f71;
+  --acc-t:      #008573;
+  --acc-b:      #e0f8f3;
+  --acc-l:      #8ad7bd;
+
+                                                    
+  --n1:   #ffffff;
+  --n2:   #f9f9fb;
+  --n3:   #f0f0f3;
+  --n4:   #e0e1e6;
+  --n6:   #cdced6;
+  --n7:   #b9bbc6;
+  --n8:   #8b8d98;
+  --n11:  #60646c;
+  --n12:  #1c2024;
+
+                                                    
+  --st-plan:     #0090ff;  --st-plan-b:    #e6f4fe;  --st-plan-t:    #0d6dc3;
+  --st-work:     #ffc53d;  --st-work-b:    #fff7c2;  --st-work-t:    #8a5300;
+  --st-review:   #00a2c7;  --st-review-b:  #def7f9;  --st-review-t:  #0d6d85;
+  --st-done:     #30a46c;  --st-done-b:    #e6f6eb;  --st-done-t:    #207c54;
+  --st-later:    #8b8d98;  --st-later-b:   #f0f0f3;  --st-later-t:   #60646c;
+  --st-late:     #f76b15;  --st-late-b:    #ffefd6;  --st-late-t:    #b54706;
+
+                                      
+  --dir-synapt:   #12a594;  --dir-synapt-b:   #e0f8f3;  --dir-synapt-t:   #008573;
+  --dir-automy:   #f76b15;  --dir-automy-b:   #ffefd6;  --dir-automy-t:   #b54706;
+  --dir-junior:   #0090ff;  --dir-junior-b:   #e6f4fe;  --dir-junior-t:   #0d6dc3;
+  --dir-media:    #e93d82;  --dir-media-b:    #ffe9f0;  --dir-media-t:    #cb1d63;
+  --dir-mentor:   #00a2c7;  --dir-mentor-b:   #def7f9;  --dir-mentor-t:   #107690;
+  --dir-platform: #074575;  --dir-platform-b: #e6f0f8;  --dir-platform-t: #074575;
+  --dir-brand:    #46a758;  --dir-brand-b:    #e9f6e9;  --dir-brand-t:    #2a7e3b;
+  --dir-assist:   #8b8d98;  --dir-assist-b:   #f0f0f3;  --dir-assist-t:   #60646c;
+
+  --bad:  #c62a21;
+  --good: #30a46c;
+
+                                    
+  --t1: 26px;
+  --t2: 19px;
+  --t3: 15px;
+  --t4: 13px;
+  --t5: 11.5px;
+
+  --lh-tight: 1.2;
+  --lh-base:  1.45;
+  --lh-text:  1.6;
+  --track-kicker: 0.07em;
+
+               
+  --s1: 4px;  --s2: 8px;  --s3: 12px; --s4: 16px;
+  --s5: 24px; --s6: 32px; --s7: 48px; --s8: 64px;
+
+                                           
+  --r-s:    6px;
+  --r-pill: 8px;
+  --r:      10px;
+  --r-l:    14px;
+  --r-xs:   2px;
+  --r-sq:   3px;
+
+                                  
+  --shadow-overlay: 0 4px 16px rgba(28, 32, 36, .10);
+  --shadow-modal:   0 8px 32px rgba(28, 32, 36, .14);
+
+              
+  --h-row:     40px;
+  --h-row-okr: 44px;
+  --h-row-sub: 36px;
+  --h-head:    44px;
+  --h-btn:     32px;
+  --h-chip:    26px;
+  --h-badge:   20px;
+  --h-avatar:  22px;
+  --h-dir:      7px;
+  --h-toast:   48px;
+
+                                                                      
+  --w-text: 760px;
+  --w-work: 1280px;
+}

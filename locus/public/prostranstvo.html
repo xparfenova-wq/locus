@@ -1,0 +1,725 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Моё пространство</title>
+<link rel="icon" href="/api/favicon?v=L" type="image/svg+xml">
+<link rel="stylesheet" href="/css/obschij.css">
+<style>
+                                                           
+                                             
+                                                                  
+                                                                 
+                                            
+.wrap{padding-left:0;padding-right:0;max-width:none;
+padding-top:var(--verh-otstup,16px)}
+                                                              
+.fil-r{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;gap:8px}
+                                                        
+                                                                
+                                                
+                                                            
+                                                         
+                                                           
+                                 
+                                                             
+                                                            
+                                                             
+                                                             
+                                                              
+.chip-r.odna-stroka{display:flex;align-items:center;gap:6px;
+flex-wrap:nowrap;padding:0;margin:0}
+.chip-r.odna-stroka > div{display:flex;align-items:center;gap:6px;
+flex-wrap:nowrap;min-width:0;flex:none;margin:0;padding:0}
+.chip-r.odna-stroka .fil,.chip-r.odna-stroka .fil-r{display:flex;gap:6px;
+flex-wrap:nowrap;margin:0;padding:0;border:0;min-width:0;
+overflow:visible}
+.chip-r.odna-stroka .fil-b{flex:none;padding:5px 9px;font-size:11.5px;
+line-height:1.3;min-height:0;height:28px;box-sizing:border-box;
+display:inline-flex;align-items:center;margin:0}
+.chip-r.odna-stroka .vyp{display:inline-flex;margin:0}
+                                                                
+                                                      
+.chip-r.odna-stroka #filtry,.chip-r.odna-stroka #chipy,
+.chip-r.odna-stroka #filtry .fil-r,.chip-r.odna-stroka #chipy .fil{
+  padding:0 !important;margin:0 !important;min-height:0;
+  display:flex;align-items:center;gap:5px}
+.fil-r::-webkit-scrollbar{display:none}
+.fil-r > *{flex:none}
+@media (max-width:760px){.wrap{padding-left:16px;padding-right:16px}
+                                                                    
+                                                                       
+.chip-r.odna-stroka{overflow-x:auto;-webkit-overflow-scrolling:touch;
+scrollbar-width:none}
+.chip-r.odna-stroka::-webkit-scrollbar{display:none}}
+.pr-k{display:grid;grid-template-columns:minmax(0,1fr) 110px 70px;gap:12px;
+align-items:center;padding:13px 0;border-bottom:1px solid var(--lin);font-size:13px}
+.pr-k .im{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pr-k .st{font-size:11.5px;color:var(--t3)}
+.pr-k .dt{font-family:'Geist Mono',ui-monospace,monospace;font-size:11.5px;
+color:var(--t3);text-align:right;font-feature-settings:"tnum"}
+.itg{font-size:13px;line-height:1.75;color:var(--t2)}
+.itg .p{display:grid;grid-template-columns:18px minmax(0,1fr) auto;gap:9px;
+align-items:baseline;padding:4px 0}
+.itg .p b{font-weight:400;color:var(--t1)}
+.itg .nm{font-family:'Geist Mono',ui-monospace,monospace;font-size:10.5px;
+color:var(--npr-c,var(--t3));font-feature-settings:"tnum"}
+.itg .st{font-size:11.5px;color:var(--t3);white-space:nowrap}
+.itg .pz{padding-left:18px;font-size:11.5px;color:var(--t2)}
+.itg .pz b{color:var(--t2)}
+                                                            
+                                                               
+                                                           
+                                                                 
+                                        
+#itogi-den{display:inline-flex;align-items:center;gap:10px}
+#itogi-den b{font-weight:400;font-family:'Geist Mono',ui-monospace,monospace;
+font-size:11.5px;color:var(--t2)}
+#itogi-den .str{width:5px;height:5px;border-right:1.3px solid var(--t3);
+border-bottom:1.3px solid var(--t3);flex:none;position:relative}
+                                                                 
+                                                              
+                                                   
+#itogi-den .str.l{transform:rotate(135deg)}
+#itogi-den .str.r{transform:rotate(-45deg)}
+#itogi-den .str.nel{opacity:.3;pointer-events:none}
+                                                        
+                                                                 
+                                                                 
+#itogi-den{padding-right:16px}
+#itogi-den .str::after{content:'';position:absolute;
+  top:-14px;bottom:-14px;left:-14px;right:-14px}
+#itogi-den .str.r::after{right:-4px;left:-20px}
+@media (max-width:760px){
+  #itogi-den .str::after{top:-19px;bottom:-19px;left:-19px;right:-19px}
+  #itogi-den .str.r::after{right:-4px;left:-30px}
+}
+.chip-r{display:flex;align-items:center;gap:14px;justify-content:space-between}
+.chip-r #chipy{min-width:0}
+
+                                              
+                                                                 
+                                                                 
+                          
+
+                                                             
+                                                              
+                                                                
+                                                                
+                                                                   
+.pr-dve{display:grid;grid-template-columns:440px minmax(0,1fr);
+  gap:30px;align-items:start}
+                                                                
+                                                                  
+                                                                   
+                                               
+@media (min-width:1061px){
+  .kol{width:auto;max-width:1180px;min-width:0}
+}
+                                                          
+                                           
+.pr-levo{position:sticky;top:18px}
+.pr-pravo{min-width:0}
+                                                              
+                                                     
+                                                           
+@media (max-width:1060px){
+  .pr-dve{grid-template-columns:minmax(0,1fr);gap:22px}
+  .pr-levo{position:static;top:auto;order:2}
+  .pr-pravo{order:1}
+}
+.pr-dve.gruzitsja{display:none}
+</style></head><body>
+<div id="menju"></div>
+<div class="wrap"><div class="kol">
+                                                                  
+                                                          
+  <div class="zagr" id="zagr-str"><span class="zagr-s">загрузка</span><span class="zagr-p"><i></i></span></div>
+  <div class="pr-dve gruzitsja">
+    <div class="pr-levo">
+                                                                              
+                                                                        
+      <div id="sozdanie"></div>
+                                                              
+                                                                             
+      <div class="sek"><span class="sek-n">мои проекты</span><span class="sek-p" id="pr-mesto"></span></div>
+      <div id="proekty"></div>
+    </div>
+    <div class="pr-pravo">
+                                                                                    
+                                                                                                                                       
+                                                                        
+                                                                        
+      <div class="chip-r odna-stroka">
+        <div id="filtry"></div><div id="chipy"></div><div id="prodlit"></div>
+      </div>
+      <div id="spisok"></div>
+      <div class="sek"><span class="sek-n">итоги дня</span><span class="sek-p" id="itogi-den"></span></div>
+      <div id="itogi"></div>
+    </div>
+  </div>
+</div></div>
+<script src="/js/nedeli.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/obschij.js"></script>
+<script src="/js/kalendar.js"></script>
+<script>
+(function () {
+                                                            
+                      
+const IZ_ADRESA = new URLSearchParams(location.search);
+let SPRAV = null, PROSTR = null,
+    chip = IZ_ADRESA.get('chip') || 'vse';
+                                                    
+let sprint_rucznoj = IZ_ADRESA.get('sprint') || null;
+                                                                 
+                                                               
+                                                                  
+let fStatus = IZ_ADRESA.get('status') || null,
+    fNapr = IZ_ADRESA.get('napravlenie') || null;
+
+                                                                     
+const IMENA = {
+  vse: 'все', dobavleno_komandoj: 'добавлено командой',
+  uchastvuju: 'участвую', prosrochennye: 'просроченные',
+                                                            
+                                        
+  na_segodnja: 'на сегодня',
+};
+
+                                                                
+                                                              
+const KLJUCH_PORJADKA = 'locus-porjadok-chipov';
+
+function porjadok_chipov() {
+  const vse = Object.keys(IMENA);
+  try {
+    const s = localStorage.getItem(KLJUCH_PORJADKA);
+    const svoj = s ? JSON.parse(s) : null;
+    if (Array.isArray(svoj)) {
+                                                             
+                                                           
+      const zhivye = svoj.filter((k) => vse.includes(k));
+      const novye = vse.filter((k) => !zhivye.includes(k));
+      if (zhivye.length) return [...zhivye, ...novye];
+    }
+  } catch {                                          }
+  return vse;
+}
+
+function sohranit_porjadok(spisok) {
+  try { localStorage.setItem(KLJUCH_PORJADKA, JSON.stringify(spisok)); }
+  catch {                              }
+}
+
+                                                             
+                                                                
+let VSE_PROEKTY = [];
+
+async function zagruzit(novyj_chip) {
+  const [pr, prj] = await Promise.all([
+    API.ekran('moe_prostranstvo', {
+      chip: novyj_chip || chip,
+      ...(sprint_rucznoj ? { sprint: sprint_rucznoj } : {}),
+      ...(fStatus ? { status: fStatus } : {}),
+      ...(fNapr ? { napravlenie: fNapr } : {}),
+    }),
+    API.spisok('proekty', { na_stranice: 200 }).catch(() => ({ spisok: [] })),
+  ]);
+  PROSTR = pr;
+  if (window.DANNYE) window.DANNYE.nedelja=pr.nedelja;
+  VSE_PROEKTY = prj.spisok || [];
+  return PROSTR;
+}
+
+                                                            
+                                                              
+                                                               
+                                                                   
+                            
+function filtry() {
+  const st = SPRAV.statusy.filter((s) => s.kod !== 'kogda_nibud' && s.kod !== 'sdelano');
+  document.getElementById('filtry').innerHTML = `
+    <div class="fil-r">
+      <span class="vyp"><a class="fil-b${fStatus ? ' on' : ''}" id="f-st">
+        ${fStatus ? st.find((s) => s.kod === fStatus).imja : 'статус'}<span class="str"></span></a></span>
+      <span class="vyp"><a class="fil-b${fNapr ? ' on' : ''}" id="f-np">
+        ${fNapr ? O.naprPoKodu(fNapr).imja : 'направление'}<span class="str"></span></a></span>
+      ${fStatus || fNapr ? '<a class="fil-sbros" id="f-sb">сбросить</a>' : ''}
+    </div>`;
+
+  const zanovo = async () => {
+    try { await zagruzit(); narisovat(); }
+    catch (e) { O.tost('Не получилось: ' + e.message); }
+  };
+  O.vypadajuschij(document.getElementById('f-st'),
+    [{ kod: '', imja: 'любой' }].concat(st), fStatus)
+    .addEventListener('click', (e) => { const p = e.target.closest('.vyp-p'); if (!p) return;
+                                                    
+      const snjat = p.classList.contains('on');
+      fStatus = p.dataset.kod || null; zanovo(); });
+  O.vypadajuschij(document.getElementById('f-np'),
+    [{ kod: '', imja: 'все' }].concat(SPRAV.napravlenija), fNapr)
+    .addEventListener('click', (e) => { const p = e.target.closest('.vyp-p'); if (!p) return;
+                                                    
+      const snjat = p.classList.contains('on');
+      fNapr = p.dataset.kod || null; zanovo(); });
+  document.getElementById('f-sb')?.addEventListener('click', () => {
+    fStatus = fNapr = null; zanovo();
+  });
+}
+
+function chipy() {
+                                                               
+                                                          
+  document.getElementById('chipy').innerHTML =
+    `<div class="fil fil-tashchim">` + porjadok_chipov().map((k) =>
+      `<a class="fil-b${k === chip ? ' on' : ''}" data-chip="${k}"` +
+      ` draggable="true">${IMENA[k]}` +
+      `<span class="n">${PROSTR.chipy[k] ?? 0}</span></a>`).join('') + `</div>`;
+  vkljuchitPeretaskivanie();
+
+                                                                           
+                                                            
+  const mesto = document.getElementById('prodlit');
+  if (chip === 'prosrochennye' && (PROSTR.zadachi || []).length) {
+    mesto.innerHTML = `<a class="kn" id="pr-kn" style="padding:7px 15px;font-size:12px">` +
+      `Продлить ${PROSTR.zadachi.length} на спринт</a>`;
+    document.getElementById('pr-kn').addEventListener('click', async () => {
+      try {
+        const r = await API.dejstvie('/zadachi/prodlit', { sprint: SPR.kalendar.kljuch_nedeli(PROSTR.nedelja.god,PROSTR.sprint) });
+        await zagruzit(); narisovat();
+        O.tost(`Продлено ${r.prodleno} до ${SPR.data(r.novyj_srok)}`, async () => {
+          await API.dejstvie('/otmena', { otmena: r.otmena });
+          await zagruzit(); narisovat();
+        });
+      } catch (e) { O.tost('Не получилось: ' + e.message); }
+    });
+  } else { mesto.innerHTML = ''; }
+
+  document.querySelectorAll('[data-chip]').forEach((e) =>
+    e.addEventListener('click', async () => {
+      chip = e.dataset.chip;
+      try { await zagruzit(); narisovat(); }
+      catch (err) { O.tost('Не получилось: ' + err.message); }
+    }));
+}
+
+function spisok() {
+  const z = PROSTR.zadachi || [];
+                                                                               
+                                                            
+  if (!z.length) {
+    document.getElementById('spisok').innerHTML =
+      `<div class="pusto"><div class="pusto-z">Здесь пусто</div>
+       <div class="pusto-p">${chip === 'vse' ? 'задач на спринт нет'
+         : 'по этому чипу ничего'}</div></div>`;
+  } else {
+                                                           
+                                                                
+    const gruppy = new Map();
+    z.forEach((x) => {
+      if (!gruppy.has(x.napravlenie)) gruppy.set(x.napravlenie, []);
+      gruppy.get(x.napravlenie).push(x);
+    });
+                                                                  
+                                                             
+                                          
+    document.getElementById('spisok').innerHTML = [...gruppy].map(([kod, spisok]) => {
+      const n = O.naprPoKodu(kod);
+      return `<div class="npr-zag"><a class="npr-zag-ss"
+          href="/napravlenija.html?napravlenie=${kod}"
+          title="открыть направление">${n.imja}</a>` +
+        `<i></i><span class="n">${spisok.length}</span></div>` +
+        O.sPodzadachami(spisok).map((x) => O.strokaZadachi(SPR.dlja_ekrana(x),
+          { bezNapravlenija: true })).join('');
+    }).join('');
+  }
+
+                                                                   
+                                                                    
+                                                       
+  O.vkljuchitStatusy((stroka, status) => O.smenitStatusZadachi(stroka, status,
+    async () => { await zagruzit(); narisovat(); }));
+
+                                                                   
+                                                                
+  document.querySelectorAll('.gal-b').forEach((g) =>
+    g.addEventListener('click', async (ev) => {
+      ev.stopPropagation();
+      const nomer = Number(g.closest('.zs')?.dataset.nomer);
+      const zad = z.find((x) => x.nomer === nomer);
+      if (!zad) return;
+                                                     
+      await O.zakrytZadachu(nomer, g.closest('.zs'),
+        async () => { await zagruzit(); narisovat(); }, { bylo: zad.status });
+    }));
+}
+
+                                                       
+  
+                                                                  
+                                                              
+                                                                
+                      
+let pr_srez = 's_veduschim', pr_poisk = '';
+
+function proekty() {
+  const vse = VSE_PROEKTY.filter((x) => !x.arhiv);
+  const s_ved = vse.filter((x) => x.kto_vedet);
+  const bez_ved = vse.filter((x) => !x.kto_vedet);
+  const vybrannye = pr_srez === 'bez_veduschego' ? bez_ved : s_ved;
+  const n = pr_poisk.trim().toLowerCase();
+  const spisok = n
+    ? vybrannye.filter((x) => (x.nazvanie || '').toLowerCase().includes(n))
+    : vybrannye;
+
+                                                              
+                                                                  
+                                                             
+                                                         
+                        
+                                                                
+                                                                  
+                                                                   
+  const moi = vse.filter((x) => x.kto_vedet === window.JA);
+  const mesto = document.getElementById('pr-mesto');
+  if (mesto && !mesto.dataset.gotovo) {
+    mesto.dataset.gotovo = '1';
+    mesto.innerHTML = `<a class="kn" id="pr-otkryt"
+      style="padding:8px 15px;font-size:12px">Добавить проект</a>`;
+    document.getElementById('pr-otkryt')
+      ?.addEventListener('click', () => oknoProektov());
+  }
+  document.getElementById('proekty').innerHTML = `
+    ${moi.length ? '' : `<div class="pusto" style="padding:14px 0">
+      <div class="pusto-p">проектов, где ты ведущая, пока нет</div></div>`}
+    ${moi.slice(0, 5).map((x) => `<div class="pr-k" data-prj="${x.id}">
+        <span class="im">${O.ekranirovat(x.nazvanie)}</span>
+        <span class="st"></span>
+        <span class="dt">${O.naprPoKodu(x.napravlenie).imja || ''}</span></div>`).join('')}
+    ${moi.length > 5
+      ? `<a class="pr-esche" id="pr-esche">ещё ${moi.length - 5}</a>` : ''}`;
+
+  document.getElementById('pr-esche')?.addEventListener('click', () => oknoProektov());
+  document.querySelectorAll('[data-prj]').forEach((e) =>
+    e.addEventListener('click', () => {
+      location.href = `/napravlenija.html?proekt=${e.dataset.prj}`;
+    }));
+}
+
+                                                              
+function oknoProektov() {
+  const zakryt = O.modalka('Проекты', `
+    <div class="pr-okno">
+      <div class="pr-rjad">
+        <span class="vid km-vid pr-per" id="pr-per"></span>
+        <label class="pr-psk-o">
+          <svg class="ld-psk-l" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <circle cx="7" cy="7" r="4.6" stroke="currentColor" stroke-width="1.3"/>
+            <path d="M10.4 10.4 14 14" stroke="currentColor" stroke-width="1.3"
+              stroke-linecap="round"/></svg>
+          <input class="ld-psk" id="pr-psk" placeholder="название проекта"
+            autocomplete="off"></label>
+      </div>
+      <div id="pr-spisok"></div>
+    </div>`, null, {
+    gotovo: () => {
+      O.formaProekta({ napravlenie: fNapr }, async () => { await zagruzit(); narisovat(); });
+    },
+    znak: '+', podskazka: 'новый проект',
+  });
+
+  const narisovat_okno = () => {
+    const vse = VSE_PROEKTY.filter((x) => !x.arhiv);
+    const s_ved = vse.filter((x) => x.kto_vedet);
+    const bez_ved = vse.filter((x) => !x.kto_vedet);
+    const vybrannye = pr_srez === 'bez_veduschego' ? bez_ved : s_ved;
+    const n = pr_poisk.trim().toLowerCase();
+    const spisok = n
+      ? vybrannye.filter((x) => (x.nazvanie || '').toLowerCase().includes(n))
+      : vybrannye;
+
+    document.getElementById('pr-per').innerHTML = `
+      <a class="vid-e${pr_srez === 's_veduschim' ? ' on' : ''}" data-prs="s_veduschim">
+        с ведущим<span class="ld-ch-n">${s_ved.length}</span></a>
+      <a class="vid-e${pr_srez === 'bez_veduschego' ? ' on' : ''}" data-prs="bez_veduschego">
+        без ведущего<span class="ld-ch-n">${bez_ved.length}</span></a>`;
+
+    document.getElementById('pr-spisok').innerHTML = spisok.length
+      ? spisok.map((x) => {
+          const vedet = ((window.DANNYE || {}).ljudi || []).find((l) => l.id === x.kto_vedet);
+          return `<div class="pr-k" data-prj="${x.id}">
+            <span class="im">${O.ekranirovat(x.nazvanie)}</span>
+            <span class="st">${vedet ? vedet.imja : 'ведущего нет'}</span>
+            <span class="dt">${O.naprPoKodu(x.napravlenie).imja || ''}</span></div>`;
+        }).join('')
+      : `<div class="net">${n ? 'по этому слову ничего не нашлось'
+          : pr_srez === 'bez_veduschego' ? 'все проекты с ведущим'
+          : 'проектов с ведущим нет'}</div>`;
+
+    document.querySelectorAll('#pr-per [data-prs]').forEach((e) =>
+      e.addEventListener('click', () => {
+        if (e.classList.contains('on')) return;
+        pr_srez = e.dataset.prs; narisovat_okno();
+      }));
+    document.querySelectorAll('#pr-spisok [data-prj]').forEach((e) =>
+      e.addEventListener('click', () => {
+        location.href = `/napravlenija.html?proekt=${e.dataset.prj}`;
+      }));
+  };
+
+  narisovat_okno();
+  const psk = document.getElementById('pr-psk');
+  psk?.addEventListener('input', () => { pr_poisk = psk.value; narisovat_okno(); });
+                                                                  
+}
+
+                                                          
+                                                              
+let den_itogov = null;
+
+function sdvinut_den(na) {
+  const segodnja = SPR.segodnja();
+  const d = new Date((den_itogov || segodnja) + 'T12:00:00Z');
+  d.setUTCDate(d.getUTCDate() + na);
+  const novyj = d.toISOString().slice(0, 10);
+                                                                  
+  if (novyj > segodnja) return;
+  den_itogov = novyj;
+  itogi();
+}
+
+async function itogi() {
+  const el = document.getElementById('itogi');
+  try {
+    const i = await API.ekran('itogi', den_itogov ? { den: den_itogov } : {});
+    den_itogov = i.den;
+                                                             
+    const shapka_dnja = document.getElementById('itogi-den');
+    shapka_dnja.innerHTML =
+      `<a class="str l" id="den-nazad" aria-label="предыдущий день"></a>` +
+      `<b>${SPR.data(i.den)}</b>` +
+      `<a class="str r${i.segodnja ? ' nel' : ''}" id="den-vpered"
+          aria-label="следующий день"></a>`;
+    document.getElementById('den-nazad')
+      .addEventListener('click', () => sdvinut_den(-1));
+    if (!i.segodnja) {
+      document.getElementById('den-vpered')
+        .addEventListener('click', () => sdvinut_den(1));
+    }
+    if (!i.punkty || !i.punkty.length) {
+      el.innerHTML = `<div class="pusto" style="padding:22px 0">
+        <div class="pusto-p">${i.tekst || 'за сегодня пока нет сделанного'}</div></div>`;
+      return;
+    }
+                                                                       
+                                                                      
+    const slovami = { sdelano: 'сделано', v_processe: 'в процессе',
+                      chuzhaja: 'закрыта подзадача' };
+    el.innerHTML = `<div class="itg">` + i.punkty.map((p, n) => {
+      const napr = O.naprPoKodu(p.napravlenie);
+      return `<div class="p">
+        <span class="nm">${n + 1}</span>
+        <b>${O.ekranirovat(p.nazvanie)}</b>
+        <span class="st">${slovami[p.itogovyj_status] || ''}</span></div>` +
+        (p.podzadachi || []).map((pz) =>
+          `<div class="p pz"><span class="nm"></span><b>${pz.nazvanie}</b>
+           <span class="st">сделано</span></div>`).join('');
+    }).join('') +
+      `</div><div class="itg-k">
+        <a class="kn tmn" id="kop" style="padding:8px 16px;font-size:12px">Скопировать для чата</a></div>`;
+                                                                        
+    document.getElementById('kop')?.addEventListener('click', async () => {
+      await O.kopirovat(i.tekst, 'Итоги скопированы');
+    });
+    O.ponumerovat(el);                                                            
+  } catch (e) {
+    el.innerHTML = `<div class="pusto" style="padding:22px 0">
+      <div class="pusto-p">итоги не загрузились: ${e.message}</div></div>`;
+  }
+}
+
+                                                                  
+                                                                   
+                                               
+function vkljuchitPeretaskivanie() {
+  const rjad = document.querySelector('.fil-tashchim');
+  if (!rjad || rjad.dataset.tashchim === '1') return;
+  rjad.dataset.tashchim = '1';
+  let berem = null;
+
+  const peremestit = (kuda) => {
+    if (!berem || !kuda || berem === kuda) return;
+    const spisok = [...rjad.querySelectorAll('[data-chip]')];
+    const iz = spisok.indexOf(berem), v = spisok.indexOf(kuda);
+    if (iz < 0 || v < 0) return;
+                                                
+    rjad.insertBefore(berem, iz < v ? kuda.nextSibling : kuda);
+    sohranit_porjadok([...rjad.querySelectorAll('[data-chip]')]
+      .map((e) => e.dataset.chip));
+  };
+
+  rjad.addEventListener('dragstart', (e) => {
+    const k = e.target.closest('[data-chip]');
+    if (!k) return;
+    berem = k;
+    k.classList.add('tashchim');
+    e.dataTransfer.effectAllowed = 'move';
+                                            
+    try { e.dataTransfer.setData('text/plain', k.dataset.chip); } catch {}
+  });
+  rjad.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    const k = e.target.closest('[data-chip]');
+    if (k) peremestit(k);
+  });
+  rjad.addEventListener('dragend', () => {
+    berem?.classList.remove('tashchim');
+    berem = null;
+  });
+
+                                                                 
+  let derzhim = null;
+  rjad.addEventListener('touchstart', (e) => {
+    const k = e.target.closest('[data-chip]');
+    if (!k) return;
+    derzhim = setTimeout(() => {
+      berem = k; k.classList.add('tashchim');
+      if (navigator.vibrate) navigator.vibrate(12);
+    }, 420);
+  }, { passive: true });
+  rjad.addEventListener('touchmove', (e) => {
+    if (!berem) { clearTimeout(derzhim); return; }
+    e.preventDefault();
+    const t = e.touches[0];
+    const pod = document.elementFromPoint(t.clientX, t.clientY);
+    const k = pod?.closest('[data-chip]');
+    if (k) peremestit(k);
+  }, { passive: false });
+  const otpustit = () => {
+    clearTimeout(derzhim);
+    berem?.classList.remove('tashchim');
+    berem = null;
+  };
+  rjad.addEventListener('touchend', otpustit);
+  rjad.addEventListener('touchcancel', otpustit);
+}
+
+                                                             
+                                             
+function v_adres() {
+  const p = new URLSearchParams();
+  if (chip && chip !== 'vse') p.set('chip', chip);
+  if (sprint_rucznoj) p.set('sprint', String(sprint_rucznoj));
+  if (fStatus) p.set('status', fStatus);
+  if (fNapr) p.set('napravlenie', fNapr);
+  const s = p.toString();
+  history.replaceState(null, '', s ? '?' + s : location.pathname);
+}
+
+function narisovat() { v_adres(); chipy(); filtry(); spisok(); proekty(); O.ponumerovat(); }
+
+                                                                 
+                                                                    
+                                                                
+                                                                
+                                                                    
+async function sozdatZadachu(imja, polja) {
+  const ja = (SPRAV.ljudi || []).find((l) => l.id === API.ja)
+    || (SPRAV.ljudi || [])[0];
+  const dannye = {
+    ...polja,
+                                                               
+    napravlenie: polja.napravlenie || fNapr || 'synapt',
+    otvetstvennyj: polja.otvetstvennyj ? Number(polja.otvetstvennyj)
+      : (ja ? ja.id : undefined),
+    ...(polja.povtorjaetsja ? {} : { sprint: polja.sprint || PROSTR.sprint, god_sprinta:polja.god_sprinta || PROSTR.nedelja.god }),
+  };
+  const novaja = await API.sozdat('zadachi', dannye);
+  await zagruzit(); narisovat();
+  O.toastCreatedTask(novaja,{posle:async()=>{await zagruzit();narisovat();}});
+}
+
+(async function start() {
+  try {
+    SPRAV = await SPR.zagruzit();
+    window.DANNYE = { napravlenija: SPRAV.napravlenija, ljudi: SPRAV.ljudi,
+                      statusy: SPRAV.statusy, tipy: SPRAV.tipy, zadachi: [] };
+    await zagruzit();
+    const n = PROSTR.nedelja || {};
+    document.getElementById('menju').innerHTML = O.menju('Пространство', {
+                                                                    
+                                                                 
+                                                                    
+                                                                
+      podrazdely: O.PODRAZDELY_PROSTRANSTVA,
+      podrazdel: 'дела',
+                                                                    
+                                                                
+                                   
+      bez_formy: true,
+      period: [`спринт ${PROSTR.sprint} / ${PROSTR.nedelja.god}`,
+               n.nachalo ? SPR.period(n.nachalo, n.konec) : ''],
+    });
+                                                                    
+                                                           
+    document.getElementById('sozdanie').innerHTML = O.kartaSozdanija({ s_knopkoj: true });
+                                                       
+                                                             
+                                                         
+    if (matchMedia('(max-width:760px)').matches) {
+      const rjad = document.querySelector('.men .npr-chipy');
+      if (rjad) {
+        rjad.innerHTML = `
+          <a class="npr-ch on" data-pr-vid="zadachi">Задачи</a>
+          <a class="npr-ch" data-pr-vid="sozdanie">Создать задачу</a>
+          <a class="npr-ch" href="/kabinet.html">Про меня</a>`;
+        document.body.dataset.prVid = 'zadachi';
+        rjad.querySelectorAll('[data-pr-vid]').forEach((e) =>
+          e.addEventListener('click', () => {
+                                                             
+                                     
+            if (e.dataset.prVid === 'sozdanie') {
+              location.href = '/sozdat.html'; return;
+            }
+            rjad.querySelectorAll('.npr-ch').forEach((x) =>
+              x.classList.toggle('on', x === e));
+            document.body.dataset.prVid = e.dataset.prVid;
+          }));
+      }
+    }
+    narisovat();
+    document.getElementById('zagr-str')?.remove();
+    document.querySelector('.pr-dve')?.classList.remove('gruzitsja');
+                                                                
+                                                               
+                                                
+    document.getElementById('plav-sozd')?.remove();
+    window.OPROS = async () => { await zagruzit(); narisovat(); };
+    O.vkljuchitSkvoznoe(sozdatZadachu);
+                                                       
+    O.vkljuchitPeriod(async (shag) => {
+      const next=SPR.kalendar.sdvinut_nedelju(PROSTR.nedelja.god,PROSTR.sprint,shag);
+      sprint_rucznoj=SPR.kalendar.kljuch_nedeli(next.god,next.nomer);
+      v_adres();
+      try {
+        await zagruzit(); narisovat();
+        const n = PROSTR.nedelja || {};
+        document.querySelector('.men-r1-obj .ned b').textContent = `спринт ${PROSTR.sprint} / ${PROSTR.nedelja.god}`;
+        document.querySelector('.men-r1-obj .ned .nd').textContent =
+          n.nachalo ? SPR.period(n.nachalo, n.konec) : '';
+      } catch (e) { O.tost('Не получилось: ' + e.message); }
+    });
+    itogi();
+    document.body.dataset.gotovo = String((PROSTR.zadachi || []).length);
+  } catch (e) {
+    document.getElementById('zagr-str')?.remove();
+    document.querySelector('.pr-dve')?.classList.remove('gruzitsja');
+    document.getElementById('spisok').innerHTML =
+      `<div class="pusto"><div class="pusto-z">Не получилось загрузить</div>
+       <div class="pusto-p">${e.message}</div></div>`;
+    document.body.dataset.oshibka = e.message;
+  }
+})();
+document.addEventListener('locus:projects-changed',()=>{zagruzit().then(narisovat).catch(error=>O.tost(error.message));});
+})();
+</script>
+</body></html>

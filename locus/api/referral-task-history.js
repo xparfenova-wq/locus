@@ -1,0 +1,13 @@
+const {Konflikt}=require('../db/db.js');
+const payout=require('./referral-payout-history.js');
+function group(db,event){const action=payout.context(event).dejstvie_id;return action?db.prepare("SELECT * FROM zhurnal WHERE json_extract(srez,'$.dejstvie_id')=? ORDER BY id").all(action):[];}
+function anchor(db,event){const marker=payout.context(event).referalnaja_operacija;if(marker!==undefined){const root=db.prepare('SELECT * FROM zhurnal WHERE id=?').get(marker);if(!root||!payout.context(root).referalnaja_zadacha||payout.context(root).dejstvie_id!==payout.context(event).dejstvie_id)throw new Konflikt('История выплаты по задаче неполная. Отмена не применена',{istorija_nepolnaja:true});return root;}return group(db,event).find(r=>payout.context(r).referalnaja_zadacha);}
+function seal(db,event){const rows=group(db,event);for(const row of rows)db.prepare('UPDATE zhurnal SET srez=? WHERE id=?').run(JSON.stringify({...payout.context(row),referalnaja_operacija:event.id,...(row.id===event.id?{referalnye_sobytija:rows.map(r=>r.id)}:{})}),row.id);}
+function assertComplete(db,events){const selected=new Set(events.map(r=>r.id)),checked=new Set();for(const event of events){const root=anchor(db,event);if(!root||checked.has(root.id))continue;checked.add(root.id);const c=payout.context(root),ids=c.referalnye_sobytija;
+ if(!Array.isArray(ids)||!ids.length||ids.some(id=>!Number.isSafeInteger(id)||!selected.has(id))||new Set(ids).size!==ids.length)throw new Konflikt('Закрытие задачи и отметка выплаты отменяются целиком. Используй действие из журнала');
+ const rows=group(db,root);if(rows.length!==ids.length||rows.some(r=>!ids.includes(r.id)))throw new Konflikt('История выплаты по задаче неполная. Отмена не применена',{istorija_nepolnaja:true});
+ const linked=c.referalnaja_zadacha;if(!rows.some(r=>r.obekt==='zadacha'&&r.obekt_id===linked.id&&r.pole==='status'))throw new Konflikt('Не найдено связанное закрытие задачи');
+ }}
+function afterUndo(db,events,head){const old=events.map(r=>anchor(db,r)).find(Boolean);if(!old)return;const inverse=db.prepare("SELECT * FROM zhurnal WHERE id>? AND obekt='sotrudnichestvo' AND pole='vyplacheno' ORDER BY id DESC LIMIT 1").get(head);if(!inverse)throw new Error('Linked payout inverse missing');db.prepare('UPDATE zhurnal SET srez=? WHERE id=?').run(JSON.stringify({...payout.context(inverse),referalnaja_zadacha:payout.context(old).referalnaja_zadacha}),inverse.id);seal(db,db.prepare('SELECT * FROM zhurnal WHERE id=?').get(inverse.id));}
+function isLinkedUndo(db,events){return events.some(r=>!!anchor(db,r));}
+module.exports={seal,assertComplete,afterUndo,isLinkedUndo};

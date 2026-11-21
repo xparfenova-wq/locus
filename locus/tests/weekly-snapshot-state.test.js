@@ -1,0 +1,11 @@
+const {test}=require('node:test'),assert=require('node:assert/strict'),{randomUUID}=require('node:crypto'),model=require('../public/js/weekly-snapshot-state.js');
+class Store{constructor(){this.data=new Map();}get length(){return this.data.size;}key(i){return [...this.data.keys()][i]??null;}getItem(k){return this.data.get(k)??null;}setItem(k,v){this.data.set(k,v);}removeItem(k){this.data.delete(k);}}
+const item=()=>{const key=randomUUID();return {key,actor:1,napravlenie:'synapt',god:2026,nedelja:42,kind:'pereschitat',body:{zapros_kljuch:key,kontekst:'a'.repeat(64)}};};
+const proof=i=>({obekt:'snimok_planerki',avtor_id:i.actor,napravlenie:i.napravlenie,god:i.god,nedelja:i.nedelja,zapros_kljuch:i.key,dejstvie:i.kind,sostojanie:'sohraneno'});
+test('weekly pending receipts are durable and isolated by actor and exact direction/year/week',()=>{
+ const storage=new Store(),state=model.create(storage,1,randomUUID()),other=model.create(storage,2,randomUUID()),i=item();state.reserve(i);assert.equal(state.pending().length,1);assert.equal(other.pending().length,0);for(const change of [{god:2025},{nedelja:41},{napravlenie:'media'},{avtor_id:2},{zapros_kljuch:randomUUID()},{dejstvie:'otmenit'},{sostojanie:'ne_najdeno'}])assert.throws(()=>state.finish(i,{...proof(i),...change}));assert.equal(state.pending().length,1);state.finish(i,proof(i));assert.equal(state.pending().length,0);assert.equal(state.last(i).key,i.key);assert.equal(state.last({...i,god:2025}),null);
+ const undo={...i,key:randomUUID(),kind:'otmenit'};undo.body={zapros_kljuch:undo.key,ishodnyj_kljuch:i.key};state.reserve(undo);state.finish(undo,proof(undo));assert.equal(state.last(i),null);
+});
+test('storage refusal and corrupted bodies block writes instead of inventing a new command',()=>{
+ const storage=new Store(),state=model.create(storage,1,randomUUID()),i=item();storage.setItem=()=>{throw Error('quota');};assert.throws(()=>state.reserve(i));assert.equal(state.pending().length,0);const corrupt=new Store();corrupt.setItem('locus-weekly-v1:1:pending:'+i.key,JSON.stringify({...i,tab:randomUUID(),body:{...i.body,novaja:{secret:'not stored'}}}));assert.throws(()=>model.create(corrupt,1,randomUUID()).pending());
+});

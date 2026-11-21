@@ -1,0 +1,19 @@
+const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),validation=require('../public/js/validacija-kontakta');
+test('contact validation leaves literal valid input to the existing canonical phone parser',()=>{
+ for(const [kind,value] of [['telefon','+7 (916) 123-45-67'],['telefon','+49\u00a0151\u202f12345678'],['pochta','name+tag@example.test'],['drugoe','literal </textarea> & value']])assert.equal(validation.proverit(kind,' '+value+' '),value);
+ assert.equal(validation.tekstDublya('telefon'),'Такой телефон уже есть у этого человека');assert.equal(validation.tekstDublya('pochta'),'Такая почта уже есть у этого человека');
+});
+test('empty, overlong, alphabetic phone and malformed email failures have stable codes',()=>{
+ for(const [kind,value,code,status] of [['telefon',undefined,'pustoe_znachenie_kontakta',422],['pochta',null,'pustoe_znachenie_kontakta',422],['drugoe',' \t ','pustoe_znachenie_kontakta',422],['drugoe','a'.repeat(256),'contact_length',400],['telefon','+7 916 ABC-45-67','invalid_phone_chars',422],['telefon','+ ()-','invalid_phone',422],['telefon','++7916','invalid_phone_chars',422],['telefon','7+9161234567','invalid_phone_chars',422],['pochta','sokolov.mail.ru','invalid_email',422],['pochta','name@','invalid_email',422],['pochta','a b@example.test','invalid_email',422]])assert.throws(()=>validation.proverit(kind,value),e=>e.code===code&&e.status===status);
+});
+test('the browser and server use identical validation messages and results',()=>{
+ const sandbox={};vm.runInNewContext(fs.readFileSync(path.resolve(__dirname,'../public/js/validacija-kontakta.js'),'utf8'),sandbox);const browser=sandbox.LocusValidacijaKontakta;
+ for(const [kind,value] of [['telefon','+79161234567'],['pochta','name@example.test'],['telefon','+7 ABC'],['telefon','7+9161234567'],['pochta','broken'],['drugoe','']]){
+  const result=core=>{try{return{value:core.proverit(kind,value)};}catch(error){return{message:error.message,code:error.code,status:error.status};}};assert.deepEqual(result(browser),result(validation));
+ }
+});
+function browserAPI(){const window={fetch:async()=>{throw new Error('unexpected fetch');}},document={querySelectorAll:()=>[],querySelector:()=>null,dispatchEvent:()=>{}};const sandbox={window,document,crypto:require('node:crypto').webcrypto,URL,URLSearchParams,Headers,Request,Intl,console,setTimeout,clearTimeout};vm.createContext(sandbox);vm.runInContext(fs.readFileSync(path.resolve(__dirname,'../public/js/api.js'),'utf8'),sandbox);return window.API;}
+const row={id:1,chelovek_id:2,tip:'pochta',znachenie:'one@example.test',znachenie_norm:'one@example.test',versija:1},body={chelovek_id:2,tip:'pochta',znachenie:row.znachenie};
+const found=(exists=true)=>({chelovek_id:2,tip:'pochta',znachenie_norm:row.znachenie_norm,vsego:exists?1:0,spisok:exists?[row]:[],osnovnaja_gruppa:{chelovek_id:2,tip:'pochta',kontekst:'a'.repeat(64),spisok:exists?[row]:[]}});
+test('a pre-existing own contact is distinguished before any POST',async()=>{const api=browserAPI();let writes=0,reads=0;api.spisok=async()=>{reads++;return found();};api.sozdat=async()=>{writes++;};const result=await api.sozdatKontakt(body);assert.equal(result.predvaritelnoByl,true);assert.equal(result.uzheByl,true);assert.equal(result.kontakt.id,row.id);assert.equal(reads,1);assert.equal(writes,0);});
+test('confirming a lost POST reply is distinguished from a pre-existing form duplicate without replay',async()=>{const api=browserAPI();let writes=0,reads=0;api.spisok=async()=>found(++reads>1);api.sozdat=async()=>{writes++;throw new TypeError('lost acknowledgement');};const result=await api.sozdatKontakt(body);assert.equal(result.predvaritelnoByl,false);assert.equal(result.uzheByl,true);assert.equal(result.kontakt.id,row.id);assert.equal(writes,1);assert.equal(reads,2);});
