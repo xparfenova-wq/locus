@@ -448,7 +448,7 @@ function insajty({ zapros, avtor, metod, uchityvat_otlozhennye=true }) {
       `«${z.nazvanie}» висит ${sk(dnej_s(z.sozdano), 'день', 'дня', 'дней')} и не разбита на шаги`,
       `/zadachi.html?nomer=${z.nomer}`, z.napravlenie)));
 
-                                                                            
+
   bezopasno(() => {
     for(const r of require('./nagruzka.js').zakryto_po_napravlenijam(db,{den})){
       if(r.mediana!=null&&r.seichas>r.mediana*r.koefficient){

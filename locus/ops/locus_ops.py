@@ -1,4 +1,4 @@
-                      
+
 """Private, self-contained backups and releases. No pip dependencies.
 
 Archives contain team data. Store them privately; never add them to Git.

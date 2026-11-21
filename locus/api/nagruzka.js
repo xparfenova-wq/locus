@@ -63,7 +63,7 @@ function nagruzka(db,{den,week=calendar.iso_nedelja(den),chelovek_id}={}){
       peregruz:porog!=null&&p.otkryto>porog,nedel_v_okne:window,porog_peregruza:settings.porog_peregruza,chasovoj_pojas:zone};
   });
 }
-                                                                              
+
 function zakryto_po_napravlenijam(db,{den}={}){
   calendar.data(den);const settings=require('./parametry-analitiki.js').values(db),week=calendar.iso_nedelja(den),start=calendar.sdvinut_nedelju(week.god,week.nomer,-settings.nedel_v_okne),borders=calendar.granicy_nedeli(week.god,week.nomer),groups=new Map();
   const keys=Array.from({length:settings.nedel_v_okne},(_,i)=>{const w=calendar.sdvinut_nedelju(start.god,start.nomer,i);return calendar.kljuch_nedeli(w.god,w.nomer);});
